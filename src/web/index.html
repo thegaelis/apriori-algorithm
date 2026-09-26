@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apriori Algorithm - Interactive Step-by-Step Training Guide</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --success: #16a34a;
+      --success-light: #f0fdf4;
+      --danger: #dc2626;
+      --danger-light: #fef2f2;
+      --warning: #d97706;
+      --warning-light: #fffbeb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 10px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    html, body {
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    /* Top Navigation Header */
+    header {
+      height: 52px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      flex-shrink: 0;
+      z-index: 30;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-icon {
+      background: var(--primary);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand-subtitle {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .mode-switch {
+      display: flex;
+      background: #f1f5f9;
+      padding: 3px;
+      border-radius: 8px;
+      gap: 3px;
+    }
+
+    .mode-btn {
+      border: none;
+      background: transparent;
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mode-btn.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Main Workspace Layout (Sidebar + Main Demonstration) */
+    .app-layout {
+      display: flex;
+      height: calc(100vh - 52px);
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Controls & Inputs */
+    .sidebar {
+      width: 320px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      padding: 0.85rem 1rem;
+      gap: 0.8rem;
+    }
+
+    .sidebar-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-label span.value-badge {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    select, textarea, input[type="range"] {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.45rem 0.55rem;
+      font-size: 0.8rem;
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    textarea {
+      font-family: monospace;
+      font-size: 0.775rem;
+      resize: vertical;
+      line-height: 1.35;
+      min-height: 100px;
+      max-height: 160px;
+    }
+
+    select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-row .btn {
+      flex: 1;
+    }
+
+    .dataset-stats {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem;
+      font-size: 0.75rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem;
+    }
+
+    .stat-mini-val {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stat-mini-lbl {
+      color: var(--text-muted);
+    }
+
+    /* Right Main Panel: Demonstration Area */
+    .main-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Stepper Header Navigation */
+    .stepper-header-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+      overflow-x: auto;
+    }
+
+    .stepper-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .steps-track {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      overflow-x: auto;
+      flex: 1;
+      scrollbar-width: thin;
+    }
+
+    .step-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 16px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      font-size: 0.725rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .step-pill:hover {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+
+    .step-pill.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
+    }
+
+    .step-pill.completed {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .step-pill-num {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+    }
+
+    .step-pill.active .step-pill-num {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Demonstration Content Viewport */
+    .demo-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    /* Training Card Layout */
+    .step-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .phase-badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+    }
+
+    .step-card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .step-concept {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+
+    /* Grid for Concept & Formula */
+    .concept-math-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 1024px) {
+      .concept-math-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guide-box {
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .guide-concept {
+      background: #ffffff;
+      border: 1px solid var(--border);
+    }
+
+    .guide-concept h4 {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .math-box {
+      background: #fefce8;
+      border: 1px solid #fef08a;
+      border-left: 3px solid #eab308;
+    }
+
+    .math-box h4 {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: #854d0e;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .math-formula {
+      font-family: "Courier New", Courier, monospace;
+      background: white;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid #fde047;
+      display: inline-block;
+      margin: 0.2rem 0;
+      font-weight: 600;
+      color: #713f12;
+      font-size: 0.75rem;
+    }
+
+    .takeaway-box {
+      background: var(--success-light);
+      border: 1px solid #bbf7d0;
+      border-left: 3px solid var(--success);
+      padding: 0.6rem 0.85rem;
+    }
+
+    .takeaway-box h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #166534;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Tables */
+    .data-section-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      max-height: 240px;
+      scrollbar-width: thin;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.775rem;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #f8fafc;
+      padding: 0.5rem 0.65rem;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      z-index: 2;
+    }
+
+    td {
+      padding: 0.45rem 0.65rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.12rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .status-keep {
+      background: var(--success-light);
+      color: var(--success);
+      border: 1px solid #bbf7d0;
+    }
+
+    .status-prune {
+      background: var(--danger-light);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+    }
+
+    .item-chip {
+      display: inline-block;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 0.08rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin: 0.05rem;
+      font-weight: 600;
+    }
+
+    .trans-chip {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 0.05rem 0.3rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin: 0.05rem;
+    }
+
+    .badge-tag {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #bfdbfe;
+      padding: 0.12rem 0.4rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* Bottom Stepper Action Bar */
+    .bottom-stepper-bar {
+      height: 48px;
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-progress-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .action-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Dashboard Grid (Whole Process Mode) */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.65rem;
+    }
+
+    .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stat-lbl {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    @media (max-width: 860px) {
+      .app-layout {
+        flex-direction: column;
+        height: auto;
+        overflow: auto;
+      }
+      .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+      html, body {
+        overflow: auto;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Bar -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">🧺</div>
+      <div>
+        <div class="brand-title">Apriori Market Basket Mining</div>
+      </div>
+      <div class="brand-subtitle">Interactive Step-by-Step Training Guide</div>
+    </div>
+    <div class="mode-switch">
+      <button id="btnModeStep" class="mode-btn active" onclick="setMode('step')">🎓 Step-by-Step Guide</button>
+      <button id="btnModeWhole" class="mode-btn" onclick="setMode('whole')">⚡ Full Dashboard</button>
+    </div>
+  </header>
+
+  <!-- Two-Column Workspace Layout -->
+  <div class="app-layout">
+
+    <!-- Left Sidebar: Controls & Inputs -->
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <span>⚙️</span> Dataset & Parameters
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Grocery Preset</label>
+        <select id="presetSelect" onchange="loadPreset()">
+          <option value="Classic grocery baskets">Classic Supermarket (Milk, Bread, Diaper...)</option>
+          <option value="Breakfast baskets">Breakfast Store (Bread, Butter, Cereal...)</option>
+          <option value="Dinner baskets">Dinner & Pasta (Rice, Pasta, Chicken...)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Minimum Support (minsup)
+          <span id="minsupVal" class="value-badge">40%</span>
+        </label>
+        <input type="range" id="minsupSlider" min="0.10" max="0.90" step="0.05" value="0.40" oninput="updateParamLabels()">
+        <small id="minsupCountHelp" style="color: var(--text-muted); font-size: 0.725rem;">Requires itemset in ≥ 4 baskets</small>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Minimum Confidence (minconf)
+          <span id="minconfVal" class="value-badge">70%</span>
+        </label>
+        <input type="range" id="minconfSlider" min="0.10" max="1.0" step="0.05" value="0.70" oninput="updateParamLabels()">
+        <small style="color: var(--text-muted); font-size: 0.725rem;">Rule A → B valid if confidence ≥ 70%</small>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">
+          Customer Baskets
+          <span style="font-size: 0.7rem; color: var(--text-muted); font-weight: normal;">(1 basket / line)</span>
+        </label>
+        <textarea id="basketsText" rows="6"></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="runAnalysis()">
+          <span>🚀</span> Re-Calculate
+        </button>
+        <button class="btn btn-secondary" onclick="resetDefaults()">
+          <span>↺</span> Reset
+        </button>
+      </div>
+
+      <!-- Live Mini Dataset Stats -->
+      <div class="dataset-stats">
+        <div>
+          <div class="stat-mini-lbl">Baskets (N)</div>
+          <div id="sideStatBaskets" class="stat-mini-val">0</div>
+        </div>
+        <div>
+          <div class="stat-mini-lbl">Unique Items</div>
+          <div id="sideStatItems" class="stat-mini-val">0</div>
+        </div>
+        <div>
+          <div class="stat-mini-lbl">Minsup Count</div>
+          <div id="sideStatMinsupCount" class="stat-mini-val">0</div>
+        </div>
+        <div>
+          <div class="stat-mini-lbl">Mined Rules</div>
+          <div id="sideStatRules" class="stat-mini-val">0</div>
+        </div>
+      </div>
+
+      <div style="font-size: 0.7rem; color: var(--text-muted); line-height: 1.35; margin-top: auto;">
+        💡 Tip: Use keyboard <kbd>←</kbd> and <kbd>→</kbd> arrow keys to navigate steps seamlessly.
+      </div>
+    </aside>
+
+    <!-- Right Main Panel: Demonstration Area -->
+    <main class="main-panel">
+
+      <!-- Horizontal Stepper Breadcrumbs -->
+      <div id="stepperBar" class="stepper-header-bar">
+        <span class="stepper-label">Timeline:</span>
+        <div id="stepsTrack" class="steps-track">
+          <!-- Step pills rendered dynamically -->
+        </div>
+        <div style="display: flex; gap: 0.25rem;">
+          <button class="btn btn-secondary" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="prevStep()">◀</button>
+          <button class="btn btn-primary" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;" onclick="nextStep()">▶</button>
+        </div>
+      </div>
+
+      <!-- Main Step-by-Step Training Guide Area -->
+      <div id="stepView" class="demo-content">
+        <div id="stepContainer" style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <!-- Dynamically populated per step -->
+        </div>
+      </div>
+
+      <!-- Alternative View: Full Process Dashboard -->
+      <div id="wholeView" class="demo-content" style="display: none;">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div id="statTrans" class="stat-val">0</div>
+            <div class="stat-lbl">Total Baskets (N)</div>
+          </div>
+          <div class="stat-card">
+            <div id="statItems" class="stat-val">0</div>
+            <div class="stat-lbl">Distinct Items</div>
+          </div>
+          <div class="stat-card">
+            <div id="statFrequent" class="stat-val">0</div>
+            <div class="stat-lbl">Frequent Itemsets</div>
+          </div>
+          <div class="stat-card">
+            <div id="statRules" class="stat-val">0</div>
+            <div class="stat-lbl">Association Rules Found</div>
+          </div>
+        </div>
+
+        <div class="data-section-title">
+          <span>📦 All Frequent Itemsets (L1, L2, ...)</span>
+        </div>
+        <div class="table-container">
+          <table id="fullFrequentTable">
+            <thead>
+              <tr>
+                <th>Size (k)</th>
+                <th>Itemset</th>
+                <th>Basket Count</th>
+                <th>Support</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="data-section-title">
+          <span>🔗 Derived Strong Association Rules (A → B)</span>
+        </div>
+        <div class="table-container">
+          <table id="fullRulesTable">
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Support</th>
+                <th>Confidence</th>
+                <th>Lift</th>
+                <th>Business Recommendation</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Bottom Step Navigation Footer -->
+      <footer id="bottomNav" class="bottom-stepper-bar">
+        <div id="stepProgressText" class="step-progress-text">
+          Step 1 of 8
+        </div>
+        <div class="action-btn-group">
+          <button class="btn btn-secondary" onclick="firstStep()">⏮ First</button>
+          <button class="btn btn-secondary" onclick="prevStep()">◀ Previous</button>
+          <button class="btn btn-primary" onclick="nextStep()">Next Step ▶</button>
+          <button class="btn btn-secondary" onclick="endStep()">Jump to End ⏭</button>
+        </div>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script>
+    let currentMode = 'step';
+    let currentStepIdx = 0;
+    let analysisResult = null;
+
+    const PRESETS = {
+      "Classic grocery baskets": "milk, bread, butter\nbread, diaper, beer, eggs\nmilk, diaper, bread, cola\nbread, milk, diaper, beer\nmilk, bread, diaper, cola\neggs, flour, sugar\nbread, butter, jam\nmilk, cereal, banana",
+      "Breakfast baskets": "bread, butter, jam\nmilk, cereal, banana\nbread, eggs, milk\noatmeal, milk, banana\nbread, peanut butter, jelly\ncoffee, milk, sugar",
+      "Dinner baskets": "rice, chicken, onion, garlic\nrice, beans, tomato\npasta, tomato, cheese\nbread, butter, soup\nrice, chicken, broccoli\npasta, garlic, olive oil"
+    };
+
+    function init() {
+      loadPreset();
+      updateParamLabels();
+      runAnalysis();
+
+      // Keyboard arrow navigation
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') nextStep();
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevStep();
+      });
+    }
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.getElementById('btnModeStep').classList.toggle('active', mode === 'step');
+      document.getElementById('btnModeWhole').classList.toggle('active', mode === 'whole');
+      document.getElementById('stepView').style.display = (mode === 'step') ? 'flex' : 'none';
+      document.getElementById('wholeView').style.display = (mode === 'whole') ? 'flex' : 'none';
+      document.getElementById('bottomNav').style.display = (mode === 'step') ? 'flex' : 'none';
+      document.getElementById('stepperBar').style.display = (mode === 'step') ? 'flex' : 'none';
+    }
+
+    function loadPreset() {
+      const presetKey = document.getElementById('presetSelect').value;
+      document.getElementById('basketsText').value = PRESETS[presetKey] || PRESETS["Classic grocery baskets"];
+      updateParamLabels();
+    }
+
+    function resetDefaults() {
+      document.getElementById('presetSelect').value = "Classic grocery baskets";
+      document.getElementById('minsupSlider').value = 0.40;
+      document.getElementById('minconfSlider').value = 0.70;
+      loadPreset();
+      runAnalysis();
+    }
+
+    function updateParamLabels() {
+      const minsup = parseFloat(document.getElementById('minsupSlider').value);
+      const minconf = parseFloat(document.getElementById('minconfSlider').value);
+      document.getElementById('minsupVal').textContent = Math.round(minsup * 100) + '%';
+      document.getElementById('minconfVal').textContent = Math.round(minconf * 100) + '%';
+      
+      const lines = document.getElementById('basketsText').value.split('\n').filter(l => l.trim().length > 0 && !l.trim().startsWith('#'));
+      const n = lines.length;
+      const countReq = Math.ceil(minsup * n);
+      document.getElementById('minsupCountHelp').textContent = `Requires itemset in ≥ ${countReq} of ${n} baskets`;
+    }
+
+    async function runAnalysis() {
+      const basketsText = document.getElementById('basketsText').value;
+      const minSupport = parseFloat(document.getElementById('minsupSlider').value);
+      const minConfidence = parseFloat(document.getElementById('minconfSlider').value);
+
+      try {
+        const response = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            baskets: basketsText,
+            min_support: minSupport,
+            min_confidence: minConfidence
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Server returned ' + response.status);
+        }
+
+        analysisResult = await response.json();
+        currentStepIdx = 0;
+        renderAll();
+      } catch (err) {
+        console.error('Analysis error:', err);
+        alert('Could not run analysis: ' + err.message);
+      }
+    }
+
+    function renderAll() {
+      if (!analysisResult) return;
+
+      // Update Sidebar Mini Stats
+      document.getElementById('sideStatBaskets').textContent = analysisResult.transaction_count;
+      document.getElementById('sideStatItems').textContent = analysisResult.all_unique_items.length;
+      document.getElementById('sideStatMinsupCount').textContent = analysisResult.min_support_count;
+      document.getElementById('sideStatRules').textContent = analysisResult.rules.length;
+
+      renderStepNav();
+      renderCurrentStep();
+      renderWholeProcess();
+    }
+
+    function renderStepNav() {
+      const steps = analysisResult.training_steps || [];
+      const track = document.getElementById('stepsTrack');
+      track.innerHTML = '';
+
+      steps.forEach((step, idx) => {
+        const pill = document.createElement('button');
+        pill.className = 'step-pill' + (idx === currentStepIdx ? ' active' : '') + (idx < currentStepIdx ? ' completed' : '');
+        pill.onclick = () => goToStep(idx);
+
+        const num = document.createElement('span');
+        num.className = 'step-pill-num';
+        num.innerHTML = (idx < currentStepIdx) ? '✓' : (idx + 1);
+
+        const title = document.createElement('span');
+        title.textContent = step.title.length > 22 ? step.title.substring(0, 20) + '…' : step.title;
+
+        pill.appendChild(num);
+        pill.appendChild(title);
+        track.appendChild(pill);
+      });
+
+      document.getElementById('stepProgressText').textContent = 
+        `Step ${currentStepIdx + 1} of ${steps.length}: ${steps[currentStepIdx] ? steps[currentStepIdx].title : ''}`;
+    }
+
+    function renderCurrentStep() {
+      const steps = analysisResult.training_steps || [];
+      const container = document.getElementById('stepContainer');
+      if (!steps || steps.length === 0) {
+        container.innerHTML = '<p>No training steps available.</p>';
+        return;
+      }
+
+      const step = steps[currentStepIdx];
+      let html = '';
+
+      // Title & Phase Row
+      html += `
+        <div class="step-title-row">
+          <div>
+            <div class="phase-badge">${step.phase}</div>
+            <div class="step-card-title">${step.title}</div>
+            <div class="step-concept">${step.concept}</div>
+          </div>
+        </div>
+      `;
+
+      // Concept & Math side-by-side in grid
+      html += `<div class="concept-math-grid">`;
+      html += `
+        <div class="guide-box guide-concept">
+          <h4><span>🎓</span> Step Logic & Action</h4>
+          <p>${step.explanation}</p>
+        </div>
+      `;
+
+      if (step.formula) {
+        html += `
+          <div class="guide-box math-box">
+            <h4><span>📐</span> Calculation & Arithmetic</h4>
+            <div>Formula: <span class="math-formula">${step.formula.expression}</span></div>
+            <div>Applied: <strong>${step.formula.calculation}</strong></div>
+          </div>
+        `;
+      }
+      html += `</div>`;
+
+      // Step Specific Visual Table
+      html += renderStepSpecificData(step);
+
+      // Key Takeaway box
+      if (step.key_takeaway) {
+        html += `
+          <div class="guide-box takeaway-box">
+            <h4><span>💡</span> Core Apriori Takeaway</h4>
+            <p>${step.key_takeaway}</p>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderStepSpecificData(step) {
+      let html = '';
+
+      // Step 1: Problem Setup Table
+      if (step.step_id === 'setup') {
+        html += `
+          <div class="data-section-title">
+            <span>🛒 Input Baskets & Items Overview</span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">TID</th>
+                  <th>Basket Items</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${step.data.transactions.map(t => `
+                  <tr>
+                    <td><strong>${t.tid}</strong></td>
+                    <td>${t.items.map(item => `<span class="item-chip">${item}</span>`).join(' ')}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Level k Candidates Scan & Filter
+      else if (step.step_id.startsWith('scan_filter_')) {
+        html += `
+          <div class="data-section-title">
+            <span>📊 Support Count & Pruning Evaluations (Level ${step.data.level})</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">
+              ${step.data.frequent_count} Kept, ${step.data.pruned_count} Pruned
+            </span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Candidate Itemset</th>
+                  <th>Occurs in Baskets</th>
+                  <th>Count</th>
+                  <th>Support %</th>
+                  <th>Decision</th>
+                  <th>Reasoning</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${step.data.candidates.map(c => `
+                  <tr>
+                    <td><strong>${c.label}</strong></td>
+                    <td>${c.matched_tids.map(tid => `<span class="trans-chip">${tid}</span>`).join(' ')}</td>
+                    <td><strong>${c.count}</strong></td>
+                    <td>${c.support_pct}</td>
+                    <td>
+                      <span class="status-badge ${c.is_frequent ? 'status-keep' : 'status-prune'}">
+                        ${c.is_frequent ? '✓ ' + c.decision : '✗ ' + c.decision}
+                      </span>
+                    </td>
+                    <td style="font-size: 0.75rem; color: var(--text-muted);">${c.reason}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Level k Candidate Generation (Join + Prune)
+      else if (step.step_id.startsWith('candidate_gen_')) {
+        html += `
+          <div class="data-section-title">
+            <span>🔗 Join Step: Combining Pairs from L${step.data.level - 1} & Checking Subsets</span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Joined Pairs</th>
+                  <th>Candidate Generated</th>
+                  <th>Subsets of size ${step.data.level - 1}</th>
+                  <th>Subset Check in L${step.data.level - 1}</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${step.data.joined_combinations.map(j => `
+                  <tr>
+                    <td><code>${j.from_pair}</code></td>
+                    <td><strong>${j.candidate}</strong></td>
+                    <td>${j.subsets.map(s => `<span class="item-chip">${s}</span>`).join(' ')}</td>
+                    <td>
+                      ${j.passed_prune 
+                        ? '<span style="color: var(--success); font-weight: 600;">✓ All subsets frequent</span>' 
+                        : `<span style="color: var(--danger); font-weight: 600;">✗ Missing: ${j.missing_subsets.join(', ')}</span>`
+                      }
+                    </td>
+                    <td>
+                      <span class="status-badge ${j.passed_prune ? 'status-keep' : 'status-prune'}">
+                        ${j.passed_prune ? '✓ ' + j.action : '✗ ' + j.action}
+                      </span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Association Rules
+      else if (step.step_id === 'rule_generation') {
+        html += `
+          <div class="data-section-title">
+            <span>🎯 Association Rule Confidence & Lift Evaluations</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: normal;">
+              ${step.data.accepted_rules_count} Accepted of ${step.data.total_rules_tested} Tested
+            </span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Candidate Rule (A → B)</th>
+                  <th>Rule Support</th>
+                  <th>Confidence Calculation</th>
+                  <th>Confidence</th>
+                  <th>Lift</th>
+                  <th>Decision</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${step.data.all_evaluated_rules.map(r => `
+                  <tr>
+                    <td><strong>${r.rule}</strong></td>
+                    <td>${r.support_pct}</td>
+                    <td style="font-size: 0.725rem; font-family: monospace;">${r.calculation_formula}</td>
+                    <td><strong>${r.confidence_pct}</strong></td>
+                    <td><span class="badge-tag">${r.lift_str}</span></td>
+                    <td>
+                      <span class="status-badge ${r.is_accepted ? 'status-keep' : 'status-prune'}">
+                        ${r.is_accepted ? '✓ ACCEPTED' : '✗ REJECTED'}
+                      </span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // Final Summary
+      else if (step.step_id === 'summary') {
+        html += `
+          <div class="data-section-title">
+            <span>🏆 Final Strong Association Rules for Business</span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Association Rule</th>
+                  <th>Support</th>
+                  <th>Confidence</th>
+                  <th>Lift</th>
+                  <th>Retail Business Strategy</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${step.data.rules.map(r => `
+                  <tr>
+                    <td><strong>${r.rule}</strong></td>
+                    <td>${r.support}</td>
+                    <td><strong>${r.confidence}</strong></td>
+                    <td><span class="badge-tag">${r.lift}</span></td>
+                    <td>
+                      <span style="font-weight: 600; color: ${parseFloat(r.lift) > 1.2 ? 'var(--success)' : 'var(--text)'};">
+                        ${r.interpretation}
+                      </span>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      return html;
+    }
+
+    function renderWholeProcess() {
+      if (!analysisResult) return;
+
+      document.getElementById('statTrans').textContent = analysisResult.transaction_count;
+      document.getElementById('statItems').textContent = analysisResult.all_unique_items.length;
+      document.getElementById('statFrequent').textContent = analysisResult.frequent_itemsets.length;
+      document.getElementById('statRules').textContent = analysisResult.rules.length;
+
+      // Frequent itemsets table
+      const freqTbody = document.querySelector('#fullFrequentTable tbody');
+      freqTbody.innerHTML = '';
+      analysisResult.frequent_itemsets.forEach(([items, support, count]) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span class="badge-tag">${items.length}-item</span></td>
+          <td><strong>{${items.join(', ')}}</strong></td>
+          <td>${count}</td>
+          <td><strong>${(support * 100).toFixed(1)}%</strong></td>
+        `;
+        freqTbody.appendChild(tr);
+      });
+
+      // Rules table
+      const rulesTbody = document.querySelector('#fullRulesTable tbody');
+      rulesTbody.innerHTML = '';
+      if (analysisResult.rules.length === 0) {
+        rulesTbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">No rules met the confidence threshold.</td></tr>';
+      } else {
+        analysisResult.rules.forEach(rule => {
+          const tr = document.createElement('tr');
+          const liftVal = rule.lift;
+          const interp = liftVal > 1.2 ? 'Strong positive association (Bundle promotion)' : (liftVal >= 1.0 ? 'Positive association' : 'Independent / weak');
+          tr.innerHTML = `
+            <td><strong>{${rule.antecedent.join(', ')}} → {${rule.consequent.join(', ')}}</strong></td>
+            <td>${(rule.support * 100).toFixed(1)}%</td>
+            <td><strong>${(rule.confidence * 100).toFixed(1)}%</strong></td>
+            <td><span class="badge-tag">${liftVal.toFixed(2)}</span></td>
+            <td><span style="font-weight: 600; color: ${liftVal > 1.2 ? 'var(--success)' : 'var(--text)'};">${interp}</span></td>
+          `;
+          rulesTbody.appendChild(tr);
+        });
+      }
+    }
+
+    function nextStep() {
+      const steps = analysisResult ? analysisResult.training_steps : [];
+      if (currentStepIdx < steps.length - 1) {
+        currentStepIdx++;
+        renderStepNav();
+        renderCurrentStep();
+        const stepView = document.getElementById('stepView');
+        if (stepView) stepView.scrollTop = 0;
+      }
+    }
+
+    function prevStep() {
+      if (currentStepIdx > 0) {
+        currentStepIdx--;
+        renderStepNav();
+        renderCurrentStep();
+        const stepView = document.getElementById('stepView');
+        if (stepView) stepView.scrollTop = 0;
+      }
+    }
+
+    function firstStep() {
+      currentStepIdx = 0;
+      renderStepNav();
+      renderCurrentStep();
+      const stepView = document.getElementById('stepView');
+      if (stepView) stepView.scrollTop = 0;
+    }
+
+    function endStep() {
+      const steps = analysisResult ? analysisResult.training_steps : [];
+      if (steps.length > 0) {
+        currentStepIdx = steps.length - 1;
+        renderStepNav();
+        renderCurrentStep();
+        const stepView = document.getElementById('stepView');
+        if (stepView) stepView.scrollTop = 0;
+      }
+    }
+
+    function goToStep(idx) {
+      currentStepIdx = idx;
+      renderStepNav();
+      renderCurrentStep();
+      const stepView = document.getElementById('stepView');
+      if (stepView) stepView.scrollTop = 0;
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

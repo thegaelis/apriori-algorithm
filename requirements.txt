@@ -1,0 +1,3 @@
+# Pure Python Apriori Training Simulator
+# Zero external dependencies required - runs with standard library Python 3.8+!
+
