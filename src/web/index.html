@@ -625,6 +625,8 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 </head>
 <body>
 
@@ -822,6 +824,26 @@
     let currentStepIdx = 0;
     let analysisResult = null;
 
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function renderMathFormulas(container) {
+      if (typeof katex === 'undefined') return;
+      container.querySelectorAll('.math-formula[data-latex]').forEach((el) => {
+        try {
+          katex.render(el.dataset.latex, el, { throwOnError: false, displayMode: false });
+        } catch (err) {
+          el.textContent = el.dataset.latex;
+        }
+      });
+    }
+
     const PRESETS = {
       "Classic grocery baskets": "milk, bread, butter\nbread, diaper, beer, eggs\nmilk, diaper, bread, cola\nbread, milk, diaper, beer\nmilk, bread, diaper, cola\neggs, flour, sugar\nbread, butter, jam\nmilk, cereal, banana",
       "Breakfast baskets": "bread, butter, jam\nmilk, cereal, banana\nbread, eggs, milk\noatmeal, milk, banana\nbread, peanut butter, jelly\ncoffee, milk, sugar",
@@ -981,7 +1003,7 @@
         html += `
           <div class="guide-box math-box">
             <h4><span>📐</span> Calculation & Arithmetic</h4>
-            <div>Formula: <span class="math-formula">${step.formula.expression}</span></div>
+            <div>Formula: <span class="math-formula" data-latex="${escapeHtml(step.formula.expression)}"></span></div>
             <div>Applied: <strong>${step.formula.calculation}</strong></div>
           </div>
         `;
@@ -1002,6 +1024,7 @@
       }
 
       container.innerHTML = html;
+      renderMathFormulas(container);
     }
 
     function renderStepSpecificData(step) {
