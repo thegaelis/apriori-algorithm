@@ -7,7 +7,7 @@ import socketserver
 import sys
 from typing import Any
 
-from src.core.apriori import analyze_baskets, parse_baskets, format_itemset, format_rule
+from src.core.apriori import analyze_baskets, parse_baskets, format_itemset, format_rule, build_apriori_trace
 from src.data.sample_baskets import PRESET_BASKETS, DEFAULT_PRESET_NAME
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -66,6 +66,8 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self) -> None:
         if self.path == "/api/analyze":
             self.handle_analyze()
+        elif self.path == "/api/apriori":
+            self.handle_apriori_trace()
         else:
             self.send_error(404, "Endpoint Not Found")
 
@@ -98,6 +100,25 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             response_data = serialize_analysis_result(analysis)
 
             self.send_json(response_data)
+        except Exception as e:
+            self.send_json({"error": str(e)}, status=400)
+
+    def handle_apriori_trace(self) -> None:
+        """Run the step-by-step Apriori trace used by the interactive web UI."""
+        try:
+            content_length = int(self.headers.get("Content-Length", 0))
+            body_bytes = self.rfile.read(content_length)
+            payload = json.loads(body_bytes.decode("utf-8"))
+
+            transactions = payload.get("transactions", [])
+            min_count = max(1, int(payload.get("min_count", 1)))
+            min_confidence = float(payload.get("min_confidence", 0.6))
+
+            if not transactions:
+                raise ValueError("Cần ít nhất một giao dịch để phân tích.")
+
+            trace = build_apriori_trace(transactions, min_count, min_confidence)
+            self.send_json(trace)
         except Exception as e:
             self.send_json({"error": str(e)}, status=400)
 
