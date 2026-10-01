@@ -7,8 +7,8 @@ import socketserver
 import sys
 from typing import Any
 
-from src.core.apriori import analyze_baskets, parse_baskets, format_itemset, format_rule, build_apriori_trace
-from src.data.sample_baskets import PRESET_BASKETS, DEFAULT_PRESET_NAME
+from src.core.apriori import analyze_baskets, parse_baskets, build_apriori_trace
+from src.data.sample_baskets import PRESET_BASKETS, DEFAULT_PRESET_NAME, UI_PRESETS
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEB_DIR = os.path.join(BASE_DIR, "src", "web")
@@ -18,14 +18,14 @@ INDEX_PATH = os.path.join(WEB_DIR, "index.html")
 def serialize_analysis_result(analysis: dict[str, Any]) -> dict[str, Any]:
     """Ensure all frozensets and tuples in analysis result are JSON-serializable."""
     serialized_frequents = [
-        [sorted(list(itemset)), round(supp, 4), count]
+        [sorted(itemset), round(supp, 4), count]
         for itemset, supp, count in analysis.get("frequent_itemsets", [])
     ]
 
     serialized_rules = [
         {
-            "antecedent": sorted(list(r["antecedent"])),
-            "consequent": sorted(list(r["consequent"])),
+            "antecedent": sorted(r["antecedent"]),
+            "consequent": sorted(r["consequent"]),
             "support": round(r["support"], 4),
             "confidence": round(r["confidence"], 4),
             "lift": round(r["lift"], 4),
@@ -59,6 +59,7 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_json({
                 "default": DEFAULT_PRESET_NAME,
                 "presets": PRESET_BASKETS,
+                "ui_presets": UI_PRESETS,
             })
         else:
             super().do_GET()
@@ -84,12 +85,18 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
         except Exception as e:
             self.send_error(500, f"Error reading index.html: {e}")
 
+    def read_json(self) -> dict[str, Any]:
+        """Read the JSON object shared by both analysis endpoints."""
+        content_length = int(self.headers.get("Content-Length", 0))
+        payload = json.loads(self.rfile.read(content_length).decode("utf-8"))
+        if not isinstance(payload, dict):
+            raise ValueError("Request body must be a JSON object.")
+        return payload
+
     def handle_analyze(self) -> None:
         """Process basket data through Apriori and return full educational trace."""
         try:
-            content_length = int(self.headers.get("Content-Length", 0))
-            body_bytes = self.rfile.read(content_length)
-            payload = json.loads(body_bytes.decode("utf-8"))
+            payload = self.read_json()
 
             baskets_text = payload.get("baskets", "")
             min_support = float(payload.get("min_support", 0.4))
@@ -106,9 +113,7 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
     def handle_apriori_trace(self) -> None:
         """Run the step-by-step Apriori trace used by the interactive web UI."""
         try:
-            content_length = int(self.headers.get("Content-Length", 0))
-            body_bytes = self.rfile.read(content_length)
-            payload = json.loads(body_bytes.decode("utf-8"))
+            payload = self.read_json()
 
             transactions = payload.get("transactions", [])
             min_count = max(1, int(payload.get("min_count", 1)))
@@ -186,3 +191,4 @@ def start_server(preferred_ports: list[int] | None = None) -> None:
 
 if __name__ == "__main__":
     start_server()
+

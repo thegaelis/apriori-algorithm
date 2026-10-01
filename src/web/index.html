@@ -224,54 +224,7 @@ h3.sec{font-size:1.25rem;margin:22px 0 10px}
 </main>
 
 <script>
-const PRESETS = [
-  { id:'han', name:'SGK Han et al. — Table 4.1 (9 giao dịch, I1…I5)', src:'Han, Pei & Tong (2022), Table 4.1, Example 4.3–4.4 — trùng slide 16–18 của nhóm.', mode:'count', minsup:2, minconf:70,
-    text:`T100: I1, I2, I5
-T200: I2, I4
-T300: I2, I3
-T400: I1, I2, I4
-T500: I1, I3
-T600: I2, I3
-T700: I1, I3
-T800: I1, I2, I3, I5
-T900: I1, I2, I3` },
-  { id:'abcd', name:'Lattice {a, b, c, d} — minh họa join/prune (slide 12–13)', src:'Dữ liệu dựng sao cho L₂ = {ab, ac, ad, bc, bd} và cd ∉ L₂, đúng như ví dụ prune trên slide 13.', mode:'count', minsup:2, minconf:60,
-    text:`T1: a, b, c
-T2: a, b, d
-T3: a, c
-T4: b, d
-T5: a, d
-T6: b, c` },
-  { id:'grocery', name:'Giỏ hàng siêu thị (10 giao dịch)', src:'Bộ giỏ hàng dựng để thấy đủ tình huống: L₁ và L₂ có loại, k = 3 có cặp không ghép và có prune, k = 4 sinh 3 ứng viên → prune còn 1 → quét thấy L₄ = ∅.', mode:'count', minsup:3, minconf:70,
-    text:`T1: milk, bread, diaper, beer
-T2: bread, beer, eggs
-T3: milk, bread, eggs, butter
-T4: bread, diaper, beer
-T5: milk, bread, beer, eggs
-T6: milk, diaper, beer
-T7: bread, beer, eggs, cola
-T8: milk, bread, diaper
-T9: milk, eggs, butter
-T10: milk, bread, diaper, beer` },
-  { id:'breakfast', name:'Bữa sáng (6 giao dịch)', src:'Preset "Breakfast baskets" trong sample_baskets.py.', mode:'count', minsup:2, minconf:60,
-    text:`bread, butter, jam
-milk, cereal, banana
-bread, eggs, milk
-oatmeal, milk, banana
-bread, peanut butter, jelly
-coffee, milk, sugar` },
-  { id:'dinner', name:'Bữa tối (6 giao dịch)', src:'Preset "Dinner baskets" trong sample_baskets.py.', mode:'count', minsup:2, minconf:60,
-    text:`rice, chicken, onion, garlic
-rice, beans, tomato
-pasta, tomato, cheese
-bread, butter, soup
-rice, chicken, broccoli
-pasta, garlic, olive oil` },
-  { id:'custom', name:'Tự nhập…', src:'Nhập giao dịch của bạn ở ô bên trái rồi bấm "Áp dụng dữ liệu".', mode:'count', minsup:2, minconf:60, text:`T1: A, B, C
-T2: A, C
-T3: A, D
-T4: B, E, F` },
-];
+let PRESETS = [];
 
 const cmpItem = (a,b) => a.localeCompare(b, undefined, {numeric:true, sensitivity:'base'});
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -357,7 +310,7 @@ function loadPreset(id){
   $('minsup').value = p.minsup;
   $('minconf').value = p.minconf;
   $('srcnote').textContent = p.src;
-  run();
+  return run();
 }
 
 function syncSupUnit(convert){
@@ -645,8 +598,18 @@ function renderStep(){
   bindHover(el);
 }
 
-initPresets();
-loadPreset('grocery');
+async function init(){
+  try {
+    const response = await fetch('/api/presets');
+    if (!response.ok) throw new Error(`Lỗi máy chủ (${response.status})`);
+    PRESETS = (await response.json()).ui_presets;
+    initPresets();
+    await loadPreset('grocery');
+  } catch (err){
+    $('step').innerHTML = `<div class="err">Không thể tải dữ liệu mẫu: ${esc(err.message)}</div>`;
+  }
+}
+init();
 </script>
 </body>
 </html>

@@ -50,6 +50,21 @@ python -m unittest discover -s tests
 make test
 ```
 
+Both HTTP endpoints use `build_apriori_trace` in `src/core/apriori.py`.
+`src/core/legacy.py` adapts that trace to the original `/api/analyze` response.
+The interactive UI loads its presets from `/api/presets`, backed by
+`src/data/sample_baskets.py`.
+
+Tests cover exhaustive itemset/rule comparisons, the textbook dataset, edge
+cases, and real HTTP requests. To additionally check frontend rendering and API
+integration with Node.js 18+ (using a minimal DOM stub, without a browser):
+
+```bash
+python app.py 8765
+# In another terminal:
+node tests/frontend_smoke.cjs
+```
+
 milk, bread, butter
 bread, diaper, beer, eggs
 milk, diaper, bread, cola
