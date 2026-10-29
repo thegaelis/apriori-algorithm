@@ -54,6 +54,9 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(*args, directory=WEB_DIR, **kwargs)
 
+    def do_HEAD(self) -> None:
+        self.do_GET()
+
     def do_GET(self) -> None:
         if self.path in ("/", "/index.html"):
             self.serve_index()
