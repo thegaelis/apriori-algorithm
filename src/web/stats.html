@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thống kê dataset Online Retail (UCI)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F9;--surface:#fff;--surface-2:#EDF0F5;--ink:#16202E;--muted:#5C6675;--line:#D6DCE5;--line-strong:#B8C1CE;--accent:#2B4BC7;--accent-bg:#E7ECFA;--accent-ink:#1F3799;--keep:#117A65;--keep-bg:#DDF3EC;--drop:#B03A2E;--drop-bg:#FBE5E1;--prune:#9A6A00;--prune-bg:#FBF0D3;--shadow:0 1px 2px rgba(22,32,46,.06),0 8px 24px rgba(22,32,46,.06);--serif:"Newsreader",Georgia,serif;--sans:"IBM Plex Sans","Segoe UI",Roboto,Arial,sans-serif;--mono:"IBM Plex Mono",Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{--paper:#0F141B;--surface:#171E28;--surface-2:#1F2833;--ink:#E6EAF0;--muted:#9AA5B4;--line:#2A3441;--line-strong:#3B4756;--accent:#8FA6FF;--accent-bg:#1E2A4F;--accent-ink:#B9C7FF;--keep:#4FC9A6;--keep-bg:#123A31;--drop:#F08A7E;--drop-bg:#47231F;--prune:#E8B84A;--prune-bg:#3E3111;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35)}}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;padding:0 20px 40px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;margin:0;text-wrap:balance}
+a{color:var(--accent)}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding:18px 0 14px;border-bottom:1px solid var(--line)}
+.top h1{font-size:1.75rem;line-height:1.1}
+.top p{margin:4px 0 0;color:var(--muted);font-size:.92rem;max-width:75ch}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav a{border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);text-decoration:none;border-radius:6px;padding:7px 14px;font-weight:500;font-size:.9rem}
+.nav a.cur{background:var(--accent);border-color:var(--accent);color:#fff}
+main{max-width:1200px;margin:0 auto}
+section{margin-top:26px}
+section>h2{font-size:1.45rem;margin-bottom:4px}
+.sub{color:var(--muted);font-size:.9rem;margin:0 0 12px;max-width:80ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow)}
+.card .v{font-family:var(--serif);font-size:1.7rem;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.card .l{font-size:.78rem;color:var(--muted);margin-top:3px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px}
+@media (max-width:480px){.grid2{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.panel h3{font-size:1.1rem;margin-bottom:8px}
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--line-strong);white-space:nowrap}
+td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;font-variant-numeric:tabular-nums}
+td.n,th.n{text-align:right}
+code,.mono{font-family:var(--mono);font-size:.88em}
+.pill{display:inline-block;font-size:.74rem;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--accent-bg);color:var(--accent-ink)}
+.bars{display:flex;flex-direction:column;gap:5px}
+.bar{display:grid;grid-template-columns:minmax(90px,200px) 1fr 80px;gap:8px;align-items:center;font-size:.85rem}
+.bar .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .tr{background:var(--surface-2);border-radius:4px;height:16px;overflow:hidden}
+.bar .fl{height:100%;background:var(--accent);border-radius:4px}
+.bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.vcol{display:flex;align-items:flex-end;gap:3px;height:170px;padding-top:8px;border-bottom:1px solid var(--line-strong)}
+.vcol .c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
+.vcol .c i{display:block;width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:1px}
+.vlab{display:flex;gap:3px;font-size:.68rem;color:var(--muted);margin-top:3px}
+.vlab span{flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.note{background:var(--prune-bg);border-left:3px solid var(--prune);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;margin:10px 0}
+.good{background:var(--keep-bg);border-left-color:var(--keep)}
+.err{background:var(--drop-bg);color:var(--drop);padding:12px;border-radius:8px}
+.q{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px}
+.q div{background:var(--surface-2);border-radius:6px;padding:6px 8px;text-align:center}
+.q b{display:block;font-family:var(--serif);font-size:1.1rem;font-variant-numeric:tabular-nums}
+.q span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+footer{margin-top:30px;color:var(--muted);font-size:.82rem}
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Thống kê dataset Online Retail</h1>
+    <p id="srcline">Đang tải…</p>
+  </div>
+  <nav class="nav"><a href="/">Demo thuật toán</a><a href="/shop" style="font-weight:600;color:var(--accent)">🛒 E-Commerce Cross-sell</a><a href="/stats" class="cur">Thống kê dataset</a></nav>
+</header>
+<main id="root"><p class="sub">Đang tải số liệu…</p></main>
+
+<script>
+const fmt = n => Number(n).toLocaleString('en-US');
+const fmt2 = n => Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gbp = n => '£' + fmt(Math.round(n));
+
+function cards(items){return `<div class="cards">${items.map(([v,l])=>`<div class="card"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('')}</div>`}
+function hbars(rows, valFmt=fmt){
+  const max = Math.max(...rows.map(r=>r.v),1);
+  return `<div class="bars">${rows.map(r=>`<div class="bar"><span class="nm" title="${esc(r.t||r.n)}">${esc(r.n)}</span><span class="tr"><span class="fl" style="display:block;width:${(100*r.v/max).toFixed(1)}%"></span></span><span class="val">${valFmt(r.v)}</span></div>`).join('')}</div>`;
+}
+function vcols(labels, values, valFmt=fmt){
+  const max = Math.max(...values,1);
+  return `<div class="vcol">${values.map((v,i)=>`<div class="c" title="${esc(labels[i])}: ${valFmt(v)}"><i style="height:${(100*v/max).toFixed(1)}%"></i></div>`).join('')}</div>
+  <div class="vlab">${labels.map(l=>`<span>${esc(l)}</span>`).join('')}</div>`;
+}
+function quant(q){
+  const keys=[['min','Min'],['p25','P25'],['median','Median'],['p75','P75'],['p95','P95'],['p99','P99'],['max','Max'],['mean','Mean'],['std','Std']];
+  return `<div class="q">${keys.map(([k,l])=>`<div><b>${fmt2(q[k])}</b><span>${l}</span></div>`).join('')}</div>`;
+}
+
+function render(d){
+  const o=d.overview, qu=d.quality, b=d.basket, c=d.customers;
+  document.getElementById('srcline').innerHTML =
+    `Nguồn: <a href="${d.url}" target="_blank" rel="noopener">${esc(d.source)}</a>. Giao dịch của một cửa hàng quà tặng trực tuyến tại Anh, ${o.date_from.slice(0,10)} → ${o.date_to.slice(0,10)}.`;
+  let h='';
+
+  h+=`<section><h2>1. Tổng quan</h2><p class="sub">Quy mô dữ liệu thô trước khi làm sạch.</p>
+  ${cards([
+    [fmt(o.rows),'dòng (line items)'],[o.columns,'cột'],[fmt(o.invoices),'hóa đơn (InvoiceNo)'],
+    [fmt(o.customers),'khách hàng (CustomerID)'],[fmt(o.products_stockcodes),'mã sản phẩm (StockCode)'],[o.countries,'quốc gia'],
+    [o.days_span+' ngày','khoảng thời gian'],[gbp(o.total_revenue_valid_sales),'doanh thu (đơn hợp lệ)'],[gbp(o.avg_order_value),'giá trị đơn trung bình']
+  ])}</section>`;
+
+  h+=`<section><h2>2. Lược đồ các cột</h2><div class="panel"><div class="tblwrap"><table>
+  <tr><th>Cột</th><th>Kiểu</th><th>Mô tả</th><th class="n">Thiếu</th><th class="n">% thiếu</th></tr>
+  ${d.columns.map((col,i)=>{const key=['invoice','stock','desc','qty','date','price','cust','country'][i];const m=d.missing[key];
+    return `<tr><td><code>${col.name}</code></td><td><span class="pill">${col.type}</span></td><td>${esc(col.desc)}</td><td class="n">${fmt(m.count)}</td><td class="n">${m.pct}%</td></tr>`}).join('')}
+  </table></div></div></section>`;
+
+  h+=`<section><h2>3. Chất lượng dữ liệu</h2><p class="sub">Các vấn đề cần xử lý trước khi khai phá luật kết hợp.</p>
+  ${cards([
+    [fmt(qu.cancellation_rows),'dòng hủy (InvoiceNo bắt đầu bằng C)'],[fmt(qu.cancellation_invoices),'hóa đơn bị hủy'],
+    [fmt(qu.negative_quantity_rows),'dòng Quantity &lt; 0'],[fmt(qu.zero_price_rows),'dòng UnitPrice = 0'],
+    [fmt(qu.negative_price_rows),'dòng UnitPrice &lt; 0 (điều chỉnh nợ)'],[fmt(qu.duplicate_rows),'dòng trùng lặp hoàn toàn'],
+    [fmt(qu.non_product_rows),'dòng không phải sản phẩm (POST, D, M…)'],[fmt(d.missing.cust.count),'dòng thiếu CustomerID ('+d.missing.cust.pct+'%)']
+  ])}
+  <div class="note"><b>Mã không phải sản phẩm:</b> <code>${qu.non_product_codes.map(esc).join('</code>, <code>')}</code></div></section>`;
+
+  h+=`<section><h2>4. Phân bố số lượng và đơn giá</h2><p class="sub">Chỉ tính các dòng bán hợp lệ: không hủy, Quantity &gt; 0, UnitPrice &gt; 0 (${fmt(qu.valid_sale_rows)} dòng).</p>
+  <div class="grid2"><div class="panel"><h3>Quantity mỗi dòng</h3>${quant(d.quantity)}
+  <p class="sub" style="margin-top:8px">Phân bố lệch phải mạnh: trung vị ${d.quantity.median}, nhưng tối đa ${fmt(d.quantity.max)}. Phần lớn là bán sỉ cho đại lý.</p></div>
+  <div class="panel"><h3>UnitPrice (GBP)</h3>${quant(d.unit_price)}
+  <p class="sub" style="margin-top:8px">Hàng giá thấp chiếm đa số (trung vị £${d.unit_price.median}).</p></div></div></section>`;
+
+  h+=`<section><h2>5. Giỏ hàng cho Apriori</h2><p class="sub">${esc(b.note)}</p>
+  ${cards([
+    [fmt(b.clean_transactions),'giao dịch sạch (|D|)'],[fmt(b.distinct_items),'item khác nhau (|I|)'],[fmt(b.clean_rows),'cặp (hóa đơn, item)'],
+    [fmt2(b.size.mean),'item trung bình / giỏ'],[b.size.median,'trung vị item / giỏ'],[fmt(b.size.max),'giỏ lớn nhất'],
+    [b.single_item_baskets_pct+'%','giỏ chỉ 1 item (vô ích cho luật)'],[b.density_pct+'%','mật độ ma trận giỏ × item']
+  ])}
+  <div class="grid2" style="margin-top:16px">
+  <div class="panel"><h3>Phân bố kích thước giỏ hàng (số item)</h3>${vcols(b.size_hist.labels,b.size_hist.counts)}</div>
+  <div class="panel"><h3>Phân vị kích thước giỏ</h3>${quant(b.size)}
+  <p class="sub" style="margin-top:8px">Giỏ lớn (P99 = ${b.size.p99} item) làm số itemset bậc cao bùng nổ: là vấn đề chính của Apriori trên dữ liệu thật.</p></div></div>
+  <div class="panel" style="margin-top:16px"><h3>Chọn <code>min_sup</code> thế nào? Số item phổ biến theo ngưỡng</h3>
+  <div class="tblwrap"><table><tr><th>min_sup</th><th class="n">≈ số giao dịch tối thiểu</th><th class="n">số item phổ biến (L₁)</th><th class="n">C₂ phải đếm (cặp)</th></tr>
+  ${b.support_curve.map(s=>`<tr><td>${s.min_sup_pct}%</td><td class="n">${s.min_count}</td><td class="n">${fmt(s.frequent_items)}</td><td class="n">${fmt(s.frequent_items*(s.frequent_items-1)/2)}</td></tr>`).join('')}
+  </table></div>
+  <div class="note">Với min_sup thấp, số cặp ứng viên lên tới hàng triệu. Khi chạy Apriori cần lọc item hiếm và chọn min_sup phù hợp, nên dùng pipeline offline.</div></div></section>`;
+
+  h+=`<section><h2>6. Sản phẩm</h2><div class="grid2">
+  <div class="panel"><h3>Top 20 theo số giỏ chứa (support)</h3>${hbars(d.top_products_by_baskets.map(p=>({n:p.name||p.code,t:p.code+' '+p.name,v:p.support_pct})),v=>v+'%')}</div>
+  <div class="panel"><h3>Top 15 theo doanh thu</h3>${hbars(d.top_products_by_revenue.map(p=>({n:p.name||p.code,t:p.code,v:p.revenue})),gbp)}
+  <h3 style="margin-top:14px">Top 15 theo số lượng bán</h3>${hbars(d.top_products_by_quantity.map(p=>({n:p.name||p.code,t:p.code,v:p.qty})))}</div></div></section>`;
+
+  h+=`<section><h2>7. Khách hàng</h2>${cards([
+    [fmt(o.customers),'khách hàng định danh'],[fmt(c.repeat_customers),'khách mua ≥ 2 lần'],
+    [fmt2(c.orders_per_customer.mean),'đơn trung bình / khách'],[c.orders_per_customer.median,'trung vị đơn / khách'],[c.orders_per_customer.max,'khách mua nhiều nhất (đơn)']
+  ])}</section>`;
+
+  h+=`<section><h2>8. Thời gian</h2><div class="grid2">
+  <div class="panel"><h3>Doanh thu theo tháng</h3>${vcols(d.monthly.map(m=>m.month.slice(2)),d.monthly.map(m=>m.revenue),gbp)}
+  <p class="sub" style="margin-top:8px">Tháng 12/2011 chỉ có dữ liệu đến ngày 9. Cao điểm vào quý 4 (mùa quà tặng).</p></div>
+  <div class="panel"><h3>Số hóa đơn theo tháng</h3>${vcols(d.monthly.map(m=>m.month.slice(2)),d.monthly.map(m=>m.invoices))}</div>
+  <div class="panel"><h3>Hóa đơn theo giờ trong ngày</h3>${vcols(d.hourly_invoices.map(x=>x.hour+'h'),d.hourly_invoices.map(x=>x.invoices))}</div>
+  <div class="panel"><h3>Hóa đơn theo thứ trong tuần</h3>${vcols(d.weekday_invoices.map(x=>x.day),d.weekday_invoices.map(x=>x.invoices))}
+  <p class="sub" style="margin-top:8px">Không có hóa đơn vào thứ 7.</p></div></div></section>`;
+
+  h+=`<section><h2>9. Quốc gia (Top 40)</h2><div class="panel"><div class="tblwrap"><table>
+  <tr><th>Quốc gia</th><th class="n">Hóa đơn</th><th class="n">Doanh thu</th><th class="n">% doanh thu</th></tr>
+  ${d.countries.map(x=>`<tr><td>${esc(x.country)}</td><td class="n">${fmt(x.invoices)}</td><td class="n">${gbp(x.revenue)}</td><td class="n">${x.revenue_pct}%</td></tr>`).join('')}
+  </table></div></div></section>`;
+
+  h+=`<footer>Số liệu sinh bằng <code>scripts/build_retail_stats.py</code> → <code>src/data/retail_stats.json</code>.</footer>`;
+  document.getElementById('root').innerHTML=h;
+}
+
+fetch('/api/retail-stats').then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(render)
+ .catch(e=>{document.getElementById('root').innerHTML=`<div class="err">Không tải được số liệu: ${esc(e.message)}. Chạy <code>python scripts/build_retail_stats.py "Online Retail.xlsx"</code> để tạo file.</div>`});
+</script>
+</body>
+</html>

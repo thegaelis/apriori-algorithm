@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-Commerce Store & Basket Intelligence — Apriori Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f8fafc; --surface:#ffffff; --surface-sub:#f1f5f9; --border:#e2e8f0; --border-focus:#94a3b8;
+  --text:#0f172a; --text-muted:#64748b; --text-light:#94a3b8;
+  --primary:#0284c7; --primary-hover:#0369a1; --primary-light:#e0f2fe; --primary-dark:#0c4a6e;
+  --accent:#10b981; --accent-light:#d1fae5; --accent-dark:#065f46;
+  --warning:#f59e0b; --warning-light:#fef3c7;
+  --danger:#ef4444; --danger-light:#fee2e2;
+  --sans:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --shadow-sm:0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow:0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --shadow-lg:0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#090d16; --surface:#111827; --surface-sub:#1f2937; --border:#374151; --border-focus:#6b7280;
+    --text:#f9fafb; --text-muted:#9ca3af; --text-light:#6b7280;
+    --primary:#38bdf8; --primary-hover:#0ea5e9; --primary-light:#082f49; --primary-dark:#bae6fd;
+    --accent:#34d399; --accent-light:#064e3b; --accent-dark:#a7f3d0;
+    --warning:#fbbf24; --warning-light:#451a03;
+    --danger:#f87171; --danger-light:#450a0a;
+    --shadow-sm:0 1px 2px 0 rgb(0 0 0 / 0.5);
+    --shadow:0 4px 6px -1px rgb(0 0 0 / 0.4);
+    --shadow-lg:0 10px 15px -3px rgb(0 0 0 / 0.5);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;min-height:100vh}
+header.shop-nav{position:sticky;top:0;z-index:40;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm);backdrop-filter:blur(8px)}
+.nav-inner{max-width:1380px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:16px}
+.brand-box{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand-badge{background:linear-gradient(135deg,var(--primary),#6366f1);color:#fff;font-weight:700;font-size:1.15rem;padding:6px 12px;border-radius:10px;display:flex;align-items:center;gap:6px}
+.brand-title{font-size:1.1rem;font-weight:700;letter-spacing:-0.02em}
+.brand-sub{font-size:0.75rem;color:var(--text-muted);display:block}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.nav-link{text-decoration:none;font-size:0.86rem;font-weight:600;padding:7px 12px;border-radius:8px;color:var(--text-muted);border:1px solid var(--border);transition:all 0.15s}
+.nav-link:hover{background:var(--surface-sub);color:var(--text)}
+.nav-link.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark)}
+.cart-btn{background:var(--primary);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:600;font-size:0.88rem;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)}
+.cart-badge{background:#fff;color:var(--primary);border-radius:999px;font-size:0.75rem;padding:1px 7px;font-weight:700}
+
+.hero{background:linear-gradient(180deg,var(--surface) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:28px 20px 24px}
+.hero-inner{max-width:1380px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
+.hero-content h1{font-size:1.6rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:6px}
+.hero-content p{color:var(--text-muted);font-size:0.92rem;max-width:700px}
+.mode-toggle{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px;display:flex;gap:4px;box-shadow:var(--shadow-sm)}
+.mode-btn{border:none;background:transparent;padding:7px 14px;border-radius:7px;font-size:0.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;display:flex;align-items:center;gap:6px;transition:0.15s}
+.mode-btn.active{background:var(--primary);color:#fff;box-shadow:var(--shadow-sm)}
+
+.container{max-width:1380px;margin:0 auto;padding:24px 20px 60px}
+.layout{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start}
+@media (max-width:1080px){.layout{grid-template-columns:1fr}}
+
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-title{font-size:1.15rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.filter-bar{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:16px}
+.filter-chip{background:var(--surface);border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:0.8rem;font-weight:500;color:var(--text-muted);cursor:pointer;white-space:nowrap}
+.filter-chip.active{background:var(--primary-light);border-color:var(--primary);color:var(--primary-dark);font-weight:600}
+
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.prod-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm);transition:all 0.2s;display:flex;flex-direction:column}
+.prod-card:hover{box-shadow:var(--shadow);transform:translateY(-2px);border-color:var(--border-focus)}
+.prod-thumb{height:120px;background:var(--surface-sub);display:flex;align-items:center;justify-content:center;position:relative}
+.prod-code{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:0.7rem;background:rgba(0,0,0,0.6);color:#fff;padding:2px 6px;border-radius:4px}
+.prod-icon{font-size:2.4rem}
+.prod-body{padding:12px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.prod-name{font-size:0.86rem;font-weight:600;line-height:1.35;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+.prod-foot{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.prod-price{font-size:1.05rem;font-weight:700;color:var(--text)}
+.add-btn{background:var(--surface-sub);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:0.8rem;font-weight:600;cursor:pointer;transition:0.15s;display:flex;align-items:center;gap:4px}
+.add-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.cart-panel{position:sticky;top:80px;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.cart-header{padding:14px 16px;background:var(--surface-sub);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cart-title{font-size:0.98rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.clear-cart{background:none;border:none;color:var(--danger);font-size:0.78rem;font-weight:600;cursor:pointer}
+.cart-items{padding:12px 16px;max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.cart-empty{text-align:center;padding:24px 12px;color:var(--text-light);font-size:0.86rem}
+.cart-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--surface-sub);font-size:0.84rem}
+.cart-row-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.cart-row-remove{color:var(--text-light);background:none;border:none;cursor:pointer;font-size:1.1rem}
+.cart-row-remove:hover{color:var(--danger)}
+
+.ai-recommend{background:linear-gradient(180deg,var(--primary-light) 0%,var(--surface) 100%);border-top:2px solid var(--primary);padding:14px 16px}
+.ai-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.ai-title{font-size:0.88rem;font-weight:700;color:var(--primary-dark);display:flex;align-items:center;gap:6px}
+.ai-spark{color:var(--primary);font-size:1rem}
+.recom-list{display:flex;flex-direction:column;gap:10px}
+.recom-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px;box-shadow:var(--shadow-sm);transition:0.15s}
+.recom-card:hover{border-color:var(--primary);box-shadow:var(--shadow)}
+.recom-top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px}
+.recom-name{font-size:0.82rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.recom-tags{display:flex;gap:4px;flex-wrap:wrap;margin:4px 0}
+.metric-pill{font-family:var(--mono);font-size:0.7rem;padding:2px 6px;border-radius:4px;font-weight:600}
+.pill-lift{background:var(--accent-light);color:var(--accent-dark)}
+.pill-conf{background:var(--primary-light);color:var(--primary-dark)}
+.pill-supp{background:var(--surface-sub);color:var(--text-muted)}
+.recom-why{font-size:0.74rem;color:var(--text-muted);margin:4px 0 6px;line-height:1.35}
+.recom-act{display:flex;justify-content:space-between;align-items:center}
+
+.bundle-section{margin-top:36px;border-top:1px solid var(--border);padding-top:24px}
+.bundle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.bundle-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;justify-content:space-between}
+.bundle-items{display:flex;align-items:center;gap:8px;margin:10px 0}
+.bundle-item{flex:1;background:var(--surface-sub);padding:8px;border-radius:8px;font-size:0.78rem;font-weight:600;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bundle-plus{font-weight:700;color:var(--text-muted)}
+.bundle-stats{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:10px;margin-top:6px}
+
+.biz-note{display:none}
+.biz-mode .biz-note{display:block}
+.tech-note{display:block}
+.biz-mode .tech-note{display:none}
+</style>
+</head>
+<body>
+
+<header class="shop-nav">
+  <div class="nav-inner">
+    <a href="/shop" class="brand-box">
+      <div class="brand-badge">⚡ RetailML</div>
+      <div>
+        <span class="brand-title">E-Commerce Intelligence Store</span>
+        <span class="brand-sub">Powered by Online Retail Apriori Rules</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <a href="/" class="nav-link">🔬 Apriori Stepper</a>
+      <a href="/stats" class="nav-link">📊 UCI Dataset Stats</a>
+      <a href="/shop" class="nav-link active">🛒 Store & Cross-sell</a>
+      <button class="cart-btn" onclick="document.querySelector('.cart-panel').scrollIntoView({behavior:'smooth'})">
+        <span>Giỏ hàng</span>
+        <span class="cart-badge" id="cartCountBadge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <h1>Demo Ứng Dụng Khai Phá Giỏ Hàng (Market Basket Analysis)</h1>
+      <p>Trải nghiệm hệ thống gợi ý sản phẩm thời gian thực (Real-time Recommendation) và Combo tự động tối ưu hóa doanh thu được sinh trực tiếp từ tập luật Apriori khai phá trên 18,273 giỏ hàng thật.</p>
+    </div>
+    <div class="mode-toggle" aria-label="Chế độ xem">
+      <button class="mode-btn active" id="btnTechMode" onclick="setMode('tech')">
+        <span>👨‍💻 Chế độ Khoa Học</span>
+      </button>
+      <button class="mode-btn" id="btnBizMode" onclick="setMode('biz')">
+        <span>💼 Chế độ Kinh Doanh</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="layout">
+    <!-- Main shopping section -->
+    <main>
+      <div class="section-head">
+        <h2 class="section-title">🛍️ Danh Mục Sản Phẩm Phổ Biến (UCI Catalog)</h2>
+        <span style="font-size:0.84rem;color:var(--text-muted)">Thêm vào giỏ để kích hoạt thuật toán</span>
+      </div>
+
+      <div class="filter-bar" id="categoryBar">
+        <button class="filter-chip active" onclick="filterCategory('ALL')">Tất cả sản phẩm</button>
+        <button class="filter-chip" onclick="filterCategory('BAG')">👜 Jumbo Bags</button>
+        <button class="filter-chip" onclick="filterCategory('HERB')">🌿 Herb Markers</button>
+        <button class="filter-chip" onclick="filterCategory('BAKE')">🧁 Tea & Baking</button>
+        <button class="filter-chip" onclick="filterCategory('HEART')">❤️ Heart & Decor</button>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Smart Bundles section -->
+      <section class="bundle-section">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">📦 Combo Khuyến Mãi Tự Động (Apriori Frequent 2-Itemsets)</h2>
+            <p style="font-size:0.84rem;color:var(--text-muted);margin-top:2px">
+              <span class="tech-note">Được sinh từ các tập phổ biến $L_2$ có Support cao nhất và được khách hàng mua cùng thường xuyên nhất.</span>
+              <span class="biz-note">Gợi ý đóng gói Combo mua kèm để tăng Giá trị đơn hàng trung bình (AOV) và kích cầu chéo.</span>
+            </p>
+          </div>
+        </div>
+        <div class="bundle-grid" id="bundleGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Sidebar cart & real-time basket intelligence -->
+    <aside>
+      <div class="cart-panel">
+        <div class="cart-header">
+          <div class="cart-title">
+            <span>🛒 Giỏ Hàng Của Bạn</span>
+            <span class="metric-pill pill-conf" id="cartCount">0 món</span>
+          </div>
+          <button class="clear-cart" onclick="clearCart()">Xóa tất cả</button>
+        </div>
+
+        <div class="cart-items" id="cartItemsList">
+          <div class="cart-empty">Giỏ hàng đang trống.<br>Hãy chọn thêm sản phẩm bên trái để xem Apriori gợi ý!</div>
+        </div>
+
+        <!-- AI Cross-selling widget powered by mined Apriori rules -->
+        <div class="ai-recommend">
+          <div class="ai-head">
+            <div class="ai-title">
+              <span class="ai-spark">✨</span>
+              <span>Gợi Ý Mua Cùng (Cross-Sell)</span>
+            </div>
+            <span style="font-size:0.7rem;font-family:var(--mono);color:var(--text-muted)" id="rulesMatchedCount">0 luật khớp</span>
+          </div>
+
+          <div class="recom-list" id="recomList">
+            <div style="font-size:0.78rem;color:var(--text-muted);text-align:center;padding:12px 0;">
+              Chưa có dữ liệu giỏ hàng để kích hoạt vế trái ($A \to B$) của các luật kết hợp.
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+let DATA = null;
+let CART = new Set();
+let CURRENT_MODE = 'tech'; // 'tech' or 'biz'
+let ACTIVE_CAT = 'ALL';
+
+const EMOJI_MAP = {
+  BAG: '👜', HERB: '🌿', BAKE: '🧁', HEART: '❤️', RETRO: '🔴', MUG: '☕', CLOCK: '⏰', LIGHT: '🕯️'
+};
+
+function getEmoji(name) {
+  name = (name || '').toUpperCase();
+  if (name.includes('BAG')) return '👜';
+  if (name.includes('HERB') || name.includes('MARKER')) return '🌿';
+  if (name.includes('CAKE') || name.includes('TEA') || name.includes('BAK')) return '🧁';
+  if (name.includes('HEART')) return '❤️';
+  if (name.includes('LIGHT') || name.includes('CANDLE') || name.includes('HOLDER')) return '🕯️';
+  if (name.includes('MUG') || name.includes('CUP')) return '☕';
+  if (name.includes('CLOCK')) return '⏰';
+  return '🎁';
+}
+
+function setMode(mode) {
+  CURRENT_MODE = mode;
+  document.getElementById('btnTechMode').classList.toggle('active', mode === 'tech');
+  document.getElementById('btnBizMode').classList.toggle('active', mode === 'biz');
+  document.body.classList.toggle('biz-mode', mode === 'biz');
+  updateRecommendations();
+  renderBundles();
+}
+
+function filterCategory(cat) {
+  ACTIVE_CAT = cat;
+  document.querySelectorAll('.filter-chip').forEach(el => el.classList.remove('active'));
+  event.target.classList.add('active');
+  renderProducts();
+}
+
+function addToCart(code) {
+  CART.add(code);
+  renderCart();
+  updateRecommendations();
+}
+
+function removeFromCart(code) {
+  CART.delete(code);
+  renderCart();
+  updateRecommendations();
+}
+
+function clearCart() {
+  CART.clear();
+  renderCart();
+  updateRecommendations();
+}
+
+function addBundle(codeA, codeB) {
+  CART.add(codeA);
+  CART.add(codeB);
+  renderCart();
+  updateRecommendations();
+}
+
+function renderProducts() {
+  if (!DATA) return;
+  const grid = document.getElementById('productGrid');
+  const cat = DATA.catalog;
+  
+  // Pick curated products that appear in strong rules & combos
+  let codes = Object.keys(cat).filter(c => {
+    const item = cat[c];
+    const n = item.name.toUpperCase();
+    if (ACTIVE_CAT === 'BAG') return n.includes('BAG');
+    if (ACTIVE_CAT === 'HERB') return n.includes('HERB');
+    if (ACTIVE_CAT === 'BAKE') return n.includes('CAKE') || n.includes('TEA') || n.includes('BAK');
+    if (ACTIVE_CAT === 'HEART') return n.includes('HEART');
+    return true;
+  });
+
+  // Sort by popularity in rules
+  grid.innerHTML = codes.slice(0, 32).map(code => {
+    const p = cat[code];
+    const inCart = CART.has(code);
+    return `
+      <div class="prod-card">
+        <div class="prod-thumb">
+          <span class="prod-code">${p.code}</span>
+          <span class="prod-icon">${getEmoji(p.name)}</span>
+        </div>
+        <div class="prod-body">
+          <div class="prod-name" title="${p.name}">${p.name}</div>
+          <div class="prod-foot">
+            <div class="prod-price">£${Number(p.price).toFixed(2)}</div>
+            <button class="add-btn" onclick="addToCart('${p.code}')" ${inCart ? 'style="background:var(--accent-light);color:var(--accent-dark);border-color:var(--accent)"' : ''}>
+              ${inCart ? '✓ Đã thêm' : '+ Thêm giỏ'}
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderCart() {
+  const container = document.getElementById('cartItemsList');
+  const countBadge = document.getElementById('cartCountBadge');
+  const countHeader = document.getElementById('cartCount');
+  
+  countBadge.innerText = CART.size;
+  countHeader.innerText = `${CART.size} món`;
+
+  if (CART.size === 0) {
+    container.innerHTML = `<div class="cart-empty">Giỏ hàng đang trống.<br>Hãy chọn thêm sản phẩm bên trái để xem Apriori gợi ý!</div>`;
+    return;
+  }
+
+  container.innerHTML = Array.from(CART).map(code => {
+    const item = DATA.catalog[code] || {name: code, price: 0};
+    return `
+      <div class="cart-row">
+        <span>${getEmoji(item.name)}</span>
+        <span class="cart-row-name" title="${item.name}">${item.name}</span>
+        <span style="font-weight:600;font-variant-numeric:tabular-nums">£${Number(item.price).toFixed(2)}</span>
+        <button class="cart-row-remove" onclick="removeFromCart('${code}')" title="Xóa">×</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function updateRecommendations() {
+  const container = document.getElementById('recomList');
+  const matchedBadge = document.getElementById('rulesMatchedCount');
+  if (!DATA || CART.size === 0) {
+    matchedBadge.innerText = '0 luật khớp';
+    container.innerHTML = `<div style="font-size:0.78rem;color:var(--text-muted);text-align:center;padding:12px 0;">Thêm sản phẩm vào giỏ để kích hoạt vế trái ($A$) của các luật kết hợp.</div>`;
+    return;
+  }
+
+  const cartList = Array.from(CART);
+  const matchedRules = [];
+
+  // Match rules where antecedent ⊆ CART and consequent not yet in CART
+  for (const rule of DATA.rules) {
+    const antCovered = rule.antecedent.every(c => CART.has(c));
+    if (antCovered) {
+      const remainingConsequent = rule.consequent.filter(c => !CART.has(c));
+      if (remainingConsequent.length > 0) {
+        matchedRules.push({
+          ...rule,
+          targetItems: remainingConsequent,
+        });
+      }
+    }
+  }
+
+  matchedBadge.innerText = `${matchedRules.length} luật kích hoạt`;
+
+  if (matchedRules.length === 0) {
+    container.innerHTML = `<div style="font-size:0.8rem;color:var(--text-muted);padding:8px 0;line-height:1.4">
+      Chưa có luật kết hợp nào chứa tập sản phẩm này với Support/Confidence thỏa mãn ngưỡng. Thử thêm các mặt hàng phổ biến khác như <b>Jumbo Bag</b> hoặc <b>Herb Markers</b>!
+    </div>`;
+    return;
+  }
+
+  // Deduplicate recommendations by target item and pick highest lift
+  const recomMap = new Map();
+  for (const r of matchedRules) {
+    for (const code of r.targetItems) {
+      if (!recomMap.has(code) || recomMap.get(code).lift < r.lift) {
+        recomMap.set(code, {
+          code: code,
+          item: DATA.catalog[code] || {name: code, price: 2.0},
+          rule: r,
+          lift: r.lift,
+          conf: r.confidence,
+          supp: r.support,
+          count: r.count,
+        });
+      }
+    }
+  }
+
+  const sortedRecoms = Array.from(recomMap.values()).sort((a,b) => b.lift - a.lift).slice(0, 4);
+
+  container.innerHTML = sortedRecoms.map(rec => {
+    const isTech = CURRENT_MODE === 'tech';
+    const antNames = rec.rule.antecedent.map(c => (DATA.catalog[c]?.name || c).slice(0, 15) + '..').join(' + ');
+
+    const explanation = isTech
+      ? `<b>Luật:</b> {${rec.rule.antecedent.join(', ')}} → {${rec.code}}<br>Khi mua <i>${antNames}</i>, xác suất mua thêm món này đạt <b>${(rec.conf * 100).toFixed(1)}%</b>, cao gấp <b>${rec.lift}×</b> lần trung bình ngẫu nhiên.`
+      : `Khách hàng đã mua các món tương tự trong giỏ có xu hướng mua kèm món này gấp <b>${rec.lift} lần</b> thông thường. Đề xuất tăng AOV.`;
+
+    return `
+      <div class="recom-card">
+        <div class="recom-top">
+          <span style="font-size:1.1rem">${getEmoji(rec.item.name)}</span>
+          <span class="recom-name" title="${rec.item.name}">${rec.item.name}</span>
+          <span style="font-weight:700;font-size:0.84rem;color:var(--text)">£${Number(rec.item.price).toFixed(2)}</span>
+        </div>
+        <div class="recom-tags">
+          <span class="metric-pill pill-lift" title="Lift: Hệ số tăng cường tương quan">Lift ${rec.lift}×</span>
+          <span class="metric-pill pill-conf" title="Confidence: Độ tin cậy">${(rec.conf * 100).toFixed(0)}% tin cậy</span>
+          ${isTech ? `<span class="metric-pill pill-supp" title="Support: Tần suất">${(rec.supp * 100).toFixed(1)}% sup (${rec.count} đơn)</span>` : ''}
+        </div>
+        <div class="recom-why">${explanation}</div>
+        <div class="recom-act">
+          <a href="/?preset=grocery" target="_blank" style="font-size:0.72rem;color:var(--primary);text-decoration:none;font-weight:600">
+            ${isTech ? 'Xem trace Apriori →' : 'Chi tiết mẫu hành vi →'}
+          </a>
+          <button class="add-btn" style="background:var(--primary);color:#fff;border-color:var(--primary);padding:4px 8px;font-size:0.76rem" onclick="addToCart('${rec.code}')">
+            + Mua Kèm
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderBundles() {
+  if (!DATA) return;
+  const grid = document.getElementById('bundleGrid');
+  const isTech = CURRENT_MODE === 'tech';
+
+  grid.innerHTML = DATA.combos.slice(0, 6).map((c, idx) => {
+    const itemA = DATA.catalog[c.items[0]] || {name: c.items[0], price: 2.0};
+    const itemB = DATA.catalog[c.items[1]] || {name: c.items[1], price: 2.0};
+    const originalPrice = itemA.price + itemB.price;
+    const bundlePrice = (originalPrice * 0.88).toFixed(2); // 12% off promo bundle
+    
+    return `
+      <div class="bundle-card">
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em">Combo #${idx + 1}</span>
+            <span class="metric-pill pill-lift" style="font-size:0.7rem">Tiết kiệm 12%</span>
+          </div>
+          <div class="bundle-items">
+            <div class="bundle-item" title="${itemA.name}">${itemA.name}</div>
+            <span class="bundle-plus">+</span>
+            <div class="bundle-item" title="${itemB.name}">${itemB.name}</div>
+          </div>
+          <p style="font-size:0.74rem;color:var(--text-muted);line-height:1.35;margin-top:6px">
+            ${isTech 
+              ? `Tập phổ biến $L_2$ gồm 2 item này xuất hiện trong <b>${c.count}</b> giỏ hàng (${(c.support * 100).toFixed(1)}% toàn bộ giao dịch).` 
+              : `Hai sản phẩm này có tần suất khách hàng tự ghép cặp cao nhất tại cửa hàng.`}
+          </p>
+        </div>
+        <div class="bundle-stats">
+          <div>
+            <span style="font-size:0.78rem;text-decoration:line-through;color:var(--text-muted)">£${originalPrice.toFixed(2)}</span>
+            <span style="font-size:1.05rem;font-weight:700;color:var(--accent-dark);margin-left:4px">£${bundlePrice}</span>
+          </div>
+          <button class="add-btn" style="background:var(--accent);color:#fff;border-color:var(--accent)" onclick="addBundle('${c.items[0]}', '${c.items[1]}')">
+            + Thêm Cả Combo
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Fetch ecom rules and init
+fetch('/api/ecom-rules')
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(data => {
+    DATA = data;
+    renderProducts();
+    renderBundles();
+  })
+  .catch(err => {
+    console.error(err);
+    document.querySelector('.container').innerHTML = `
+      <div style="background:var(--danger-light);color:var(--danger);padding:20px;border-radius:10px;text-align:center">
+        <h3>Không thể tải dữ liệu Apriori E-Commerce: ${err.message}</h3>
+        <p style="margin-top:8px;font-size:0.9rem">Vui lòng đảm bảo file <code>src/data/ecom_rules.json</code> đã được tạo sẵn.</p>
+      </div>
+    `;
+  });
+</script>
+</body>
+</html>

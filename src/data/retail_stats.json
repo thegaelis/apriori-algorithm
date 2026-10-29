@@ -1,0 +1,942 @@
+{
+ "source": "UCI Machine Learning Repository - Online Retail (id 352)",
+ "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+ "overview": {
+  "rows": 541909,
+  "columns": 8,
+  "invoices": 25900,
+  "customers": 4372,
+  "products_stockcodes": 4070,
+  "countries": 38,
+  "date_from": "2010-12-01 08:26:00",
+  "date_to": "2011-12-09 12:50:00",
+  "days_span": 374,
+  "total_revenue_valid_sales": 10666684.54,
+  "avg_order_value": 534.4
+ },
+ "columns": [
+  {
+   "name": "InvoiceNo",
+   "type": "nominal",
+   "desc": "Mã hóa đơn (6 chữ số). Bắt đầu bằng 'C' = hủy đơn"
+  },
+  {
+   "name": "StockCode",
+   "type": "nominal",
+   "desc": "Mã sản phẩm (5 chữ số)"
+  },
+  {
+   "name": "Description",
+   "type": "text",
+   "desc": "Tên sản phẩm"
+  },
+  {
+   "name": "Quantity",
+   "type": "integer",
+   "desc": "Số lượng mỗi dòng"
+  },
+  {
+   "name": "InvoiceDate",
+   "type": "datetime",
+   "desc": "Thời điểm lập hóa đơn"
+  },
+  {
+   "name": "UnitPrice",
+   "type": "numeric",
+   "desc": "Đơn giá (GBP)"
+  },
+  {
+   "name": "CustomerID",
+   "type": "nominal",
+   "desc": "Mã khách hàng (5 chữ số)"
+  },
+  {
+   "name": "Country",
+   "type": "nominal",
+   "desc": "Quốc gia của khách"
+  }
+ ],
+ "missing": {
+  "invoice": {
+   "count": 0,
+   "pct": 0.0
+  },
+  "stock": {
+   "count": 0,
+   "pct": 0.0
+  },
+  "desc": {
+   "count": 1454,
+   "pct": 0.27
+  },
+  "qty": {
+   "count": 0,
+   "pct": 0.0
+  },
+  "date": {
+   "count": 0,
+   "pct": 0.0
+  },
+  "price": {
+   "count": 0,
+   "pct": 0.0
+  },
+  "cust": {
+   "count": 135080,
+   "pct": 24.93
+  },
+  "country": {
+   "count": 0,
+   "pct": 0.0
+  }
+ },
+ "quality": {
+  "cancellation_rows": 9288,
+  "cancellation_invoices": 3836,
+  "negative_quantity_rows": 10624,
+  "zero_price_rows": 2515,
+  "negative_price_rows": 2,
+  "duplicate_rows": 5268,
+  "non_product_rows": 2995,
+  "non_product_codes": [
+   "AMAZONFEE",
+   "B",
+   "BANK CHARGES",
+   "C2",
+   "CRUK",
+   "D",
+   "DCGS0003",
+   "DCGS0004",
+   "DCGS0055",
+   "DCGS0057",
+   "DCGS0066P",
+   "DCGS0067",
+   "DCGS0068",
+   "DCGS0069",
+   "DCGS0070",
+   "DCGS0071",
+   "DCGS0072",
+   "DCGS0073",
+   "DCGS0074",
+   "DCGS0076",
+   "DCGSSBOY",
+   "DCGSSGIRL",
+   "DOT",
+   "M",
+   "PADS",
+   "POST",
+   "S",
+   "gift_0001_10",
+   "gift_0001_20",
+   "gift_0001_30",
+   "gift_0001_40",
+   "gift_0001_50",
+   "m"
+  ],
+  "valid_sale_rows": 530104
+ },
+ "quantity": {
+  "min": 1,
+  "p25": 1,
+  "median": 3,
+  "p75": 10,
+  "p95": 30,
+  "p99": 100,
+  "max": 80995,
+  "mean": 10.542,
+  "std": 155.524
+ },
+ "unit_price": {
+  "min": 0.001,
+  "p25": 1.25,
+  "median": 2.08,
+  "p75": 4.13,
+  "p95": 9.95,
+  "p99": 16.98,
+  "max": 13541.33,
+  "mean": 3.908,
+  "std": 35.916
+ },
+ "invoice_lines": {
+  "quantiles": {
+   "min": 1,
+   "p25": 2,
+   "median": 10,
+   "p75": 23,
+   "p95": 68,
+   "p99": 192,
+   "max": 1114,
+   "mean": 20.923,
+   "std": 43.031
+  }
+ },
+ "basket": {
+  "note": "Giỏ hàng sạch cho Apriori: bỏ hóa đơn hủy, qty<=0, giá<=0, mã không phải sản phẩm; mỗi hóa đơn = 1 tập item (không trùng).",
+  "clean_transactions": 19773,
+  "clean_rows": 527725,
+  "distinct_items": 3900,
+  "size": {
+   "min": 1.0,
+   "p25": 6.0,
+   "median": 15.0,
+   "p75": 29.0,
+   "p95": 75.0,
+   "p99": 218.0,
+   "max": 1108.0,
+   "mean": 26.16,
+   "std": 47.012
+  },
+  "size_hist": {
+   "labels": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6-7",
+    "8-10",
+    "11-15",
+    "16-20",
+    "21-30",
+    "31-50",
+    "51-100",
+    "101+"
+   ],
+   "counts": [
+    1500,
+    813,
+    693,
+    676,
+    672,
+    1227,
+    1775,
+    2620,
+    2374,
+    2879,
+    2448,
+    1470,
+    626
+   ]
+  },
+  "single_item_baskets_pct": 7.59,
+  "multi_item_baskets": 18273,
+  "density_pct": 0.6843,
+  "support_curve": [
+   {
+    "min_sup_pct": 0.1,
+    "min_count": 19.8,
+    "frequent_items": 2832
+   },
+   {
+    "min_sup_pct": 0.2,
+    "min_count": 39.5,
+    "frequent_items": 2351
+   },
+   {
+    "min_sup_pct": 0.5,
+    "min_count": 98.9,
+    "frequent_items": 1549
+   },
+   {
+    "min_sup_pct": 1,
+    "min_count": 197.7,
+    "frequent_items": 829
+   },
+   {
+    "min_sup_pct": 2,
+    "min_count": 395.5,
+    "frequent_items": 298
+   },
+   {
+    "min_sup_pct": 3,
+    "min_count": 593.2,
+    "frequent_items": 132
+   },
+   {
+    "min_sup_pct": 5,
+    "min_count": 988.6,
+    "frequent_items": 36
+   }
+  ]
+ },
+ "customers": {
+  "orders_per_customer": {
+   "min": 1.0,
+   "p25": 1.0,
+   "median": 3.0,
+   "p75": 5.0,
+   "p95": 16.0,
+   "p99": 36.0,
+   "max": 248.0,
+   "mean": 5.075,
+   "std": 9.338
+  },
+  "repeat_customers": 3059,
+  "rows_without_customer_pct": 24.93
+ },
+ "top_products_by_baskets": [
+  {
+   "code": "85123A",
+   "name": "WHITE HANGING HEART T-LIGHT HOLDER",
+   "baskets": 2198,
+   "support_pct": 11.12
+  },
+  {
+   "code": "85099B",
+   "name": "JUMBO BAG RED RETROSPOT",
+   "baskets": 2089,
+   "support_pct": 10.56
+  },
+  {
+   "code": "22423",
+   "name": "REGENCY CAKESTAND 3 TIER",
+   "baskets": 1988,
+   "support_pct": 10.05
+  },
+  {
+   "code": "47566",
+   "name": "PARTY BUNTING",
+   "baskets": 1685,
+   "support_pct": 8.52
+  },
+  {
+   "code": "20725",
+   "name": "LUNCH BAG RED RETROSPOT",
+   "baskets": 1565,
+   "support_pct": 7.91
+  },
+  {
+   "code": "84879",
+   "name": "ASSORTED COLOUR BIRD ORNAMENT",
+   "baskets": 1455,
+   "support_pct": 7.36
+  },
+  {
+   "code": "22197",
+   "name": "POPCORN HOLDER",
+   "baskets": 1392,
+   "support_pct": 7.04
+  },
+  {
+   "code": "22720",
+   "name": "SET OF 3 CAKE TINS PANTRY DESIGN",
+   "baskets": 1385,
+   "support_pct": 7.0
+  },
+  {
+   "code": "21212",
+   "name": "PACK OF 72 RETROSPOT CAKE CASES",
+   "baskets": 1320,
+   "support_pct": 6.68
+  },
+  {
+   "code": "22383",
+   "name": "LUNCH BAG SUKI DESIGN",
+   "baskets": 1284,
+   "support_pct": 6.49
+  },
+  {
+   "code": "20727",
+   "name": "LUNCH BAG  BLACK SKULL.",
+   "baskets": 1273,
+   "support_pct": 6.44
+  },
+  {
+   "code": "22457",
+   "name": "NATURAL SLATE HEART CHALKBOARD",
+   "baskets": 1249,
+   "support_pct": 6.32
+  },
+  {
+   "code": "23203",
+   "name": "JUMBO BAG VINTAGE DOILY",
+   "baskets": 1231,
+   "support_pct": 6.23
+  },
+  {
+   "code": "22386",
+   "name": "JUMBO BAG PINK POLKADOT",
+   "baskets": 1218,
+   "support_pct": 6.16
+  },
+  {
+   "code": "22469",
+   "name": "HEART OF WICKER SMALL",
+   "baskets": 1201,
+   "support_pct": 6.07
+  },
+  {
+   "code": "21931",
+   "name": "JUMBO STORAGE BAG SUKI",
+   "baskets": 1184,
+   "support_pct": 5.99
+  },
+  {
+   "code": "22411",
+   "name": "JUMBO SHOPPER VINTAGE RED PAISLEY",
+   "baskets": 1175,
+   "support_pct": 5.94
+  },
+  {
+   "code": "22961",
+   "name": "JAM MAKING SET PRINTED",
+   "baskets": 1162,
+   "support_pct": 5.88
+  },
+  {
+   "code": "22086",
+   "name": "PAPER CHAIN KIT 50'S CHRISTMAS",
+   "baskets": 1160,
+   "support_pct": 5.87
+  },
+  {
+   "code": "22382",
+   "name": "LUNCH BAG SPACEBOY DESIGN",
+   "baskets": 1157,
+   "support_pct": 5.85
+  }
+ ],
+ "top_products_by_quantity": [
+  {
+   "code": "23843",
+   "name": "PAPER CRAFT , LITTLE BIRDIE",
+   "qty": 80995
+  },
+  {
+   "code": "23166",
+   "name": "MEDIUM CERAMIC TOP STORAGE JAR",
+   "qty": 78033
+  },
+  {
+   "code": "22197",
+   "name": "POPCORN HOLDER",
+   "qty": 56921
+  },
+  {
+   "code": "84077",
+   "name": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+   "qty": 55047
+  },
+  {
+   "code": "85099B",
+   "name": "JUMBO BAG RED RETROSPOT",
+   "qty": 48474
+  },
+  {
+   "code": "85123A",
+   "name": "WHITE HANGING HEART T-LIGHT HOLDER",
+   "qty": 37660
+  },
+  {
+   "code": "84879",
+   "name": "ASSORTED COLOUR BIRD ORNAMENT",
+   "qty": 36461
+  },
+  {
+   "code": "21212",
+   "name": "PACK OF 72 RETROSPOT CAKE CASES",
+   "qty": 36419
+  },
+  {
+   "code": "23084",
+   "name": "RABBIT NIGHT LIGHT",
+   "qty": 30788
+  },
+  {
+   "code": "22492",
+   "name": "MINI PAINT SET VINTAGE",
+   "qty": 26633
+  },
+  {
+   "code": "22616",
+   "name": "PACK OF 12 LONDON TISSUES",
+   "qty": 26135
+  },
+  {
+   "code": "21977",
+   "name": "PACK OF 60 PINK PAISLEY CAKE CASES",
+   "qty": 24854
+  },
+  {
+   "code": "22178",
+   "name": "VICTORIAN GLASS HANGING T-LIGHT",
+   "qty": 24304
+  },
+  {
+   "code": "15036",
+   "name": "ASSORTED COLOURS SILK FAN",
+   "qty": 23826
+  },
+  {
+   "code": "17003",
+   "name": "BROCADE RING PURSE",
+   "qty": 23056
+  }
+ ],
+ "top_products_by_revenue": [
+  {
+   "code": "22423",
+   "name": "REGENCY CAKESTAND 3 TIER",
+   "revenue": 174484.74
+  },
+  {
+   "code": "23843",
+   "name": "PAPER CRAFT , LITTLE BIRDIE",
+   "revenue": 168469.6
+  },
+  {
+   "code": "85123A",
+   "name": "WHITE HANGING HEART T-LIGHT HOLDER",
+   "revenue": 104518.8
+  },
+  {
+   "code": "47566",
+   "name": "PARTY BUNTING",
+   "revenue": 99504.33
+  },
+  {
+   "code": "85099B",
+   "name": "JUMBO BAG RED RETROSPOT",
+   "revenue": 94340.05
+  },
+  {
+   "code": "23166",
+   "name": "MEDIUM CERAMIC TOP STORAGE JAR",
+   "revenue": 81700.92
+  },
+  {
+   "code": "23084",
+   "name": "RABBIT NIGHT LIGHT",
+   "revenue": 66964.99
+  },
+  {
+   "code": "22086",
+   "name": "PAPER CHAIN KIT 50'S CHRISTMAS",
+   "revenue": 64952.29
+  },
+  {
+   "code": "84879",
+   "name": "ASSORTED COLOUR BIRD ORNAMENT",
+   "revenue": 59094.93
+  },
+  {
+   "code": "79321",
+   "name": "CHILLI LIGHTS",
+   "revenue": 54117.76
+  },
+  {
+   "code": "22502",
+   "name": "PICNIC BASKET WICKER SMALL",
+   "revenue": 51426.62
+  },
+  {
+   "code": "22197",
+   "name": "POPCORN HOLDER",
+   "revenue": 51354.02
+  },
+  {
+   "code": "23298",
+   "name": "SPOTTY BUNTING",
+   "revenue": 43182.83
+  },
+  {
+   "code": "22386",
+   "name": "JUMBO BAG PINK POLKADOT",
+   "revenue": 42436.24
+  },
+  {
+   "code": "23203",
+   "name": "JUMBO BAG VINTAGE DOILY",
+   "revenue": 42067.78
+  }
+ ],
+ "countries": [
+  {
+   "country": "United Kingdom",
+   "revenue": 9025222.08,
+   "invoices": 18019,
+   "revenue_pct": 84.61
+  },
+  {
+   "country": "Netherlands",
+   "revenue": 285446.34,
+   "invoices": 94,
+   "revenue_pct": 2.68
+  },
+  {
+   "country": "EIRE",
+   "revenue": 283453.96,
+   "invoices": 288,
+   "revenue_pct": 2.66
+  },
+  {
+   "country": "Germany",
+   "revenue": 228867.14,
+   "invoices": 457,
+   "revenue_pct": 2.15
+  },
+  {
+   "country": "France",
+   "revenue": 209715.11,
+   "invoices": 392,
+   "revenue_pct": 1.97
+  },
+  {
+   "country": "Australia",
+   "revenue": 138521.31,
+   "invoices": 57,
+   "revenue_pct": 1.3
+  },
+  {
+   "country": "Spain",
+   "revenue": 61577.11,
+   "invoices": 90,
+   "revenue_pct": 0.58
+  },
+  {
+   "country": "Switzerland",
+   "revenue": 57089.9,
+   "invoices": 54,
+   "revenue_pct": 0.54
+  },
+  {
+   "country": "Belgium",
+   "revenue": 41196.34,
+   "invoices": 98,
+   "revenue_pct": 0.39
+  },
+  {
+   "country": "Sweden",
+   "revenue": 38378.33,
+   "invoices": 36,
+   "revenue_pct": 0.36
+  },
+  {
+   "country": "Japan",
+   "revenue": 37416.37,
+   "invoices": 19,
+   "revenue_pct": 0.35
+  },
+  {
+   "country": "Norway",
+   "revenue": 36165.44,
+   "invoices": 36,
+   "revenue_pct": 0.34
+  },
+  {
+   "country": "Portugal",
+   "revenue": 33747.1,
+   "invoices": 58,
+   "revenue_pct": 0.32
+  },
+  {
+   "country": "Finland",
+   "revenue": 22546.08,
+   "invoices": 41,
+   "revenue_pct": 0.21
+  },
+  {
+   "country": "Singapore",
+   "revenue": 21279.29,
+   "invoices": 7,
+   "revenue_pct": 0.2
+  },
+  {
+   "country": "Channel Islands",
+   "revenue": 20450.44,
+   "invoices": 26,
+   "revenue_pct": 0.19
+  },
+  {
+   "country": "Denmark",
+   "revenue": 18955.34,
+   "invoices": 18,
+   "revenue_pct": 0.18
+  },
+  {
+   "country": "Italy",
+   "revenue": 17483.24,
+   "invoices": 38,
+   "revenue_pct": 0.16
+  },
+  {
+   "country": "Hong Kong",
+   "revenue": 15691.8,
+   "invoices": 11,
+   "revenue_pct": 0.15
+  },
+  {
+   "country": "Cyprus",
+   "revenue": 13590.38,
+   "invoices": 16,
+   "revenue_pct": 0.13
+  },
+  {
+   "country": "Austria",
+   "revenue": 10198.68,
+   "invoices": 17,
+   "revenue_pct": 0.1
+  },
+  {
+   "country": "Israel",
+   "revenue": 8135.26,
+   "invoices": 8,
+   "revenue_pct": 0.08
+  },
+  {
+   "country": "Poland",
+   "revenue": 7334.65,
+   "invoices": 19,
+   "revenue_pct": 0.07
+  },
+  {
+   "country": "Greece",
+   "revenue": 4760.52,
+   "invoices": 5,
+   "revenue_pct": 0.04
+  },
+  {
+   "country": "Unspecified",
+   "revenue": 4749.79,
+   "invoices": 13,
+   "revenue_pct": 0.04
+  },
+  {
+   "country": "Iceland",
+   "revenue": 4310.0,
+   "invoices": 7,
+   "revenue_pct": 0.04
+  },
+  {
+   "country": "Canada",
+   "revenue": 3666.38,
+   "invoices": 6,
+   "revenue_pct": 0.03
+  },
+  {
+   "country": "USA",
+   "revenue": 3580.39,
+   "invoices": 5,
+   "revenue_pct": 0.03
+  },
+  {
+   "country": "Malta",
+   "revenue": 2725.59,
+   "invoices": 5,
+   "revenue_pct": 0.03
+  },
+  {
+   "country": "United Arab Emirates",
+   "revenue": 1902.28,
+   "invoices": 3,
+   "revenue_pct": 0.02
+  },
+  {
+   "country": "Lebanon",
+   "revenue": 1693.88,
+   "invoices": 1,
+   "revenue_pct": 0.02
+  },
+  {
+   "country": "Lithuania",
+   "revenue": 1661.06,
+   "invoices": 4,
+   "revenue_pct": 0.02
+  },
+  {
+   "country": "European Community",
+   "revenue": 1300.25,
+   "invoices": 4,
+   "revenue_pct": 0.01
+  },
+  {
+   "country": "Brazil",
+   "revenue": 1143.6,
+   "invoices": 1,
+   "revenue_pct": 0.01
+  },
+  {
+   "country": "RSA",
+   "revenue": 1002.31,
+   "invoices": 1,
+   "revenue_pct": 0.01
+  },
+  {
+   "country": "Czech Republic",
+   "revenue": 826.74,
+   "invoices": 2,
+   "revenue_pct": 0.01
+  },
+  {
+   "country": "Bahrain",
+   "revenue": 754.14,
+   "invoices": 3,
+   "revenue_pct": 0.01
+  },
+  {
+   "country": "Saudi Arabia",
+   "revenue": 145.92,
+   "invoices": 1,
+   "revenue_pct": 0.0
+  }
+ ],
+ "monthly": [
+  {
+   "month": "2010-12",
+   "revenue": 823746.14,
+   "invoices": 1559
+  },
+  {
+   "month": "2011-01",
+   "revenue": 691364.56,
+   "invoices": 1086
+  },
+  {
+   "month": "2011-02",
+   "revenue": 523631.89,
+   "invoices": 1100
+  },
+  {
+   "month": "2011-03",
+   "revenue": 717639.36,
+   "invoices": 1454
+  },
+  {
+   "month": "2011-04",
+   "revenue": 537808.62,
+   "invoices": 1246
+  },
+  {
+   "month": "2011-05",
+   "revenue": 770536.02,
+   "invoices": 1681
+  },
+  {
+   "month": "2011-06",
+   "revenue": 761739.9,
+   "invoices": 1533
+  },
+  {
+   "month": "2011-07",
+   "revenue": 719221.19,
+   "invoices": 1475
+  },
+  {
+   "month": "2011-08",
+   "revenue": 759138.38,
+   "invoices": 1361
+  },
+  {
+   "month": "2011-09",
+   "revenue": 1058590.17,
+   "invoices": 1837
+  },
+  {
+   "month": "2011-10",
+   "revenue": 1154979.3,
+   "invoices": 2040
+  },
+  {
+   "month": "2011-11",
+   "revenue": 1509496.33,
+   "invoices": 2769
+  },
+  {
+   "month": "2011-12",
+   "revenue": 638792.68,
+   "invoices": 819
+  }
+ ],
+ "hourly_invoices": [
+  {
+   "hour": 6,
+   "invoices": 1
+  },
+  {
+   "hour": 7,
+   "invoices": 29
+  },
+  {
+   "hour": 8,
+   "invoices": 566
+  },
+  {
+   "hour": 9,
+   "invoices": 1484
+  },
+  {
+   "hour": 10,
+   "invoices": 2361
+  },
+  {
+   "hour": 11,
+   "invoices": 2396
+  },
+  {
+   "hour": 12,
+   "invoices": 3220
+  },
+  {
+   "hour": 13,
+   "invoices": 2753
+  },
+  {
+   "hour": 14,
+   "invoices": 2457
+  },
+  {
+   "hour": 15,
+   "invoices": 2336
+  },
+  {
+   "hour": 16,
+   "invoices": 1335
+  },
+  {
+   "hour": 17,
+   "invoices": 667
+  },
+  {
+   "hour": 18,
+   "invoices": 192
+  },
+  {
+   "hour": 19,
+   "invoices": 146
+  },
+  {
+   "hour": 20,
+   "invoices": 18
+  }
+ ],
+ "weekday_invoices": [
+  {
+   "day": "Thứ 2",
+   "invoices": 3126
+  },
+  {
+   "day": "Thứ 3",
+   "invoices": 3554
+  },
+  {
+   "day": "Thứ 4",
+   "invoices": 3690
+  },
+  {
+   "day": "Thứ 5",
+   "invoices": 4246
+  },
+  {
+   "day": "Thứ 6",
+   "invoices": 3140
+  },
+  {
+   "day": "Thứ 7",
+   "invoices": 0
+  },
+  {
+   "day": "CN",
+   "invoices": 2204
+  }
+ ]
+}

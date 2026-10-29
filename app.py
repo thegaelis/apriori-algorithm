@@ -13,6 +13,8 @@ from src.data.sample_baskets import PRESET_BASKETS, DEFAULT_PRESET_NAME, UI_PRES
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEB_DIR = os.path.join(BASE_DIR, "src", "web")
 INDEX_PATH = os.path.join(WEB_DIR, "index.html")
+RETAIL_STATS_PATH = os.path.join(BASE_DIR, "src", "data", "retail_stats.json")
+ECOM_RULES_PATH = os.path.join(BASE_DIR, "src", "data", "ecom_rules.json")
 
 
 def serialize_analysis_result(analysis: dict[str, Any]) -> dict[str, Any]:
@@ -55,6 +57,14 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
         if self.path in ("/", "/index.html"):
             self.serve_index()
+        elif self.path in ("/shop", "/shop.html"):
+            self.serve_file(os.path.join(WEB_DIR, "shop.html"), "text/html; charset=utf-8")
+        elif self.path == "/api/ecom-rules":
+            self.serve_file(ECOM_RULES_PATH, "application/json; charset=utf-8")
+        elif self.path in ("/stats", "/stats.html"):
+            self.serve_file(os.path.join(WEB_DIR, "stats.html"), "text/html; charset=utf-8")
+        elif self.path == "/api/retail-stats":
+            self.serve_file(RETAIL_STATS_PATH, "application/json; charset=utf-8")
         elif self.path == "/api/presets":
             self.send_json({
                 "default": DEFAULT_PRESET_NAME,
@@ -84,6 +94,20 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(content)
         except Exception as e:
             self.send_error(500, f"Error reading index.html: {e}")
+
+    def serve_file(self, path: str, content_type: str) -> None:
+        """Serve a single known file (404 if it does not exist)."""
+        try:
+            with open(path, "rb") as f:
+                content = f.read()
+        except FileNotFoundError:
+            self.send_error(404, "File not found")
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(content)))
+        self.end_headers()
+        self.wfile.write(content)
 
     def read_json(self) -> dict[str, Any]:
         """Read the JSON object shared by both analysis endpoints."""
