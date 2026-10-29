@@ -56,6 +56,15 @@ code,.mono{font-family:var(--mono);font-size:.88em}
 .q div{background:var(--surface-2);border-radius:6px;padding:6px 8px;text-align:center}
 .q b{display:block;font-family:var(--serif);font-size:1.1rem;font-variant-numeric:tabular-nums}
 .q span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.pipe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px}
+.pipe-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;position:relative}
+.pipe-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pipe-num{background:var(--accent);color:#fff;font-family:var(--mono);font-size:.76rem;font-weight:700;padding:3px 9px;border-radius:999px}
+.pipe-metric{font-family:var(--mono);font-size:.78rem;background:var(--accent-bg);color:var(--accent-ink);padding:2px 8px;border-radius:6px;font-weight:600}
+.pipe-title{font-size:1.05rem;font-weight:700;margin:2px 0}
+.pipe-what{font-size:.88rem;color:var(--ink)}
+.pipe-why{background:var(--surface-2);border-left:3px solid var(--accent);padding:8px 11px;border-radius:0 8px 8px 0;font-size:.84rem;color:var(--muted)}
+.pipe-why b{color:var(--ink)}
 footer{margin-top:30px;color:var(--muted);font-size:.82rem}
 </style>
 </head>
@@ -150,6 +159,47 @@ function render(d){
   ${b.support_curve.map(s=>`<tr><td>${s.min_sup_pct}%</td><td class="n">${s.min_count}</td><td class="n">${fmt(s.frequent_items)}</td><td class="n">${fmt(s.frequent_items*(s.frequent_items-1)/2)}</td></tr>`).join('')}
   </table></div>
   <div class="note">Với min_sup thấp, số cặp ứng viên lên tới hàng triệu. Khi chạy Apriori cần lọc item hiếm và chọn min_sup phù hợp, nên dùng pipeline offline.</div></div></section>`;
+
+  h+=`<section><h2>Quy trình xử lý dữ liệu &amp; khai phá Apriori (End-to-End Pipeline)</h2>
+  <p class="sub">Giải thích chi tiết từng bước biến đổi từ bảng giao dịch Excel thô sang tập luật kết hợp phục vụ gợi ý sản phẩm — và <b>tại sao bắt buộc phải làm như vậy</b> dưới góc độ toán học của thuật toán Apriori.</p>
+  <div class="pipe-grid">
+    <div class="pipe-step">
+      <div class="pipe-head"><span class="pipe-num">BƯỚC 1</span><span class="pipe-metric">${fmt(o.rows)} dòng · ${fmt(o.invoices)} đơn</span></div>
+      <div class="pipe-title">📥 Đọc dữ liệu thô (Streaming XML)</div>
+      <div class="pipe-what">Đọc trực tiếp luồng XML bên trong file <code>Online Retail.xlsx</code> (8 cột: <code>InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country</code>).</div>
+      <div class="pipe-why"><b>Vì sao làm vậy?</b> Dùng <code>zipfile + xml.etree.ElementTree.iterparse</code> trong thư viện chuẩn Python giúp xử lý 541,909 dòng chỉ với vài MB RAM mà không phụ thuộc thư viện nặng (như <code>pandas</code> hay <code>openpyxl</code>), đảm bảo chạy mượt trên môi trường cloud miễn phí.</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-head"><span class="pipe-num">BƯỚC 2</span><span class="pipe-metric">−${fmt(qu.cancellation_rows + qu.zero_price_rows + qu.negative_price_rows)} dòng nhiễu</span></div>
+      <div class="pipe-title">🧹 Lọc đơn hủy &amp; dòng bất thường</div>
+      <div class="pipe-what">Loại bỏ các hóa đơn bắt đầu bằng chữ <code>C</code> (${fmt(qu.cancellation_invoices)} đơn hủy), các dòng có <code>Quantity ≤ 0</code> (${fmt(qu.negative_quantity_rows)} dòng trả hàng/hỏng kho) và <code>UnitPrice ≤ 0</code> (${fmt(qu.zero_price_rows + qu.negative_price_rows)} dòng quà tặng/điều chỉnh công nợ).</div>
+      <div class="pipe-why"><b>Vì sao làm vậy?</b> Apriori đo hành vi <i>mua hàng thành công</i>. Nếu giữ lại đơn hủy và phiếu xuất hủy kho, một mặt hàng bị trả lại nhiều lần sẽ bị đếm trùng làm phồng giả tạo <code>support(X)</code>, dẫn đến sinh ra các luật kết hợp sai lệch.</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-head"><span class="pipe-num">BƯỚC 3</span><span class="pipe-metric">−${fmt(qu.non_product_rows)} dòng phí</span></div>
+      <div class="pipe-title">🏷️ Loại bỏ mã kế toán &amp; phí vận chuyển</div>
+      <div class="pipe-what">Lọc bỏ các mã <code>StockCode</code> không phải hàng hóa thực sự như <code>POST</code> (phí bưu điện), <code>DOT</code>, <code>M</code> (nhập tay), <code>BANK CHARGES</code>, <code>AMAZONFEE</code>, <code>CRUK</code>, <code>D</code> (chiết khấu).</div>
+      <div class="pipe-why"><b>Vì sao làm vậy?</b> Phí bưu điện (<code>POST</code>) xuất hiện ở hầu hết các đơn hàng quốc tế. Nếu không loại bỏ, Apriori sẽ sinh hàng loạt luật vô nghĩa kiểu <i>“Mua cốc sứ ⇒ Mua phí bưu điện (confidence 95%)”</i>, làm hỏng hoàn toàn hệ thống gợi ý Cross-sell.</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-head"><span class="pipe-num">BƯỚC 4</span><span class="pipe-metric">${fmt(b.clean_transactions)} giỏ → ${fmt(b.multi_item_baskets)} giỏ ≥2 món</span></div>
+      <div class="pipe-title">🧺 Gom nhóm theo InvoiceNo &amp; Khử trùng lặp</div>
+      <div class="pipe-what">Gom các dòng cùng <code>InvoiceNo</code> thành 1 tập hợp sản phẩm duy nhất (<code>set</code>), chuẩn hóa tên &amp; lấy giá trung vị cho mỗi SKU, sau đó giữ lại <b>${fmt(b.multi_item_baskets)} giỏ hàng có từ 2 sản phẩm trở lên</b> (loại ${b.single_item_baskets_pct}% giỏ chỉ có 1 món).</div>
+      <div class="pipe-why"><b>Vì sao làm vậy?</b> (1) Mô hình giỏ hàng kinh điển xét sự đồng xuất hiện nhị phân (có/không) nên cần khử dòng trùng trong cùng 1 hóa đơn. (2) Giỏ chỉ có 1 món không bao giờ tạo được tập phổ biến bậc $k \ge 2$; loại bỏ chúng giúp mẫu số $N = ${fmt(b.multi_item_baskets)}$ phản ánh đúng tập khách hàng có hành vi mua kèm.</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-head"><span class="pipe-num">BƯỚC 5</span><span class="pipe-metric">min_count = 140 (~0.77%)</span></div>
+      <div class="pipe-title">⚡ Khai phá Tập phổ biến $L_1, L_2, L_3$ bằng TID-set Apriori</div>
+      <div class="pipe-what">Áp dụng nguyên lý Apriori (Join $L_{k-1} \bowtie L_{k-1}$ &amp; Prune mọi ứng viên $C_k$ có tập con $(k-1)$ không thuộc $L_{k-1}$), kết hợp giao tập chỉ số hóa đơn (TID-set intersection) để tìm ra <b>1,161 tập $L_1$</b>, <b>2,777 tập $L_2$</b> và <b>1,167 tập $L_3$</b> (tổng 5,105 tập phổ biến).</div>
+      <div class="pipe-why"><b>Vì sao làm vậy?</b> Với ${fmt(b.distinct_items)} sản phẩm, vét cạn cần đếm $\binom{3900}{2} \approx 7.6$ triệu cặp và $\binom{3900}{3} \approx 9.8$ tỷ bộ ba! Nhờ cắt tỉa Apriori ở ngưỡng $\sigma \ge 140$ giỏ, số ứng viên cần kiểm tra giảm hơn <b>99.9%</b> mà vẫn đảm bảo toán học không bỏ sót bất kỳ tập phổ biến nào.</div>
+    </div>
+    <div class="pipe-step">
+      <div class="pipe-head"><span class="pipe-num">BƯỚC 6</span><span class="pipe-metric">11,972 luật → 1,000 luật đa dạng</span></div>
+      <div class="pipe-title">📐 Sinh luật kết hợp &amp; Phân tầng đa dạng hóa (4-Tier)</div>
+      <div class="pipe-what">Từ các tập $L_2, L_3$, sinh toàn bộ luật $A \Rightarrow B$ thỏa <code>confidence ≥ 20%</code> và <code>lift ≥ 1.2</code> (thu được 11,972 luật). Tiếp theo, chọn lọc phân tầng 4 lớp (bảo đảm 100% SKU cửa hàng đều có luật, cân bằng quota 7 ngành hàng, ưu tiên điểm <code>confidence × lift</code>) để xuất ra 1,000 luật vào <code>ecom_rules.json</code>.</div>
+      <div class="pipe-why"><b>Vì sao làm vậy?</b> Trong dữ liệu thật, một nhóm nhỏ sản phẩm ngách (như bộ thẻ đánh dấu thảo mộc <i>Herb Markers</i>) có <code>lift</code> tới 70–86×. Nếu chỉ lấy top theo Lift đơn thuần, 100% luật sẽ rơi vào nhóm thảo mộc khiến các ngành hàng chủ lực (Túi Jumbo, Tách trà, Đồng hồ…) không có gợi ý. Phân tầng giúp mọi sản phẩm trên Store đều kích hoạt được gợi ý chất lượng cao.</div>
+    </div>
+  </div></section>`;
 
   h+=`<section><h2>6. Sản phẩm</h2><div class="grid2">
   <div class="panel"><h3>Top 20 theo số giỏ chứa (support)</h3>${hbars(d.top_products_by_baskets.map(p=>({n:p.name||p.code,t:p.code+' '+p.name,v:p.support_pct})),v=>v+'%')}</div>

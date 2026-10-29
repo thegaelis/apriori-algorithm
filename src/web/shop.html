@@ -207,7 +207,7 @@ button{font:inherit;color:inherit}
 
 <script>
 const STORAGE_KEY = 'basketiq.cart';
-const MAX_RECS = 4;
+const MAX_RECS = 8;
 let DATA = null;
 let CART = loadCart();          // { sku: qty }
 let MODE = 'tech';
@@ -241,39 +241,62 @@ const cartTotal = () => cartCodes().reduce((s, c) => s + product(c).price * CART
 /* ---------- Recommendation cascade: never returns an empty list ---------- */
 function computeRecommendations(cartSet) {
   const recs = [];
-  const seen = new Set();
+  const byCode = new Map();
   const push = (code, tier, score, extra) => {
-    if (cartSet.has(code) || seen.has(code) || !DATA.catalog[code]) return;
-    seen.add(code);
-    recs.push(Object.assign({code, tier, score}, extra));
+    if (cartSet.has(code) || !DATA.catalog[code]) return;
+    if (byCode.has(code)) {
+      const existing = byCode.get(code);
+      existing.ruleCount = (existing.ruleCount || 1) + 1;
+      if (tier < existing.tier || (tier === existing.tier && score > existing.score)) {
+        existing.tier = tier;
+        existing.score = score;
+        if (extra && extra.rule) existing.rule = extra.rule;
+        if (extra && extra.combo) { existing.combo = extra.combo; existing.via = extra.via; }
+      }
+      return;
+    }
+    const item = Object.assign({code, tier, score, ruleCount: 1}, extra);
+    byCode.set(code, item);
+    recs.push(item);
   };
   let fired = 0;
+  const tier1Targets = new Set();
   if (cartSet.size) {
     for (const r of DATA.rules) {                    // Tier 1: whole antecedent in cart
       if (r.antecedent.every(c => cartSet.has(c))) {
         const targets = r.consequent.filter(c => !cartSet.has(c));
         if (targets.length) fired++;
-        targets.forEach(t => push(t, 1, r.lift * 10 + r.confidence, {rule: r}));
+        targets.forEach(t => {
+          tier1Targets.add(t);
+          push(t, 1, r.lift * 10 + r.confidence, {rule: r});
+        });
       }
     }
-    for (const r of DATA.rules) {                    // Tier 2: part of antecedent in cart
-      if (r.antecedent.some(c => cartSet.has(c))) {
-        r.consequent.forEach(t => push(t, 2, r.lift * 5 + r.confidence, {rule: r}));
+    if (recs.length < 4) {
+      for (const r of DATA.rules) {                  // Tier 2: part of antecedent in cart
+        if (r.antecedent.some(c => cartSet.has(c))) {
+          r.consequent.forEach(t => push(t, 2, r.lift * 5 + r.confidence, {rule: r}));
+        }
       }
     }
-    for (const c of DATA.combos) {                   // Tier 3: frequent pairs (L2)
-      const [a, b] = c.items;
-      if (cartSet.has(a)) push(b, 3, c.count, {combo: c, via: a});
-      else if (cartSet.has(b)) push(a, 3, c.count, {combo: c, via: b});
+    if (recs.length < 4) {
+      for (const c of DATA.combos) {                 // Tier 3: frequent pairs (L2)
+        const [a, b] = c.items;
+        if (cartSet.has(a)) push(b, 3, c.count, {combo: c, via: a});
+        else if (cartSet.has(b)) push(a, 3, c.count, {combo: c, via: b});
+      }
     }
   }
-  const l1 = (DATA.frequent_itemsets && DATA.frequent_itemsets.L1) || [];
-  for (const e of l1) {                              // Tier 4: bestsellers
-    if (recs.length >= MAX_RECS * 3) break;
-    push(e.items[0], 4, e.support, {support: e.support});
+  if (recs.length < 4) {
+    const l1 = (DATA.frequent_itemsets && DATA.frequent_itemsets.L1) || [];
+    for (const e of l1) {                            // Tier 4: bestsellers
+      if (recs.length >= MAX_RECS * 3) break;
+      push(e.items[0], 4, e.support, {support: e.support});
+    }
   }
   recs.sort((a, b) => a.tier - b.tier || b.score - a.score);
-  return {recs: recs.slice(0, MAX_RECS), fired};
+  const limit = Math.max(4, Math.min(MAX_RECS, tier1Targets.size || 4));
+  return {recs: recs.slice(0, limit), fired, uniqueTier1: tier1Targets.size};
 }
 
 function names(codes) { return codes.map(c => esc(product(c).name)).join(' + '); }
@@ -365,24 +388,28 @@ function renderCart() {
 }
 
 function renderRecommendations() {
-  const {recs, fired} = computeRecommendations(new Set(cartCodes()));
+  const {recs, fired, uniqueTier1} = computeRecommendations(new Set(cartCodes()));
   const badge = $('firedBadge');
   if (!cartCodes().length) {
     badge.className = 'fired none';
     badge.textContent = 'Chưa có sản phẩm trong giỏ — đang hiển thị món bán chạy nhất.';
   } else if (fired > 0) {
     badge.className = 'fired';
-    badge.textContent = `⚡ ${fired} luật kết hợp được kích hoạt bởi giỏ hàng của bạn`;
+    const extraNote = fired !== recs.length
+      ? ` → gợi ý ${recs.length} sản phẩm độc nhất (các luật trùng vế phải đã được gộp)`
+      : ` → gợi ý ${recs.length} sản phẩm liên quan`;
+    badge.textContent = `⚡ ${fired} luật kết hợp được kích hoạt bởi giỏ hàng của bạn${extraNote}`;
   } else {
     badge.className = 'fired none';
     badge.textContent = 'Chưa có luật khớp trọn vế trái — dùng luật khớp một phần / combo / bán chạy.';
   }
   $('recomList').innerHTML = recs.map(rec => {
     const p = product(rec.code);
+    const multiBadge = rec.ruleCount > 1 ? ` · ${rec.ruleCount} luật củng cố` : '';
     return `<div class="reco-card">
       <div class="reco-top"><span aria-hidden="true" style="font-size:1.3rem">${esc(p.icon || '🎁')}</span><span class="reco-name">${esc(p.name)}</span><span class="reco-price">${gbp(p.price)}</span></div>
       <div class="reco-why">${explain(rec)}</div>
-      <div class="reco-act"><span class="tier-tag">${TIER_LABEL[rec.tier]}${rec.rule ? ` · lift ${rec.rule.lift}×` : ''}</span>
+      <div class="reco-act"><span class="tier-tag">${TIER_LABEL[rec.tier]}${rec.rule ? ` · lift ${rec.rule.lift}×` : ''}${multiBadge}</span>
         <button class="btn btn-primary" type="button" data-act="add-reco" data-code="${esc(rec.code)}">+ Thêm nhanh</button></div>
     </div>`;
   }).join('');
