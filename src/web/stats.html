@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Thống kê dataset Online Retail (UCI)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/app.css">
 <style>
-:root{--paper:#F4F6F9;--surface:#fff;--surface-2:#EDF0F5;--ink:#16202E;--muted:#5C6675;--line:#D6DCE5;--line-strong:#B8C1CE;--accent:#2B4BC7;--accent-bg:#E7ECFA;--accent-ink:#1F3799;--keep:#117A65;--keep-bg:#DDF3EC;--drop:#B03A2E;--drop-bg:#FBE5E1;--prune:#9A6A00;--prune-bg:#FBF0D3;--shadow:0 1px 2px rgba(22,32,46,.06),0 8px 24px rgba(22,32,46,.06);--serif:"Newsreader",Georgia,serif;--sans:"IBM Plex Sans","Segoe UI",Roboto,Arial,sans-serif;--mono:"IBM Plex Mono",Menlo,Consolas,monospace}
-@media (prefers-color-scheme:dark){:root{--paper:#0F141B;--surface:#171E28;--surface-2:#1F2833;--ink:#E6EAF0;--muted:#9AA5B4;--line:#2A3441;--line-strong:#3B4756;--accent:#8FA6FF;--accent-bg:#1E2A4F;--accent-ink:#B9C7FF;--keep:#4FC9A6;--keep-bg:#123A31;--drop:#F08A7E;--drop-bg:#47231F;--prune:#E8B84A;--prune-bg:#3E3111;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35)}}
 *{box-sizing:border-box}
 html{font-size:16px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;padding:0 20px 40px}
@@ -61,12 +60,23 @@ footer{margin-top:30px;color:var(--muted);font-size:.82rem}
 </style>
 </head>
 <body>
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
+    <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
+      <a href="/shop"><span aria-hidden="true">🛍️</span>Cửa hàng</a>
+      <a href="/"><span aria-hidden="true">🔬</span>Demo thuật toán</a>
+      <a href="/stats" class="active" aria-current="page"><span aria-hidden="true">📊</span>Thống kê dataset</a>
+      <a href="/admin"><span aria-hidden="true">🛠️</span>Admin</a>
+    </nav>
+    <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
+  </div>
+</header>
 <header class="top">
   <div>
     <h1>Thống kê dataset Online Retail</h1>
     <p id="srcline">Đang tải…</p>
   </div>
-  <nav class="nav"><a href="/">Demo thuật toán</a><a href="/shop" style="font-weight:600;color:var(--accent)">🛒 E-Commerce Cross-sell</a><a href="/stats" class="cur">Thống kê dataset</a></nav>
 </header>
 <main id="root"><p class="sub">Đang tải số liệu…</p></main>
 

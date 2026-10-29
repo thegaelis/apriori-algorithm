@@ -66,6 +66,8 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.serve_file(ECOM_RULES_PATH, "application/json; charset=utf-8")
         elif self.path in ("/stats", "/stats.html"):
             self.serve_file(os.path.join(WEB_DIR, "stats.html"), "text/html; charset=utf-8")
+        elif self.path in ("/admin", "/admin.html"):
+            self.serve_file(os.path.join(WEB_DIR, "admin.html"), "text/html; charset=utf-8")
         elif self.path == "/api/retail-stats":
             self.serve_file(RETAIL_STATS_PATH, "application/json; charset=utf-8")
         elif self.path == "/api/presets":
