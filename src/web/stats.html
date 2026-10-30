@@ -788,23 +788,24 @@ function renderDissectorStage() {
     <div class="venn-and-prob">
       <div class="venn-box">
         <div style="font-weight:800;font-size:.92rem;margin-bottom:6px">Biểu đồ Tập hợp Giao dịch trên N = ${fmt(N)} giỏ hàng</div>
-        <svg viewBox="0 0 420 195" style="width:100%;max-width:420px;height:auto">
-          <rect x="6" y="6" width="408" height="183" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+        <svg viewBox="0 0 460 205" style="width:100%;max-width:460px;height:auto">
+          <rect x="6" y="6" width="448" height="193" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="4 4"/>
           <text x="18" y="26" font-size="11" font-weight="700" fill="#64748b">Không gian mẫu N = ${fmt(N)} giao dịch</text>
 
-          <circle cx="165" cy="108" r="64" fill="rgba(79,70,229,0.16)" stroke="#4f46e5" stroke-width="2.5"/>
-          <circle cx="255" cy="108" r="64" fill="rgba(16,185,129,0.16)" stroke="#10b981" stroke-width="2.5"/>
+          <circle cx="172" cy="112" r="68" fill="rgba(79,70,229,0.14)" stroke="#4f46e5" stroke-width="2.5"/>
+          <circle cx="288" cy="112" r="68" fill="rgba(16,185,129,0.14)" stroke="#10b981" stroke-width="2.5"/>
 
-          <text x="122" y="96" text-anchor="middle" font-size="11.5" font-weight="800" fill="#312e81">Tập A</text>
-          <text x="122" y="113" text-anchor="middle" font-size="12" font-weight="800" fill="#312e81">${fmt(countA)} giỏ</text>
-          <text x="122" y="128" text-anchor="middle" font-size="10" fill="#4338ca">(Chỉ A: ${fmt(countA - countAB)})</text>
+          <text x="128" y="98" text-anchor="middle" font-size="11.5" font-weight="800" fill="#312e81">Tập A</text>
+          <text x="128" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="#312e81">${fmt(countA)} giỏ</text>
+          <text x="128" y="131" text-anchor="middle" font-size="10" fill="#4338ca">(Chỉ A: ${fmt(countA - countAB)})</text>
 
-          <text x="298" y="96" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46">Tập B</text>
-          <text x="298" y="113" text-anchor="middle" font-size="12" font-weight="800" fill="#065f46">${fmt(countB)} giỏ</text>
-          <text x="298" y="128" text-anchor="middle" font-size="10" fill="#047857">(Sup: ${suppBPct}%)</text>
+          <text x="332" y="98" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46">Tập B</text>
+          <text x="332" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="#065f46">${fmt(countB)} giỏ</text>
+          <text x="332" y="131" text-anchor="middle" font-size="10" fill="#047857">(Sup: ${suppBPct}%)</text>
 
-          <text x="210" y="102" text-anchor="middle" font-size="11" font-weight="800" fill="#0f172a">A ∩ B</text>
-          <text x="210" y="119" text-anchor="middle" font-size="13.5" font-weight="800" fill="#b45309">${fmt(countAB)} giỏ</text>
+          <rect x="202" y="91" width="56" height="38" rx="7" fill="rgba(255,255,255,0.92)" stroke="#fde68a" stroke-width="1.2"/>
+          <text x="230" y="106" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0f172a">A ∩ B</text>
+          <text x="230" y="122" text-anchor="middle" font-size="12" font-weight="800" fill="#b45309">${fmt(countAB)} giỏ</text>
         </svg>
       </div>
 

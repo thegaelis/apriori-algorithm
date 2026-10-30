@@ -275,10 +275,10 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--m
   <div class="app-header-inner">
     <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
-      <a href="/shop"><span aria-hidden="true">🛍️</span>Cửa hàng</a>
-      <a href="/"><span aria-hidden="true">🔬</span>Demo thuật toán</a>
-      <a href="/stats"><span aria-hidden="true">📊</span>Thống kê Apriori</a>
-      <a href="/admin" class="active" aria-current="page"><span aria-hidden="true">🛠️</span>Admin</a>
+      <a href="/shop">Cửa hàng</a>
+      <a href="/">Demo thuật toán</a>
+      <a href="/stats">Thống kê Apriori</a>
+      <a href="/admin" class="active" aria-current="page">Admin</a>
     </nav>
     <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
   </div>
@@ -526,77 +526,111 @@ function buildGraph() {
 function layoutConcentricForce(g) {
   const n = g.nodes.length;
   if (!n) return;
-  const cx = W / 2, cy = H / 2;
+  const cx = W / 2, cy = H / 2 + 8;
 
-  // Sort nodes by degree descending so highest-degree Hubs are placed in the inner ring
-  const sorted = [...g.nodes].sort((a, b) => b.deg - a.deg || b.support - a.support);
-  const hubs = sorted.filter(v => v.deg >= 4);
-  const mids = sorted.filter(v => v.deg >= 2 && v.deg < 4);
-  const leaves = sorted.filter(v => v.deg < 2);
+  // Build adjacency map to align outer nodes near their connected inner Hubs
+  const adj = new Map(g.nodes.map(v => [v.id, []]));
+  for (const e of g.edges) {
+    adj.get(e.a).push({id: e.b, lift: e.lift});
+    adj.get(e.b).push({id: e.a, lift: e.lift});
+  }
 
-  const placeRing = (arr, rx, ry, angleOffset = 0) => {
-    arr.forEach((v, i) => {
-      const t = angleOffset + (2 * Math.PI * i) / Math.max(arr.length, 1);
-      v.x = cx + rx * Math.cos(t);
-      v.y = cy + ry * Math.sin(t);
+  // Sort nodes by degree descending, then maxLift, then support
+  const sorted = [...g.nodes].sort((a, b) => b.deg - a.deg || b.maxLift - a.maxLift || b.support - a.support);
+
+  // Partition into 3 concentric elliptical rings based on rank so every ring has balanced density
+  const n1 = Math.min(7, Math.max(1, Math.ceil(n * 0.18)));
+  const n2 = Math.min(15, Math.max(0, Math.ceil((n - n1) * 0.44)));
+  const ring1 = sorted.slice(0, n1);
+  const ring2 = sorted.slice(n1, n1 + n2);
+  const ring3 = sorted.slice(n1 + n2);
+
+  const angleMap = new Map();
+
+  // Ring 1: Inner Hub Ring
+  if (ring1.length === 1) {
+    ring1[0].tx = cx;
+    ring1[0].ty = cy;
+    angleMap.set(ring1[0].id, 0);
+  } else {
+    ring1.forEach((v, i) => {
+      const a = -Math.PI / 2 + (2 * Math.PI * i) / ring1.length;
+      angleMap.set(v.id, a);
+      v.tx = cx + 145 * Math.cos(a);
+      v.ty = cy + 95 * Math.sin(a);
+    });
+  }
+
+  // Helper to sort a ring by average angle of already-placed neighbors
+  const sortRingByNeighbors = (ring, offsetAngle) => {
+    ring.forEach((v, idx) => {
+      const nbrs = (adj.get(v.id) || []).filter(nb => angleMap.has(nb.id));
+      if (nbrs.length) {
+        let sx = 0, sy = 0;
+        for (const nb of nbrs) {
+          const ang = angleMap.get(nb.id);
+          sx += Math.cos(ang) * nb.lift;
+          sy += Math.sin(ang) * nb.lift;
+        }
+        v._prefAngle = Math.atan2(sy, sx);
+      } else {
+        v._prefAngle = -Math.PI + (2 * Math.PI * idx) / Math.max(ring.length, 1);
+      }
+    });
+    ring.sort((a, b) => a._prefAngle - b._prefAngle);
+    ring.forEach((v, i) => {
+      const a = offsetAngle + (2 * Math.PI * i) / Math.max(ring.length, 1);
+      angleMap.set(v.id, a);
     });
   };
 
-  if (hubs.length === 1) {
-    hubs[0].x = cx;
-    hubs[0].y = cy;
-  } else {
-    placeRing(hubs, 145, 115, 0.2);
-  }
-  placeRing(mids, 300, 205, 0.55);
-  placeRing(leaves, 445, 265, 0.1);
+  // Ring 2: Middle Connector Ring
+  sortRingByNeighbors(ring2, -Math.PI / 2 + Math.PI / Math.max(ring2.length, 2));
+  ring2.forEach((v, i) => {
+    const a = angleMap.get(v.id);
+    const stagger = (i % 2 === 0 ? -10 : 10);
+    v.tx = cx + (285 + stagger) * Math.cos(a);
+    v.ty = cy + (182 + stagger * 0.65) * Math.sin(a);
+  });
 
-  const idx = new Map(g.nodes.map((v, i) => [v.id, i]));
-  const idealDist = Math.min(135, Math.max(85, Math.sqrt((W * H) / Math.max(n, 1)) * 0.52));
-  let temp = 42;
+  // Ring 3: Outer Satellite Ring (with radial stagger so adjacent labels never sit on the same horizontal line)
+  sortRingByNeighbors(ring3, -Math.PI / 2 + Math.PI / Math.max(ring3.length, 2));
+  ring3.forEach((v, i) => {
+    const a = angleMap.get(v.id);
+    const stagger = (i % 3 === 0 ? -18 : i % 3 === 1 ? 0 : 18);
+    v.tx = cx + (430 + stagger) * Math.cos(a);
+    v.ty = cy + (258 + stagger * 0.65) * Math.sin(a);
+  });
 
-  for (let it = 0; it < 180; it++) {
-    const dx = new Array(n).fill(0), dy = new Array(n).fill(0);
+  g.nodes.forEach(v => {
+    v.x = v.tx;
+    v.y = v.ty;
+  });
 
-    // Repulsion with minimum separation so nodes & text labels never collide
+  // Local label & node collision relaxation anchored to target elliptical coordinates
+  for (let it = 0; it < 65; it++) {
     for (let i = 0; i < n; i++) {
       for (let j = i + 1; j < n; j++) {
-        const ux = g.nodes[i].x - g.nodes[j].x;
-        const uy = g.nodes[i].y - g.nodes[j].y;
-        const d = Math.max(Math.hypot(ux, uy), 1);
-        const rep = (idealDist * idealDist * 0.9) / d;
-        const extra = d < 78 ? (78 - d) * 2.2 : 0;
-        const fx = (ux / d) * (rep + extra);
-        const fy = (uy / d) * (rep + extra);
-        dx[i] += fx; dy[i] += fy;
-        dx[j] -= fx; dy[j] -= fy;
+        const a = g.nodes[i], b = g.nodes[j];
+        const ux = a.x - b.x;
+        const uy = a.y - b.y;
+        const minDx = 115; // label width buffer
+        const minDy = 36;  // label height + circle radius buffer
+        if (Math.abs(ux) < minDx && Math.abs(uy) < minDy) {
+          const pushX = ((minDx - Math.abs(ux)) * 0.16) * (ux >= 0 ? 1 : -1);
+          const pushY = ((minDy - Math.abs(uy)) * 0.28) * (uy >= 0 ? 1 : -1);
+          a.x += pushX; b.x -= pushX;
+          a.y += pushY; b.y -= pushY;
+        }
       }
     }
-
-    // Spring attraction along edges
-    for (const e of g.edges) {
-      const i = idx.get(e.a), j = idx.get(e.b);
-      const ux = g.nodes[i].x - g.nodes[j].x;
-      const uy = g.nodes[i].y - g.nodes[j].y;
-      const d = Math.max(Math.hypot(ux, uy), 1);
-      const target = (g.nodes[i].deg === 1 || g.nodes[j].deg === 1) ? idealDist * 0.82 : idealDist * 1.1;
-      const f = (d - target) * 0.18;
-      dx[i] -= (ux / d) * f; dy[i] -= (uy / d) * f;
-      dx[j] += (ux / d) * f; dy[j] += (uy / d) * f;
-    }
-
-    // Smooth elliptical gravity toward center (prevents boundary wall clamping)
-    g.nodes.forEach((v, i) => {
-      const pull = v.deg >= 4 ? 0.12 : v.deg >= 2 ? 0.08 : 0.06;
-      dx[i] += (cx - v.x) * pull;
-      dy[i] += (cy - v.y) * (pull * 1.25);
-
-      const d = Math.max(Math.hypot(dx[i], dy[i]), 0.01);
-      const step = Math.min(d, temp);
-      v.x = Math.min(W - 95, Math.max(95, v.x + (dx[i] / d) * step));
-      v.y = Math.min(H - 58, Math.max(58, v.y + (dy[i] / d) * step));
+    // Gentle spring back toward target ring coordinates + soft inner margins
+    g.nodes.forEach(v => {
+      v.x += (v.tx - v.x) * 0.22;
+      v.y += (v.ty - v.y) * 0.22;
+      v.x = Math.min(W - 88, Math.max(88, v.x));
+      v.y = Math.min(H - 48, Math.max(54, v.y));
     });
-    temp *= 0.972;
   }
 }
 
