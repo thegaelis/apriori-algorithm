@@ -15,12 +15,12 @@
   "l2_count": 1140,
   "l3_count": 850,
   "total_frequent_itemsets": 2126,
-  "curated_rules_count": 1218,
+  "curated_rules_count": 1200,
   "min_support_count": 30,
   "min_support_pct": 0.31,
   "min_confidence_pct": 15.0,
   "min_lift": 1.15,
-  "max_lift": 146.79
+  "max_lift": 11.42
  },
  "basket": {
   "clean_transactions": 9835,
@@ -798,291 +798,6 @@
  "top_recommendation_rules": [
   {
    "antecedent": [
-    "baby food"
-   ],
-   "consequent": [
-    "soups"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 67,
-   "consequent_support_pct": 0.68,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 146.79,
-   "reason": "Complementary basket affinity (146.79× lift)"
-  },
-  {
-   "antecedent": [
-    "sound storage medium"
-   ],
-   "consequent": [
-    "frozen potato products"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 83,
-   "consequent_support_pct": 0.84,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 118.49,
-   "reason": "Complementary basket affinity (118.49× lift)"
-  },
-  {
-   "antecedent": [
-    "sound storage medium"
-   ],
-   "consequent": [
-    "candy"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 294,
-   "consequent_support_pct": 2.99,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 33.45,
-   "reason": "Complementary basket affinity (33.45× lift)"
-  },
-  {
-   "antecedent": [
-    "baby food"
-   ],
-   "consequent": [
-    "chocolate"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 488,
-   "consequent_support_pct": 4.96,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 20.15,
-   "reason": "Complementary basket affinity (20.15× lift)"
-  },
-  {
-   "antecedent": [
-    "baby food"
-   ],
-   "consequent": [
-    "butter"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 545,
-   "consequent_support_pct": 5.54,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 18.05,
-   "reason": "Home baking essentials"
-  },
-  {
-   "antecedent": [
-    "preservation products"
-   ],
-   "consequent": [
-    "whipped/sour cream"
-   ],
-   "count": 2,
-   "support": 0.0002,
-   "support_pct": 0.02,
-   "antecedent_count": 2,
-   "antecedent_support_pct": 0.02,
-   "consequent_count": 705,
-   "consequent_support_pct": 7.17,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 13.95,
-   "reason": "Complementary basket affinity (13.95× lift)"
-  },
-  {
-   "antecedent": [
-    "preservation products"
-   ],
-   "consequent": [
-    "citrus fruit"
-   ],
-   "count": 2,
-   "support": 0.0002,
-   "support_pct": 0.02,
-   "antecedent_count": 2,
-   "antecedent_support_pct": 0.02,
-   "consequent_count": 814,
-   "consequent_support_pct": 8.28,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 12.08,
-   "reason": "Complementary basket affinity (12.08× lift)"
-  },
-  {
-   "antecedent": [
-    "sound storage medium"
-   ],
-   "consequent": [
-    "shopping bags"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 969,
-   "consequent_support_pct": 9.85,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 10.15,
-   "reason": "Complementary basket affinity (10.15× lift)"
-  },
-  {
-   "antecedent": [
-    "sound storage medium"
-   ],
-   "consequent": [
-    "bottled water"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 1087,
-   "consequent_support_pct": 11.05,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 9.05,
-   "reason": "Beverage & refreshment replenishment"
-  },
-  {
-   "antecedent": [
-    "kitchen utensil"
-   ],
-   "consequent": [
-    "onions"
-   ],
-   "count": 2,
-   "support": 0.0002,
-   "support_pct": 0.02,
-   "antecedent_count": 4,
-   "antecedent_support_pct": 0.04,
-   "consequent_count": 305,
-   "consequent_support_pct": 3.1,
-   "confidence": 0.5,
-   "confidence_pct": 50.0,
-   "lift": 16.12,
-   "reason": "Complementary basket affinity (16.12× lift)"
-  },
-  {
-   "antecedent": [
-    "bags"
-   ],
-   "consequent": [
-    "frozen potato products"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 4,
-   "antecedent_support_pct": 0.04,
-   "consequent_count": 83,
-   "consequent_support_pct": 0.84,
-   "confidence": 0.25,
-   "confidence_pct": 25.0,
-   "lift": 29.62,
-   "reason": "Complementary basket affinity (29.62× lift)"
-  },
-  {
-   "antecedent": [
-    "baby food"
-   ],
-   "consequent": [
-    "yogurt"
-   ],
-   "count": 1,
-   "support": 0.0001,
-   "support_pct": 0.01,
-   "antecedent_count": 1,
-   "antecedent_support_pct": 0.01,
-   "consequent_count": 1372,
-   "consequent_support_pct": 13.95,
-   "confidence": 1.0,
-   "confidence_pct": 100.0,
-   "lift": 7.17,
-   "reason": "Complementary basket affinity (7.17× lift)"
-  },
-  {
-   "antecedent": [
-    "salad dressing"
-   ],
-   "consequent": [
-    "onions"
-   ],
-   "count": 3,
-   "support": 0.0003,
-   "support_pct": 0.03,
-   "antecedent_count": 8,
-   "antecedent_support_pct": 0.08,
-   "consequent_count": 305,
-   "consequent_support_pct": 3.1,
-   "confidence": 0.375,
-   "confidence_pct": 37.5,
-   "lift": 12.09,
-   "reason": "Complementary basket affinity (12.09× lift)"
-  },
-  {
-   "antecedent": [
-    "rubbing alcohol"
-   ],
-   "consequent": [
-    "butter"
-   ],
-   "count": 5,
-   "support": 0.0005,
-   "support_pct": 0.05,
-   "antecedent_count": 10,
-   "antecedent_support_pct": 0.1,
-   "consequent_count": 545,
-   "consequent_support_pct": 5.54,
-   "confidence": 0.5,
-   "confidence_pct": 50.0,
-   "lift": 9.02,
-   "reason": "Home baking essentials"
-  },
-  {
-   "antecedent": [
-    "cooking chocolate"
-   ],
-   "consequent": [
-    "baking powder"
-   ],
-   "count": 7,
-   "support": 0.0007,
-   "support_pct": 0.07,
-   "antecedent_count": 25,
-   "antecedent_support_pct": 0.25,
-   "consequent_count": 174,
-   "consequent_support_pct": 1.77,
-   "confidence": 0.28,
-   "confidence_pct": 28.0,
-   "lift": 15.83,
-   "reason": "Home baking essentials"
-  },
-  {
-   "antecedent": [
     "Instant food products"
    ],
    "consequent": [
@@ -1099,139 +814,6 @@
    "confidence_pct": 38.0,
    "lift": 11.42,
    "reason": "Complementary basket affinity (11.42× lift)"
-  },
-  {
-   "antecedent": [
-    "baby cosmetics"
-   ],
-   "consequent": [
-    "butter milk"
-   ],
-   "count": 2,
-   "support": 0.0002,
-   "support_pct": 0.02,
-   "antecedent_count": 6,
-   "antecedent_support_pct": 0.06,
-   "consequent_count": 275,
-   "consequent_support_pct": 2.8,
-   "confidence": 0.3333,
-   "confidence_pct": 33.3,
-   "lift": 11.92,
-   "reason": "Complementary basket affinity (11.92× lift)"
-  },
-  {
-   "antecedent": [
-    "frozen fruits"
-   ],
-   "consequent": [
-    "whipped/sour cream"
-   ],
-   "count": 6,
-   "support": 0.0006,
-   "support_pct": 0.06,
-   "antecedent_count": 12,
-   "antecedent_support_pct": 0.12,
-   "consequent_count": 705,
-   "consequent_support_pct": 7.17,
-   "confidence": 0.5,
-   "confidence_pct": 50.0,
-   "lift": 6.98,
-   "reason": "Complementary basket affinity (6.98× lift)"
-  },
-  {
-   "antecedent": [
-    "cream"
-   ],
-   "consequent": [
-    "sausage"
-   ],
-   "count": 7,
-   "support": 0.0007,
-   "support_pct": 0.07,
-   "antecedent_count": 13,
-   "antecedent_support_pct": 0.13,
-   "consequent_count": 924,
-   "consequent_support_pct": 9.4,
-   "confidence": 0.5385,
-   "confidence_pct": 53.8,
-   "lift": 5.73,
-   "reason": "Complementary basket affinity (5.73× lift)"
-  },
-  {
-   "antecedent": [
-    "rubbing alcohol"
-   ],
-   "consequent": [
-    "napkins"
-   ],
-   "count": 4,
-   "support": 0.0004,
-   "support_pct": 0.04,
-   "antecedent_count": 10,
-   "antecedent_support_pct": 0.1,
-   "consequent_count": 515,
-   "consequent_support_pct": 5.24,
-   "confidence": 0.4,
-   "confidence_pct": 40.0,
-   "lift": 7.64,
-   "reason": "Complementary basket affinity (7.64× lift)"
-  },
-  {
-   "antecedent": [
-    "rubbing alcohol"
-   ],
-   "consequent": [
-    "citrus fruit"
-   ],
-   "count": 5,
-   "support": 0.0005,
-   "support_pct": 0.05,
-   "antecedent_count": 10,
-   "antecedent_support_pct": 0.1,
-   "consequent_count": 814,
-   "consequent_support_pct": 8.28,
-   "confidence": 0.5,
-   "confidence_pct": 50.0,
-   "lift": 6.04,
-   "reason": "Complementary basket affinity (6.04× lift)"
-  },
-  {
-   "antecedent": [
-    "specialty vegetables"
-   ],
-   "consequent": [
-    "white bread"
-   ],
-   "count": 6,
-   "support": 0.0006,
-   "support_pct": 0.06,
-   "antecedent_count": 17,
-   "antecedent_support_pct": 0.17,
-   "consequent_count": 414,
-   "consequent_support_pct": 4.21,
-   "confidence": 0.3529,
-   "confidence_pct": 35.3,
-   "lift": 8.38,
-   "reason": "Complementary basket affinity (8.38× lift)"
-  },
-  {
-   "antecedent": [
-    "kitchen utensil"
-   ],
-   "consequent": [
-    "pastry"
-   ],
-   "count": 2,
-   "support": 0.0002,
-   "support_pct": 0.02,
-   "antecedent_count": 4,
-   "antecedent_support_pct": 0.04,
-   "consequent_count": 875,
-   "consequent_support_pct": 8.9,
-   "confidence": 0.5,
-   "confidence_pct": 50.0,
-   "lift": 5.62,
-   "reason": "Complementary basket affinity (5.62× lift)"
   },
   {
    "antecedent": [
@@ -1252,6 +834,443 @@
    "confidence_pct": 53.9,
    "lift": 4.95,
    "reason": "Home cooking: soup, stew & roast ingredients"
+  },
+  {
+   "antecedent": [
+    "flour"
+   ],
+   "consequent": [
+    "sugar"
+   ],
+   "count": 49,
+   "support": 0.005,
+   "support_pct": 0.5,
+   "antecedent_count": 171,
+   "antecedent_support_pct": 1.74,
+   "consequent_count": 333,
+   "consequent_support_pct": 3.39,
+   "confidence": 0.2865,
+   "confidence_pct": 28.6,
+   "lift": 8.46,
+   "reason": "Home baking essentials"
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "sliced cheese"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 37,
+   "support": 0.0038,
+   "support_pct": 0.38,
+   "antecedent_count": 55,
+   "antecedent_support_pct": 0.56,
+   "consequent_count": 1903,
+   "consequent_support_pct": 19.35,
+   "confidence": 0.6727,
+   "confidence_pct": 67.3,
+   "lift": 3.48,
+   "reason": "Home cooking: soup, stew & roast ingredients"
+  },
+  {
+   "antecedent": [
+    "herbs",
+    "other vegetables"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 38,
+   "support": 0.0039,
+   "support_pct": 0.39,
+   "antecedent_count": 76,
+   "antecedent_support_pct": 0.77,
+   "consequent_count": 1072,
+   "consequent_support_pct": 10.9,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 4.59,
+   "reason": "Home cooking: soup, stew & roast ingredients"
+  },
+  {
+   "antecedent": [
+    "beef",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 37,
+   "support": 0.0038,
+   "support_pct": 0.38,
+   "antecedent_count": 75,
+   "antecedent_support_pct": 0.76,
+   "consequent_count": 1072,
+   "consequent_support_pct": 10.9,
+   "confidence": 0.4933,
+   "confidence_pct": 49.3,
+   "lift": 4.53,
+   "reason": "Home cooking: soup, stew & roast ingredients"
+  },
+  {
+   "antecedent": [
+    "liquor"
+   ],
+   "consequent": [
+    "bottled beer"
+   ],
+   "count": 46,
+   "support": 0.0047,
+   "support_pct": 0.47,
+   "antecedent_count": 109,
+   "antecedent_support_pct": 1.11,
+   "consequent_count": 792,
+   "consequent_support_pct": 8.05,
+   "confidence": 0.422,
+   "confidence_pct": 42.2,
+   "lift": 5.24,
+   "reason": "Complementary basket affinity (5.24× lift)"
+  },
+  {
+   "antecedent": [
+    "butter",
+    "onions"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 30,
+   "support": 0.0031,
+   "support_pct": 0.31,
+   "antecedent_count": 40,
+   "antecedent_support_pct": 0.41,
+   "consequent_count": 2513,
+   "consequent_support_pct": 25.55,
+   "confidence": 0.75,
+   "confidence_pct": 75.0,
+   "lift": 2.94,
+   "reason": "Daily breakfast & dairy staples"
+  },
+  {
+   "antecedent": [
+    "brown bread",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 30,
+   "support": 0.0031,
+   "support_pct": 0.31,
+   "antecedent_count": 46,
+   "antecedent_support_pct": 0.47,
+   "consequent_count": 1903,
+   "consequent_support_pct": 19.35,
+   "confidence": 0.6522,
+   "confidence_pct": 65.2,
+   "lift": 3.37,
+   "reason": "Complementary basket affinity (3.37× lift)"
+  },
+  {
+   "antecedent": [
+    "beef",
+    "soda"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 39,
+   "support": 0.004,
+   "support_pct": 0.4,
+   "antecedent_count": 80,
+   "antecedent_support_pct": 0.81,
+   "consequent_count": 1072,
+   "consequent_support_pct": 10.9,
+   "confidence": 0.4875,
+   "confidence_pct": 48.8,
+   "lift": 4.47,
+   "reason": "Home cooking: soup, stew & roast ingredients"
+  },
+  {
+   "antecedent": [
+    "onions",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 36,
+   "support": 0.0037,
+   "support_pct": 0.37,
+   "antecedent_count": 56,
+   "antecedent_support_pct": 0.57,
+   "consequent_count": 1903,
+   "consequent_support_pct": 19.35,
+   "confidence": 0.6429,
+   "confidence_pct": 64.3,
+   "lift": 3.32,
+   "reason": "Complementary basket affinity (3.32× lift)"
+  },
+  {
+   "antecedent": [
+    "butter milk",
+    "pip fruit"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 32,
+   "support": 0.0033,
+   "support_pct": 0.33,
+   "antecedent_count": 50,
+   "antecedent_support_pct": 0.51,
+   "consequent_count": 1903,
+   "consequent_support_pct": 19.35,
+   "confidence": 0.64,
+   "confidence_pct": 64.0,
+   "lift": 3.31,
+   "reason": "Complementary basket affinity (3.31× lift)"
+  },
+  {
+   "antecedent": [
+    "curd",
+    "domestic eggs"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 47,
+   "support": 0.0048,
+   "support_pct": 0.48,
+   "antecedent_count": 64,
+   "antecedent_support_pct": 0.65,
+   "consequent_count": 2513,
+   "consequent_support_pct": 25.55,
+   "confidence": 0.7344,
+   "confidence_pct": 73.4,
+   "lift": 2.87,
+   "reason": "Daily breakfast & dairy staples"
+  },
+  {
+   "antecedent": [
+    "butter",
+    "curd"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 48,
+   "support": 0.0049,
+   "support_pct": 0.49,
+   "antecedent_count": 67,
+   "antecedent_support_pct": 0.68,
+   "consequent_count": 2513,
+   "consequent_support_pct": 25.55,
+   "confidence": 0.7164,
+   "confidence_pct": 71.6,
+   "lift": 2.8,
+   "reason": "Daily breakfast & dairy staples"
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "sugar"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 35,
+   "support": 0.0036,
+   "support_pct": 0.36,
+   "antecedent_count": 49,
+   "antecedent_support_pct": 0.5,
+   "consequent_count": 2513,
+   "consequent_support_pct": 25.55,
+   "confidence": 0.7143,
+   "confidence_pct": 71.4,
+   "lift": 2.8,
+   "reason": "Daily breakfast & dairy staples"
+  },
+  {
+   "antecedent": [
+    "cream cheese",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "count": 33,
+   "support": 0.0034,
+   "support_pct": 0.34,
+   "antecedent_count": 63,
+   "antecedent_support_pct": 0.64,
+   "consequent_count": 1372,
+   "consequent_support_pct": 13.95,
+   "confidence": 0.5238,
+   "confidence_pct": 52.4,
+   "lift": 3.75,
+   "reason": "Complementary basket affinity (3.75× lift)"
+  },
+  {
+   "antecedent": [
+    "curd",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "count": 52,
+   "support": 0.0053,
+   "support_pct": 0.53,
+   "antecedent_count": 101,
+   "antecedent_support_pct": 1.03,
+   "consequent_count": 1372,
+   "consequent_support_pct": 13.95,
+   "confidence": 0.5149,
+   "confidence_pct": 51.5,
+   "lift": 3.69,
+   "reason": "Complementary basket affinity (3.69× lift)"
+  },
+  {
+   "antecedent": [
+    "berries",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "count": 42,
+   "support": 0.0043,
+   "support_pct": 0.43,
+   "antecedent_count": 116,
+   "antecedent_support_pct": 1.18,
+   "consequent_count": 705,
+   "consequent_support_pct": 7.17,
+   "confidence": 0.3621,
+   "confidence_pct": 36.2,
+   "lift": 5.05,
+   "reason": "Dessert pairing: fresh berries & cream"
+  },
+  {
+   "antecedent": [
+    "cream cheese",
+    "root vegetables"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "count": 37,
+   "support": 0.0038,
+   "support_pct": 0.38,
+   "antecedent_count": 74,
+   "antecedent_support_pct": 0.75,
+   "consequent_count": 1372,
+   "consequent_support_pct": 13.95,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 3.58,
+   "reason": "Complementary basket affinity (3.58× lift)"
+  },
+  {
+   "antecedent": [
+    "curd",
+    "pip fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "count": 38,
+   "support": 0.0039,
+   "support_pct": 0.39,
+   "antecedent_count": 77,
+   "antecedent_support_pct": 0.78,
+   "consequent_count": 1372,
+   "consequent_support_pct": 13.95,
+   "confidence": 0.4935,
+   "confidence_pct": 49.4,
+   "lift": 3.54,
+   "reason": "Complementary basket affinity (3.54× lift)"
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "count": 37,
+   "support": 0.0038,
+   "support_pct": 0.38,
+   "antecedent_count": 91,
+   "antecedent_support_pct": 0.93,
+   "consequent_count": 1032,
+   "consequent_support_pct": 10.49,
+   "confidence": 0.4066,
+   "confidence_pct": 40.7,
+   "lift": 3.87,
+   "reason": "Complementary basket affinity (3.87× lift)"
+  },
+  {
+   "antecedent": [
+    "grapes",
+    "other vegetables"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "count": 36,
+   "support": 0.0037,
+   "support_pct": 0.37,
+   "antecedent_count": 89,
+   "antecedent_support_pct": 0.9,
+   "consequent_count": 1032,
+   "consequent_support_pct": 10.49,
+   "confidence": 0.4045,
+   "confidence_pct": 40.5,
+   "lift": 3.85,
+   "reason": "Complementary basket affinity (3.85× lift)"
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "pip fruit"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "count": 55,
+   "support": 0.0056,
+   "support_pct": 0.56,
+   "antecedent_count": 136,
+   "antecedent_support_pct": 1.38,
+   "consequent_count": 1032,
+   "consequent_support_pct": 10.49,
+   "confidence": 0.4044,
+   "confidence_pct": 40.4,
+   "lift": 3.85,
+   "reason": "Complementary basket affinity (3.85× lift)"
+  },
+  {
+   "antecedent": [
+    "processed cheese"
+   ],
+   "consequent": [
+    "white bread"
+   ],
+   "count": 41,
+   "support": 0.0042,
+   "support_pct": 0.42,
+   "antecedent_count": 163,
+   "antecedent_support_pct": 1.66,
+   "consequent_count": 414,
+   "consequent_support_pct": 4.21,
+   "confidence": 0.2515,
+   "confidence_pct": 25.1,
+   "lift": 5.98,
+   "reason": "Complementary basket affinity (5.98× lift)"
   }
  ]
 }

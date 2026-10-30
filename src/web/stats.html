@@ -395,32 +395,32 @@ function render(d) {
   h += `
     <div class="kpis">
       <div class="kpi">
-        <div class="kpi-top"><span class="kpi-ico">🧺</span><span class="kpi-tag">Transactions (N)</span></div>
+        <div class="kpi-top"><span class="kpi-tag">Transactions (N)</span></div>
         <div class="v">${fmt(o.transactions)}</div>
-        <div class="l">${fmt(o.multi_item_baskets)} giỏ mua ≥ 2 món (${o.multi_item_baskets_pct}%)</div>
+        <div class="l">${fmt(o.multi_item_baskets)} giỏ có ≥ 2 mặt hàng (${o.multi_item_baskets_pct}%)</div>
       </div>
       <div class="kpi">
-        <div class="kpi-top"><span class="kpi-ico">🏷️</span><span class="kpi-tag">Items (|I|)</span></div>
+        <div class="kpi-top"><span class="kpi-tag">Items (|I|)</span></div>
         <div class="v">${fmt(o.distinct_items)}</div>
-        <div class="l">Trung bình ${o.avg_basket_size} món / giỏ hàng</div>
+        <div class="l">Trung bình ${o.avg_basket_size} mặt hàng / giao dịch</div>
       </div>
       <div class="kpi">
-        <div class="kpi-top"><span class="kpi-ico">✂️</span><span class="kpi-tag">Ngưỡng min_sup</span></div>
+        <div class="kpi-top"><span class="kpi-tag">Ngưỡng min_sup</span></div>
         <div class="v">${o.min_support_count} giỏ</div>
         <div class="l">Support ≥ ${o.min_support_pct}% trên ${fmt(o.transactions)} giỏ</div>
       </div>
       <div class="kpi">
-        <div class="kpi-top"><span class="kpi-ico">🥇</span><span class="kpi-tag">Frequent L1</span></div>
+        <div class="kpi-top"><span class="kpi-tag">Frequent L1</span></div>
         <div class="v">${fmt(o.l1_count)} / ${o.distinct_items}</div>
-        <div class="l">Tỉa bỏ ${o.distinct_items - o.l1_count} mặt hàng ít phổ biến</div>
+        <div class="l">Loại ${o.distinct_items - o.l1_count} mặt hàng có count &lt; ${o.min_support_count}</div>
       </div>
       <div class="kpi">
-        <div class="kpi-top"><span class="kpi-ico">🤝</span><span class="kpi-tag">Combos L2 &amp; L3</span></div>
+        <div class="kpi-top"><span class="kpi-tag">Frequent L2 &amp; L3</span></div>
         <div class="v">${fmt(o.l2_count + o.l3_count)}</div>
-        <div class="l">${fmt(o.l2_count)} cặp L2 · ${fmt(o.l3_count)} bộ ba L3</div>
+        <div class="l">${fmt(o.l2_count)} tập L2 · ${fmt(o.l3_count)} tập L3</div>
       </div>
       <div class="kpi">
-        <div class="kpi-top"><span class="kpi-ico">⚡</span><span class="kpi-tag">Luật A ⇒ B</span></div>
+        <div class="kpi-top"><span class="kpi-tag">Luật kết hợp A ⇒ B</span></div>
         <div class="v">${fmt(o.curated_rules_count)}</div>
         <div class="l">Conf ≥ ${o.min_confidence_pct}% · Lift ≥ ${o.min_lift}×</div>
       </div>
@@ -428,11 +428,11 @@ function render(d) {
 
     <!-- INTERACTIVE NAVIGATION TABS -->
     <nav class="view-nav" aria-label="Chọn chuyên đề thống kê">
-      <button class="view-btn active" type="button" data-sec="funnel">🔬 1. Phễu Cắt tỉa &amp; Quy trình Apriori</button>
-      <button class="view-btn" type="button" data-sec="l1">🏆 2. Bestsellers &amp; Phân bố 169 Mặt hàng (L1)</button>
-      <button class="view-btn" type="button" data-sec="combos">🤝 3. Combo Mua chung: Thực tế vs. Ngẫu nhiên (L2/L3)</button>
-      <button class="view-btn" type="button" data-sec="dissector">⚡ 4. Giải phẫu Luật Gợi ý A ⇒ B (Tương tác)</button>
-      <button class="view-btn" type="button" data-sec="all" style="margin-left:auto">📑 Xem toàn bộ trên 1 trang</button>
+      <button class="view-btn active" type="button" data-sec="funnel">1. Cắt tỉa Ứng viên &amp; Quy trình Apriori</button>
+      <button class="view-btn" type="button" data-sec="l1">2. Tập phổ biến bậc 1 (L1) &amp; Phân bố Mặt hàng</button>
+      <button class="view-btn" type="button" data-sec="combos">3. Tập phổ biến L2, L3: Thực tế vs. Độc lập</button>
+      <button class="view-btn" type="button" data-sec="dissector">4. Phân tích Chi tiết Luật Kết hợp A ⇒ B</button>
+      <button class="view-btn" type="button" data-sec="all" style="margin-left:auto">Xem toàn bộ trên 1 trang</button>
     </nav>
   `;
 
@@ -442,95 +442,95 @@ function render(d) {
   h += `
     <section class="stat-sec active" id="sec-funnel">
       <div class="sec-head">
-        <h2 class="sec-title">1. Phễu Cắt tỉa Không gian Tìm kiếm (Search Space Pruning) &amp; Quy trình Apriori</h2>
-        <p class="sec-sub">Tại sao không thể đếm vét cạn (Brute-force) mọi tổ hợp sản phẩm? Biểu đồ phễu bên trái minh họa cách <b>Tiên đề Apriori (Anti-monotone Property)</b> cắt giảm hơn <b>99%</b> số tổ hợp dư thừa.</p>
+        <h2 class="sec-title">1. Cắt tỉa Không gian Ứng viên (Candidate Pruning) &amp; Quy trình Khai phá</h2>
+        <p class="sec-sub">Biểu đồ bên trái minh họa cách <b>Tính chất Apriori (Apriori Property / Tính chất phản đơn điệu - Anti-monotone)</b> thu hẹp số lượng tổ hợp ứng viên cần đếm qua từng bước lặp.</p>
       </div>
       <div class="grid2">
         <div class="panel">
-          <h3>Phễu Thu hẹp Ứng viên qua từng vòng lặp (k = 1 → 2 → 3)</h3>
-          <p class="panel-sub">So sánh số tổ hợp lý thuyết nếu vét cạn so với số tập phổ biến thực sự vượt ngưỡng <code>min_sup = ${o.min_support_count} giỏ (${o.min_support_pct}%)</code>.</p>
+          <h3>Tỷ lệ Thu hẹp Ứng viên qua từng bậc k (k = 1 → 2 → 3)</h3>
+          <p class="panel-sub">So sánh số tổ hợp lý thuyết <code>C(|I|, k)</code> với số tập phổ biến đạt ngưỡng <code>min_sup = ${o.min_support_count} giỏ (${o.min_support_pct}%)</code>.</p>
           <div class="funnel-list">
             <div class="funnel-stage">
               <div class="funnel-top">
-                <span class="funnel-name">Vòng k = 1: Lọc mặt hàng đơn lẻ (C<sub>1</sub> → L<sub>1</sub>)</span>
-                <span class="funnel-nums">${o.distinct_items} món → Giữ lại ${o.l1_count} món L<sub>1</sub></span>
+                <span class="funnel-name">Bậc k = 1: Lọc 1-Itemsets (C<sub>1</sub> → L<sub>1</sub>)</span>
+                <span class="funnel-nums">${o.distinct_items} ứng viên → ${o.l1_count} tập phổ biến L<sub>1</sub></span>
               </div>
               <div class="funnel-track">
                 <div class="funnel-bar-kept" style="width:${(o.l1_count / o.distinct_items * 100).toFixed(1)}%"></div>
               </div>
               <div class="funnel-note">
-                <span>Đạt chuẩn ≥ 30 giỏ: <b>80.5% (${o.l1_count} món)</b></span>
-                <span class="prune-badge">✂️ Tỉa 33 món (&lt; 30 giỏ) ngay từ vòng 1</span>
+                <span>Đạt ngưỡng ≥ 30 giỏ: <b>80.5% (${o.l1_count} mặt hàng)</b></span>
+                <span class="prune-badge">Loại 33 mặt hàng (&lt; 30 giỏ) ở C1 → L1</span>
               </div>
             </div>
 
             <div class="funnel-stage">
               <div class="funnel-top">
-                <span class="funnel-name">Vòng k = 2: Khai phá Cặp mua chung (C<sub>2</sub> → L<sub>2</sub>)</span>
-                <span class="funnel-nums">${fmt(c2_exhaustive)} cặp lý thuyết → ${fmt(o.l2_count)} cặp L<sub>2</sub></span>
+                <span class="funnel-name">Bậc k = 2: Khai phá 2-Itemsets (C<sub>2</sub> → L<sub>2</sub>)</span>
+                <span class="funnel-nums">${fmt(c2_exhaustive)} tổ hợp đôi → ${fmt(o.l2_count)} tập phổ biến L<sub>2</sub></span>
               </div>
               <div class="funnel-track">
                 <div class="funnel-bar-kept" style="width:${(o.l2_count / c2_exhaustive * 100).toFixed(1)}%"></div>
               </div>
               <div class="funnel-note">
-                <span>Nhờ tỉa 33 món ở L<sub>1</sub>, bỏ qua ngay <b>${fmt(c2_exhaustive - c2_after_l1)} cặp</b> không cần đếm!</span>
-                <span class="prune-badge">✂️ Giảm 92.0% tổ hợp cặp</span>
+                <span>Nhờ loại 33 mặt hàng ở L<sub>1</sub>, giảm trước <b>${fmt(c2_exhaustive - c2_after_l1)} cặp</b> trước khi đếm giao dịch</span>
+                <span class="prune-badge">Giảm 92.0% không gian tổ hợp bậc 2</span>
               </div>
             </div>
 
             <div class="funnel-stage">
               <div class="funnel-top">
-                <span class="funnel-name">Vòng k = 3: Khai phá Bộ ba (C<sub>3</sub> → L<sub>3</sub>)</span>
-                <span class="funnel-nums">${fmt(c3_exhaustive)} bộ ba lý thuyết → ${fmt(o.l3_count)} bộ ba L<sub>3</sub></span>
+                <span class="funnel-name">Bậc k = 3: Khai phá 3-Itemsets (C<sub>3</sub> → L<sub>3</sub>)</span>
+                <span class="funnel-nums">${fmt(c3_exhaustive)} tổ hợp ba → ${fmt(o.l3_count)} tập phổ biến L<sub>3</sub></span>
               </div>
               <div class="funnel-track">
                 <div class="funnel-bar-kept" style="width:4%"></div>
               </div>
               <div class="funnel-note">
-                <span>Chỉ ghép những bộ ba mà cả 3 tập con 2 món đều thuộc L<sub>2</sub></span>
-                <span class="prune-badge">✂️ Giảm 99.89% không gian tìm kiếm</span>
+                <span>Chỉ giữ ứng viên C<sub>3</sub> khi cả 3 tập con bậc 2 của nó đều thuộc L<sub>2</sub></span>
+                <span class="prune-badge">Giảm 99.89% không gian tổ hợp bậc 3</span>
               </div>
             </div>
 
             <div class="funnel-stage">
               <div class="funnel-top">
-                <span class="funnel-name">Bước Sinh luật: Lọc theo Confidence ≥ ${o.min_confidence_pct}% &amp; Lift ≥ ${o.min_lift}×</span>
-                <span class="funnel-nums">2,474 luật hợp lệ → ${fmt(o.curated_rules_count)} luật đưa lên Web</span>
+                <span class="funnel-name">Sinh luật kết hợp: Lọc theo Confidence ≥ ${o.min_confidence_pct}% &amp; Lift ≥ ${o.min_lift}×</span>
+                <span class="funnel-nums">2,474 luật thỏa ngưỡng → ${fmt(o.curated_rules_count)} luật hiển thị</span>
               </div>
               <div class="funnel-track">
                 <div class="funnel-bar-kept" style="width:48.5%;background:linear-gradient(90deg,#059669,#10b981)"></div>
               </div>
               <div class="funnel-note">
-                <span>Loại bỏ các luật trùng hợp ngẫu nhiên có <code>Lift ≈ 1</code></span>
-                <span class="prune-badge" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0">✅ Đảm bảo ý nghĩa thống kê</span>
+                <span>Loại bỏ các luật có <code>Lift ≤ 1.15</code> (hai mặt hàng xuất hiện độc lập thống kê)</span>
+                <span class="prune-badge" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0">Đạt ngưỡng tương quan dương</span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>Quy trình 4 bước Tiền xử lý &amp; Khai phá Luật</h3>
-          <p class="panel-sub">Giải thích lý do toán học đằng sau mỗi bước xử lý dữ liệu trước khi đưa lên giao diện.</p>
+          <h3>Quy trình 4 bước Tiền xử lý &amp; Khai phá Luật kết hợp</h3>
+          <p class="panel-sub">Cơ sở phương pháp luận của từng bước xử lý dữ liệu trước khi đưa vào hệ thống gợi ý.</p>
           <div class="pipe-steps">
             <div class="pipe-card">
               <div class="pipe-top"><span class="pipe-step">BƯỚC 1</span><span class="pipe-stat">${fmt(o.transactions)} giao dịch POS</span></div>
-              <h4>Chuẩn hóa Ma trận Giỏ hàng Nhị phân (Binary Basket)</h4>
-              <p>Chuyển mỗi hóa đơn thành một tập hợp mặt hàng phân biệt <code>T<sub>i</sub> ⊆ I</code> (chỉ xét có/không xuất hiện, không nhân bản số lượng hộp trong 1 giỏ) để tính đúng xác suất đồng xuất hiện <code>P(A ∩ B)</code>.</p>
+              <h4>Biểu diễn Giỏ hàng Nhị phân (Binary Transaction Representation)</h4>
+              <p>Mỗi hóa đơn được chuẩn hóa thành một tập hợp mặt hàng phân biệt <code>T<sub>i</sub> ⊆ I</code> (chỉ ghi nhận <b>1 = có mua</b> hoặc <b>0 = không mua</b> trong hóa đơn đó, bỏ qua số lượng mua lặp). <b>Lý do:</b> Nếu 1 khách mua sỉ 20 hộp sữa trong 1 hóa đơn thì vẫn chỉ tính là <b>1 giao dịch có sữa</b> (tránh làm lệch tần suất <code>Support</code> và đảm bảo <code>Confidence = Count(A ∪ B) / Count(A) ≤ 100%</code>).</p>
             </div>
             <div class="pipe-card">
-              <div class="pipe-top"><span class="pipe-step">BƯỚC 2</span><span class="pipe-stat">Tính chất Anti-monotone</span></div>
-              <h4>Cắt tỉa theo Tiên đề Apriori: <code>Sup(A ∪ B) ≤ Sup(A)</code></h4>
-              <p>Nếu mặt hàng <code>A</code> có <code>count(A) &lt; 30</code> (như <i>cooking chocolate</i> chỉ có 25 giỏ), mọi tập mở rộng chứa <code>A</code> chắc chắn cũng <code>&lt; 30</code> giỏ. Cắt tỉa ngay giúp tránh sinh <b>luật nhiễu (spurious rules)</b> từ mẫu quá nhỏ.</p>
+              <div class="pipe-top"><span class="pipe-step">BƯỚC 2</span><span class="pipe-stat">Tính chất Phản đơn điệu (Anti-monotone)</span></div>
+              <h4>Cắt tỉa theo Tính chất Apriori: <code>Sup(A ∪ B) ≤ Sup(A)</code></h4>
+              <p>Nếu tập <code>A</code> có <code>count(A) &lt; 30</code> (ví dụ <i>cooking chocolate</i> có 25 giỏ), mọi tập cha chứa <code>A</code> đều có tần suất <code>&lt; 30</code> giỏ. Việc loại bỏ sớm giúp giảm chi phí tính toán và tránh các <b>luật ngẫu nhiên (spurious rules)</b> do cỡ mẫu nhỏ.</p>
             </div>
             <div class="pipe-card">
               <div class="pipe-top"><span class="pipe-step">BƯỚC 3</span><span class="pipe-stat">Vertical TID-set Intersection</span></div>
-              <h4>Giao tập danh sách Hóa đơn (TID-set) tìm L<sub>2</sub>, L<sub>3</sub></h4>
-              <p>Lưu danh sách mã giỏ hàng <code>TID(A)</code> của mỗi món. Khi cần đếm cặp <code>{A, B}</code>, chỉ cần lấy lực lượng giao 2 tập hợp <code>|TID(A) ∩ TID(B)|</code> thay vì quét lại toàn bộ 9,835 dòng CSV.</p>
+              <h4>Đếm tần suất bằng Giao tập Mã giao dịch (TID-set)</h4>
+              <p>Mỗi mặt hàng lưu tập chỉ số giao dịch <code>TID(A)</code>. Số giỏ chứa đồng thời <code>{A, B}</code> được tính bằng lực lượng giao <code>|TID(A) ∩ TID(B)|</code> thay vì quét lặp toàn bộ cơ sở dữ liệu.</p>
             </div>
             <div class="pipe-card">
               <div class="pipe-top"><span class="pipe-step">BƯỚC 4</span><span class="pipe-stat">Confidence &amp; Lift Filtering</span></div>
-              <h4>Kiểm định Nhân quả bằng Confidence kết hợp Lift</h4>
-              <p>Nếu chỉ dùng <code>Confidence</code>, các món quá phổ biến như <i>whole milk (25.6%)</i> sẽ luôn được gợi ý một cách tầm thường. Bắt buộc <code>Lift ≥ 1.15×</code> để chứng minh <code>A</code> thực sự thúc đẩy khách mua <code>B</code>.</p>
+              <h4>Đánh giá Tương quan Dương bằng Confidence kết hợp Lift</h4>
+              <p>Nếu chỉ xét <code>Confidence = P(B | A)</code>, các mặt hàng có tần suất nền <code>P(B)</code> lớn (như <i>whole milk — 25.6%</i>) sẽ luôn có Confidence cao dù mua độc lập. Điều kiện <code>Lift = P(B | A) / P(B) ≥ 1.15</code> đảm bảo <code>A</code> và <code>B</code> có tương quan dương có ý nghĩa thống kê.</p>
             </div>
           </div>
         </div>
@@ -546,13 +546,13 @@ function render(d) {
   h += `
     <section class="stat-sec" id="sec-l1">
       <div class="sec-head">
-        <h2 class="sec-title">2. Mặt hàng Bán chạy nhất (L<sub>1</sub>) &amp; Cấu trúc Phân tầng 169 Mặt hàng</h2>
-        <p class="sec-sub">Trả lời câu hỏi: <b>"Mặt hàng nào bán chạy? Tại sao có món trên cửa hàng được gợi ý mua kèm, có món lại bị Apriori cắt tỉa?"</b></p>
+        <h2 class="sec-title">2. Tập phổ biến bậc 1 (L<sub>1</sub>) &amp; Phân bố 169 Mặt hàng theo Ngưỡng Cắt tỉa</h2>
+        <p class="sec-sub">Thống kê tần suất xuất hiện đơn lẻ <code>Support(A) = Count(A) / N</code> và phân loại 169 mặt hàng theo từng giai đoạn lọc của thuật toán Apriori.</p>
       </div>
       <div class="grid2">
         <div class="panel">
-          <h3>Biểu đồ Top 15 Mặt hàng Bán chạy nhất Siêu thị (L<sub>1</sub>)</h3>
-          <p class="panel-sub">Xếp hạng theo số giỏ hàng thực tế chứa sản phẩm: <code>Support(A) = Count(A) / 9,835</code>.</p>
+          <h3>Top 15 Mặt hàng có Support cao nhất trong L<sub>1</sub></h3>
+          <p class="panel-sub">Độ phổ biến đơn lẻ tính trên tổng số <code>N = 9,835</code> giao dịch: <code>Support(A) = Count(A) / 9,835</code>.</p>
           <div class="bars">
             ${top15.map((p, idx) => `<div class="bar-row">
               <span class="bar-rank">#${idx + 1}</span>
@@ -564,56 +564,56 @@ function render(d) {
         </div>
 
         <div class="panel">
-          <h3>Phân tầng Toàn bộ 169 Mặt hàng theo Ngưỡng Cắt tỉa Apriori</h3>
-          <p class="panel-sub">Giải thích vì sao trên trang <code>/shop</code> có đủ 169 mặt hàng nhưng chỉ 97 mặt hàng kích hoạt luật mua kèm.</p>
+          <h3>Phân nhóm 169 Mặt hàng theo Trạng thái Khai phá Luật</h3>
+          <p class="panel-sub">Giải thích lý do trong 169 mặt hàng trên <code>/shop</code> có 97 mặt hàng sinh được luật gợi ý và 72 mặt hàng bị lược bỏ qua các bước lọc.</p>
 
           <div class="pareto-bar" title="Phân bố 169 mặt hàng">
-            <div class="pareto-seg" style="width:57.4%;background:#4f46e5">97 món (57.4%)</div>
-            <div class="pareto-seg" style="width:23.1%;background:#64748b">39 món (23.1%)</div>
-            <div class="pareto-seg" style="width:19.5%;background:#f59e0b">33 món (19.5%)</div>
+            <div class="pareto-seg" style="width:57.4%;background:#4f46e5">97 mặt hàng (57.4%)</div>
+            <div class="pareto-seg" style="width:23.1%;background:#64748b">39 mặt hàng (23.1%)</div>
+            <div class="pareto-seg" style="width:19.5%;background:#f59e0b">33 mặt hàng (19.5%)</div>
           </div>
 
           <div class="tier-cards">
             <div class="tier-card">
               <div class="tier-head">
-                <span><i class="tier-dot" style="background:#4f46e5"></i>Nhóm 1: Đạt chuẩn L<sub>1</sub>, L<sub>2</sub> &amp; Có luật kết hợp A ⇒ B</span>
+                <span><i class="tier-dot" style="background:#4f46e5"></i>Nhóm 1: Thuộc L<sub>1</sub>, L<sub>2</sub> &amp; Sinh được luật kết hợp A ⇒ B</span>
                 <span style="font-family:var(--mono);color:#4f46e5">97 / 169 mặt hàng</span>
               </div>
-              <div class="tier-desc">Bản thân món hàng có <code>≥ 30</code> giỏ (L<sub>1</sub>), có ít nhất 1 cặp mua chung đạt <code>≥ 30</code> giỏ (L<sub>2</sub>) và thỏa <code>Conf ≥ 15%, Lift ≥ 1.15×</code>. Khi bấm vào trên <code>/shop</code> sẽ gợi ý ngay món mua kèm.</div>
+              <div class="tier-desc">Mặt hàng có <code>count(A) ≥ 30</code> (thuộc L<sub>1</sub>), có ít nhất 1 cặp đồng xuất hiện <code>count(A ∪ B) ≥ 30</code> (thuộc L<sub>2</sub>) và thỏa <code>Conf ≥ 15%, Lift ≥ 1.15×</code>.</div>
               <div class="tier-samples">
-                <span class="item-tag">🥛 whole milk (2,513)</span>
-                <span class="item-tag">🥬 other vegetables (1,903)</span>
-                <span class="item-tag">🥐 rolls/buns (1,809)</span>
-                <span class="item-tag">🍓 berries (327)</span>
-                <span class="item-tag">🥩 beef (516)</span>
+                <span class="item-tag">whole milk (2,513)</span>
+                <span class="item-tag">other vegetables (1,903)</span>
+                <span class="item-tag">rolls/buns (1,809)</span>
+                <span class="item-tag">berries (327)</span>
+                <span class="item-tag">beef (516)</span>
               </div>
             </div>
 
             <div class="tier-card">
               <div class="tier-head">
-                <span><i class="tier-dot" style="background:#64748b"></i>Nhóm 2: Đạt L<sub>1</sub> đơn lẻ nhưng bị tỉa ở bước C<sub>2</sub> → L<sub>2</sub> (hoặc Lift)</span>
+                <span><i class="tier-dot" style="background:#64748b"></i>Nhóm 2: Thuộc L<sub>1</sub> nhưng bị loại ở bước C<sub>2</sub> → L<sub>2</sub> (hoặc ngưỡng Lift)</span>
                 <span style="font-family:var(--mono);color:#475569">39 / 169 mặt hàng</span>
               </div>
-              <div class="tier-desc">Mặt hàng đủ <code>≥ 30</code> giỏ đơn lẻ (vào L<sub>1</sub>), nhưng khách mua rải rác độc lập nên <b>không có cặp mua chung {A, B} nào đạt đủ 30 giỏ</b> (hoặc <code>Lift &lt; 1.15×</code>).</div>
+              <div class="tier-desc">Mặt hàng đạt <code>count(A) ≥ 30</code> đơn lẻ, nhưng khi ghép cặp không có cặp <code>{A, B}</code> nào đạt <code>count(A ∪ B) ≥ 30</code> (hoặc <code>Lift &lt; 1.15×</code> do hai món được mua độc lập).</div>
               <div class="tier-samples">
-                <span class="item-tag">🧽 dish cleaner (103 giỏ)</span>
-                <span class="item-tag">🥛 condensed milk (101 giỏ)</span>
-                <span class="item-tag">☕ instant coffee (73 giỏ)</span>
-                <span class="item-tag">🍺 canned beer (764 giỏ · Lift &lt; 1.15)</span>
+                <span class="item-tag">dish cleaner (103 giỏ)</span>
+                <span class="item-tag">condensed milk (101 giỏ)</span>
+                <span class="item-tag">instant coffee (73 giỏ)</span>
+                <span class="item-tag">canned beer (764 giỏ · Lift &lt; 1.15)</span>
               </div>
             </div>
 
             <div class="tier-card">
               <div class="tier-head">
-                <span><i class="tier-dot" style="background:#f59e0b"></i>Nhóm 3: Mặt hàng ít phổ biến — Bị tỉa ngay ở C<sub>1</sub> → L<sub>1</sub></span>
+                <span><i class="tier-dot" style="background:#f59e0b"></i>Nhóm 3: Không phổ biến (Infrequent) — Bị loại ở bước C<sub>1</sub> → L<sub>1</sub></span>
                 <span style="font-family:var(--mono);color:#b45309">33 / 169 mặt hàng</span>
               </div>
-              <div class="tier-desc">Xuất hiện <b>dưới 30 giỏ hàng</b> (<code>Support &lt; 0.31%</code>). Bị loại ngay từ vòng 1 theo tính chất đóng dưới Apriori để chống nhiễu thống kê từ mẫu quá nhỏ.</div>
+              <div class="tier-desc">Có tần suất <code>count(A) &lt; 30</code> (<code>Support &lt; 0.31%</code>). Bị cắt tỉa ở bước C<sub>1</sub> → L<sub>1</sub> theo tính chất phản đơn điệu của Apriori.</div>
               <div class="tier-samples">
-                <span class="item-tag">🐟 fish (29 giỏ)</span>
-                <span class="item-tag">🍫 cooking chocolate (25 giỏ)</span>
-                <span class="item-tag">☕ cocoa drinks (22 giỏ)</span>
-                <span class="item-tag">🍼 baby food (1 giỏ)</span>
+                <span class="item-tag">fish (29 giỏ)</span>
+                <span class="item-tag">cooking chocolate (25 giỏ)</span>
+                <span class="item-tag">cocoa drinks (22 giỏ)</span>
+                <span class="item-tag">baby food (1 giỏ)</span>
               </div>
             </div>
           </div>
@@ -633,13 +633,13 @@ function render(d) {
   h += `
     <section class="stat-sec" id="sec-combos">
       <div class="sec-head">
-        <h2 class="sec-title">3. Combo Đi cùng nhau (L<sub>2</sub>, L<sub>3</sub>): Thực tế Mua chung vs. Giả định Độc lập Ngẫu nhiên</h2>
-        <p class="sec-sub">Trả lời câu hỏi: <b>"Tại sao biết 2 món đi cùng nhau do nhu cầu thực tế chứ không phải do cả 2 món đều bán chạy?"</b> — Hãy nhìn khoảng chênh lệch giữa thanh <b>Thực tế</b> (màu tím) và thanh <b>Ngẫu nhiên độc lập</b> (màu xám).</p>
+        <h2 class="sec-title">3. Tập phổ biến bậc 2 &amp; bậc 3 (L<sub>2</sub>, L<sub>3</sub>): Tần suất Thực tế vs. Kỳ vọng Độc lập</h2>
+        <p class="sec-sub">Đánh giá mức độ đồng xuất hiện của cặp mặt hàng <code>{A, B}</code> bằng cách đối chiếu tần suất quan sát thực tế <code>Count(A ∪ B)</code> với tần suất kỳ vọng dưới giả thuyết độc lập thống kê <code>P(A ∩ B) = P(A) × P(B)</code>.</p>
       </div>
       <div class="grid2-eq">
         <div class="panel">
-          <h3>So sánh Trực quan Top Cặp L<sub>2</sub>: Thực tế vs. Kỳ vọng Ngẫu nhiên</h3>
-          <p class="panel-sub">Nếu A và B độc lập, số giỏ mua chung ngẫu nhiên kỳ vọng là <code>E(A ∩ B) = Count(A) × Count(B) / 9,835</code>.</p>
+          <h3>Đối chiếu Tần suất Thực tế và Kỳ vọng Độc lập trên Top Cặp L<sub>2</sub></h3>
+          <p class="panel-sub">Số giỏ kỳ vọng khi A và B độc lập: <code>E(A ∩ B) = N × P(A) × P(B) = Count(A) × Count(B) / 9,835</code>. Tỷ số giữa hai thanh chính là <code>Lift</code>.</p>
           <div class="combo-list">
             ${topL2.map(c => {
               const wAct = (c.count / maxL2Count * 100).toFixed(1);
@@ -647,16 +647,16 @@ function render(d) {
               return `<div class="combo-card">
                 <div class="combo-top">
                   <span class="combo-pair">${tags(c.items)}</span>
-                  <span class="lift-pill">Cao gấp ${c.cooccurrence_lift}× ngẫu nhiên (Sup ${c.support_pct}%)</span>
+                  <span class="lift-pill">Lift = ${c.cooccurrence_lift}× · Support = ${c.support_pct}%</span>
                 </div>
                 <div class="dual-bars">
                   <div class="dual-row">
-                    <span class="dual-lbl">🟣 Mua chung thực tế</span>
+                    <span class="dual-lbl">Quan sát thực tế</span>
                     <div class="dual-track"><div class="dual-fill-actual" style="width:${wAct}%"></div></div>
                     <span class="dual-num" style="color:var(--primary-dark)">${fmt(c.count)} giỏ</span>
                   </div>
                   <div class="dual-row">
-                    <span class="dual-lbl">⚪ Nếu mua ngẫu nhiên</span>
+                    <span class="dual-lbl">Kỳ vọng độc lập</span>
                     <div class="dual-track"><div class="dual-fill-rand" style="width:${wRand}%"></div></div>
                     <span class="dual-num" style="color:var(--text-muted)">${fmt(c.expected_random_count)} giỏ</span>
                   </div>
@@ -667,8 +667,8 @@ function render(d) {
         </div>
 
         <div class="panel">
-          <h3>Top 10 Bộ 3 Sản phẩm Mua cùng nhau (L<sub>3</sub> Triplets)</h3>
-          <p class="panel-sub">Các bộ 3 mặt hàng vượt qua cả 3 vòng lọc (<code>L<sub>1</sub> → L<sub>2</sub> → L<sub>3</sub></code>), phản ánh trọn vẹn một giỏ hàng nấu ăn hoặc bữa sáng gia đình.</p>
+          <h3>Top 10 Tập phổ biến bậc 3 (L<sub>3</sub> — Frequent 3-Itemsets)</h3>
+          <p class="panel-sub">Các bộ 3 mặt hàng thỏa đồng thời tính chất đóng dưới (mọi tập con 2 mặt hàng đều thuộc L<sub>2</sub>) và đạt <code>count(A ∪ B ∪ C) ≥ 30</code>.</p>
           <div class="combo-list">
             ${topL3.map((c, idx) => {
               const w = (c.count / maxL3Count * 100).toFixed(1);
@@ -695,14 +695,14 @@ function render(d) {
   h += `
     <section class="stat-sec" id="sec-dissector">
       <div class="sec-head">
-        <h2 class="sec-title">4. Phòng Thí nghiệm Giải phẫu Luật Gợi ý A ⇒ B (Interactive Rule Dissector)</h2>
-        <p class="sec-sub">Hãy <b>bấm chọn một luật bất kỳ ở danh sách bên trái</b> để xem sơ đồ giao tập giỏ hàng (Venn Diagram), cách thế số trực tiếp vào 3 công thức <code>Support</code>, <code>Confidence</code>, <code>Lift</code> và sự nhảy vọt xác suất mua hàng.</p>
+        <h2 class="sec-title">4. Phân tích Chi tiết Luật Kết hợp A ⇒ B</h2>
+        <p class="sec-sub">Chọn một luật kết hợp ở danh sách bên trái để xem biểu đồ tập hợp (Venn Diagram), so sánh xác suất tiên nghiệm <code>P(B)</code> với xác suất có điều kiện <code>P(B | A)</code> và cách tính các độ đo <code>Support</code>, <code>Confidence</code>, <code>Lift</code>.</p>
       </div>
 
       <div class="dissector-layout">
         <div class="panel" style="padding:1.5vh 1.1vw">
-          <h3>Chọn Luật A ⇒ B để mổ xẻ (${rules.length} luật tiêu biểu)</h3>
-          <p class="panel-sub">Bấm vào từng thẻ để cập nhật biểu đồ toán học bên phải.</p>
+          <h3>Danh sách Luật Kết hợp Tiêu biểu (${rules.length} luật)</h3>
+          <p class="panel-sub">Chọn một luật để cập nhật thông số phân tích ở khung bên phải.</p>
           <div class="rule-selector-list" id="ruleSelectorList">
             ${rules.map((r, idx) => `
               <button type="button" class="rule-pick-btn ${idx === SELECTED_RULE_IDX ? 'active' : ''}" data-ridx="${idx}">
@@ -772,25 +772,25 @@ function renderDissectorStage() {
   stage.innerHTML = `
     <div class="dissect-banner">
       <div>
-        <div style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Luật kết hợp đang phân tích</div>
+        <div style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Luật kết hợp đang chọn</div>
         <div class="dissect-rule-title">
-          Nếu giỏ hàng có <span class="item-tag" style="font-size:1rem;background:#eef2ff;border-color:#c7d2fe;color:#3730a3">${esc(antStr)}</span>
-          ⇒ Gợi ý mua thêm <span class="item-tag" style="font-size:1rem;background:#ecfdf5;border-color:#a7f3d0;color:#047857">${esc(conStr)}</span>
+          Tiền đề A: <span class="item-tag" style="font-size:1rem;background:#eef2ff;border-color:#c7d2fe;color:#3730a3">${esc(antStr)}</span>
+          ⇒ Hệ quả B: <span class="item-tag" style="font-size:1rem;background:#ecfdf5;border-color:#a7f3d0;color:#047857">${esc(conStr)}</span>
         </div>
       </div>
       <span class="lift-pill" style="font-size:1.05rem;padding:6px 14px">Lift = ${r.lift}×</span>
     </div>
 
     <div class="dissect-reason">
-      💡 <b>Ý nghĩa hành vi tiêu dùng:</b> ${esc(r.reason)}
+      <b>Ngữ cảnh giỏ hàng thực tế:</b> ${esc(r.reason)}
     </div>
 
     <div class="venn-and-prob">
       <div class="venn-box">
-        <div style="font-weight:800;font-size:.92rem;margin-bottom:6px">Sơ đồ Giao tập Giỏ hàng trên N = ${fmt(N)} hóa đơn</div>
+        <div style="font-weight:800;font-size:.92rem;margin-bottom:6px">Biểu đồ Tập hợp Giao dịch trên N = ${fmt(N)} giỏ hàng</div>
         <svg viewBox="0 0 420 195" style="width:100%;max-width:420px;height:auto">
           <rect x="6" y="6" width="408" height="183" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="4 4"/>
-          <text x="18" y="26" font-size="11" font-weight="700" fill="#64748b">Không gian mẫu N = ${fmt(N)} giỏ hàng</text>
+          <text x="18" y="26" font-size="11" font-weight="700" fill="#64748b">Không gian mẫu N = ${fmt(N)} giao dịch</text>
 
           <circle cx="165" cy="108" r="64" fill="rgba(79,70,229,0.16)" stroke="#4f46e5" stroke-width="2.5"/>
           <circle cx="255" cy="108" r="64" fill="rgba(16,185,129,0.16)" stroke="#10b981" stroke-width="2.5"/>
@@ -809,12 +809,12 @@ function renderDissectorStage() {
       </div>
 
       <div class="prob-box">
-        <div style="font-weight:800;font-size:.95rem">Sự nhảy vọt Xác suất mua "${esc(conStr)}" (B)</div>
-        <p style="font-size:.83rem;color:var(--text-muted)">So sánh xác suất tiên nghiệm <code>P(B)</code> (khách bất kỳ) và xác suất hậu nghiệm <code>P(B | A)</code> (khi biết khách đã chọn A):</p>
+        <div style="font-weight:800;font-size:.95rem">So sánh Xác suất Tiên nghiệm P(B) và Hậu nghiệm P(B | A)</div>
+        <p style="font-size:.83rem;color:var(--text-muted)">Đối chiếu xác suất mua <b>${esc(conStr)}</b> không điều kiện <code>P(B) = Support(B)</code> với xác suất có điều kiện <code>P(B | A) = Confidence(A ⇒ B)</code>:</p>
 
         <div>
           <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
-            <span>⚪ Xác suất mua <b>${esc(conStr)}</b> tự nhiên <code>P(B)</code>:</span>
+            <span>Xác suất tiên nghiệm <code>P(B) = Support(B)</code>:</span>
             <b style="font-family:var(--mono)">${suppBPct}% (${fmt(countB)}/${fmt(N)})</b>
           </div>
           <div class="dual-track" style="height:14px"><div class="dual-fill-rand" style="width:${priorWidth}%"></div></div>
@@ -822,36 +822,36 @@ function renderDissectorStage() {
 
         <div>
           <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
-            <span>🟣 Khi giỏ đã có <b>${esc(antStr)}</b> <code>P(B | A)</code>:</span>
+            <span>Xác suất hậu nghiệm <code>P(B | A) = Confidence(A ⇒ B)</code>:</span>
             <b style="font-family:var(--mono);color:var(--primary-dark)">${r.confidence_pct}% (${fmt(countAB)}/${fmt(countA)})</b>
           </div>
           <div class="dual-track" style="height:14px"><div class="dual-fill-actual" style="width:${postWidth}%"></div></div>
         </div>
 
         <div style="font-size:.84rem;background:#eef2ff;color:#312e81;padding:8px 11px;border-radius:8px;font-weight:600">
-          🚀 Việc xuất hiện <b>${esc(antStr)}</b> trong giỏ làm xác suất khách mua thêm <b>${esc(conStr)}</b> tăng vọt từ <b>${suppBPct}%</b> lên <b>${r.confidence_pct}%</b> (gấp <b>${r.lift} lần</b>)!
+          Nhận xét: Khi biết giỏ hàng đã có <b>${esc(antStr)}</b>, xác suất xuất hiện <b>${esc(conStr)}</b> là <b>${r.confidence_pct}%</b>, cao gấp <b>${r.lift} lần</b> so với tần suất nền <b>${suppBPct}%</b> trong toàn bộ tập dữ liệu.
         </div>
       </div>
     </div>
 
     <div class="formula-cards-3">
       <div class="f-card">
-        <div class="f-card-head">1. Độ phổ biến (Support)</div>
-        <div class="f-card-eq">Support(A ⇒ B) = Count(A ∪ B) / N</div>
+        <div class="f-card-head">1. Support (Độ phổ biến của tập hợp)</div>
+        <div class="f-card-eq">Support(A ⇒ B) = P(A ∩ B) = Count(A ∪ B) / N</div>
         <div class="f-card-calc">= ${fmt(countAB)} / ${fmt(N)} = ${r.support_pct}%</div>
-        <div class="f-card-desc">Có <b>${fmt(countAB)} giỏ hàng thực tế</b> chứa đồng thời cả <i>${esc(antStr)}</i> và <i>${esc(conStr)}</i> (vượt ngưỡng min_sup = 30 giỏ).</div>
+        <div class="f-card-desc">Tỷ lệ giao dịch trong toàn bộ cơ sở dữ liệu chứa đồng thời cả <i>${esc(antStr)}</i> và <i>${esc(conStr)}</i> (${fmt(countAB)} giao dịch, đạt ngưỡng min_sup ≥ 30).</div>
       </div>
       <div class="f-card">
-        <div class="f-card-head">2. Độ tin cậy (Confidence)</div>
-        <div class="f-card-eq">Conf(A ⇒ B) = Count(A ∪ B) / Count(A)</div>
+        <div class="f-card-head">2. Confidence (Xác suất có điều kiện)</div>
+        <div class="f-card-eq">Conf(A ⇒ B) = P(B | A) = Count(A ∪ B) / Count(A)</div>
         <div class="f-card-calc">= ${fmt(countAB)} / ${fmt(countA)} = ${r.confidence_pct}%</div>
-        <div class="f-card-desc">Trong <b>${fmt(countA)} giỏ</b> có mua <i>${esc(antStr)}</i>, có đúng <b>${fmt(countAB)} giỏ (${r.confidence_pct}%)</b> mua kèm thêm <i>${esc(conStr)}</i>.</div>
+        <div class="f-card-desc">Trong <b>${fmt(countA)} giao dịch</b> có chứa <i>${esc(antStr)}</i>, có <b>${fmt(countAB)} giao dịch (${r.confidence_pct}%)</b> đồng thời chứa <i>${esc(conStr)}</i>.</div>
       </div>
       <div class="f-card">
-        <div class="f-card-head">3. Độ nâng tương quan (Lift)</div>
-        <div class="f-card-eq">Lift(A ⇒ B) = Conf(A ⇒ B) / Sup(B)</div>
+        <div class="f-card-head">3. Lift (Hệ số Tương quan Đồng xuất hiện)</div>
+        <div class="f-card-eq">Lift(A ⇒ B) = P(B | A) / P(B) = Conf(A ⇒ B) / Sup(B)</div>
         <div class="f-card-calc">= ${r.confidence_pct}% / ${suppBPct}% = ${r.lift}×</div>
-        <div class="f-card-desc">Vì <code>Lift = ${r.lift}× &gt; 1</code>, khẳng định mối liên hệ đồng xuất hiện mang tính thúc đẩy dương (Positive Correlation), không phải ngẫu nhiên.</div>
+        <div class="f-card-desc">Vì <code>Lift = ${r.lift}× &gt; 1</code>, hai tập mặt hàng có <b>mối tương quan dương (Positive Correlation)</b>: xuất hiện cùng nhau thường xuyên hơn so với giả thuyết độc lập thống kê.</div>
       </div>
     </div>
   `;
