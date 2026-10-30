@@ -145,7 +145,7 @@ class TestTier4AdminWorkflow(E2ETestBase):
 
         # Step 3: Inspect Executive KPI metrics
         self.assertIn("total_baskets", self.summary)
-        self.assertGreater(self.summary.get("total_baskets", 0), 10000)
+        self.assertGreater(self.summary.get("total_baskets", 0), 9000)
         self.assertIn("curated_rules_count", self.summary)
 
         # Step 4: Tab 1 - Frequent Itemsets Filter Simulation

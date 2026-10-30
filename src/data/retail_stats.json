@@ -1,190 +1,41 @@
 {
- "source": "UCI Machine Learning Repository - Online Retail (id 352)",
- "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+ "source": "Groceries POS Dataset — Michael Hahsler, Kurt Hornik, Thomas Reutterer (2006), WU Vienna / R arules",
+ "url": "https://cran.r-project.org/web/packages/arules/index.html",
  "overview": {
-  "rows": 541909,
-  "columns": 8,
-  "invoices": 25900,
-  "customers": 4372,
-  "products_stockcodes": 4070,
-  "countries": 38,
-  "date_from": "2010-12-01 08:26:00",
-  "date_to": "2011-12-09 12:50:00",
-  "days_span": 374,
-  "total_revenue_valid_sales": 10666684.54,
-  "avg_order_value": 534.4
- },
- "columns": [
-  {
-   "name": "InvoiceNo",
-   "type": "nominal",
-   "desc": "Mã hóa đơn (6 chữ số). Bắt đầu bằng 'C' = hủy đơn"
-  },
-  {
-   "name": "StockCode",
-   "type": "nominal",
-   "desc": "Mã sản phẩm (5 chữ số)"
-  },
-  {
-   "name": "Description",
-   "type": "text",
-   "desc": "Tên sản phẩm"
-  },
-  {
-   "name": "Quantity",
-   "type": "integer",
-   "desc": "Số lượng mỗi dòng"
-  },
-  {
-   "name": "InvoiceDate",
-   "type": "datetime",
-   "desc": "Thời điểm lập hóa đơn"
-  },
-  {
-   "name": "UnitPrice",
-   "type": "numeric",
-   "desc": "Đơn giá (GBP)"
-  },
-  {
-   "name": "CustomerID",
-   "type": "nominal",
-   "desc": "Mã khách hàng (5 chữ số)"
-  },
-  {
-   "name": "Country",
-   "type": "nominal",
-   "desc": "Quốc gia của khách"
-  }
- ],
- "missing": {
-  "invoice": {
-   "count": 0,
-   "pct": 0.0
-  },
-  "stock": {
-   "count": 0,
-   "pct": 0.0
-  },
-  "desc": {
-   "count": 1454,
-   "pct": 0.27
-  },
-  "qty": {
-   "count": 0,
-   "pct": 0.0
-  },
-  "date": {
-   "count": 0,
-   "pct": 0.0
-  },
-  "price": {
-   "count": 0,
-   "pct": 0.0
-  },
-  "cust": {
-   "count": 135080,
-   "pct": 24.93
-  },
-  "country": {
-   "count": 0,
-   "pct": 0.0
-  }
- },
- "quality": {
-  "cancellation_rows": 9288,
-  "cancellation_invoices": 3836,
-  "negative_quantity_rows": 10624,
-  "zero_price_rows": 2515,
-  "negative_price_rows": 2,
-  "duplicate_rows": 5268,
-  "non_product_rows": 2995,
-  "non_product_codes": [
-   "AMAZONFEE",
-   "B",
-   "BANK CHARGES",
-   "C2",
-   "CRUK",
-   "D",
-   "DCGS0003",
-   "DCGS0004",
-   "DCGS0055",
-   "DCGS0057",
-   "DCGS0066P",
-   "DCGS0067",
-   "DCGS0068",
-   "DCGS0069",
-   "DCGS0070",
-   "DCGS0071",
-   "DCGS0072",
-   "DCGS0073",
-   "DCGS0074",
-   "DCGS0076",
-   "DCGSSBOY",
-   "DCGSSGIRL",
-   "DOT",
-   "M",
-   "PADS",
-   "POST",
-   "S",
-   "gift_0001_10",
-   "gift_0001_20",
-   "gift_0001_30",
-   "gift_0001_40",
-   "gift_0001_50",
-   "m"
-  ],
-  "valid_sale_rows": 530104
- },
- "quantity": {
-  "min": 1,
-  "p25": 1,
-  "median": 3,
-  "p75": 10,
-  "p95": 30,
-  "p99": 100,
-  "max": 80995,
-  "mean": 10.542,
-  "std": 155.524
- },
- "unit_price": {
-  "min": 0.001,
-  "p25": 1.25,
-  "median": 2.08,
-  "p75": 4.13,
-  "p95": 9.95,
-  "p99": 16.98,
-  "max": 13541.33,
-  "mean": 3.908,
-  "std": 35.916
- },
- "invoice_lines": {
-  "quantiles": {
-   "min": 1,
-   "p25": 2,
-   "median": 10,
-   "p75": 23,
-   "p95": 68,
-   "p99": 192,
-   "max": 1114,
-   "mean": 20.923,
-   "std": 43.031
-  }
+  "transactions": 9835,
+  "multi_item_baskets": 7676,
+  "multi_item_baskets_pct": 78.05,
+  "single_item_baskets": 2159,
+  "single_item_baskets_pct": 21.95,
+  "total_item_purchases": 43367,
+  "distinct_items": 169,
+  "store_curated_items": 169,
+  "avg_basket_size": 4.41,
+  "l1_count": 136,
+  "l2_count": 1140,
+  "l3_count": 850,
+  "total_frequent_itemsets": 2126,
+  "curated_rules_count": 1218,
+  "min_support_count": 30,
+  "min_support_pct": 0.31,
+  "min_confidence_pct": 15.0,
+  "min_lift": 1.15,
+  "max_lift": 146.79
  },
  "basket": {
-  "note": "Giỏ hàng sạch cho Apriori: bỏ hóa đơn hủy, qty<=0, giá<=0, mã không phải sản phẩm; mỗi hóa đơn = 1 tập item (không trùng).",
-  "clean_transactions": 19773,
-  "clean_rows": 527725,
-  "distinct_items": 3900,
+  "clean_transactions": 9835,
+  "clean_rows": 43367,
+  "distinct_items": 169,
   "size": {
    "min": 1.0,
-   "p25": 6.0,
-   "median": 15.0,
-   "p75": 29.0,
-   "p95": 75.0,
-   "p99": 218.0,
-   "max": 1108.0,
-   "mean": 26.16,
-   "std": 47.012
+   "p25": 2.0,
+   "median": 3.0,
+   "p75": 6.0,
+   "p95": 11.0,
+   "p99": 16.0,
+   "max": 32.0,
+   "mean": 4.41,
+   "std": 3.59
   },
   "size_hist": {
    "labels": [
@@ -197,746 +48,1210 @@
     "8-10",
     "11-15",
     "16-20",
-    "21-30",
-    "31-50",
-    "51-100",
-    "101+"
+    "21+"
    ],
    "counts": [
-    1500,
-    813,
-    693,
-    676,
-    672,
-    1227,
-    1775,
-    2620,
-    2374,
-    2879,
-    2448,
-    1470,
-    626
+    2159,
+    1643,
+    1299,
+    1005,
+    855,
+    1190,
+    1034,
+    509,
+    112,
+    29
    ]
   },
-  "single_item_baskets_pct": 7.59,
-  "multi_item_baskets": 18273,
-  "density_pct": 0.6843,
+  "single_item_baskets_pct": 21.95,
+  "multi_item_baskets": 7676,
+  "density_pct": 2.61,
   "support_curve": [
    {
-    "min_sup_pct": 0.1,
-    "min_count": 19.8,
-    "frequent_items": 2832
-   },
-   {
-    "min_sup_pct": 0.2,
-    "min_count": 39.5,
-    "frequent_items": 2351
+    "min_sup_pct": 0.3,
+    "min_count": 29.5,
+    "frequent_items": 136
    },
    {
     "min_sup_pct": 0.5,
-    "min_count": 98.9,
-    "frequent_items": 1549
+    "min_count": 49.2,
+    "frequent_items": 120
    },
    {
-    "min_sup_pct": 1,
-    "min_count": 197.7,
-    "frequent_items": 829
+    "min_sup_pct": 1.0,
+    "min_count": 98.3,
+    "frequent_items": 88
    },
    {
-    "min_sup_pct": 2,
-    "min_count": 395.5,
-    "frequent_items": 298
+    "min_sup_pct": 2.0,
+    "min_count": 196.7,
+    "frequent_items": 59
    },
    {
-    "min_sup_pct": 3,
-    "min_count": 593.2,
-    "frequent_items": 132
+    "min_sup_pct": 3.0,
+    "min_count": 295.1,
+    "frequent_items": 44
    },
    {
-    "min_sup_pct": 5,
-    "min_count": 988.6,
-    "frequent_items": 36
+    "min_sup_pct": 5.0,
+    "min_count": 491.8,
+    "frequent_items": 28
+   },
+   {
+    "min_sup_pct": 10.0,
+    "min_count": 983.5,
+    "frequent_items": 8
    }
   ]
  },
- "customers": {
-  "orders_per_customer": {
-   "min": 1.0,
-   "p25": 1.0,
-   "median": 3.0,
-   "p75": 5.0,
-   "p95": 16.0,
-   "p99": 36.0,
-   "max": 248.0,
-   "mean": 5.075,
-   "std": 9.338
-  },
-  "repeat_customers": 3059,
-  "rows_without_customer_pct": 24.93
- },
  "top_products_by_baskets": [
   {
-   "code": "85123A",
-   "name": "WHITE HANGING HEART T-LIGHT HOLDER",
-   "baskets": 2198,
-   "support_pct": 11.12
+   "code": "whole milk",
+   "name": "whole milk",
+   "icon": "🥛",
+   "category": "DAIRY",
+   "price": 1.85,
+   "baskets": 2513,
+   "support": 0.2555,
+   "support_pct": 25.55
   },
   {
-   "code": "85099B",
-   "name": "JUMBO BAG RED RETROSPOT",
-   "baskets": 2089,
-   "support_pct": 10.56
+   "code": "other vegetables",
+   "name": "other vegetables",
+   "icon": "🥬",
+   "category": "PRODUCE",
+   "price": 1.95,
+   "baskets": 1903,
+   "support": 0.1935,
+   "support_pct": 19.35
   },
   {
-   "code": "22423",
-   "name": "REGENCY CAKESTAND 3 TIER",
-   "baskets": 1988,
-   "support_pct": 10.05
+   "code": "rolls/buns",
+   "name": "rolls/buns",
+   "icon": "🥖",
+   "category": "BAKERY",
+   "price": 1.35,
+   "baskets": 1809,
+   "support": 0.1839,
+   "support_pct": 18.39
   },
   {
-   "code": "47566",
-   "name": "PARTY BUNTING",
-   "baskets": 1685,
-   "support_pct": 8.52
+   "code": "soda",
+   "name": "soda",
+   "icon": "🥤",
+   "category": "DRINKS",
+   "price": 1.25,
+   "baskets": 1715,
+   "support": 0.1744,
+   "support_pct": 17.44
   },
   {
-   "code": "20725",
-   "name": "LUNCH BAG RED RETROSPOT",
-   "baskets": 1565,
-   "support_pct": 7.91
+   "code": "yogurt",
+   "name": "yogurt",
+   "icon": "🥣",
+   "category": "DAIRY",
+   "price": 1.4,
+   "baskets": 1372,
+   "support": 0.1395,
+   "support_pct": 13.95
   },
   {
-   "code": "84879",
-   "name": "ASSORTED COLOUR BIRD ORNAMENT",
-   "baskets": 1455,
-   "support_pct": 7.36
+   "code": "bottled water",
+   "name": "bottled water",
+   "icon": "💧",
+   "category": "DRINKS",
+   "price": 0.95,
+   "baskets": 1087,
+   "support": 0.1105,
+   "support_pct": 11.05
   },
   {
-   "code": "22197",
-   "name": "POPCORN HOLDER",
-   "baskets": 1392,
-   "support_pct": 7.04
+   "code": "root vegetables",
+   "name": "root vegetables",
+   "icon": "🥕",
+   "category": "PRODUCE",
+   "price": 1.5,
+   "baskets": 1072,
+   "support": 0.109,
+   "support_pct": 10.9
   },
   {
-   "code": "22720",
-   "name": "SET OF 3 CAKE TINS PANTRY DESIGN",
-   "baskets": 1385,
-   "support_pct": 7.0
+   "code": "tropical fruit",
+   "name": "tropical fruit",
+   "icon": "🥭",
+   "category": "PRODUCE",
+   "price": 2.6,
+   "baskets": 1032,
+   "support": 0.1049,
+   "support_pct": 10.49
   },
   {
-   "code": "21212",
-   "name": "PACK OF 72 RETROSPOT CAKE CASES",
-   "baskets": 1320,
-   "support_pct": 6.68
+   "code": "shopping bags",
+   "name": "shopping bags",
+   "icon": "🛍️",
+   "category": "PANTRY",
+   "price": 0.5,
+   "baskets": 969,
+   "support": 0.0985,
+   "support_pct": 9.85
   },
   {
-   "code": "22383",
-   "name": "LUNCH BAG SUKI DESIGN",
-   "baskets": 1284,
+   "code": "sausage",
+   "name": "sausage",
+   "icon": "🌭",
+   "category": "MEAT",
+   "price": 3.2,
+   "baskets": 924,
+   "support": 0.094,
+   "support_pct": 9.4
+  },
+  {
+   "code": "pastry",
+   "name": "pastry",
+   "icon": "🥐",
+   "category": "BAKERY",
+   "price": 1.8,
+   "baskets": 875,
+   "support": 0.089,
+   "support_pct": 8.9
+  },
+  {
+   "code": "citrus fruit",
+   "name": "citrus fruit",
+   "icon": "🍊",
+   "category": "PRODUCE",
+   "price": 2.3,
+   "baskets": 814,
+   "support": 0.0828,
+   "support_pct": 8.28
+  },
+  {
+   "code": "bottled beer",
+   "name": "bottled beer",
+   "icon": "🍺",
+   "category": "DRINKS",
+   "price": 2.1,
+   "baskets": 792,
+   "support": 0.0805,
+   "support_pct": 8.05
+  },
+  {
+   "code": "newspapers",
+   "name": "newspapers",
+   "icon": "📰",
+   "category": "PANTRY",
+   "price": 1.2,
+   "baskets": 785,
+   "support": 0.0798,
+   "support_pct": 7.98
+  },
+  {
+   "code": "canned beer",
+   "name": "canned beer",
+   "icon": "🍻",
+   "category": "DRINKS",
+   "price": 1.65,
+   "baskets": 764,
+   "support": 0.0777,
+   "support_pct": 7.77
+  },
+  {
+   "code": "pip fruit",
+   "name": "pip fruit",
+   "icon": "🍎",
+   "category": "PRODUCE",
+   "price": 2.15,
+   "baskets": 744,
+   "support": 0.0756,
+   "support_pct": 7.56
+  },
+  {
+   "code": "fruit/vegetable juice",
+   "name": "fruit/vegetable juice",
+   "icon": "🧃",
+   "category": "DRINKS",
+   "price": 2.2,
+   "baskets": 711,
+   "support": 0.0723,
+   "support_pct": 7.23
+  },
+  {
+   "code": "whipped/sour cream",
+   "name": "whipped/sour cream",
+   "icon": "🍦",
+   "category": "DAIRY",
+   "price": 1.65,
+   "baskets": 705,
+   "support": 0.0717,
+   "support_pct": 7.17
+  },
+  {
+   "code": "brown bread",
+   "name": "brown bread",
+   "icon": "🍞",
+   "category": "BAKERY",
+   "price": 1.9,
+   "baskets": 638,
+   "support": 0.0649,
    "support_pct": 6.49
   },
   {
-   "code": "20727",
-   "name": "LUNCH BAG  BLACK SKULL.",
-   "baskets": 1273,
-   "support_pct": 6.44
-  },
-  {
-   "code": "22457",
-   "name": "NATURAL SLATE HEART CHALKBOARD",
-   "baskets": 1249,
-   "support_pct": 6.32
-  },
-  {
-   "code": "23203",
-   "name": "JUMBO BAG VINTAGE DOILY",
-   "baskets": 1231,
-   "support_pct": 6.23
-  },
-  {
-   "code": "22386",
-   "name": "JUMBO BAG PINK POLKADOT",
-   "baskets": 1218,
-   "support_pct": 6.16
-  },
-  {
-   "code": "22469",
-   "name": "HEART OF WICKER SMALL",
-   "baskets": 1201,
-   "support_pct": 6.07
-  },
-  {
-   "code": "21931",
-   "name": "JUMBO STORAGE BAG SUKI",
-   "baskets": 1184,
-   "support_pct": 5.99
-  },
-  {
-   "code": "22411",
-   "name": "JUMBO SHOPPER VINTAGE RED PAISLEY",
-   "baskets": 1175,
-   "support_pct": 5.94
-  },
-  {
-   "code": "22961",
-   "name": "JAM MAKING SET PRINTED",
-   "baskets": 1162,
-   "support_pct": 5.88
-  },
-  {
-   "code": "22086",
-   "name": "PAPER CHAIN KIT 50'S CHRISTMAS",
-   "baskets": 1160,
-   "support_pct": 5.87
-  },
-  {
-   "code": "22382",
-   "name": "LUNCH BAG SPACEBOY DESIGN",
-   "baskets": 1157,
-   "support_pct": 5.85
+   "code": "domestic eggs",
+   "name": "domestic eggs",
+   "icon": "🥚",
+   "category": "DAIRY",
+   "price": 2.5,
+   "baskets": 624,
+   "support": 0.0634,
+   "support_pct": 6.34
   }
  ],
- "top_products_by_quantity": [
+ "top_l2_combos": [
   {
-   "code": "23843",
-   "name": "PAPER CRAFT , LITTLE BIRDIE",
-   "qty": 80995
+   "items": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 736,
+   "support": 0.0748,
+   "support_pct": 7.48,
+   "item_a_count": 1903,
+   "item_a_support_pct": 19.35,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 486.2,
+   "cooccurrence_lift": 1.51
   },
   {
-   "code": "23166",
-   "name": "MEDIUM CERAMIC TOP STORAGE JAR",
-   "qty": 78033
+   "items": [
+    "rolls/buns",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 557,
+   "support": 0.0566,
+   "support_pct": 5.66,
+   "item_a_count": 1809,
+   "item_a_support_pct": 18.39,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 462.2,
+   "cooccurrence_lift": 1.21
   },
   {
-   "code": "22197",
-   "name": "POPCORN HOLDER",
-   "qty": 56921
+   "items": [
+    "whole milk",
+    "yogurt"
+   ],
+   "k": 2,
+   "count": 551,
+   "support": 0.056,
+   "support_pct": 5.6,
+   "item_a_count": 2513,
+   "item_a_support_pct": 25.55,
+   "item_b_count": 1372,
+   "item_b_support_pct": 13.95,
+   "expected_random_count": 350.6,
+   "cooccurrence_lift": 1.57
   },
   {
-   "code": "84077",
-   "name": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
-   "qty": 55047
+   "items": [
+    "root vegetables",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 481,
+   "support": 0.0489,
+   "support_pct": 4.89,
+   "item_a_count": 1072,
+   "item_a_support_pct": 10.9,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 273.9,
+   "cooccurrence_lift": 1.76
   },
   {
-   "code": "85099B",
-   "name": "JUMBO BAG RED RETROSPOT",
-   "qty": 48474
+   "items": [
+    "other vegetables",
+    "root vegetables"
+   ],
+   "k": 2,
+   "count": 466,
+   "support": 0.0474,
+   "support_pct": 4.74,
+   "item_a_count": 1903,
+   "item_a_support_pct": 19.35,
+   "item_b_count": 1072,
+   "item_b_support_pct": 10.9,
+   "expected_random_count": 207.4,
+   "cooccurrence_lift": 2.25
   },
   {
-   "code": "85123A",
-   "name": "WHITE HANGING HEART T-LIGHT HOLDER",
-   "qty": 37660
+   "items": [
+    "other vegetables",
+    "yogurt"
+   ],
+   "k": 2,
+   "count": 427,
+   "support": 0.0434,
+   "support_pct": 4.34,
+   "item_a_count": 1903,
+   "item_a_support_pct": 19.35,
+   "item_b_count": 1372,
+   "item_b_support_pct": 13.95,
+   "expected_random_count": 265.5,
+   "cooccurrence_lift": 1.61
   },
   {
-   "code": "84879",
-   "name": "ASSORTED COLOUR BIRD ORNAMENT",
-   "qty": 36461
+   "items": [
+    "other vegetables",
+    "rolls/buns"
+   ],
+   "k": 2,
+   "count": 419,
+   "support": 0.0426,
+   "support_pct": 4.26,
+   "item_a_count": 1903,
+   "item_a_support_pct": 19.35,
+   "item_b_count": 1809,
+   "item_b_support_pct": 18.39,
+   "expected_random_count": 350.0,
+   "cooccurrence_lift": 1.2
   },
   {
-   "code": "21212",
-   "name": "PACK OF 72 RETROSPOT CAKE CASES",
-   "qty": 36419
+   "items": [
+    "tropical fruit",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 416,
+   "support": 0.0423,
+   "support_pct": 4.23,
+   "item_a_count": 1032,
+   "item_a_support_pct": 10.49,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 263.7,
+   "cooccurrence_lift": 1.58
   },
   {
-   "code": "23084",
-   "name": "RABBIT NIGHT LIGHT",
-   "qty": 30788
+   "items": [
+    "soda",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 394,
+   "support": 0.0401,
+   "support_pct": 4.01,
+   "item_a_count": 1715,
+   "item_a_support_pct": 17.44,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 438.2,
+   "cooccurrence_lift": 0.9
   },
   {
-   "code": "22492",
-   "name": "MINI PAINT SET VINTAGE",
-   "qty": 26633
+   "items": [
+    "rolls/buns",
+    "soda"
+   ],
+   "k": 2,
+   "count": 377,
+   "support": 0.0383,
+   "support_pct": 3.83,
+   "item_a_count": 1809,
+   "item_a_support_pct": 18.39,
+   "item_b_count": 1715,
+   "item_b_support_pct": 17.44,
+   "expected_random_count": 315.4,
+   "cooccurrence_lift": 1.2
   },
   {
-   "code": "22616",
-   "name": "PACK OF 12 LONDON TISSUES",
-   "qty": 26135
+   "items": [
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "k": 2,
+   "count": 353,
+   "support": 0.0359,
+   "support_pct": 3.59,
+   "item_a_count": 1903,
+   "item_a_support_pct": 19.35,
+   "item_b_count": 1032,
+   "item_b_support_pct": 10.49,
+   "expected_random_count": 199.7,
+   "cooccurrence_lift": 1.77
   },
   {
-   "code": "21977",
-   "name": "PACK OF 60 PINK PAISLEY CAKE CASES",
-   "qty": 24854
+   "items": [
+    "bottled water",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 338,
+   "support": 0.0344,
+   "support_pct": 3.44,
+   "item_a_count": 1087,
+   "item_a_support_pct": 11.05,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 277.7,
+   "cooccurrence_lift": 1.22
   },
   {
-   "code": "22178",
-   "name": "VICTORIAN GLASS HANGING T-LIGHT",
-   "qty": 24304
+   "items": [
+    "rolls/buns",
+    "yogurt"
+   ],
+   "k": 2,
+   "count": 338,
+   "support": 0.0344,
+   "support_pct": 3.44,
+   "item_a_count": 1809,
+   "item_a_support_pct": 18.39,
+   "item_b_count": 1372,
+   "item_b_support_pct": 13.95,
+   "expected_random_count": 252.4,
+   "cooccurrence_lift": 1.34
   },
   {
-   "code": "15036",
-   "name": "ASSORTED COLOURS SILK FAN",
-   "qty": 23826
+   "items": [
+    "pastry",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 327,
+   "support": 0.0332,
+   "support_pct": 3.32,
+   "item_a_count": 875,
+   "item_a_support_pct": 8.9,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 223.6,
+   "cooccurrence_lift": 1.46
   },
   {
-   "code": "17003",
-   "name": "BROCADE RING PURSE",
-   "qty": 23056
+   "items": [
+    "other vegetables",
+    "soda"
+   ],
+   "k": 2,
+   "count": 322,
+   "support": 0.0327,
+   "support_pct": 3.27,
+   "item_a_count": 1903,
+   "item_a_support_pct": 19.35,
+   "item_b_count": 1715,
+   "item_b_support_pct": 17.44,
+   "expected_random_count": 331.8,
+   "cooccurrence_lift": 0.97
+  },
+  {
+   "items": [
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 317,
+   "support": 0.0322,
+   "support_pct": 3.22,
+   "item_a_count": 705,
+   "item_a_support_pct": 7.17,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 180.1,
+   "cooccurrence_lift": 1.76
+  },
+  {
+   "items": [
+    "rolls/buns",
+    "sausage"
+   ],
+   "k": 2,
+   "count": 301,
+   "support": 0.0306,
+   "support_pct": 3.06,
+   "item_a_count": 1809,
+   "item_a_support_pct": 18.39,
+   "item_b_count": 924,
+   "item_b_support_pct": 9.4,
+   "expected_random_count": 170.0,
+   "cooccurrence_lift": 1.77
+  },
+  {
+   "items": [
+    "citrus fruit",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 300,
+   "support": 0.0305,
+   "support_pct": 3.05,
+   "item_a_count": 814,
+   "item_a_support_pct": 8.28,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 208.0,
+   "cooccurrence_lift": 1.44
+  },
+  {
+   "items": [
+    "pip fruit",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 296,
+   "support": 0.0301,
+   "support_pct": 3.01,
+   "item_a_count": 744,
+   "item_a_support_pct": 7.56,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 190.1,
+   "cooccurrence_lift": 1.56
+  },
+  {
+   "items": [
+    "domestic eggs",
+    "whole milk"
+   ],
+   "k": 2,
+   "count": 295,
+   "support": 0.03,
+   "support_pct": 3.0,
+   "item_a_count": 624,
+   "item_a_support_pct": 6.34,
+   "item_b_count": 2513,
+   "item_b_support_pct": 25.55,
+   "expected_random_count": 159.4,
+   "cooccurrence_lift": 1.85
   }
  ],
- "top_products_by_revenue": [
+ "top_l3_combos": [
   {
-   "code": "22423",
-   "name": "REGENCY CAKESTAND 3 TIER",
-   "revenue": 174484.74
+   "items": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 228,
+   "support": 0.0232,
+   "support_pct": 2.32
   },
   {
-   "code": "23843",
-   "name": "PAPER CRAFT , LITTLE BIRDIE",
-   "revenue": 168469.6
+   "items": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "k": 3,
+   "count": 219,
+   "support": 0.0223,
+   "support_pct": 2.23
   },
   {
-   "code": "85123A",
-   "name": "WHITE HANGING HEART T-LIGHT HOLDER",
-   "revenue": 104518.8
+   "items": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 176,
+   "support": 0.0179,
+   "support_pct": 1.79
   },
   {
-   "code": "47566",
-   "name": "PARTY BUNTING",
-   "revenue": 99504.33
+   "items": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 168,
+   "support": 0.0171,
+   "support_pct": 1.71
   },
   {
-   "code": "85099B",
-   "name": "JUMBO BAG RED RETROSPOT",
-   "revenue": 94340.05
+   "items": [
+    "rolls/buns",
+    "whole milk",
+    "yogurt"
+   ],
+   "k": 3,
+   "count": 153,
+   "support": 0.0156,
+   "support_pct": 1.56
   },
   {
-   "code": "23166",
-   "name": "MEDIUM CERAMIC TOP STORAGE JAR",
-   "revenue": 81700.92
+   "items": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "k": 3,
+   "count": 149,
+   "support": 0.0151,
+   "support_pct": 1.51
   },
   {
-   "code": "23084",
-   "name": "RABBIT NIGHT LIGHT",
-   "revenue": 66964.99
+   "items": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 144,
+   "support": 0.0146,
+   "support_pct": 1.46
   },
   {
-   "code": "22086",
-   "name": "PAPER CHAIN KIT 50'S CHRISTMAS",
-   "revenue": 64952.29
+   "items": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "k": 3,
+   "count": 143,
+   "support": 0.0145,
+   "support_pct": 1.45
   },
   {
-   "code": "84879",
-   "name": "ASSORTED COLOUR BIRD ORNAMENT",
-   "revenue": 59094.93
+   "items": [
+    "other vegetables",
+    "soda",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 137,
+   "support": 0.0139,
+   "support_pct": 1.39
   },
   {
-   "code": "79321",
-   "name": "CHILLI LIGHTS",
-   "revenue": 54117.76
+   "items": [
+    "other vegetables",
+    "pip fruit",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 133,
+   "support": 0.0135,
+   "support_pct": 1.35
   },
   {
-   "code": "22502",
-   "name": "PICNIC BASKET WICKER SMALL",
-   "revenue": 51426.62
+   "items": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 128,
+   "support": 0.013,
+   "support_pct": 1.3
   },
   {
-   "code": "22197",
-   "name": "POPCORN HOLDER",
-   "revenue": 51354.02
+   "items": [
+    "other vegetables",
+    "root vegetables",
+    "yogurt"
+   ],
+   "k": 3,
+   "count": 127,
+   "support": 0.0129,
+   "support_pct": 1.29
   },
   {
-   "code": "23298",
-   "name": "SPOTTY BUNTING",
-   "revenue": 43182.83
+   "items": [
+    "rolls/buns",
+    "root vegetables",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 125,
+   "support": 0.0127,
+   "support_pct": 1.27
   },
   {
-   "code": "22386",
-   "name": "JUMBO BAG PINK POLKADOT",
-   "revenue": 42436.24
+   "items": [
+    "domestic eggs",
+    "other vegetables",
+    "whole milk"
+   ],
+   "k": 3,
+   "count": 121,
+   "support": 0.0123,
+   "support_pct": 1.23
   },
   {
-   "code": "23203",
-   "name": "JUMBO BAG VINTAGE DOILY",
-   "revenue": 42067.78
+   "items": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "k": 3,
+   "count": 121,
+   "support": 0.0123,
+   "support_pct": 1.23
   }
  ],
- "countries": [
-  {
-   "country": "United Kingdom",
-   "revenue": 9025222.08,
-   "invoices": 18019,
-   "revenue_pct": 84.61
-  },
-  {
-   "country": "Netherlands",
-   "revenue": 285446.34,
-   "invoices": 94,
-   "revenue_pct": 2.68
-  },
-  {
-   "country": "EIRE",
-   "revenue": 283453.96,
-   "invoices": 288,
-   "revenue_pct": 2.66
-  },
-  {
-   "country": "Germany",
-   "revenue": 228867.14,
-   "invoices": 457,
-   "revenue_pct": 2.15
-  },
-  {
-   "country": "France",
-   "revenue": 209715.11,
-   "invoices": 392,
-   "revenue_pct": 1.97
-  },
-  {
-   "country": "Australia",
-   "revenue": 138521.31,
-   "invoices": 57,
-   "revenue_pct": 1.3
-  },
-  {
-   "country": "Spain",
-   "revenue": 61577.11,
-   "invoices": 90,
-   "revenue_pct": 0.58
-  },
-  {
-   "country": "Switzerland",
-   "revenue": 57089.9,
-   "invoices": 54,
-   "revenue_pct": 0.54
-  },
-  {
-   "country": "Belgium",
-   "revenue": 41196.34,
-   "invoices": 98,
-   "revenue_pct": 0.39
-  },
-  {
-   "country": "Sweden",
-   "revenue": 38378.33,
-   "invoices": 36,
-   "revenue_pct": 0.36
-  },
-  {
-   "country": "Japan",
-   "revenue": 37416.37,
-   "invoices": 19,
-   "revenue_pct": 0.35
-  },
-  {
-   "country": "Norway",
-   "revenue": 36165.44,
-   "invoices": 36,
-   "revenue_pct": 0.34
-  },
-  {
-   "country": "Portugal",
-   "revenue": 33747.1,
-   "invoices": 58,
-   "revenue_pct": 0.32
-  },
-  {
-   "country": "Finland",
-   "revenue": 22546.08,
-   "invoices": 41,
-   "revenue_pct": 0.21
-  },
-  {
-   "country": "Singapore",
-   "revenue": 21279.29,
-   "invoices": 7,
-   "revenue_pct": 0.2
-  },
-  {
-   "country": "Channel Islands",
-   "revenue": 20450.44,
-   "invoices": 26,
-   "revenue_pct": 0.19
-  },
-  {
-   "country": "Denmark",
-   "revenue": 18955.34,
-   "invoices": 18,
-   "revenue_pct": 0.18
-  },
-  {
-   "country": "Italy",
-   "revenue": 17483.24,
-   "invoices": 38,
-   "revenue_pct": 0.16
-  },
-  {
-   "country": "Hong Kong",
-   "revenue": 15691.8,
-   "invoices": 11,
-   "revenue_pct": 0.15
-  },
-  {
-   "country": "Cyprus",
-   "revenue": 13590.38,
-   "invoices": 16,
-   "revenue_pct": 0.13
-  },
-  {
-   "country": "Austria",
-   "revenue": 10198.68,
-   "invoices": 17,
-   "revenue_pct": 0.1
-  },
-  {
-   "country": "Israel",
-   "revenue": 8135.26,
-   "invoices": 8,
-   "revenue_pct": 0.08
-  },
-  {
-   "country": "Poland",
-   "revenue": 7334.65,
-   "invoices": 19,
-   "revenue_pct": 0.07
-  },
-  {
-   "country": "Greece",
-   "revenue": 4760.52,
-   "invoices": 5,
-   "revenue_pct": 0.04
-  },
-  {
-   "country": "Unspecified",
-   "revenue": 4749.79,
-   "invoices": 13,
-   "revenue_pct": 0.04
-  },
-  {
-   "country": "Iceland",
-   "revenue": 4310.0,
-   "invoices": 7,
-   "revenue_pct": 0.04
-  },
-  {
-   "country": "Canada",
-   "revenue": 3666.38,
-   "invoices": 6,
-   "revenue_pct": 0.03
-  },
-  {
-   "country": "USA",
-   "revenue": 3580.39,
-   "invoices": 5,
-   "revenue_pct": 0.03
-  },
-  {
-   "country": "Malta",
-   "revenue": 2725.59,
-   "invoices": 5,
-   "revenue_pct": 0.03
-  },
-  {
-   "country": "United Arab Emirates",
-   "revenue": 1902.28,
-   "invoices": 3,
-   "revenue_pct": 0.02
-  },
-  {
-   "country": "Lebanon",
-   "revenue": 1693.88,
-   "invoices": 1,
-   "revenue_pct": 0.02
-  },
-  {
-   "country": "Lithuania",
-   "revenue": 1661.06,
-   "invoices": 4,
-   "revenue_pct": 0.02
-  },
-  {
-   "country": "European Community",
-   "revenue": 1300.25,
-   "invoices": 4,
-   "revenue_pct": 0.01
-  },
-  {
-   "country": "Brazil",
-   "revenue": 1143.6,
-   "invoices": 1,
-   "revenue_pct": 0.01
-  },
-  {
-   "country": "RSA",
-   "revenue": 1002.31,
-   "invoices": 1,
-   "revenue_pct": 0.01
-  },
-  {
-   "country": "Czech Republic",
-   "revenue": 826.74,
-   "invoices": 2,
-   "revenue_pct": 0.01
-  },
-  {
-   "country": "Bahrain",
-   "revenue": 754.14,
-   "invoices": 3,
-   "revenue_pct": 0.01
-  },
-  {
-   "country": "Saudi Arabia",
-   "revenue": 145.92,
-   "invoices": 1,
-   "revenue_pct": 0.0
-  }
- ],
- "monthly": [
-  {
-   "month": "2010-12",
-   "revenue": 823746.14,
-   "invoices": 1559
-  },
-  {
-   "month": "2011-01",
-   "revenue": 691364.56,
-   "invoices": 1086
-  },
-  {
-   "month": "2011-02",
-   "revenue": 523631.89,
-   "invoices": 1100
-  },
-  {
-   "month": "2011-03",
-   "revenue": 717639.36,
-   "invoices": 1454
-  },
-  {
-   "month": "2011-04",
-   "revenue": 537808.62,
-   "invoices": 1246
-  },
-  {
-   "month": "2011-05",
-   "revenue": 770536.02,
-   "invoices": 1681
-  },
-  {
-   "month": "2011-06",
-   "revenue": 761739.9,
-   "invoices": 1533
-  },
-  {
-   "month": "2011-07",
-   "revenue": 719221.19,
-   "invoices": 1475
-  },
-  {
-   "month": "2011-08",
-   "revenue": 759138.38,
-   "invoices": 1361
-  },
-  {
-   "month": "2011-09",
-   "revenue": 1058590.17,
-   "invoices": 1837
-  },
-  {
-   "month": "2011-10",
-   "revenue": 1154979.3,
-   "invoices": 2040
-  },
-  {
-   "month": "2011-11",
-   "revenue": 1509496.33,
-   "invoices": 2769
-  },
-  {
-   "month": "2011-12",
-   "revenue": 638792.68,
-   "invoices": 819
-  }
- ],
- "hourly_invoices": [
-  {
-   "hour": 6,
-   "invoices": 1
-  },
-  {
-   "hour": 7,
-   "invoices": 29
-  },
-  {
-   "hour": 8,
-   "invoices": 566
-  },
-  {
-   "hour": 9,
-   "invoices": 1484
-  },
-  {
-   "hour": 10,
-   "invoices": 2361
-  },
-  {
-   "hour": 11,
-   "invoices": 2396
-  },
-  {
-   "hour": 12,
-   "invoices": 3220
-  },
-  {
-   "hour": 13,
-   "invoices": 2753
-  },
-  {
-   "hour": 14,
-   "invoices": 2457
-  },
-  {
-   "hour": 15,
-   "invoices": 2336
-  },
-  {
-   "hour": 16,
-   "invoices": 1335
-  },
-  {
-   "hour": 17,
-   "invoices": 667
-  },
-  {
-   "hour": 18,
-   "invoices": 192
-  },
-  {
-   "hour": 19,
-   "invoices": 146
-  },
-  {
-   "hour": 20,
-   "invoices": 18
-  }
- ],
- "weekday_invoices": [
-  {
-   "day": "Thứ 2",
-   "invoices": 3126
-  },
-  {
-   "day": "Thứ 3",
-   "invoices": 3554
-  },
-  {
-   "day": "Thứ 4",
-   "invoices": 3690
-  },
-  {
-   "day": "Thứ 5",
-   "invoices": 4246
-  },
-  {
-   "day": "Thứ 6",
-   "invoices": 3140
-  },
-  {
-   "day": "Thứ 7",
-   "invoices": 0
-  },
-  {
-   "day": "CN",
-   "invoices": 2204
+ "top_recommendation_rules": [
+  {
+   "antecedent": [
+    "baby food"
+   ],
+   "consequent": [
+    "soups"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 67,
+   "consequent_support_pct": 0.68,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 146.79,
+   "reason": "Complementary basket affinity (146.79× lift)"
+  },
+  {
+   "antecedent": [
+    "sound storage medium"
+   ],
+   "consequent": [
+    "frozen potato products"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 83,
+   "consequent_support_pct": 0.84,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 118.49,
+   "reason": "Complementary basket affinity (118.49× lift)"
+  },
+  {
+   "antecedent": [
+    "sound storage medium"
+   ],
+   "consequent": [
+    "candy"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 294,
+   "consequent_support_pct": 2.99,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 33.45,
+   "reason": "Complementary basket affinity (33.45× lift)"
+  },
+  {
+   "antecedent": [
+    "baby food"
+   ],
+   "consequent": [
+    "chocolate"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 488,
+   "consequent_support_pct": 4.96,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 20.15,
+   "reason": "Complementary basket affinity (20.15× lift)"
+  },
+  {
+   "antecedent": [
+    "baby food"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 545,
+   "consequent_support_pct": 5.54,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 18.05,
+   "reason": "Home baking essentials"
+  },
+  {
+   "antecedent": [
+    "preservation products"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "count": 2,
+   "support": 0.0002,
+   "support_pct": 0.02,
+   "antecedent_count": 2,
+   "antecedent_support_pct": 0.02,
+   "consequent_count": 705,
+   "consequent_support_pct": 7.17,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 13.95,
+   "reason": "Complementary basket affinity (13.95× lift)"
+  },
+  {
+   "antecedent": [
+    "preservation products"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "count": 2,
+   "support": 0.0002,
+   "support_pct": 0.02,
+   "antecedent_count": 2,
+   "antecedent_support_pct": 0.02,
+   "consequent_count": 814,
+   "consequent_support_pct": 8.28,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 12.08,
+   "reason": "Complementary basket affinity (12.08× lift)"
+  },
+  {
+   "antecedent": [
+    "sound storage medium"
+   ],
+   "consequent": [
+    "shopping bags"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 969,
+   "consequent_support_pct": 9.85,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 10.15,
+   "reason": "Complementary basket affinity (10.15× lift)"
+  },
+  {
+   "antecedent": [
+    "sound storage medium"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 1087,
+   "consequent_support_pct": 11.05,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 9.05,
+   "reason": "Beverage & refreshment replenishment"
+  },
+  {
+   "antecedent": [
+    "kitchen utensil"
+   ],
+   "consequent": [
+    "onions"
+   ],
+   "count": 2,
+   "support": 0.0002,
+   "support_pct": 0.02,
+   "antecedent_count": 4,
+   "antecedent_support_pct": 0.04,
+   "consequent_count": 305,
+   "consequent_support_pct": 3.1,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 16.12,
+   "reason": "Complementary basket affinity (16.12× lift)"
+  },
+  {
+   "antecedent": [
+    "bags"
+   ],
+   "consequent": [
+    "frozen potato products"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 4,
+   "antecedent_support_pct": 0.04,
+   "consequent_count": 83,
+   "consequent_support_pct": 0.84,
+   "confidence": 0.25,
+   "confidence_pct": 25.0,
+   "lift": 29.62,
+   "reason": "Complementary basket affinity (29.62× lift)"
+  },
+  {
+   "antecedent": [
+    "baby food"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "count": 1,
+   "support": 0.0001,
+   "support_pct": 0.01,
+   "antecedent_count": 1,
+   "antecedent_support_pct": 0.01,
+   "consequent_count": 1372,
+   "consequent_support_pct": 13.95,
+   "confidence": 1.0,
+   "confidence_pct": 100.0,
+   "lift": 7.17,
+   "reason": "Complementary basket affinity (7.17× lift)"
+  },
+  {
+   "antecedent": [
+    "salad dressing"
+   ],
+   "consequent": [
+    "onions"
+   ],
+   "count": 3,
+   "support": 0.0003,
+   "support_pct": 0.03,
+   "antecedent_count": 8,
+   "antecedent_support_pct": 0.08,
+   "consequent_count": 305,
+   "consequent_support_pct": 3.1,
+   "confidence": 0.375,
+   "confidence_pct": 37.5,
+   "lift": 12.09,
+   "reason": "Complementary basket affinity (12.09× lift)"
+  },
+  {
+   "antecedent": [
+    "rubbing alcohol"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "count": 5,
+   "support": 0.0005,
+   "support_pct": 0.05,
+   "antecedent_count": 10,
+   "antecedent_support_pct": 0.1,
+   "consequent_count": 545,
+   "consequent_support_pct": 5.54,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 9.02,
+   "reason": "Home baking essentials"
+  },
+  {
+   "antecedent": [
+    "cooking chocolate"
+   ],
+   "consequent": [
+    "baking powder"
+   ],
+   "count": 7,
+   "support": 0.0007,
+   "support_pct": 0.07,
+   "antecedent_count": 25,
+   "antecedent_support_pct": 0.25,
+   "consequent_count": 174,
+   "consequent_support_pct": 1.77,
+   "confidence": 0.28,
+   "confidence_pct": 28.0,
+   "lift": 15.83,
+   "reason": "Home baking essentials"
+  },
+  {
+   "antecedent": [
+    "Instant food products"
+   ],
+   "consequent": [
+    "hamburger meat"
+   ],
+   "count": 30,
+   "support": 0.0031,
+   "support_pct": 0.31,
+   "antecedent_count": 79,
+   "antecedent_support_pct": 0.8,
+   "consequent_count": 327,
+   "consequent_support_pct": 3.32,
+   "confidence": 0.3797,
+   "confidence_pct": 38.0,
+   "lift": 11.42,
+   "reason": "Complementary basket affinity (11.42× lift)"
+  },
+  {
+   "antecedent": [
+    "baby cosmetics"
+   ],
+   "consequent": [
+    "butter milk"
+   ],
+   "count": 2,
+   "support": 0.0002,
+   "support_pct": 0.02,
+   "antecedent_count": 6,
+   "antecedent_support_pct": 0.06,
+   "consequent_count": 275,
+   "consequent_support_pct": 2.8,
+   "confidence": 0.3333,
+   "confidence_pct": 33.3,
+   "lift": 11.92,
+   "reason": "Complementary basket affinity (11.92× lift)"
+  },
+  {
+   "antecedent": [
+    "frozen fruits"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "count": 6,
+   "support": 0.0006,
+   "support_pct": 0.06,
+   "antecedent_count": 12,
+   "antecedent_support_pct": 0.12,
+   "consequent_count": 705,
+   "consequent_support_pct": 7.17,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 6.98,
+   "reason": "Complementary basket affinity (6.98× lift)"
+  },
+  {
+   "antecedent": [
+    "cream"
+   ],
+   "consequent": [
+    "sausage"
+   ],
+   "count": 7,
+   "support": 0.0007,
+   "support_pct": 0.07,
+   "antecedent_count": 13,
+   "antecedent_support_pct": 0.13,
+   "consequent_count": 924,
+   "consequent_support_pct": 9.4,
+   "confidence": 0.5385,
+   "confidence_pct": 53.8,
+   "lift": 5.73,
+   "reason": "Complementary basket affinity (5.73× lift)"
+  },
+  {
+   "antecedent": [
+    "rubbing alcohol"
+   ],
+   "consequent": [
+    "napkins"
+   ],
+   "count": 4,
+   "support": 0.0004,
+   "support_pct": 0.04,
+   "antecedent_count": 10,
+   "antecedent_support_pct": 0.1,
+   "consequent_count": 515,
+   "consequent_support_pct": 5.24,
+   "confidence": 0.4,
+   "confidence_pct": 40.0,
+   "lift": 7.64,
+   "reason": "Complementary basket affinity (7.64× lift)"
+  },
+  {
+   "antecedent": [
+    "rubbing alcohol"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "count": 5,
+   "support": 0.0005,
+   "support_pct": 0.05,
+   "antecedent_count": 10,
+   "antecedent_support_pct": 0.1,
+   "consequent_count": 814,
+   "consequent_support_pct": 8.28,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 6.04,
+   "reason": "Complementary basket affinity (6.04× lift)"
+  },
+  {
+   "antecedent": [
+    "specialty vegetables"
+   ],
+   "consequent": [
+    "white bread"
+   ],
+   "count": 6,
+   "support": 0.0006,
+   "support_pct": 0.06,
+   "antecedent_count": 17,
+   "antecedent_support_pct": 0.17,
+   "consequent_count": 414,
+   "consequent_support_pct": 4.21,
+   "confidence": 0.3529,
+   "confidence_pct": 35.3,
+   "lift": 8.38,
+   "reason": "Complementary basket affinity (8.38× lift)"
+  },
+  {
+   "antecedent": [
+    "kitchen utensil"
+   ],
+   "consequent": [
+    "pastry"
+   ],
+   "count": 2,
+   "support": 0.0002,
+   "support_pct": 0.02,
+   "antecedent_count": 4,
+   "antecedent_support_pct": 0.04,
+   "consequent_count": 875,
+   "consequent_support_pct": 8.9,
+   "confidence": 0.5,
+   "confidence_pct": 50.0,
+   "lift": 5.62,
+   "reason": "Complementary basket affinity (5.62× lift)"
+  },
+  {
+   "antecedent": [
+    "herbs",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 41,
+   "support": 0.0042,
+   "support_pct": 0.42,
+   "antecedent_count": 76,
+   "antecedent_support_pct": 0.77,
+   "consequent_count": 1072,
+   "consequent_support_pct": 10.9,
+   "confidence": 0.5395,
+   "confidence_pct": 53.9,
+   "lift": 4.95,
+   "reason": "Home cooking: soup, stew & roast ingredients"
   }
  ]
 }

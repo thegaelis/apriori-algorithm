@@ -3,69 +3,350 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thống kê dataset Online Retail (UCI)</title>
+<title>Thống kê Apriori — Trực quan hóa Bestsellers, Combos &amp; Luật Gợi ý · BasketIQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/app.css">
 <style>
-*{box-sizing:border-box}
-html{font-size:16px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;padding:0 20px 40px}
-h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;margin:0;text-wrap:balance}
-a{color:var(--accent)}
-.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding:18px 0 14px;border-bottom:1px solid var(--line)}
-.top h1{font-size:1.75rem;line-height:1.1}
-.top p{margin:4px 0 0;color:var(--muted);font-size:.92rem;max-width:75ch}
-.nav{display:flex;gap:8px;flex-wrap:wrap}
-.nav a{border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);text-decoration:none;border-radius:6px;padding:7px 14px;font-weight:500;font-size:.9rem}
-.nav a.cur{background:var(--accent);border-color:var(--accent);color:#fff}
-main{max-width:1200px;margin:0 auto}
-section{margin-top:26px}
-section>h2{font-size:1.45rem;margin-bottom:4px}
-.sub{color:var(--muted);font-size:.9rem;margin:0 0 12px;max-width:80ch}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow)}
-.card .v{font-family:var(--serif);font-size:1.7rem;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
-.card .l{font-size:.78rem;color:var(--muted);margin-top:3px}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px}
-@media (max-width:480px){.grid2{grid-template-columns:1fr}}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
-.panel h3{font-size:1.1rem;margin-bottom:8px}
-.tblwrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.92rem}
-th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:6px 8px;border-bottom:2px solid var(--line-strong);white-space:nowrap}
-td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;font-variant-numeric:tabular-nums}
-td.n,th.n{text-align:right}
-code,.mono{font-family:var(--mono);font-size:.88em}
-.pill{display:inline-block;font-size:.74rem;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--accent-bg);color:var(--accent-ink)}
-.bars{display:flex;flex-direction:column;gap:5px}
-.bar{display:grid;grid-template-columns:minmax(90px,200px) 1fr 80px;gap:8px;align-items:center;font-size:.85rem}
-.bar .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar .tr{background:var(--surface-2);border-radius:4px;height:16px;overflow:hidden}
-.bar .fl{height:100%;background:var(--accent);border-radius:4px}
-.bar .val{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
-.vcol{display:flex;align-items:flex-end;gap:3px;height:170px;padding-top:8px;border-bottom:1px solid var(--line-strong)}
-.vcol .c{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;min-width:0}
-.vcol .c i{display:block;width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:1px}
-.vlab{display:flex;gap:3px;font-size:.68rem;color:var(--muted);margin-top:3px}
-.vlab span{flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.note{background:var(--prune-bg);border-left:3px solid var(--prune);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;margin:10px 0}
-.good{background:var(--keep-bg);border-left-color:var(--keep)}
-.err{background:var(--drop-bg);color:var(--drop);padding:12px;border-radius:8px}
-.q{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:6px}
-.q div{background:var(--surface-2);border-radius:6px;padding:6px 8px;text-align:center}
-.q b{display:block;font-family:var(--serif);font-size:1.1rem;font-variant-numeric:tabular-nums}
-.q span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.pipe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:12px}
-.pipe-step{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;position:relative}
-.pipe-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.pipe-num{background:var(--accent);color:#fff;font-family:var(--mono);font-size:.76rem;font-weight:700;padding:3px 9px;border-radius:999px}
-.pipe-metric{font-family:var(--mono);font-size:.78rem;background:var(--accent-bg);color:var(--accent-ink);padding:2px 8px;border-radius:6px;font-weight:600}
-.pipe-title{font-size:1.05rem;font-weight:700;margin:2px 0}
-.pipe-what{font-size:.88rem;color:var(--ink)}
-.pipe-why{background:var(--surface-2);border-left:3px solid var(--accent);padding:8px 11px;border-radius:0 8px 8px 0;font-size:.84rem;color:var(--muted)}
-.pipe-why b{color:var(--ink)}
-footer{margin-top:30px;color:var(--muted);font-size:.82rem}
+:root{--bg:#f8fafc;--surface:#ffffff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;padding-bottom:6vh;font-size:clamp(15px,.95vw,18px)}
+button{font:inherit;color:inherit}
+main{width:100%;max-width:none;margin:0;padding:2vh 2.5vw}
+
+.page-head{background:var(--surface);border-bottom:1px solid var(--border);padding:2.2vh 2.5vw}
+.page-head h1{font-size:clamp(1.5rem,1.8vw,2.2rem);font-weight:800;letter-spacing:-.025em}
+.page-head p{color:var(--text-muted);font-size:clamp(.92rem,.96vw,1.12rem);margin-top:.5vh;max-width:95ch}
+
+/* ---------- KPI Strip ---------- */
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:1vw;margin-bottom:2.2vh}
+@media (max-width:1200px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.5vh 1.2vw;
+  box-shadow:var(--shadow-sm);
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.kpi-top{display:flex;justify-content:space-between;align-items:center}
+.kpi-ico{font-size:clamp(1.1rem,1.2vw,1.4rem)}
+.kpi-tag{font-family:var(--mono);font-size:clamp(.72rem,.74vw,.86rem);font-weight:700;padding:2px 8px;border-radius:999px;background:var(--primary-light);color:var(--primary-dark)}
+.kpi .v{font-size:clamp(1.45rem,1.65vw,2.05rem);font-weight:800;font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--text)}
+.kpi .l{font-size:clamp(.8rem,.82vw,.96rem);color:var(--text-muted);font-weight:600}
+
+/* ---------- Interactive Section Switcher ---------- */
+.view-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:.8vh .8vw;
+  margin-bottom:2.2vh;
+  box-shadow:var(--shadow-sm);
+}
+.view-btn{
+  border:none;
+  background:transparent;
+  padding:1vh 1.2vw;
+  border-radius:10px;
+  font-size:clamp(.88rem,.92vw,1.08rem);
+  font-weight:700;
+  color:var(--text-muted);
+  cursor:pointer;
+  transition:all .15s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.view-btn:hover{color:var(--text);background:var(--surface-sub)}
+.view-btn.active{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(79,70,229,.22)}
+
+.stat-sec{display:none;animation:fadeIn .18s ease}
+.stat-sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.sec-head{margin-bottom:1.8vh}
+.sec-title{font-size:clamp(1.22rem,1.38vw,1.65rem);font-weight:800;letter-spacing:-.015em;margin-bottom:4px}
+.sec-sub{color:var(--text-muted);font-size:clamp(.9rem,.94vw,1.08rem);max-width:95ch}
+
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:1.5vw;align-items:start}
+.grid2-eq{display:grid;grid-template-columns:1fr 1fr;gap:1.5vw;align-items:start}
+@media (max-width:1050px){.grid2,.grid2-eq{grid-template-columns:1fr}}
+
+.panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2vh 1.5vw;
+  box-shadow:var(--shadow-sm);
+  min-width:0;
+}
+.panel h3{font-size:clamp(1.04rem,1.12vw,1.32rem);font-weight:800;margin-bottom:4px}
+.panel-sub{font-size:clamp(.84rem,.86vw,1rem);color:var(--text-muted);margin-bottom:1.6vh}
+
+/* ---------- Tab 1: Pruning Funnel & Pipeline ---------- */
+.funnel-list{display:flex;flex-direction:column;gap:1.4vh}
+.funnel-stage{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.3vh 1.1vw;
+}
+.funnel-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.funnel-name{font-weight:800;font-size:clamp(.92rem,.96vw,1.12rem);color:var(--text)}
+.funnel-nums{font-family:var(--mono);font-size:clamp(.82rem,.84vw,.98rem);color:var(--primary-dark);font-weight:700}
+.funnel-track{
+  background:#e2e8f0;
+  height:20px;
+  border-radius:999px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+}
+.funnel-bar-kept{
+  background:linear-gradient(90deg,#4f46e5,#6366f1);
+  height:100%;
+  border-radius:999px;
+  transition:width .4s ease;
+}
+.funnel-note{
+  font-size:clamp(.8rem,.82vw,.96rem);
+  color:var(--text-muted);
+  margin-top:6px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+}
+.prune-badge{
+  background:#fef3c7;
+  color:#92400e;
+  border:1px solid #fde68a;
+  font-family:var(--mono);
+  font-size:clamp(.74rem,.76vw,.88rem);
+  font-weight:700;
+  padding:1px 8px;
+  border-radius:6px;
+}
+
+.pipe-steps{display:flex;flex-direction:column;gap:1.2vh}
+.pipe-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-left:4px solid var(--primary);
+  border-radius:12px;
+  padding:1.3vh 1.1vw;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.pipe-top{display:flex;justify-content:space-between;align-items:center}
+.pipe-step{font-family:var(--mono);font-size:clamp(.74rem,.76vw,.88rem);font-weight:800;background:var(--primary);color:#fff;padding:2px 9px;border-radius:6px}
+.pipe-stat{font-family:var(--mono);font-size:clamp(.78rem,.8vw,.94rem);color:var(--primary-dark);font-weight:700}
+.pipe-card h4{font-size:clamp(.95rem,.98vw,1.14rem);font-weight:800}
+.pipe-card p{font-size:clamp(.84rem,.86vw,1rem);color:var(--text-muted)}
+
+/* ---------- Tab 2: L1 Bestsellers & 169-Item Pareto ---------- */
+.bars{display:flex;flex-direction:column;gap:.95vh}
+.bar-row{
+  display:grid;
+  grid-template-columns:28px minmax(145px,11vw) 1fr minmax(125px,8.5vw);
+  gap:10px;
+  align-items:center;
+  font-size:clamp(.86rem,.88vw,1.04rem);
+}
+.bar-rank{font-family:var(--mono);font-size:clamp(.78rem,.8vw,.92rem);color:var(--text-muted);font-weight:700;text-align:right}
+.bar-name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{background:var(--surface-sub);border-radius:8px;height:16px;overflow:hidden;position:relative}
+.bar-fill{height:100%;background:linear-gradient(90deg,#4f46e5,#818cf8);border-radius:8px}
+.bar-val{text-align:right;font-family:var(--mono);font-size:clamp(.8rem,.82vw,.96rem);color:var(--text)}
+
+.pareto-bar{
+  height:28px;
+  border-radius:10px;
+  overflow:hidden;
+  display:flex;
+  margin:1.2vh 0 1.8vh;
+  border:1px solid var(--border);
+}
+.pareto-seg{height:100%;display:grid;place-items:center;color:#fff;font-family:var(--mono);font-size:.78rem;font-weight:800}
+.tier-cards{display:flex;flex-direction:column;gap:1.1vh}
+.tier-card{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.2vh 1vw;
+  background:#f8fafc;
+}
+.tier-head{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:clamp(.9rem,.92vw,1.08rem);margin-bottom:4px}
+.tier-dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}
+.tier-desc{font-size:clamp(.82rem,.84vw,.98rem);color:var(--text-muted)}
+.tier-samples{margin-top:6px;display:flex;flex-wrap:wrap;gap:5px}
+.item-tag{
+  display:inline-block;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:2px 8px;
+  font-family:var(--mono);
+  font-size:clamp(.78rem,.8vw,.92rem);
+  font-weight:600;
+}
+
+/* ---------- Tab 3: L2 Actual vs Random Visual Bars ---------- */
+.combo-list{display:flex;flex-direction:column;gap:1.2vh}
+.combo-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.2vh 1.1vw;
+}
+.combo-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.combo-pair{font-weight:800;font-size:clamp(.92rem,.95vw,1.1rem)}
+.lift-pill{
+  background:#ecfdf5;
+  color:#047857;
+  border:1px solid #a7f3d0;
+  font-family:var(--mono);
+  font-size:clamp(.78rem,.8vw,.94rem);
+  font-weight:800;
+  padding:2px 9px;
+  border-radius:999px;
+}
+.dual-bars{display:flex;flex-direction:column;gap:5px}
+.dual-row{display:grid;grid-template-columns:125px 1fr 95px;gap:8px;align-items:center;font-size:clamp(.78rem,.8vw,.92rem)}
+.dual-lbl{color:var(--text-muted);font-weight:600}
+.dual-track{background:#e2e8f0;height:12px;border-radius:6px;overflow:hidden}
+.dual-fill-actual{height:100%;background:#4f46e5;border-radius:6px}
+.dual-fill-rand{height:100%;background:#94a3b8;border-radius:6px}
+.dual-num{text-align:right;font-family:var(--mono);font-weight:700}
+
+/* ---------- Tab 4: Interactive Rule Dissector ---------- */
+.dissector-layout{
+  display:grid;
+  grid-template-columns:clamp(310px,28vw,430px) 1fr;
+  gap:1.5vw;
+  align-items:start;
+}
+@media (max-width:1050px){.dissector-layout{grid-template-columns:1fr}}
+
+.rule-selector-list{
+  display:flex;
+  flex-direction:column;
+  gap:.8vh;
+  max-height:640px;
+  overflow-y:auto;
+  padding-right:4px;
+}
+.rule-pick-btn{
+  text-align:left;
+  background:#f8fafc;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:1.1vh 1vw;
+  cursor:pointer;
+  transition:all .15s;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.rule-pick-btn:hover{border-color:#a5b4fc;background:#f5f3ff}
+.rule-pick-btn.active{border-color:var(--primary);background:#eef2ff;box-shadow:0 4px 12px rgba(79,70,229,.12)}
+.rp-top{display:flex;justify-content:space-between;align-items:center;gap:6px;font-weight:800;font-size:clamp(.88rem,.9vw,1.04rem)}
+.rp-metrics{font-family:var(--mono);font-size:clamp(.76rem,.78vw,.9rem);color:var(--text-muted);display:flex;gap:10px}
+
+.dissect-stage{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:16px;
+  padding:2.2vh 1.6vw;
+  display:flex;
+  flex-direction:column;
+  gap:2vh;
+}
+.dissect-banner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  padding-bottom:1.4vh;
+  border-bottom:1px solid var(--border);
+}
+.dissect-rule-title{font-size:clamp(1.1rem,1.25vw,1.5rem);font-weight:800}
+.dissect-reason{
+  background:#f0fdf4;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  padding:1vh 1.1vw;
+  border-radius:10px;
+  font-size:clamp(.86rem,.88vw,1.04rem);
+  font-weight:600;
+}
+
+.venn-and-prob{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.4vw;
+  align-items:center;
+}
+@media (max-width:900px){.venn-and-prob{grid-template-columns:1fr}}
+.venn-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.2vh 1vw;
+  text-align:center;
+}
+.prob-box{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.4vh 1.2vw;
+  display:flex;
+  flex-direction:column;
+  gap:1.2vh;
+}
+
+.formula-cards-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1vw;
+}
+@media (max-width:900px){.formula-cards-3{grid-template-columns:1fr}}
+.f-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.3vh 1vw;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.f-card-head{font-weight:800;font-size:clamp(.88rem,.9vw,1.05rem);color:var(--text)}
+.f-card-eq{
+  font-family:var(--mono);
+  font-size:clamp(.8rem,.82vw,.95rem);
+  background:#eef2ff;
+  color:var(--primary-dark);
+  padding:6px 9px;
+  border-radius:7px;
+  font-weight:700;
+}
+.f-card-calc{
+  font-family:var(--mono);
+  font-size:clamp(.92rem,.96vw,1.12rem);
+  font-weight:800;
+  color:#0f172a;
+}
+.f-card-desc{font-size:clamp(.8rem,.82vw,.95rem);color:var(--text-muted)}
+
+.err{background:var(--danger-light);color:var(--danger);padding:16px;border-radius:10px}
 </style>
 </head>
 <body>
@@ -73,163 +354,515 @@ footer{margin-top:30px;color:var(--muted);font-size:.82rem}
   <div class="app-header-inner">
     <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
-      <a href="/shop"><span aria-hidden="true">🛍️</span>Cửa hàng</a>
-      <a href="/"><span aria-hidden="true">🔬</span>Demo thuật toán</a>
-      <a href="/stats" class="active" aria-current="page"><span aria-hidden="true">📊</span>Thống kê dataset</a>
-      <a href="/admin"><span aria-hidden="true">🛠️</span>Admin</a>
+      <a href="/shop">Cửa hàng</a>
+      <a href="/">Demo thuật toán</a>
+      <a href="/stats" class="active" aria-current="page">Thống kê Apriori</a>
+      <a href="/admin">Admin</a>
     </nav>
     <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
   </div>
 </header>
-<header class="top">
-  <div>
-    <h1>Thống kê dataset Online Retail</h1>
-    <p id="srcline">Đang tải…</p>
-  </div>
-</header>
-<main id="root"><p class="sub">Đang tải số liệu…</p></main>
+
+<div class="page-head">
+  <h1>Thống kê Trực quan Thuật toán Apriori — Groceries POS Dataset</h1>
+  <p id="srcline">Đang tải dữ liệu…</p>
+</div>
+
+<main id="root"><p class="sec-sub">Đang tải số liệu…</p></main>
 
 <script>
 const fmt = n => Number(n).toLocaleString('en-US');
-const fmt2 = n => Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
-const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const gbp = n => '£' + fmt(Math.round(n));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tags = arr => arr.map(x => `<span class="item-tag">${esc(x)}</span>`).join(' + ');
 
-function cards(items){return `<div class="cards">${items.map(([v,l])=>`<div class="card"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('')}</div>`}
-function hbars(rows, valFmt=fmt){
-  const max = Math.max(...rows.map(r=>r.v),1);
-  return `<div class="bars">${rows.map(r=>`<div class="bar"><span class="nm" title="${esc(r.t||r.n)}">${esc(r.n)}</span><span class="tr"><span class="fl" style="display:block;width:${(100*r.v/max).toFixed(1)}%"></span></span><span class="val">${valFmt(r.v)}</span></div>`).join('')}</div>`;
-}
-function vcols(labels, values, valFmt=fmt){
-  const max = Math.max(...values,1);
-  return `<div class="vcol">${values.map((v,i)=>`<div class="c" title="${esc(labels[i])}: ${valFmt(v)}"><i style="height:${(100*v/max).toFixed(1)}%"></i></div>`).join('')}</div>
-  <div class="vlab">${labels.map(l=>`<span>${esc(l)}</span>`).join('')}</div>`;
-}
-function quant(q){
-  const keys=[['min','Min'],['p25','P25'],['median','Median'],['p75','P75'],['p95','P95'],['p99','P99'],['max','Max'],['mean','Mean'],['std','Std']];
-  return `<div class="q">${keys.map(([k,l])=>`<div><b>${fmt2(q[k])}</b><span>${l}</span></div>`).join('')}</div>`;
-}
+let STATS_DATA = null;
+let ACTIVE_SEC = 'funnel';
+let SELECTED_RULE_IDX = 0;
 
-function render(d){
-  const o=d.overview, qu=d.quality, b=d.basket, c=d.customers;
+function render(d) {
+  STATS_DATA = d;
+  const o = d.overview;
   document.getElementById('srcline').innerHTML =
-    `Nguồn: <a href="${d.url}" target="_blank" rel="noopener">${esc(d.source)}</a>. Giao dịch của một cửa hàng quà tặng trực tuyến tại Anh, ${o.date_from.slice(0,10)} → ${o.date_to.slice(0,10)}.`;
-  let h='';
+    `Nguồn dữ liệu chuẩn: <a href="${esc(d.url)}" target="_blank" rel="noopener"><b>${esc(d.source)}</b></a> · Thiết kế trực quan kết nối trực tiếp lý thuyết khai phá dữ liệu (Support, Confidence, Lift, Anti-monotone Pruning) với <a href="/shop"><b>Cửa hàng (/shop)</b></a>.`;
 
-  h+=`<section><h2>1. Tổng quan</h2><p class="sub">Quy mô dữ liệu thô trước khi làm sạch.</p>
-  ${cards([
-    [fmt(o.rows),'dòng (line items)'],[o.columns,'cột'],[fmt(o.invoices),'hóa đơn (InvoiceNo)'],
-    [fmt(o.customers),'khách hàng (CustomerID)'],[fmt(o.products_stockcodes),'mã sản phẩm (StockCode)'],[o.countries,'quốc gia'],
-    [o.days_span+' ngày','khoảng thời gian'],[gbp(o.total_revenue_valid_sales),'doanh thu (đơn hợp lệ)'],[gbp(o.avg_order_value),'giá trị đơn trung bình']
-  ])}</section>`;
+  const c2_exhaustive = (o.distinct_items * (o.distinct_items - 1)) / 2; // 14,196
+  const c2_after_l1 = (o.l1_count * (o.l1_count - 1)) / 2; // 9,180
+  const c3_exhaustive = (o.distinct_items * (o.distinct_items - 1) * (o.distinct_items - 2)) / 6; // 790,244
 
-  h+=`<section><h2>2. Lược đồ các cột</h2><div class="panel"><div class="tblwrap"><table>
-  <tr><th>Cột</th><th>Kiểu</th><th>Mô tả</th><th class="n">Thiếu</th><th class="n">% thiếu</th></tr>
-  ${d.columns.map((col,i)=>{const key=['invoice','stock','desc','qty','date','price','cust','country'][i];const m=d.missing[key];
-    return `<tr><td><code>${col.name}</code></td><td><span class="pill">${col.type}</span></td><td>${esc(col.desc)}</td><td class="n">${fmt(m.count)}</td><td class="n">${m.pct}%</td></tr>`}).join('')}
-  </table></div></div></section>`;
+  let h = '';
 
-  h+=`<section><h2>3. Chất lượng dữ liệu</h2><p class="sub">Các vấn đề cần xử lý trước khi khai phá luật kết hợp.</p>
-  ${cards([
-    [fmt(qu.cancellation_rows),'dòng hủy (InvoiceNo bắt đầu bằng C)'],[fmt(qu.cancellation_invoices),'hóa đơn bị hủy'],
-    [fmt(qu.negative_quantity_rows),'dòng Quantity &lt; 0'],[fmt(qu.zero_price_rows),'dòng UnitPrice = 0'],
-    [fmt(qu.negative_price_rows),'dòng UnitPrice &lt; 0 (điều chỉnh nợ)'],[fmt(qu.duplicate_rows),'dòng trùng lặp hoàn toàn'],
-    [fmt(qu.non_product_rows),'dòng không phải sản phẩm (POST, D, M…)'],[fmt(d.missing.cust.count),'dòng thiếu CustomerID ('+d.missing.cust.pct+'%)']
-  ])}
-  <div class="note"><b>Mã không phải sản phẩm:</b> <code>${qu.non_product_codes.map(esc).join('</code>, <code>')}</code></div></section>`;
-
-  h+=`<section><h2>4. Phân bố số lượng và đơn giá</h2><p class="sub">Chỉ tính các dòng bán hợp lệ: không hủy, Quantity &gt; 0, UnitPrice &gt; 0 (${fmt(qu.valid_sale_rows)} dòng).</p>
-  <div class="grid2"><div class="panel"><h3>Quantity mỗi dòng</h3>${quant(d.quantity)}
-  <p class="sub" style="margin-top:8px">Phân bố lệch phải mạnh: trung vị ${d.quantity.median}, nhưng tối đa ${fmt(d.quantity.max)}. Phần lớn là bán sỉ cho đại lý.</p></div>
-  <div class="panel"><h3>UnitPrice (GBP)</h3>${quant(d.unit_price)}
-  <p class="sub" style="margin-top:8px">Hàng giá thấp chiếm đa số (trung vị £${d.unit_price.median}).</p></div></div></section>`;
-
-  h+=`<section><h2>5. Giỏ hàng cho Apriori</h2><p class="sub">${esc(b.note)}</p>
-  ${cards([
-    [fmt(b.clean_transactions),'giao dịch sạch (|D|)'],[fmt(b.distinct_items),'item khác nhau (|I|)'],[fmt(b.clean_rows),'cặp (hóa đơn, item)'],
-    [fmt2(b.size.mean),'item trung bình / giỏ'],[b.size.median,'trung vị item / giỏ'],[fmt(b.size.max),'giỏ lớn nhất'],
-    [b.single_item_baskets_pct+'%','giỏ chỉ 1 item (vô ích cho luật)'],[b.density_pct+'%','mật độ ma trận giỏ × item']
-  ])}
-  <div class="grid2" style="margin-top:16px">
-  <div class="panel"><h3>Phân bố kích thước giỏ hàng (số item)</h3>${vcols(b.size_hist.labels,b.size_hist.counts)}</div>
-  <div class="panel"><h3>Phân vị kích thước giỏ</h3>${quant(b.size)}
-  <p class="sub" style="margin-top:8px">Giỏ lớn (P99 = ${b.size.p99} item) làm số itemset bậc cao bùng nổ: là vấn đề chính của Apriori trên dữ liệu thật.</p></div></div>
-  <div class="panel" style="margin-top:16px"><h3>Chọn <code>min_sup</code> thế nào? Số item phổ biến theo ngưỡng</h3>
-  <div class="tblwrap"><table><tr><th>min_sup</th><th class="n">≈ số giao dịch tối thiểu</th><th class="n">số item phổ biến (L₁)</th><th class="n">C₂ phải đếm (cặp)</th></tr>
-  ${b.support_curve.map(s=>`<tr><td>${s.min_sup_pct}%</td><td class="n">${s.min_count}</td><td class="n">${fmt(s.frequent_items)}</td><td class="n">${fmt(s.frequent_items*(s.frequent_items-1)/2)}</td></tr>`).join('')}
-  </table></div>
-  <div class="note">Với min_sup thấp, số cặp ứng viên lên tới hàng triệu. Khi chạy Apriori cần lọc item hiếm và chọn min_sup phù hợp, nên dùng pipeline offline.</div></div></section>`;
-
-  h+=`<section><h2>Quy trình xử lý dữ liệu &amp; khai phá Apriori (End-to-End Pipeline)</h2>
-  <p class="sub">Giải thích chi tiết từng bước biến đổi từ bảng giao dịch Excel thô sang tập luật kết hợp phục vụ gợi ý sản phẩm — và <b>tại sao bắt buộc phải làm như vậy</b> dưới góc độ toán học của thuật toán Apriori.</p>
-  <div class="pipe-grid">
-    <div class="pipe-step">
-      <div class="pipe-head"><span class="pipe-num">BƯỚC 1</span><span class="pipe-metric">${fmt(o.rows)} dòng · ${fmt(o.invoices)} đơn</span></div>
-      <div class="pipe-title">📥 Đọc dữ liệu thô (Streaming XML)</div>
-      <div class="pipe-what">Đọc trực tiếp luồng XML bên trong file <code>Online Retail.xlsx</code> (8 cột: <code>InvoiceNo, StockCode, Description, Quantity, InvoiceDate, UnitPrice, CustomerID, Country</code>).</div>
-      <div class="pipe-why"><b>Vì sao làm vậy?</b> Dùng <code>zipfile + xml.etree.ElementTree.iterparse</code> trong thư viện chuẩn Python giúp xử lý 541,909 dòng chỉ với vài MB RAM mà không phụ thuộc thư viện nặng (như <code>pandas</code> hay <code>openpyxl</code>), đảm bảo chạy mượt trên môi trường cloud miễn phí.</div>
+  // TOP KPI STRIP
+  h += `
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-ico">🧺</span><span class="kpi-tag">Transactions (N)</span></div>
+        <div class="v">${fmt(o.transactions)}</div>
+        <div class="l">${fmt(o.multi_item_baskets)} giỏ mua ≥ 2 món (${o.multi_item_baskets_pct}%)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-ico">🏷️</span><span class="kpi-tag">Items (|I|)</span></div>
+        <div class="v">${fmt(o.distinct_items)}</div>
+        <div class="l">Trung bình ${o.avg_basket_size} món / giỏ hàng</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-ico">✂️</span><span class="kpi-tag">Ngưỡng min_sup</span></div>
+        <div class="v">${o.min_support_count} giỏ</div>
+        <div class="l">Support ≥ ${o.min_support_pct}% trên ${fmt(o.transactions)} giỏ</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-ico">🥇</span><span class="kpi-tag">Frequent L1</span></div>
+        <div class="v">${fmt(o.l1_count)} / ${o.distinct_items}</div>
+        <div class="l">Tỉa bỏ ${o.distinct_items - o.l1_count} mặt hàng ít phổ biến</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-ico">🤝</span><span class="kpi-tag">Combos L2 &amp; L3</span></div>
+        <div class="v">${fmt(o.l2_count + o.l3_count)}</div>
+        <div class="l">${fmt(o.l2_count)} cặp L2 · ${fmt(o.l3_count)} bộ ba L3</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-top"><span class="kpi-ico">⚡</span><span class="kpi-tag">Luật A ⇒ B</span></div>
+        <div class="v">${fmt(o.curated_rules_count)}</div>
+        <div class="l">Conf ≥ ${o.min_confidence_pct}% · Lift ≥ ${o.min_lift}×</div>
+      </div>
     </div>
-    <div class="pipe-step">
-      <div class="pipe-head"><span class="pipe-num">BƯỚC 2</span><span class="pipe-metric">−${fmt(qu.cancellation_rows + qu.zero_price_rows + qu.negative_price_rows)} dòng nhiễu</span></div>
-      <div class="pipe-title">🧹 Lọc đơn hủy &amp; dòng bất thường</div>
-      <div class="pipe-what">Loại bỏ các hóa đơn bắt đầu bằng chữ <code>C</code> (${fmt(qu.cancellation_invoices)} đơn hủy), các dòng có <code>Quantity ≤ 0</code> (${fmt(qu.negative_quantity_rows)} dòng trả hàng/hỏng kho) và <code>UnitPrice ≤ 0</code> (${fmt(qu.zero_price_rows + qu.negative_price_rows)} dòng quà tặng/điều chỉnh công nợ).</div>
-      <div class="pipe-why"><b>Vì sao làm vậy?</b> Apriori đo hành vi <i>mua hàng thành công</i>. Nếu giữ lại đơn hủy và phiếu xuất hủy kho, một mặt hàng bị trả lại nhiều lần sẽ bị đếm trùng làm phồng giả tạo <code>support(X)</code>, dẫn đến sinh ra các luật kết hợp sai lệch.</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-head"><span class="pipe-num">BƯỚC 3</span><span class="pipe-metric">−${fmt(qu.non_product_rows)} dòng phí</span></div>
-      <div class="pipe-title">🏷️ Loại bỏ mã kế toán &amp; phí vận chuyển</div>
-      <div class="pipe-what">Lọc bỏ các mã <code>StockCode</code> không phải hàng hóa thực sự như <code>POST</code> (phí bưu điện), <code>DOT</code>, <code>M</code> (nhập tay), <code>BANK CHARGES</code>, <code>AMAZONFEE</code>, <code>CRUK</code>, <code>D</code> (chiết khấu).</div>
-      <div class="pipe-why"><b>Vì sao làm vậy?</b> Phí bưu điện (<code>POST</code>) xuất hiện ở hầu hết các đơn hàng quốc tế. Nếu không loại bỏ, Apriori sẽ sinh hàng loạt luật vô nghĩa kiểu <i>“Mua cốc sứ ⇒ Mua phí bưu điện (confidence 95%)”</i>, làm hỏng hoàn toàn hệ thống gợi ý Cross-sell.</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-head"><span class="pipe-num">BƯỚC 4</span><span class="pipe-metric">${fmt(b.clean_transactions)} giỏ → ${fmt(b.multi_item_baskets)} giỏ ≥2 món</span></div>
-      <div class="pipe-title">🧺 Gom nhóm theo InvoiceNo &amp; Khử trùng lặp</div>
-      <div class="pipe-what">Gom các dòng cùng <code>InvoiceNo</code> thành 1 tập hợp sản phẩm duy nhất (<code>set</code>), chuẩn hóa tên &amp; lấy giá trung vị cho mỗi SKU, sau đó giữ lại <b>${fmt(b.multi_item_baskets)} giỏ hàng có từ 2 sản phẩm trở lên</b> (loại ${b.single_item_baskets_pct}% giỏ chỉ có 1 món).</div>
-      <div class="pipe-why"><b>Vì sao làm vậy?</b> (1) Mô hình giỏ hàng kinh điển xét sự đồng xuất hiện nhị phân (có/không) nên cần khử dòng trùng trong cùng 1 hóa đơn. (2) Giỏ chỉ có 1 món không bao giờ tạo được tập phổ biến bậc $k \ge 2$; loại bỏ chúng giúp mẫu số $N = ${fmt(b.multi_item_baskets)}$ phản ánh đúng tập khách hàng có hành vi mua kèm.</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-head"><span class="pipe-num">BƯỚC 5</span><span class="pipe-metric">min_count = 140 (~0.77%)</span></div>
-      <div class="pipe-title">⚡ Khai phá Tập phổ biến $L_1, L_2, L_3$ bằng TID-set Apriori</div>
-      <div class="pipe-what">Áp dụng nguyên lý Apriori (Join $L_{k-1} \bowtie L_{k-1}$ &amp; Prune mọi ứng viên $C_k$ có tập con $(k-1)$ không thuộc $L_{k-1}$), kết hợp giao tập chỉ số hóa đơn (TID-set intersection) để tìm ra <b>1,161 tập $L_1$</b>, <b>2,777 tập $L_2$</b> và <b>1,167 tập $L_3$</b> (tổng 5,105 tập phổ biến).</div>
-      <div class="pipe-why"><b>Vì sao làm vậy?</b> Với ${fmt(b.distinct_items)} sản phẩm, vét cạn cần đếm $\binom{3900}{2} \approx 7.6$ triệu cặp và $\binom{3900}{3} \approx 9.8$ tỷ bộ ba! Nhờ cắt tỉa Apriori ở ngưỡng $\sigma \ge 140$ giỏ, số ứng viên cần kiểm tra giảm hơn <b>99.9%</b> mà vẫn đảm bảo toán học không bỏ sót bất kỳ tập phổ biến nào.</div>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-head"><span class="pipe-num">BƯỚC 6</span><span class="pipe-metric">11,972 luật → 1,000 luật đa dạng</span></div>
-      <div class="pipe-title">📐 Sinh luật kết hợp &amp; Phân tầng đa dạng hóa (4-Tier)</div>
-      <div class="pipe-what">Từ các tập $L_2, L_3$, sinh toàn bộ luật $A \Rightarrow B$ thỏa <code>confidence ≥ 20%</code> và <code>lift ≥ 1.2</code> (thu được 11,972 luật). Tiếp theo, chọn lọc phân tầng 4 lớp (bảo đảm 100% SKU cửa hàng đều có luật, cân bằng quota 7 ngành hàng, ưu tiên điểm <code>confidence × lift</code>) để xuất ra 1,000 luật vào <code>ecom_rules.json</code>.</div>
-      <div class="pipe-why"><b>Vì sao làm vậy?</b> Trong dữ liệu thật, một nhóm nhỏ sản phẩm ngách (như bộ thẻ đánh dấu thảo mộc <i>Herb Markers</i>) có <code>lift</code> tới 70–86×. Nếu chỉ lấy top theo Lift đơn thuần, 100% luật sẽ rơi vào nhóm thảo mộc khiến các ngành hàng chủ lực (Túi Jumbo, Tách trà, Đồng hồ…) không có gợi ý. Phân tầng giúp mọi sản phẩm trên Store đều kích hoạt được gợi ý chất lượng cao.</div>
-    </div>
-  </div></section>`;
 
-  h+=`<section><h2>6. Sản phẩm</h2><div class="grid2">
-  <div class="panel"><h3>Top 20 theo số giỏ chứa (support)</h3>${hbars(d.top_products_by_baskets.map(p=>({n:p.name||p.code,t:p.code+' '+p.name,v:p.support_pct})),v=>v+'%')}</div>
-  <div class="panel"><h3>Top 15 theo doanh thu</h3>${hbars(d.top_products_by_revenue.map(p=>({n:p.name||p.code,t:p.code,v:p.revenue})),gbp)}
-  <h3 style="margin-top:14px">Top 15 theo số lượng bán</h3>${hbars(d.top_products_by_quantity.map(p=>({n:p.name||p.code,t:p.code,v:p.qty})))}</div></div></section>`;
+    <!-- INTERACTIVE NAVIGATION TABS -->
+    <nav class="view-nav" aria-label="Chọn chuyên đề thống kê">
+      <button class="view-btn active" type="button" data-sec="funnel">🔬 1. Phễu Cắt tỉa &amp; Quy trình Apriori</button>
+      <button class="view-btn" type="button" data-sec="l1">🏆 2. Bestsellers &amp; Phân bố 169 Mặt hàng (L1)</button>
+      <button class="view-btn" type="button" data-sec="combos">🤝 3. Combo Mua chung: Thực tế vs. Ngẫu nhiên (L2/L3)</button>
+      <button class="view-btn" type="button" data-sec="dissector">⚡ 4. Giải phẫu Luật Gợi ý A ⇒ B (Tương tác)</button>
+      <button class="view-btn" type="button" data-sec="all" style="margin-left:auto">📑 Xem toàn bộ trên 1 trang</button>
+    </nav>
+  `;
 
-  h+=`<section><h2>7. Khách hàng</h2>${cards([
-    [fmt(o.customers),'khách hàng định danh'],[fmt(c.repeat_customers),'khách mua ≥ 2 lần'],
-    [fmt2(c.orders_per_customer.mean),'đơn trung bình / khách'],[c.orders_per_customer.median,'trung vị đơn / khách'],[c.orders_per_customer.max,'khách mua nhiều nhất (đơn)']
-  ])}</section>`;
+  // =========================================================================
+  // SECTION 1: PRUNING FUNNEL & 4-STEP PIPELINE
+  // =========================================================================
+  h += `
+    <section class="stat-sec active" id="sec-funnel">
+      <div class="sec-head">
+        <h2 class="sec-title">1. Phễu Cắt tỉa Không gian Tìm kiếm (Search Space Pruning) &amp; Quy trình Apriori</h2>
+        <p class="sec-sub">Tại sao không thể đếm vét cạn (Brute-force) mọi tổ hợp sản phẩm? Biểu đồ phễu bên trái minh họa cách <b>Tiên đề Apriori (Anti-monotone Property)</b> cắt giảm hơn <b>99%</b> số tổ hợp dư thừa.</p>
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <h3>Phễu Thu hẹp Ứng viên qua từng vòng lặp (k = 1 → 2 → 3)</h3>
+          <p class="panel-sub">So sánh số tổ hợp lý thuyết nếu vét cạn so với số tập phổ biến thực sự vượt ngưỡng <code>min_sup = ${o.min_support_count} giỏ (${o.min_support_pct}%)</code>.</p>
+          <div class="funnel-list">
+            <div class="funnel-stage">
+              <div class="funnel-top">
+                <span class="funnel-name">Vòng k = 1: Lọc mặt hàng đơn lẻ (C<sub>1</sub> → L<sub>1</sub>)</span>
+                <span class="funnel-nums">${o.distinct_items} món → Giữ lại ${o.l1_count} món L<sub>1</sub></span>
+              </div>
+              <div class="funnel-track">
+                <div class="funnel-bar-kept" style="width:${(o.l1_count / o.distinct_items * 100).toFixed(1)}%"></div>
+              </div>
+              <div class="funnel-note">
+                <span>Đạt chuẩn ≥ 30 giỏ: <b>80.5% (${o.l1_count} món)</b></span>
+                <span class="prune-badge">✂️ Tỉa 33 món (&lt; 30 giỏ) ngay từ vòng 1</span>
+              </div>
+            </div>
 
-  h+=`<section><h2>8. Thời gian</h2><div class="grid2">
-  <div class="panel"><h3>Doanh thu theo tháng</h3>${vcols(d.monthly.map(m=>m.month.slice(2)),d.monthly.map(m=>m.revenue),gbp)}
-  <p class="sub" style="margin-top:8px">Tháng 12/2011 chỉ có dữ liệu đến ngày 9. Cao điểm vào quý 4 (mùa quà tặng).</p></div>
-  <div class="panel"><h3>Số hóa đơn theo tháng</h3>${vcols(d.monthly.map(m=>m.month.slice(2)),d.monthly.map(m=>m.invoices))}</div>
-  <div class="panel"><h3>Hóa đơn theo giờ trong ngày</h3>${vcols(d.hourly_invoices.map(x=>x.hour+'h'),d.hourly_invoices.map(x=>x.invoices))}</div>
-  <div class="panel"><h3>Hóa đơn theo thứ trong tuần</h3>${vcols(d.weekday_invoices.map(x=>x.day),d.weekday_invoices.map(x=>x.invoices))}
-  <p class="sub" style="margin-top:8px">Không có hóa đơn vào thứ 7.</p></div></div></section>`;
+            <div class="funnel-stage">
+              <div class="funnel-top">
+                <span class="funnel-name">Vòng k = 2: Khai phá Cặp mua chung (C<sub>2</sub> → L<sub>2</sub>)</span>
+                <span class="funnel-nums">${fmt(c2_exhaustive)} cặp lý thuyết → ${fmt(o.l2_count)} cặp L<sub>2</sub></span>
+              </div>
+              <div class="funnel-track">
+                <div class="funnel-bar-kept" style="width:${(o.l2_count / c2_exhaustive * 100).toFixed(1)}%"></div>
+              </div>
+              <div class="funnel-note">
+                <span>Nhờ tỉa 33 món ở L<sub>1</sub>, bỏ qua ngay <b>${fmt(c2_exhaustive - c2_after_l1)} cặp</b> không cần đếm!</span>
+                <span class="prune-badge">✂️ Giảm 92.0% tổ hợp cặp</span>
+              </div>
+            </div>
 
-  h+=`<section><h2>9. Quốc gia (Top 40)</h2><div class="panel"><div class="tblwrap"><table>
-  <tr><th>Quốc gia</th><th class="n">Hóa đơn</th><th class="n">Doanh thu</th><th class="n">% doanh thu</th></tr>
-  ${d.countries.map(x=>`<tr><td>${esc(x.country)}</td><td class="n">${fmt(x.invoices)}</td><td class="n">${gbp(x.revenue)}</td><td class="n">${x.revenue_pct}%</td></tr>`).join('')}
-  </table></div></div></section>`;
+            <div class="funnel-stage">
+              <div class="funnel-top">
+                <span class="funnel-name">Vòng k = 3: Khai phá Bộ ba (C<sub>3</sub> → L<sub>3</sub>)</span>
+                <span class="funnel-nums">${fmt(c3_exhaustive)} bộ ba lý thuyết → ${fmt(o.l3_count)} bộ ba L<sub>3</sub></span>
+              </div>
+              <div class="funnel-track">
+                <div class="funnel-bar-kept" style="width:4%"></div>
+              </div>
+              <div class="funnel-note">
+                <span>Chỉ ghép những bộ ba mà cả 3 tập con 2 món đều thuộc L<sub>2</sub></span>
+                <span class="prune-badge">✂️ Giảm 99.89% không gian tìm kiếm</span>
+              </div>
+            </div>
 
-  h+=`<footer>Số liệu sinh bằng <code>scripts/build_retail_stats.py</code> → <code>src/data/retail_stats.json</code>.</footer>`;
-  document.getElementById('root').innerHTML=h;
+            <div class="funnel-stage">
+              <div class="funnel-top">
+                <span class="funnel-name">Bước Sinh luật: Lọc theo Confidence ≥ ${o.min_confidence_pct}% &amp; Lift ≥ ${o.min_lift}×</span>
+                <span class="funnel-nums">2,474 luật hợp lệ → ${fmt(o.curated_rules_count)} luật đưa lên Web</span>
+              </div>
+              <div class="funnel-track">
+                <div class="funnel-bar-kept" style="width:48.5%;background:linear-gradient(90deg,#059669,#10b981)"></div>
+              </div>
+              <div class="funnel-note">
+                <span>Loại bỏ các luật trùng hợp ngẫu nhiên có <code>Lift ≈ 1</code></span>
+                <span class="prune-badge" style="background:#ecfdf5;color:#047857;border-color:#a7f3d0">✅ Đảm bảo ý nghĩa thống kê</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Quy trình 4 bước Tiền xử lý &amp; Khai phá Luật</h3>
+          <p class="panel-sub">Giải thích lý do toán học đằng sau mỗi bước xử lý dữ liệu trước khi đưa lên giao diện.</p>
+          <div class="pipe-steps">
+            <div class="pipe-card">
+              <div class="pipe-top"><span class="pipe-step">BƯỚC 1</span><span class="pipe-stat">${fmt(o.transactions)} giao dịch POS</span></div>
+              <h4>Chuẩn hóa Ma trận Giỏ hàng Nhị phân (Binary Basket)</h4>
+              <p>Chuyển mỗi hóa đơn thành một tập hợp mặt hàng phân biệt <code>T<sub>i</sub> ⊆ I</code> (chỉ xét có/không xuất hiện, không nhân bản số lượng hộp trong 1 giỏ) để tính đúng xác suất đồng xuất hiện <code>P(A ∩ B)</code>.</p>
+            </div>
+            <div class="pipe-card">
+              <div class="pipe-top"><span class="pipe-step">BƯỚC 2</span><span class="pipe-stat">Tính chất Anti-monotone</span></div>
+              <h4>Cắt tỉa theo Tiên đề Apriori: <code>Sup(A ∪ B) ≤ Sup(A)</code></h4>
+              <p>Nếu mặt hàng <code>A</code> có <code>count(A) &lt; 30</code> (như <i>cooking chocolate</i> chỉ có 25 giỏ), mọi tập mở rộng chứa <code>A</code> chắc chắn cũng <code>&lt; 30</code> giỏ. Cắt tỉa ngay giúp tránh sinh <b>luật nhiễu (spurious rules)</b> từ mẫu quá nhỏ.</p>
+            </div>
+            <div class="pipe-card">
+              <div class="pipe-top"><span class="pipe-step">BƯỚC 3</span><span class="pipe-stat">Vertical TID-set Intersection</span></div>
+              <h4>Giao tập danh sách Hóa đơn (TID-set) tìm L<sub>2</sub>, L<sub>3</sub></h4>
+              <p>Lưu danh sách mã giỏ hàng <code>TID(A)</code> của mỗi món. Khi cần đếm cặp <code>{A, B}</code>, chỉ cần lấy lực lượng giao 2 tập hợp <code>|TID(A) ∩ TID(B)|</code> thay vì quét lại toàn bộ 9,835 dòng CSV.</p>
+            </div>
+            <div class="pipe-card">
+              <div class="pipe-top"><span class="pipe-step">BƯỚC 4</span><span class="pipe-stat">Confidence &amp; Lift Filtering</span></div>
+              <h4>Kiểm định Nhân quả bằng Confidence kết hợp Lift</h4>
+              <p>Nếu chỉ dùng <code>Confidence</code>, các món quá phổ biến như <i>whole milk (25.6%)</i> sẽ luôn được gợi ý một cách tầm thường. Bắt buộc <code>Lift ≥ 1.15×</code> để chứng minh <code>A</code> thực sự thúc đẩy khách mua <code>B</code>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  // =========================================================================
+  // SECTION 2: BESTSELLERS L1 & PARETO 169-ITEM BREAKDOWN
+  // =========================================================================
+  const top15 = d.top_products_by_baskets.slice(0, 15);
+  const maxBaskets = top15[0] ? top15[0].baskets : 1;
+  h += `
+    <section class="stat-sec" id="sec-l1">
+      <div class="sec-head">
+        <h2 class="sec-title">2. Mặt hàng Bán chạy nhất (L<sub>1</sub>) &amp; Cấu trúc Phân tầng 169 Mặt hàng</h2>
+        <p class="sec-sub">Trả lời câu hỏi: <b>"Mặt hàng nào bán chạy? Tại sao có món trên cửa hàng được gợi ý mua kèm, có món lại bị Apriori cắt tỉa?"</b></p>
+      </div>
+      <div class="grid2">
+        <div class="panel">
+          <h3>Biểu đồ Top 15 Mặt hàng Bán chạy nhất Siêu thị (L<sub>1</sub>)</h3>
+          <p class="panel-sub">Xếp hạng theo số giỏ hàng thực tế chứa sản phẩm: <code>Support(A) = Count(A) / 9,835</code>.</p>
+          <div class="bars">
+            ${top15.map((p, idx) => `<div class="bar-row">
+              <span class="bar-rank">#${idx + 1}</span>
+              <span class="bar-name" title="${esc(p.name)}">${esc(p.icon)} ${esc(p.name)}</span>
+              <span class="bar-track"><span class="bar-fill" style="display:block;width:${(100 * p.baskets / maxBaskets).toFixed(1)}%"></span></span>
+              <span class="bar-val"><b>${p.support_pct}%</b> (${fmt(p.baskets)})</span>
+            </div>`).join('')}
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Phân tầng Toàn bộ 169 Mặt hàng theo Ngưỡng Cắt tỉa Apriori</h3>
+          <p class="panel-sub">Giải thích vì sao trên trang <code>/shop</code> có đủ 169 mặt hàng nhưng chỉ 97 mặt hàng kích hoạt luật mua kèm.</p>
+
+          <div class="pareto-bar" title="Phân bố 169 mặt hàng">
+            <div class="pareto-seg" style="width:57.4%;background:#4f46e5">97 món (57.4%)</div>
+            <div class="pareto-seg" style="width:23.1%;background:#64748b">39 món (23.1%)</div>
+            <div class="pareto-seg" style="width:19.5%;background:#f59e0b">33 món (19.5%)</div>
+          </div>
+
+          <div class="tier-cards">
+            <div class="tier-card">
+              <div class="tier-head">
+                <span><i class="tier-dot" style="background:#4f46e5"></i>Nhóm 1: Đạt chuẩn L<sub>1</sub>, L<sub>2</sub> &amp; Có luật kết hợp A ⇒ B</span>
+                <span style="font-family:var(--mono);color:#4f46e5">97 / 169 mặt hàng</span>
+              </div>
+              <div class="tier-desc">Bản thân món hàng có <code>≥ 30</code> giỏ (L<sub>1</sub>), có ít nhất 1 cặp mua chung đạt <code>≥ 30</code> giỏ (L<sub>2</sub>) và thỏa <code>Conf ≥ 15%, Lift ≥ 1.15×</code>. Khi bấm vào trên <code>/shop</code> sẽ gợi ý ngay món mua kèm.</div>
+              <div class="tier-samples">
+                <span class="item-tag">🥛 whole milk (2,513)</span>
+                <span class="item-tag">🥬 other vegetables (1,903)</span>
+                <span class="item-tag">🥐 rolls/buns (1,809)</span>
+                <span class="item-tag">🍓 berries (327)</span>
+                <span class="item-tag">🥩 beef (516)</span>
+              </div>
+            </div>
+
+            <div class="tier-card">
+              <div class="tier-head">
+                <span><i class="tier-dot" style="background:#64748b"></i>Nhóm 2: Đạt L<sub>1</sub> đơn lẻ nhưng bị tỉa ở bước C<sub>2</sub> → L<sub>2</sub> (hoặc Lift)</span>
+                <span style="font-family:var(--mono);color:#475569">39 / 169 mặt hàng</span>
+              </div>
+              <div class="tier-desc">Mặt hàng đủ <code>≥ 30</code> giỏ đơn lẻ (vào L<sub>1</sub>), nhưng khách mua rải rác độc lập nên <b>không có cặp mua chung {A, B} nào đạt đủ 30 giỏ</b> (hoặc <code>Lift &lt; 1.15×</code>).</div>
+              <div class="tier-samples">
+                <span class="item-tag">🧽 dish cleaner (103 giỏ)</span>
+                <span class="item-tag">🥛 condensed milk (101 giỏ)</span>
+                <span class="item-tag">☕ instant coffee (73 giỏ)</span>
+                <span class="item-tag">🍺 canned beer (764 giỏ · Lift &lt; 1.15)</span>
+              </div>
+            </div>
+
+            <div class="tier-card">
+              <div class="tier-head">
+                <span><i class="tier-dot" style="background:#f59e0b"></i>Nhóm 3: Mặt hàng ít phổ biến — Bị tỉa ngay ở C<sub>1</sub> → L<sub>1</sub></span>
+                <span style="font-family:var(--mono);color:#b45309">33 / 169 mặt hàng</span>
+              </div>
+              <div class="tier-desc">Xuất hiện <b>dưới 30 giỏ hàng</b> (<code>Support &lt; 0.31%</code>). Bị loại ngay từ vòng 1 theo tính chất đóng dưới Apriori để chống nhiễu thống kê từ mẫu quá nhỏ.</div>
+              <div class="tier-samples">
+                <span class="item-tag">🐟 fish (29 giỏ)</span>
+                <span class="item-tag">🍫 cooking chocolate (25 giỏ)</span>
+                <span class="item-tag">☕ cocoa drinks (22 giỏ)</span>
+                <span class="item-tag">🍼 baby food (1 giỏ)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  // =========================================================================
+  // SECTION 3: COMBOS L2 & L3 (ACTUAL VS RANDOM EXPECTATION)
+  // =========================================================================
+  const topL2 = d.top_l2_combos.slice(0, 8);
+  const maxL2Count = topL2[0] ? topL2[0].count : 1;
+  const topL3 = d.top_l3_combos.slice(0, 10);
+  const maxL3Count = topL3[0] ? topL3[0].count : 1;
+
+  h += `
+    <section class="stat-sec" id="sec-combos">
+      <div class="sec-head">
+        <h2 class="sec-title">3. Combo Đi cùng nhau (L<sub>2</sub>, L<sub>3</sub>): Thực tế Mua chung vs. Giả định Độc lập Ngẫu nhiên</h2>
+        <p class="sec-sub">Trả lời câu hỏi: <b>"Tại sao biết 2 món đi cùng nhau do nhu cầu thực tế chứ không phải do cả 2 món đều bán chạy?"</b> — Hãy nhìn khoảng chênh lệch giữa thanh <b>Thực tế</b> (màu tím) và thanh <b>Ngẫu nhiên độc lập</b> (màu xám).</p>
+      </div>
+      <div class="grid2-eq">
+        <div class="panel">
+          <h3>So sánh Trực quan Top Cặp L<sub>2</sub>: Thực tế vs. Kỳ vọng Ngẫu nhiên</h3>
+          <p class="panel-sub">Nếu A và B độc lập, số giỏ mua chung ngẫu nhiên kỳ vọng là <code>E(A ∩ B) = Count(A) × Count(B) / 9,835</code>.</p>
+          <div class="combo-list">
+            ${topL2.map(c => {
+              const wAct = (c.count / maxL2Count * 100).toFixed(1);
+              const wRand = (c.expected_random_count / maxL2Count * 100).toFixed(1);
+              return `<div class="combo-card">
+                <div class="combo-top">
+                  <span class="combo-pair">${tags(c.items)}</span>
+                  <span class="lift-pill">Cao gấp ${c.cooccurrence_lift}× ngẫu nhiên (Sup ${c.support_pct}%)</span>
+                </div>
+                <div class="dual-bars">
+                  <div class="dual-row">
+                    <span class="dual-lbl">🟣 Mua chung thực tế</span>
+                    <div class="dual-track"><div class="dual-fill-actual" style="width:${wAct}%"></div></div>
+                    <span class="dual-num" style="color:var(--primary-dark)">${fmt(c.count)} giỏ</span>
+                  </div>
+                  <div class="dual-row">
+                    <span class="dual-lbl">⚪ Nếu mua ngẫu nhiên</span>
+                    <div class="dual-track"><div class="dual-fill-rand" style="width:${wRand}%"></div></div>
+                    <span class="dual-num" style="color:var(--text-muted)">${fmt(c.expected_random_count)} giỏ</span>
+                  </div>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Top 10 Bộ 3 Sản phẩm Mua cùng nhau (L<sub>3</sub> Triplets)</h3>
+          <p class="panel-sub">Các bộ 3 mặt hàng vượt qua cả 3 vòng lọc (<code>L<sub>1</sub> → L<sub>2</sub> → L<sub>3</sub></code>), phản ánh trọn vẹn một giỏ hàng nấu ăn hoặc bữa sáng gia đình.</p>
+          <div class="combo-list">
+            ${topL3.map((c, idx) => {
+              const w = (c.count / maxL3Count * 100).toFixed(1);
+              return `<div class="combo-card">
+                <div class="combo-top">
+                  <span class="combo-pair"><span style="font-family:var(--mono);color:var(--text-muted);margin-right:6px">#${idx + 1}</span>${tags(c.items)}</span>
+                  <span class="lift-pill" style="background:#eef2ff;color:#4338ca;border-color:#c7d2fe">${fmt(c.count)} giỏ (${c.support_pct}%)</span>
+                </div>
+                <div class="bar-track" style="height:10px">
+                  <div class="bar-fill" style="width:${w}%"></div>
+                </div>
+              </div>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+
+  // =========================================================================
+  // SECTION 4: INTERACTIVE RULE DISSECTOR (A => B)
+  // =========================================================================
+  const rules = d.top_recommendation_rules || [];
+  h += `
+    <section class="stat-sec" id="sec-dissector">
+      <div class="sec-head">
+        <h2 class="sec-title">4. Phòng Thí nghiệm Giải phẫu Luật Gợi ý A ⇒ B (Interactive Rule Dissector)</h2>
+        <p class="sec-sub">Hãy <b>bấm chọn một luật bất kỳ ở danh sách bên trái</b> để xem sơ đồ giao tập giỏ hàng (Venn Diagram), cách thế số trực tiếp vào 3 công thức <code>Support</code>, <code>Confidence</code>, <code>Lift</code> và sự nhảy vọt xác suất mua hàng.</p>
+      </div>
+
+      <div class="dissector-layout">
+        <div class="panel" style="padding:1.5vh 1.1vw">
+          <h3>Chọn Luật A ⇒ B để mổ xẻ (${rules.length} luật tiêu biểu)</h3>
+          <p class="panel-sub">Bấm vào từng thẻ để cập nhật biểu đồ toán học bên phải.</p>
+          <div class="rule-selector-list" id="ruleSelectorList">
+            ${rules.map((r, idx) => `
+              <button type="button" class="rule-pick-btn ${idx === SELECTED_RULE_IDX ? 'active' : ''}" data-ridx="${idx}">
+                <div class="rp-top">
+                  <span>${esc(r.antecedent.join(' + '))} → <span style="color:var(--primary-dark)">${esc(r.consequent.join(' + '))}</span></span>
+                  <span class="lift-pill">${r.lift}×</span>
+                </div>
+                <div class="rp-metrics">
+                  <span>Conf: <b>${r.confidence_pct}%</b> (${r.count}/${r.antecedent_count})</span>
+                  <span>Sup: <b>${r.support_pct}%</b></span>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="dissect-stage" id="dissectStage"></div>
+      </div>
+    </section>
+  `;
+
+  document.getElementById('root').innerHTML = h;
+
+  // Bind View Navigation Tabs
+  document.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sec = btn.getAttribute('data-sec');
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b === btn));
+      if (sec === 'all') {
+        document.querySelectorAll('.stat-sec').forEach(s => s.classList.add('active'));
+      } else {
+        document.querySelectorAll('.stat-sec').forEach(s => s.classList.toggle('active', s.id === 'sec-' + sec));
+      }
+    });
+  });
+
+  // Bind Rule Dissector buttons
+  document.querySelectorAll('.rule-pick-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      SELECTED_RULE_IDX = +btn.getAttribute('data-ridx');
+      document.querySelectorAll('.rule-pick-btn').forEach(b => b.classList.toggle('active', b === btn));
+      renderDissectorStage();
+    });
+  });
+
+  renderDissectorStage();
 }
 
-fetch('/api/retail-stats').then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(render)
- .catch(e=>{document.getElementById('root').innerHTML=`<div class="err">Không tải được số liệu: ${esc(e.message)}. Chạy <code>python scripts/build_retail_stats.py "Online Retail.xlsx"</code> để tạo file.</div>`});
+function renderDissectorStage() {
+  const stage = document.getElementById('dissectStage');
+  if (!stage || !STATS_DATA) return;
+  const rules = STATS_DATA.top_recommendation_rules || [];
+  const r = rules[SELECTED_RULE_IDX] || rules[0];
+  if (!r) return;
+
+  const N = STATS_DATA.overview.transactions;
+  const countA = r.antecedent_count;
+  const countAB = r.count;
+  const suppBPct = r.consequent_support_pct;
+  const countB = Math.round((suppBPct / 100) * N);
+  const antStr = r.antecedent.join(' + ');
+  const conStr = r.consequent.join(' + ');
+
+  const priorWidth = Math.min(100, Math.max(4, suppBPct * 1.6)).toFixed(1);
+  const postWidth = Math.min(100, Math.max(8, r.confidence_pct * 1.6)).toFixed(1);
+
+  stage.innerHTML = `
+    <div class="dissect-banner">
+      <div>
+        <div style="font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)">Luật kết hợp đang phân tích</div>
+        <div class="dissect-rule-title">
+          Nếu giỏ hàng có <span class="item-tag" style="font-size:1rem;background:#eef2ff;border-color:#c7d2fe;color:#3730a3">${esc(antStr)}</span>
+          ⇒ Gợi ý mua thêm <span class="item-tag" style="font-size:1rem;background:#ecfdf5;border-color:#a7f3d0;color:#047857">${esc(conStr)}</span>
+        </div>
+      </div>
+      <span class="lift-pill" style="font-size:1.05rem;padding:6px 14px">Lift = ${r.lift}×</span>
+    </div>
+
+    <div class="dissect-reason">
+      💡 <b>Ý nghĩa hành vi tiêu dùng:</b> ${esc(r.reason)}
+    </div>
+
+    <div class="venn-and-prob">
+      <div class="venn-box">
+        <div style="font-weight:800;font-size:.92rem;margin-bottom:6px">Sơ đồ Giao tập Giỏ hàng trên N = ${fmt(N)} hóa đơn</div>
+        <svg viewBox="0 0 420 195" style="width:100%;max-width:420px;height:auto">
+          <rect x="6" y="6" width="408" height="183" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+          <text x="18" y="26" font-size="11" font-weight="700" fill="#64748b">Không gian mẫu N = ${fmt(N)} giỏ hàng</text>
+
+          <circle cx="165" cy="108" r="64" fill="rgba(79,70,229,0.16)" stroke="#4f46e5" stroke-width="2.5"/>
+          <circle cx="255" cy="108" r="64" fill="rgba(16,185,129,0.16)" stroke="#10b981" stroke-width="2.5"/>
+
+          <text x="122" y="96" text-anchor="middle" font-size="11.5" font-weight="800" fill="#312e81">Tập A</text>
+          <text x="122" y="113" text-anchor="middle" font-size="12" font-weight="800" fill="#312e81">${fmt(countA)} giỏ</text>
+          <text x="122" y="128" text-anchor="middle" font-size="10" fill="#4338ca">(Chỉ A: ${fmt(countA - countAB)})</text>
+
+          <text x="298" y="96" text-anchor="middle" font-size="11.5" font-weight="800" fill="#065f46">Tập B</text>
+          <text x="298" y="113" text-anchor="middle" font-size="12" font-weight="800" fill="#065f46">${fmt(countB)} giỏ</text>
+          <text x="298" y="128" text-anchor="middle" font-size="10" fill="#047857">(Sup: ${suppBPct}%)</text>
+
+          <text x="210" y="102" text-anchor="middle" font-size="11" font-weight="800" fill="#0f172a">A ∩ B</text>
+          <text x="210" y="119" text-anchor="middle" font-size="13.5" font-weight="800" fill="#b45309">${fmt(countAB)} giỏ</text>
+        </svg>
+      </div>
+
+      <div class="prob-box">
+        <div style="font-weight:800;font-size:.95rem">Sự nhảy vọt Xác suất mua "${esc(conStr)}" (B)</div>
+        <p style="font-size:.83rem;color:var(--text-muted)">So sánh xác suất tiên nghiệm <code>P(B)</code> (khách bất kỳ) và xác suất hậu nghiệm <code>P(B | A)</code> (khi biết khách đã chọn A):</p>
+
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+            <span>⚪ Xác suất mua <b>${esc(conStr)}</b> tự nhiên <code>P(B)</code>:</span>
+            <b style="font-family:var(--mono)">${suppBPct}% (${fmt(countB)}/${fmt(N)})</b>
+          </div>
+          <div class="dual-track" style="height:14px"><div class="dual-fill-rand" style="width:${priorWidth}%"></div></div>
+        </div>
+
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px">
+            <span>🟣 Khi giỏ đã có <b>${esc(antStr)}</b> <code>P(B | A)</code>:</span>
+            <b style="font-family:var(--mono);color:var(--primary-dark)">${r.confidence_pct}% (${fmt(countAB)}/${fmt(countA)})</b>
+          </div>
+          <div class="dual-track" style="height:14px"><div class="dual-fill-actual" style="width:${postWidth}%"></div></div>
+        </div>
+
+        <div style="font-size:.84rem;background:#eef2ff;color:#312e81;padding:8px 11px;border-radius:8px;font-weight:600">
+          🚀 Việc xuất hiện <b>${esc(antStr)}</b> trong giỏ làm xác suất khách mua thêm <b>${esc(conStr)}</b> tăng vọt từ <b>${suppBPct}%</b> lên <b>${r.confidence_pct}%</b> (gấp <b>${r.lift} lần</b>)!
+        </div>
+      </div>
+    </div>
+
+    <div class="formula-cards-3">
+      <div class="f-card">
+        <div class="f-card-head">1. Độ phổ biến (Support)</div>
+        <div class="f-card-eq">Support(A ⇒ B) = Count(A ∪ B) / N</div>
+        <div class="f-card-calc">= ${fmt(countAB)} / ${fmt(N)} = ${r.support_pct}%</div>
+        <div class="f-card-desc">Có <b>${fmt(countAB)} giỏ hàng thực tế</b> chứa đồng thời cả <i>${esc(antStr)}</i> và <i>${esc(conStr)}</i> (vượt ngưỡng min_sup = 30 giỏ).</div>
+      </div>
+      <div class="f-card">
+        <div class="f-card-head">2. Độ tin cậy (Confidence)</div>
+        <div class="f-card-eq">Conf(A ⇒ B) = Count(A ∪ B) / Count(A)</div>
+        <div class="f-card-calc">= ${fmt(countAB)} / ${fmt(countA)} = ${r.confidence_pct}%</div>
+        <div class="f-card-desc">Trong <b>${fmt(countA)} giỏ</b> có mua <i>${esc(antStr)}</i>, có đúng <b>${fmt(countAB)} giỏ (${r.confidence_pct}%)</b> mua kèm thêm <i>${esc(conStr)}</i>.</div>
+      </div>
+      <div class="f-card">
+        <div class="f-card-head">3. Độ nâng tương quan (Lift)</div>
+        <div class="f-card-eq">Lift(A ⇒ B) = Conf(A ⇒ B) / Sup(B)</div>
+        <div class="f-card-calc">= ${r.confidence_pct}% / ${suppBPct}% = ${r.lift}×</div>
+        <div class="f-card-desc">Vì <code>Lift = ${r.lift}× &gt; 1</code>, khẳng định mối liên hệ đồng xuất hiện mang tính thúc đẩy dương (Positive Correlation), không phải ngẫu nhiên.</div>
+      </div>
+    </div>
+  `;
+}
+
+fetch('/api/retail-stats')
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(render)
+  .catch(e => {
+    document.getElementById('root').innerHTML = `<div class="err">Không tải được số liệu: ${esc(e.message)}</div>`;
+  });
 </script>
 </body>
 </html>

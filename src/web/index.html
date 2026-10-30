@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Apriori Từng Bước</title>
+<title>Apriori Từng Bước — BasketIQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="/app.css">
 <style>
 *{box-sizing:border-box}
@@ -16,9 +16,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;text-wra
 button,select,input,textarea{font:inherit;color:inherit}
 code,.set,.tid{font-family:var(--mono)}
 sub{font-size:.7em;line-height:0}
-.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;padding-block:18px 14px;border-bottom:1px solid var(--line)}
-.brand h1{font-size:1.75rem;line-height:1.1}
-.brand p{margin:4px 0 0;color:var(--muted);font-size:.92rem;max-width:70ch}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 32px;padding-block:14px 12px;border-bottom:1px solid var(--line);flex-shrink:0}
+.brand h1{font-size:1.65rem;line-height:1.1}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:.9rem;max-width:70ch}
 .controls{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 16px}
 .field{display:flex;flex-direction:column;gap:4px}
 .field label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
@@ -36,6 +36,7 @@ sub{font-size:.7em;line-height:0}
 .db{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:var(--shadow);height:100%;overflow-y:auto}
 @media (max-width:900px){.db{position:static;max-height:none;height:auto}}
 .db h2{font-size:1.2rem}
+.db .iset{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .db .meta{color:var(--muted);font-size:.86rem;margin:4px 0 10px;font-variant-numeric:tabular-nums}
 .db table{width:100%;border-collapse:collapse;font-size:.95rem}
 .db th{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
@@ -46,16 +47,15 @@ sub{font-size:.7em;line-height:0}
 .tr-items{display:flex;flex-wrap:wrap;gap:4px}
 .it{display:inline-block;font-family:var(--mono);font-size:.86rem;padding:1px 7px;border-radius:5px;background:var(--surface-2);border:1px solid var(--line);line-height:1.5}
 .it.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
-.db details{margin-top:12px}
-.db summary{cursor:pointer;color:var(--accent);font-weight:500;font-size:.92rem}
-.db textarea{width:100%;min-height:150px;margin-top:8px;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:6px;padding:8px;font-family:var(--mono);font-size:.85rem;resize:vertical}
-.db .hint{font-size:.8rem;color:var(--muted);margin:6px 0}
 .legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-size:.8rem;color:var(--muted)}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line-strong);background:var(--surface-2)}
 .legend .lk::before{background:var(--keep-bg);border-color:var(--keep)}
 .legend .ld::before{background:var(--drop-bg);border-color:var(--drop)}
 .legend .lp::before{background:var(--prune-bg);border-color:var(--prune)}
-.legend .lh::before{background:var(--hit);border-color:var(--hit-line)}
+.legend .lD::before{background:var(--drop);border-color:var(--drop)}
+.legend .la::before{background:var(--accent-bg);border-color:var(--accent)}
+.legend .lx::before{background:var(--drop-bg);border-color:var(--drop-line);border-style:dashed}
+.legend .lg::before{background:transparent;border-style:dashed}
 
 .stage{min-width:0;display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden}
 @media (max-width:900px){.stage{height:auto;overflow:visible}}
@@ -143,14 +143,33 @@ table.t .frac{font-variant-numeric:tabular-nums}
 .boxed{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;border:1.5px solid var(--ink);border-radius:6px;padding:8px 12px;font-family:var(--mono);font-size:1rem}
 
 h3.sec{font-size:1.25rem;margin:22px 0 10px}
-.lattice{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
-.lat-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.lat-row .lv{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;min-width:72px}
+.latwrap{overflow-x:auto;margin:0 0 10px;padding-bottom:4px}
+.latwrap svg{display:block;margin:0 auto;font-family:var(--mono);font-size:12px}
+.latwrap text.lk{fill:var(--muted);font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.06em}
+.ln{cursor:pointer}
+.ln rect{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.2;transition:stroke-width .1s}
+.ln text{fill:var(--muted)}
+.ln:hover rect,.ln.pinned rect{stroke:var(--hit-line);stroke-width:2.5}
+.ln-k rect{fill:var(--keep-bg);stroke:var(--keep-line)} .ln-k text{fill:var(--keep);font-weight:600}
+.ln-d rect{fill:var(--drop);stroke:var(--drop)} .ln-d text{fill:var(--on-accent);font-weight:600}
+.ln-p rect{fill:var(--prune-bg);stroke:var(--prune)} .ln-p text{fill:var(--prune);font-weight:600}
+.ln-x rect{fill:var(--drop-bg);stroke:var(--drop-line);stroke-dasharray:3 2} .ln-x text{fill:var(--drop);opacity:.8}
+.ln-a rect{fill:var(--accent-bg);stroke:var(--accent)} .ln-a text{fill:var(--accent-ink);font-weight:600}
+.ln-g rect{fill:none;stroke:var(--line);stroke-dasharray:3 2} .ln-g text{fill:var(--muted);opacity:.7}
+.le{fill:none;stroke:var(--line);stroke-width:1.2;opacity:.6}
+.le-k{stroke:var(--accent);opacity:.5}
+.le-a{stroke:var(--accent);opacity:.5;stroke-dasharray:4 3}
+.le-d{stroke:var(--drop);opacity:.6}
+.le-p{stroke:var(--prune);opacity:.6}
+.le-x{stroke:var(--drop-line);opacity:.55}
+.latcap{max-width:78ch;margin:0 0 10px}
+.latopt{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:0 0 10px}
+.latopt label{cursor:pointer}
+.abbr{font-size:.8rem;color:var(--muted);margin:2px 0 8px}
 .fade{animation:fade .25s ease-out}
 @keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.fade{animation:none}}
 .err{background:var(--drop-bg);border:1px solid var(--drop-line);color:var(--drop);padding:10px 14px;border-radius:8px;margin-bottom:12px}
-.srcnote{font-size:.82rem;color:var(--muted);margin-top:10px}
 </style>
 </head>
 <body>
@@ -158,14 +177,15 @@ h3.sec{font-size:1.25rem;margin:22px 0 10px}
   <div class="app-header-inner">
     <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
-      <a href="/shop"><span aria-hidden="true">🛍️</span>Cửa hàng</a>
-      <a href="/" class="active" aria-current="page"><span aria-hidden="true">🔬</span>Demo thuật toán</a>
-      <a href="/stats"><span aria-hidden="true">📊</span>Thống kê dataset</a>
-      <a href="/admin"><span aria-hidden="true">🛠️</span>Admin</a>
+      <a href="/shop">Cửa hàng</a>
+      <a href="/" class="active" aria-current="page">Demo thuật toán</a>
+      <a href="/stats">Thống kê Apriori</a>
+      <a href="/admin">Admin</a>
     </nav>
     <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
   </div>
 </header>
+
 <header class="top">
   <div class="brand">
     <h1>Apriori từng bước</h1>
@@ -173,8 +193,7 @@ h3.sec{font-size:1.25rem;margin:22px 0 10px}
   </div>
   <div class="controls">
     <div class="field"><label for="preset">Bộ dữ liệu</label><select id="preset"></select></div>
-    <div class="field"><label for="supmode">min_sup theo</label><select id="supmode"><option value="count">số giao dịch (σ)</option><option value="pct">tỉ lệ %</option></select></div>
-    <div class="field"><label for="minsup">min_sup</label><div class="row"><input id="minsup" type="number" min="1" step="1" value="2"><span class="unit" id="supunit"></span></div></div>
+    <div class="field"><label for="minsup">min_sup</label><div class="row"><input id="minsup" type="number" min="0" max="100" step="5" value="30"><span class="unit" id="supunit">%</span></div></div>
     <div class="field"><label for="minconf">min_conf</label><div class="row"><input id="minconf" type="number" min="0" max="100" step="5" value="70"><span class="unit">%</span></div></div>
     <button class="btn" id="run">Chạy lại</button>
   </div>
@@ -182,17 +201,20 @@ h3.sec{font-size:1.25rem;margin:22px 0 10px}
 
 <main class="wrap">
   <aside class="db" aria-label="Cơ sở dữ liệu giao dịch">
+    <div class="iset">
+      <h2>Tập item I</h2>
+      <div class="meta">đã sắp theo thứ tự từ điển</div>
+      <div class="setlist" id="itemlist"></div>
+    </div>
     <h2>CSDL giao dịch D</h2>
     <div class="meta" id="dbmeta"></div>
     <div id="dbtable"></div>
-    <div class="legend"><span class="lh">giao dịch chứa itemset đang xem</span></div>
-    <details>
-      <summary>Chỉnh sửa dữ liệu</summary>
-      <p class="hint">Mỗi dòng là một giao dịch. Có thể ghi <code>TID: item, item</code> hoặc chỉ <code>item, item</code>.</p>
-      <textarea id="baskets" spellcheck="false"></textarea>
-      <div style="margin-top:8px"><button class="btn ghost" id="apply">Áp dụng dữ liệu</button></div>
-    </details>
-    <div class="srcnote" id="srcnote"></div>
+    <div style="display:none" aria-hidden="true">
+      <select id="supmode"><option value="pct" selected>%</option><option value="count">count</option></select>
+      <textarea id="baskets"></textarea>
+      <button id="apply" type="button"></button>
+      <div id="srcnote"></div>
+    </div>
   </aside>
 
   <section class="stage">
@@ -233,9 +255,6 @@ function parseBaskets(text){
   return out;
 }
 
-// All Apriori join/prune/scan/rule-generation logic lives server-side in
-// src/core/apriori.py (build_apriori_trace). This helper only enumerates
-// combinations for the purely illustrative "lattice" panel in the summary step.
 function combos(arr, k, start=0, cur=[], out=[]){
   if (cur.length === k){ out.push(cur.slice()); return out; }
   for (let i=start;i<arr.length;i++){ cur.push(arr[i]); combos(arr,k,i+1,cur,out); cur.pop(); }
@@ -247,9 +266,9 @@ function makeCmpSet(items){
   return (a,b) => { for (let i=0;i<Math.min(a.length,b.length);i++){ const d = rank.get(a[i]) - rank.get(b[i]); if (d) return d; } return a.length-b.length; };
 }
 
-// Sends the parsed transactions to the Python backend and reconstructs the
-// Map/Set fields the renderer expects from the JSON-safe response.
-async function runApriori(D, minCount, minConf){
+async function runApriori(D, minSup, minConf){
+  const N = D.length;
+  const minCount = Math.max(1, Math.ceil(minSup * N - 1e-9));
   const res = await fetch('/api/apriori', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -260,20 +279,19 @@ async function runApriori(D, minCount, minConf){
   payload.count = new Map(Object.entries(payload.count));
   payload.pruned = new Set(payload.pruned);
   payload.cmpSet = makeCmpSet(payload.items);
+  payload.minSup = minSup;
   return payload;
 }
 
-const state = { D: [], R: null, i: 0, hl: null, pin: null, minMode:'count', minRaw:2 };
+const state = { D: [], R: null, i: 0, hl: null, pin: null, latFull: false };
 const $ = id => document.getElementById(id);
 
 function initPresets(){
   $('preset').innerHTML = PRESETS.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');
   $('preset').addEventListener('change', ()=> loadPreset($('preset').value));
-  $('supmode').addEventListener('change', ()=>{ syncSupUnit(true); run(); });
   $('minsup').addEventListener('change', run);
   $('minconf').addEventListener('change', run);
   $('run').addEventListener('click', run);
-  $('apply').addEventListener('click', ()=>{ $('preset').value = 'custom'; $('srcnote').textContent = PRESETS.find(p=>p.id==='custom').src; run(); });
   $('prev').addEventListener('click', ()=>go(state.i-1));
   $('next').addEventListener('click', ()=>go(state.i+1));
   document.addEventListener('keydown', e=>{
@@ -290,45 +308,27 @@ function loadPreset(id){
   const p = PRESETS.find(x=>x.id===id) || PRESETS[0];
   $('preset').value = p.id;
   $('baskets').value = p.text;
-  $('supmode').value = p.mode;
-  $('minsup').value = p.minsup;
+  state.D = parseBaskets(p.text);
+  const N = state.D.length || 1;
+  const supPct = p.mode === 'count' ? Math.round((p.minsup / N) * 100) : p.minsup;
+  $('minsup').value = supPct;
   $('minconf').value = p.minconf;
-  $('srcnote').textContent = p.src;
   return run();
-}
-
-function syncSupUnit(convert){
-  const N = parseBaskets($('baskets').value).length;
-  const mode = $('supmode').value;
-  const inp = $('minsup');
-  if (convert && N){
-    const v = parseFloat(inp.value) || 0;
-    inp.value = mode === 'pct' ? Math.round(v / N * 100) : Math.max(1, Math.ceil(v / 100 * N));
-  }
-  inp.step = mode === 'pct' ? 5 : 1;
-  inp.max = mode === 'pct' ? 100 : (N || 999);
-  $('supunit').textContent = mode === 'pct' ? '%' : 'giao dịch';
 }
 
 async function run(){
   state.D = parseBaskets($('baskets').value);
   const N = state.D.length;
-  const mode = $('supmode').value;
-  const raw = parseFloat($('minsup').value) || 0;
-  const minCount = mode === 'pct' ? Math.max(1, Math.ceil(raw/100 * N - 1e-9)) : Math.max(1, Math.round(raw));
+  const minSup = (parseFloat($('minsup').value) || 0) / 100;
   const minConf = (parseFloat($('minconf').value) || 0) / 100;
-  state.minMode = mode; state.minRaw = raw;
   state.hl = null; state.pin = null;
-  syncSupUnit(false);
   if (!N){
     state.R = null;
-    $('step').innerHTML = '<div class="err">Chưa có giao dịch nào. Hãy nhập dữ liệu ở ô bên trái rồi bấm "Áp dụng dữ liệu".</div>';
+    $('step').innerHTML = '<div class="err">Chưa có giao dịch nào.</div>';
     $('rail').innerHTML = ''; $('pos').textContent = ''; renderDB(); return;
   }
-  $('step').innerHTML = '<p class="lead muted">Đang phân tích trên máy chủ…</p>';
-  $('rail').innerHTML = ''; $('pos').textContent = '';
   try {
-    state.R = await runApriori(state.D, minCount, minConf);
+    state.R = await runApriori(state.D, minSup, minConf);
   } catch (err){
     state.R = null;
     $('step').innerHTML = `<div class="err">Không thể phân tích: ${esc(err.message)}</div>`;
@@ -344,7 +344,7 @@ function renderDB(){
   const R = state.R, N = state.D.length;
   const hl = state.pin || state.hl;
   const hs = hl ? new Set(hl) : null;
-  $('dbmeta').innerHTML = R ? `N = ${N} giao dịch · m = ${R.items.length} item · min_sup = ${R.minCount}/${N} (${pct(R.minCount/N)}) · min_conf = ${pct(R.minConf)}` : `N = ${N}`;
+  $('dbmeta').innerHTML = R ? `N = ${N} giao dịch · m = ${R.items.length} item · min_sup = ${pct(R.minSup)} · min_conf = ${pct(R.minConf)}` : `N = ${N}`;
   $('dbtable').innerHTML = `<table><thead><tr><th>TID</th><th>Items</th></tr></thead><tbody>` + state.D.map(t=>{
     const hit = hs && hl.every(x=>t.items.includes(x));
     return `<tr class="${hit?'hit':''}"><td class="tid">${esc(t.tid)}</td><td><div class="tr-items">${t.items.map(i=>`<span class="it ${hs&&hs.has(i)?'on':''}">${esc(i)}</span>`).join('')}</div></td></tr>`;
@@ -355,12 +355,19 @@ function go(i){
   const R = state.R; if (!R) return;
   state.i = Math.max(0, Math.min(R.steps.length-1, i));
   state.pin = null; state.hl = null;
-  renderRail(); renderStep(); renderDB();
+  renderRail(); renderItems(); renderStep(); renderDB();
   $('prev').disabled = state.i === 0;
   $('next').disabled = state.i === R.steps.length-1;
   $('pos').textContent = `Bước ${state.i+1} / ${R.steps.length}`;
   const el = $('step'); el.classList.remove('fade'); void el.offsetWidth; el.classList.add('fade');
   if (window.innerWidth < 900) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function renderItems(){
+  const el = $('itemlist');
+  if (!el || !state.R) return;
+  el.innerHTML = state.R.items.map(i=>`<span class="set a" ${dataset([i])}>${esc(i)}</span>`).join('');
+  bindHover(el);
 }
 
 function chipLabel(s){
@@ -395,6 +402,7 @@ const setList = (arr, cls='') => arr.length ? arr.map(s=>setHTML(s,cls)).join(' 
 const dataset = arr => `data-hl="${esc(arr.join('|'))}"`;
 
 function bindHover(root){
+  if (!root || !root.querySelectorAll) return;
   root.querySelectorAll('[data-hl]').forEach(el=>{
     const items = el.dataset.hl.split('|');
     el.classList.add('hover');
@@ -402,7 +410,7 @@ function bindHover(root){
     el.addEventListener('mouseleave', ()=>{ if (!state.pin) setHL(null); });
     el.addEventListener('click', ()=>{
       const same = state.pin && key(state.pin) === key(items);
-      root.querySelectorAll('.pinned').forEach(x=>x.classList.remove('pinned'));
+      if (document.querySelectorAll) document.querySelectorAll('.pinned').forEach(x=>x.classList.remove('pinned'));
       state.pin = same ? null : items;
       if (!same) el.classList.add('pinned');
       setHL(same ? null : items);
@@ -410,47 +418,147 @@ function bindHover(root){
   });
 }
 
+function abbrevMap(items){
+  const low = items.map(s=>s.toLowerCase());
+  const map = new Map();
+  items.forEach((it,i)=>{
+    let ab = it;
+    for (let L=1; L<it.length; L++){
+      const p = low[i].slice(0,L);
+      if (!low.some((o,j)=>j!==i && o.startsWith(p))){ ab = it.slice(0,L); break; }
+    }
+    map.set(it, ab);
+  });
+  return map;
+}
+
+function latticeState(R, upto){
+  const st = new Map();
+  for (let i=0;i<=upto;i++){
+    const s = R.steps[i];
+    if (s.type==='join'){ for (const c of s.cands) st.set(key(c),'a'); }
+    else if (s.type==='prune'){ for (const r of s.rows) if (!r.keep) st.set(key(r.c),'p'); }
+    else if (s.type==='scan'){ for (const r of s.rows) st.set(key(r.c), r.keep?'k':'d'); }
+  }
+  return st;
+}
+
+function latticeModel(R, upto){
+  const m = R.items.length;
+  const st = latticeState(R, upto);
+  const status = new Map();
+  const rows = [];
+  const exact = m <= 12;
+  if (exact){
+    for (let k=1;k<=m;k++){
+      const all = combos(R.items,k).sort(R.cmpSet);
+      for (const c of all){
+        const kk = key(c);
+        let cls = st.get(kk);
+        if (!cls){
+          cls = 'g';
+          for (let i=0;i<c.length;i++){
+            const s = status.get(key(c.filter((_,j)=>j!==i)));
+            if (s==='d'||s==='p'||s==='x'){ cls='x'; break; }
+          }
+        }
+        status.set(kk, cls);
+      }
+      rows.push(all);
+    }
+  } else {
+    for (const [kk,cls] of st){ const c = kk.split('|'); if (!rows[c.length-1]) rows[c.length-1] = []; rows[c.length-1].push(c); status.set(kk,cls); }
+    for (let k=0;k<rows.length;k++) rows[k] = (rows[k]||[]).sort(R.cmpSet);
+  }
+  const stats = { k:0, d:0, p:0, x:0, g:0, a:0 };
+  for (const v of status.values()) stats[v]++;
+  return { rows, status, stats, exact };
+}
+
+const LAT_TITLE = { k:'frequent (đã đếm)', d:'đã đếm, không frequent', p:'sinh ở join, bị prune (không đếm)', x:'bị cắt tỉa ngầm: chứa tập con không frequent, không cần sinh hay đếm', a:'ứng viên đang chờ đếm', g:'chưa xét' };
+
+function latticeSVG(R, model, full){
+  const CW=7.2, PX=8, H=26, GX=8, RH=88, PAD=14, ML=54;
+  const shown = model.rows.map((row,i)=>({ k:i+1, nodes: full ? row : row.filter(c=>'akdp'.includes(model.status.get(key(c)))) })).filter(r=>r.nodes.length);
+  if (!shown.length) return '<p class="muted small">Chưa có itemset nào được sinh.</p>';
+  let ab = null;
+  const label = c => '{' + c.map(x=>ab ? ab.get(x) : x).join(',') + '}';
+  const wOf = c => Math.max(30, label(c).length*CW + 2*PX);
+  const rowW = nodes => nodes.reduce((a,c)=>a + wOf(c), 0) + GX*(nodes.length-1);
+  let W = Math.max(...shown.map(r=>rowW(r.nodes)));
+  if (W > 1100){ ab = abbrevMap(R.items); W = Math.max(...shown.map(r=>rowW(r.nodes))); }
+  const pos = new Map();
+  let y = PAD;
+  for (const r of shown){
+    let x = ML + (W - rowW(r.nodes))/2;
+    for (const c of r.nodes){ const w = wOf(c); pos.set(key(c), { x, y, w, cx: x + w/2 }); x += w + GX; }
+    r.y = y; y += RH;
+  }
+  const totalW = Math.round(ML + W + PAD), totalH = Math.round(y - RH + H + PAD);
+  let back = '', front = '', nodes = '';
+  for (const r of shown){
+    nodes += `<text class="lk" x="${PAD}" y="${r.y+H/2}" dy=".35em">k = ${r.k}</text>`;
+    for (const c of r.nodes){
+      const kk = key(c), p = pos.get(kk), cls = model.status.get(kk);
+      if (r.k > 1) for (let i=0;i<c.length;i++){
+        const q = pos.get(key(c.filter((_,j)=>j!==i)));
+        if (!q) continue;
+        const line = `<line class="le le-${cls}" x1="${q.cx.toFixed(1)}" y1="${q.y+H}" x2="${p.cx.toFixed(1)}" y2="${p.y}"/>`;
+        if (cls==='k' || cls==='a' || cls==='d') front += line; else back += line;
+      }
+      const n = R.count.get(kk);
+      const title = LAT_TITLE[cls] + (n !== undefined ? ` · support = ${pct(n/R.N)}` : '');
+      nodes += `<g class="ln ln-${cls}" ${dataset(c)} transform="translate(${p.x.toFixed(1)},${p.y})"><title>${esc(title)}</title><rect width="${p.w.toFixed(1)}" height="${H}" rx="6"/><text x="${(p.w/2).toFixed(1)}" y="${H/2}" dy=".35em" text-anchor="middle">${esc(label(c))}</text></g>`;
+    }
+  }
+  const fit = totalW > 1100 ? ' style="width:100%;height:auto"' : '';
+  let h = `<div class="latwrap"><svg width="${totalW}" height="${totalH}" viewBox="0 0 ${totalW} ${totalH}"${fit} role="img" aria-label="Lattice itemset">${back}${front}${nodes}</svg></div>`;
+  if (ab) h += `<div class="abbr">Viết tắt: ${R.items.map(i=>`<b>${esc(ab.get(i))}</b> = ${esc(i)}`).join(' · ')}</div>`;
+  return h;
+}
+
+function latticeBox(R, upto){
+  const m = R.items.length, total = Math.pow(2,m)-1;
+  const full = m <= 6 || (m <= 9 && state.latFull);
+  const model = latticeModel(R, upto);
+  const st = model.stats;
+  const cap = `Kết quả cuối: ${st.k} frequent (xanh lá), ${st.d} đã đếm nhưng không frequent (đỏ đậm), ${st.p} bị prune (vàng)${model.exact ? `, ${st.x} bị cắt tỉa ngầm (đỏ nhạt)` : ''}. Apriori chỉ đếm ${st.k + st.d}/${total.toLocaleString('vi-VN')} itemset.`;
+  let h = `<h3 class="sec">Lattice itemset sau bước này</h3><p class="latcap">${cap}</p>`;
+  if (m > 6){
+    h += `<div class="latopt small muted"><span>Lattice đầy đủ có ${total.toLocaleString('vi-VN')} nút${m <= 9 ? '; mặc định chỉ vẽ các itemset Apriori đã sinh.' : ', quá lớn để vẽ; chỉ vẽ các itemset Apriori đã sinh.'}</span>${m <= 9 ? `<label><input type="checkbox" id="latfull" ${state.latFull?'checked':''}> Vẽ đủ lattice (thu nhỏ cho vừa khung, rê chuột để xem từng nút)</label>` : ''}</div>`;
+  }
+  h += latticeSVG(R, model, full);
+  h += `<div class="legend"><span class="lk">frequent (đã đếm)</span><span class="lD">không frequent (đã đếm)</span><span class="la">ứng viên chờ đếm</span><span class="lp">sinh ở join, bị prune</span>${full ? `<span class="lx">bị cắt tỉa ngầm — không cần đếm</span><span class="lg">chưa xét</span>` : ''}</div>`;
+  return h;
+}
+
 function renderStep(){
   const R = state.R, s = R.steps[state.i], N = R.N;
   let h = '';
 
   if (s.type === 'setup'){
-    const m = R.items.length;
-    const total = Math.pow(2,m)-1;
     h += `<div class="eyebrow">Đặt vấn đề</div><h2>Dữ liệu và ngưỡng khai phá</h2>
-      <p class="lead">Pha 1: tìm mọi itemset X có σ(X) ≥ min_sup. Pha 2: sinh luật A ⇒ B có confidence ≥ min_conf.</p>
-      <div class="formula">min_sup = <b>${R.minCount}</b> giao dịch &nbsp;(${pct(R.minCount/N)} của N = ${N}${state.minMode==='pct' ? ` &nbsp;= ⌈${state.minRaw}% × ${N}⌉` : ''})<br>min_conf = <b>${pct(R.minConf)}</b></div>
-      <div class="stats">
-        <div class="stat"><div class="v">${N}</div><div class="l">giao dịch |D|</div></div>
-        <div class="stat"><div class="v">${m}</div><div class="l">item phân biệt m</div></div>
-        <div class="stat"><div class="v">${total.toLocaleString('vi-VN')}</div><div class="l">itemset khả dĩ 2<sup>m</sup> − 1 (vét cạn)</div></div>
-        <div class="stat"><div class="v">${R.minCount}</div><div class="l">ngưỡng σ tối thiểu</div></div>
-      </div>
-      <h3 class="sec">Tập item I (đã sắp theo thứ tự từ điển)</h3>
-      <div class="setlist">${R.items.map(i=>`<span class="set a" ${dataset([i])}>${esc(i)}</span>`).join('')}</div>
-      <div class="takeaway"><strong>Nguyên lý Apriori:</strong> mọi tập con của một frequent itemset đều phải frequent. Nhờ đó chỉ cần đếm các ứng viên sống sót sau join và prune thay vì ${total.toLocaleString('vi-VN')} itemset.</div>`;
+      <p class="lead">Pha 1: tìm những sản phẩm thường được mua cùng nhau, tức mọi itemset X có support(X) ≥ min_sup.<br>Pha 2: từ các tập đó sinh luật A ⇒ B có confidence ≥ min_conf.</p>`;
   }
 
   else if (s.type === 'scan'){
     const k = s.k;
     h += `<div class="eyebrow">k = ${k} · Quét D lần ${s.scanNo} · Đếm support</div>
       <h2>Quét D: ${sub('C',k)} → ${sub('L',k)}</h2>
-      <p class="lead">${k === 1 ? `${sub('C',1)} gồm mọi 1-itemset. ` : ''}Đếm σ(c) cho từng ứng viên, giữ lại c có σ(c) ≥ ${R.minCount}.</p>
+      <p class="lead">${k === 1 ? `${sub('C',1)} gồm mọi 1-itemset. ` : ''}Tính support(c) cho từng ứng viên, giữ lại c có support(c) ≥ ${pct(R.minSup)}.</p>
       <div class="result a"><span class="lbl">${sub('C',k)} =</span> ${setList(s.rows.map(r=>r.c),'a')} <span class="muted small">(${s.rows.length} ứng viên)</span></div>
-      <div class="tblwrap"><table class="t"><thead><tr><th>Ứng viên c</th><th>Giao dịch chứa c</th><th>σ(c)</th><th>support</th><th>Kết luận</th></tr></thead><tbody>`;
+      <div class="tblwrap"><table class="t"><thead><tr><th>Ứng viên c</th><th>Giao dịch chứa c</th><th>support</th><th>Kết luận</th></tr></thead><tbody>`;
     for (const r of s.rows){
-      h += `<tr class="${r.keep?'keep':'drop'}" ${dataset(r.c)}><td>${setHTML(r.c, r.keep?'k':'d')}</td><td class="small">${r.tids.length ? r.tids.map(esc).join(', ') : '<span class="muted">—</span>'}</td><td>${r.n}</td><td>${r.n}/${N} = ${pct(r.sup)}</td><td>${r.keep ? `<span class="tag k">∈ ${sub('L',k)}</span>` : `<span class="tag d">loại · ${r.n} &lt; ${R.minCount}</span>`}</td></tr>`;
+      h += `<tr class="${r.keep?'keep':'drop'}" ${dataset(r.c)}><td>${setHTML(r.c, r.keep?'k':'d')}</td><td class="small">${r.tids.length ? r.tids.map(esc).join(', ') : '<span class="muted">—</span>'}</td><td>${r.n}/${N} = ${pct(r.sup)}</td><td>${r.keep ? `<span class="tag k">∈ ${sub('L',k)}</span>` : `<span class="tag d">loại · ${pct(r.sup)} &lt; ${pct(R.minSup)}</span>`}</td></tr>`;
     }
     h += `</tbody></table></div>
       <div class="result k"><span class="lbl">${sub('L',k)} =</span> ${setList(s.L,'k')} <span class="muted small">(${s.L.length}/${s.rows.length} ứng viên frequent)</span></div>`;
-    const dropped = s.rows.filter(r=>!r.keep);
-    if (dropped.length) h += `<div class="takeaway">${dropped.map(r=>setHTML(r.c,'d')).join(' ')} không frequent → mọi superset của chúng cũng không frequent (nguyên lý Apriori).</div>`;
   }
 
   else if (s.type === 'join'){
     const k = s.k, prev = s.prevL;
-    const joins = s.pairs.filter(p=>p.ok), skipped = s.pairs.filter(p=>!p.ok);
-    const plus = (a,b,c) => `<div class="jl">${setHTML(a,'k')} <span class="op">+</span> ${setHTML(b,'k')} <span class="op">→</span> ${c ? setHTML(c,'a') : '<span class="muted">không ghép</span>'}</div>`;
+    const joins = s.pairs.filter(p=>p.ok);
+    const plus = (a,b,c) => `<div class="jl">${setHTML(a,'k')} <span class="op">+</span> ${setHTML(b,'k')} <span class="op">→</span> ${setHTML(c,'a')}</div>`;
     h += `<div class="eyebrow">k = ${k} · apriori_gen · Bước 1: Join</div>
       <h2>Từ ${sub('L',k-1)} → ${sub('C',k)}: JOIN</h2>
       <div class="deriv">
@@ -462,24 +570,6 @@ function renderStep(){
     } else {
       h += `<div class="ct joins">${joins.map(p=>plus(p.l1,p.l2,p.cand)).join('')}</div>
         <div class="ct"><span class="boxed"><span class="mth">${sub('C',k)} =</span> ${setList(s.cands,'a')}</span> <span class="muted small">${s.cands.length} ứng viên${k===2 ? ` = C(${prev.length}, 2)` : ''}</span></div>`;
-      if (skipped.length){
-        const show = skipped.slice(0,8);
-        h += `<div class="ct"><span class="small muted">Không ghép (k − 2 = ${k-2} phần tử đầu khác nhau):</span>${show.map(p=>plus(p.l1,p.l2,null)).join('')}${skipped.length>show.length ? `<span class="small muted">… và ${skipped.length-show.length} cặp khác</span>` : ''}</div>`;
-      }
-    }
-    if (s.dropped.length){
-      let ex = [];
-      if (k===2){
-        for (const a of prev) for (const d of s.dropped) ex.push([a[0], d[0]].sort(cmpItem));
-      } else {
-        for (const d of s.dropped) for (const a of prev){
-          const u = [...new Set([...a, ...d])].sort(cmpItem);
-          if (u.length===k) ex.push(u);
-        }
-        ex = ex.filter((x,i)=>ex.findIndex(y=>key(y)===key(x))===i);
-      }
-      const show = ex.slice(0,8);
-      h += `<div class="ct"><span class="small muted">Không có:</span><div>${show.length ? setList(show,'d') : '<span class="muted">—</span>'}${ex.length>show.length ? ' <span class="muted">…</span>' : ''}</div><span class="small muted">vì ${s.dropped.map(d=>setHTML(d,'d')).join(' ')} đã bị loại khỏi ${sub('L',k-1)} (σ &lt; ${R.minCount}).</span></div>`;
     }
     h += `</div>`;
   }
@@ -499,7 +589,6 @@ function renderStep(){
     }
     h += `</tbody></table></div>
       <div class="result a"><span class="lbl">${sub('C',k)} sau prune =</span> ${setList(s.kept,'a')} <span class="muted small">(${s.rows.length} → ${s.kept.length} ứng viên, prune ${s.prunedN})</span></div>`;
-    h += `<div class="takeaway">${k===2 ? `Ở k = 2 không prune được gì: mọi tập con 1 phần tử đều ∈ ${sub('L',1)}.` : (s.prunedN ? `${s.prunedN} ứng viên bị loại mà không cần quét D.` : `Không loại được ứng viên nào; cả ${s.kept.length} ứng viên phải được đếm.`)}</div>`;
   }
 
   else if (s.type === 'end'){
@@ -510,7 +599,6 @@ function renderStep(){
       <p class="lead">${s.reason==='L' ? `Không ứng viên nào trong ${sub('C',k)} đạt min_sup.` : s.reason==='prune' ? `Mọi ứng viên trong ${sub('C',k)} đều bị prune.` : `Không sinh được ứng viên nào từ ${sub('L',k-1)}.`} Dừng với k<sub>max</sub> = ${kmax}, ${R.scans} lần quét D.</p>
       <div class="formula">L = ${R.Lall.filter(l=>l.length).map((_,i)=>sub('L',i+1)).join(' ∪ ') || '∅'} &nbsp;→&nbsp; <b>${R.freq.length}</b> frequent itemset</div>`;
     R.Lall.forEach((L,i)=>{ if (L.length) h += `<div class="result k"><span class="lbl">${sub('L',i+1)} =</span> ${setList(L,'k')}</div>`; });
-    h += `<div class="takeaway">Pha 2 sinh luật từ các frequent itemset có ≥ 2 item, không cần quét D nữa.</div>`;
   }
 
   else if (s.type === 'rules'){
@@ -519,16 +607,16 @@ function renderStep(){
       <div class="deriv" style="margin-bottom:18px">${R.Lall.filter(L=>L.length).map((L,i)=>`<div class="ct"><span class="mth">${sub('L',i+1)} =</span> ${setList(L, i===0 ? 'g' : 'k')}${i===0 ? '<span class="small muted">chỉ 1 item, không sinh được luật</span>' : ''}</div>`).join('')}</div>
       <p class="lead">Với mỗi frequent itemset l (|l| ≥ 2), tách l thành A ⊂ l và B = l − A. Luật A ⇒ B <b>mạnh</b> nếu confidence ≥ ${pct(R.minConf)}.</p>
       <div class="mathbox">
-        <div class="mrow"><span class="mlbl">Confidence:</span><span class="math">confidence(A ⇒ B) = <span class="frac"><span>support(A ∪ B)</span><span>support(A)</span></span> = <span class="frac"><span>σ(A ∪ B)</span><span>σ(A)</span></span></span></div>
-        <div class="mrow"><span class="mlbl">Lift:</span><span class="math">lift(A ⇒ B) = <span class="frac"><span>confidence(A ⇒ B)</span><span>support(B)</span></span> = <span class="frac"><span>σ(A ∪ B) · N</span><span>σ(A) · σ(B)</span></span></span></div>
-        <div class="mrow"><span class="mlbl">Support:</span><span class="math">support(A ⇒ B) = support(A ∪ B) = <span class="frac"><span>σ(l)</span><span>N</span></span> <span class="small muted">— luôn ≥ min_sup vì l frequent</span></span></div>
+        <div class="mrow"><span class="mlbl">Confidence:</span><span class="math">confidence(A ⇒ B) = <span class="frac"><span>support(A ∪ B)</span><span>support(A)</span></span></span></div>
+        <div class="mrow"><span class="mlbl">Lift:</span><span class="math">lift(A ⇒ B) = <span class="frac"><span>confidence(A ⇒ B)</span><span>support(B)</span></span></span></div>
+        <div class="mrow"><span class="mlbl">Support:</span><span class="math">support(A ⇒ B) = support(A ∪ B) <span class="small muted">— luôn ≥ min_sup vì l frequent</span></span></div>
       </div>`;
     if (!s.groups.length) h += `<p class="lead muted">Không có frequent itemset nào có từ 2 item trở lên, nên không sinh được luật. Hãy giảm min_sup để thử.</p>`;
     for (const g of s.groups){
-      h += `<div class="rulecard"><header><h3>l = ${setHTML(g.l,'k')}</h3><span class="muted small">σ(l) = ${g.sl} · support = ${g.sl}/${N} = ${pct(g.sl/N)} · ${g.rules.length} luật khả dĩ</span></header>
-        <div class="tblwrap"><table class="t"><thead><tr><th>Luật A ⇒ B</th><th>confidence = σ(A ∪ B) / σ(A)</th><th>lift = confidence / support(B)</th><th>Mạnh?</th></tr></thead><tbody>`;
+      h += `<div class="rulecard"><header><h3>l = ${setHTML(g.l,'k')}</h3><span class="muted small">support = ${g.sl}/${N} = ${pct(g.sl/N)} · ${g.rules.length} luật khả dĩ</span></header>
+        <div class="tblwrap"><table class="t"><thead><tr><th>Luật A ⇒ B</th><th>confidence = support(A ∪ B) / support(A)</th><th>lift = confidence / support(B)</th><th>Mạnh?</th></tr></thead><tbody>`;
       for (const r of g.rules){
-        h += `<tr class="${r.ok?'keep':'drop'}" ${dataset(g.l)}><td>${setHTML(r.s)}<span class="arrow">⇒</span>${setHTML(r.b)}</td><td><span class="frac"><span>${r.sl}</span><span>${r.ss}</span></span> = <b>${pct(r.conf)}</b></td><td><span class="frac"><span>${pct(r.conf)}</span><span>${r.sb}/${N}</span></span> = ${r.lift.toFixed(2)}</td><td>${r.ok ? `<span class="tag k">✓ xuất</span>` : `<span class="tag d">✗ &lt; ${pct(R.minConf)}</span>`}</td></tr>`;
+        h += `<tr class="${r.ok?'keep':'drop'}" ${dataset(g.l)}><td>${setHTML(r.s)}<span class="arrow">⇒</span>${setHTML(r.b)}</td><td><span class="frac"><span>${pct(r.sl/N)}</span><span>${pct(r.ss/N)}</span></span> = <b>${pct(r.conf)}</b></td><td><span class="frac"><span>${pct(r.conf)}</span><span>${pct(r.sb/N)}</span></span> = ${r.lift.toFixed(2)}</td><td>${r.ok ? `<span class="tag k">✓ xuất</span>` : `<span class="tag d">✗ &lt; ${pct(R.minConf)}</span>`}</td></tr>`;
       }
       h += `</tbody></table></div></div>`;
     }
@@ -552,7 +640,7 @@ function renderStep(){
       <div class="tblwrap"><table class="t"><thead><tr><th>k</th><th>|C<sub>k</sub>| sau join</th><th>|C<sub>k</sub>| sau prune</th><th>% bị prune</th><th>|L<sub>k</sub>|</th><th>L<sub>k</sub></th></tr></thead><tbody>`;
     for (const l of R.levels){
       const pr = l.joinCount ? (l.joinCount - l.pruneCount)/l.joinCount : 0;
-      h += `<tr><td>${l.k}</td><td>${l.joinCount}</td><td>${l.pruneCount ?? 0}</td><td>${l.k===1 ? '—' : pct(pr)}</td><td>${l.L.length}</td><td><div class="setlist">${l.L.length ? l.L.map(x=>`<span class="set k" ${dataset(x)}>{${x.map(esc).join(', ')}} <span class="muted">σ=${R.count.get(key(x))}</span></span>`).join('') : '<span class="muted">∅</span>'}</div></td></tr>`;
+      h += `<tr><td>${l.k}</td><td>${l.joinCount}</td><td>${l.pruneCount ?? 0}</td><td>${l.k===1 ? '—' : pct(pr)}</td><td>${l.L.length}</td><td><div class="setlist">${l.L.length ? l.L.map(x=>`<span class="set k" ${dataset(x)}>{${x.map(esc).join(', ')}} <span class="muted">${pct(R.count.get(key(x))/R.N)}</span></span>`).join('') : '<span class="muted">∅</span>'}</div></td></tr>`;
     }
     h += `</tbody></table></div>`;
     const strongRules = R.groups.flatMap(g=>g.rules.filter(r=>r.ok).map(r=>({...r, l:g.l})));
@@ -560,26 +648,24 @@ function renderStep(){
     if (strongRules.length){
       h += `<div class="tblwrap"><table class="t"><thead><tr><th>Luật</th><th>support</th><th>confidence</th><th>lift</th></tr></thead><tbody>` + strongRules.map(r=>`<tr class="keep" ${dataset(r.l)}><td>${setHTML(r.s)}<span class="arrow">⇒</span>${setHTML(r.b)}</td><td>${pct(r.sl/N)}</td><td>${pct(r.conf)}</td><td>${r.lift.toFixed(2)}</td></tr>`).join('') + `</tbody></table></div>`;
     } else h += `<p class="muted">Không có luật nào đạt min_conf.</p>`;
-    if (m <= 6){
-      h += `<h3 class="sec">Lattice itemset: Apriori đã "chạm" vào đâu</h3><div class="lattice">`;
-      for (let k=1;k<=m;k++){
-        const all = combos(R.items,k).sort(R.cmpSet);
-        h += `<div class="lat-row"><span class="lv">mức ${k}</span>` + all.map(c=>{
-          const kk = key(c);
-          let cls='g', title='không bao giờ được sinh';
-          if (R.count.has(kk)){ const f = R.count.get(kk) >= R.minCount; cls = f?'k':'d'; title = f ? 'frequent' : 'đã đếm, không frequent'; }
-          else if (R.pruned.has(kk)){ cls='p'; title='sinh ở join, bị prune'; }
-          return `<span class="set ${cls}" title="${title}" ${cls!=='g'?dataset(c):''}>{${c.map(esc).join(', ')}}</span>`;
-        }).join('') + `</div>`;
-      }
-      h += `</div><div class="legend"><span class="lk">frequent</span><span class="ld">đã đếm, không frequent</span><span class="lp">bị prune, không cần đếm</span><span>chưa từng sinh</span></div>`;
-    }
     h += `<div class="takeaway">Chỉ đếm ${counted}/${total.toLocaleString('vi-VN')} itemset với ${R.scans} lần quét D, không bỏ sót frequent itemset nào.</div>`;
   }
+
+  if (s.type === 'summary') h += latticeBox(R, state.i);
 
   const el = $('step');
   el.innerHTML = h;
   bindHover(el);
+  if (el.querySelector){
+    const cb = el.querySelector('#latfull');
+    if (cb) cb.addEventListener('change', ()=>{ state.latFull = cb.checked; renderStep(); bindPinRestore(); });
+  }
+}
+
+function bindPinRestore(){
+  if (!state.pin || !$('step').querySelector) return;
+  const el = $('step').querySelector(`[data-hl="${CSS.escape(state.pin.join('|'))}"]`);
+  if (el) el.classList.add('pinned');
 }
 
 async function init(){

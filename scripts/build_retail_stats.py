@@ -1,65 +1,23 @@
-"""Compute full descriptive statistics for the UCI "Online Retail" dataset.
+"""Build algorithm-centric dataset statistics for the Groceries POS dataset (Hahsler et al., 2006).
 
-Pure standard library (zipfile + xml iterparse), no pandas/openpyxl needed.
+Directly addresses the 3 core Apriori pillars that connect the dataset to the web storefront:
+1. Bestsellers (L1): Which items sell the most? What are their exact basket counts and support (%)?
+2. Frequent Combos (L2 & L3): Which item pairs/triplets are bought together? Why, and with what counts & support?
+3. Product Recommendations (A => B): How do Support, Confidence, and Lift mathematically justify recommending item B when buying item A?
 
-Usage:
-    python scripts/build_retail_stats.py "/path/to/Online Retail.xlsx"
-
-Output: src/data/retail_stats.json (consumed by the /stats page).
-Source: https://archive.ics.uci.edu/dataset/352/online+retail
+Output: src/data/retail_stats.json (consumed by /stats and /api/retail-stats).
 """
 from __future__ import annotations
 
 import json
 import os
-import re
 import sys
-import zipfile
-from collections import Counter, defaultdict
-from datetime import datetime, timedelta
-from xml.etree import ElementTree as ET
+from collections import Counter
 
-NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                   "src", "data", "retail_stats.json")
-EPOCH = datetime(1899, 12, 30)
-NON_PRODUCT = {"POST", "D", "M", "C2", "DOT", "BANK CHARGES", "S", "AMAZONFEE",
-               "B", "CRUK", "PADS", "m"}
-COLS = ["invoice", "stock", "desc", "qty", "date", "price", "cust", "country"]
-
-
-def load_shared(z: zipfile.ZipFile) -> list[str]:
-    out = []
-    for _, el in ET.iterparse(z.open("xl/sharedStrings.xml")):
-        if el.tag == NS + "si":
-            out.append("".join(t.text or "" for t in el.iter(NS + "t")))
-            el.clear()
-    return out
-
-
-def iter_rows(path: str):
-    with zipfile.ZipFile(path) as z:
-        shared = load_shared(z)
-        row: dict[str, object] = {}
-        for ev, el in ET.iterparse(z.open("xl/worksheets/sheet1.xml"), events=("end",)):
-            if el.tag == NS + "c":
-                ref = el.get("r", "")
-                col = re.match(r"[A-Z]+", ref).group(0)
-                t = el.get("t")
-                v = el.find(NS + "v")
-                val = None
-                if t == "inlineStr":
-                    val = "".join(x.text or "" for x in el.iter(NS + "t"))
-                elif v is not None and v.text is not None:
-                    val = shared[int(v.text)] if t == "s" else v.text
-                row[col] = val
-                el.clear()
-            elif el.tag == NS + "row":
-                r = int(el.get("r"))
-                if r > 1:
-                    yield [row.get(c) for c in "ABCDEFGH"]
-                row = {}
-                el.clear()
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_CSV = os.path.join(PROJECT_ROOT, "src", "data", "groceries.csv")
+RULES_FILE = os.path.join(PROJECT_ROOT, "src", "data", "ecom_rules.json")
+OUT_FILE = os.path.join(PROJECT_ROOT, "src", "data", "retail_stats.json")
 
 
 def quantiles(sorted_vals: list[float]) -> dict:
@@ -69,16 +27,28 @@ def quantiles(sorted_vals: list[float]) -> dict:
     q = lambda p: sorted_vals[min(n - 1, int(p * (n - 1)))]
     mean = sum(sorted_vals) / n
     var = sum((x - mean) ** 2 for x in sorted_vals) / n
-    return {"min": sorted_vals[0], "p25": q(.25), "median": q(.5), "p75": q(.75),
-            "p95": q(.95), "p99": q(.99), "max": sorted_vals[-1],
-            "mean": round(mean, 3), "std": round(var ** .5, 3)}
+    return {
+        "min": sorted_vals[0],
+        "p25": q(0.25),
+        "median": q(0.5),
+        "p75": q(0.75),
+        "p95": q(0.95),
+        "p99": q(0.99),
+        "max": sorted_vals[-1],
+        "mean": round(mean, 2),
+        "std": round(var ** 0.5, 2),
+    }
 
 
-def hist(values, edges):
-    labels, counts = [], [0] * (len(edges))
+def hist(values: list[int], edges: list[int]) -> dict:
+    labels, counts = [], [0] * len(edges)
     for i, e in enumerate(edges):
-        labels.append(f"{e}" if i == len(edges) - 1 else (f"{e}" if edges[i + 1] == e + 1 else f"{e}-{edges[i + 1] - 1}"))
-    labels[-1] = f"{edges[-1]}+"
+        if i == len(edges) - 1:
+            labels.append(f"{e}+")
+        elif edges[i + 1] == e + 1:
+            labels.append(f"{e}")
+        else:
+            labels.append(f"{e}-{edges[i + 1] - 1}")
     for v in values:
         idx = 0
         for i, e in enumerate(edges):
@@ -88,176 +58,190 @@ def hist(values, edges):
     return {"labels": labels, "counts": counts}
 
 
-def main(path: str) -> None:
-    n = 0
-    miss = Counter()
-    inv_rows = Counter()
-    inv_items: dict[str, set] = defaultdict(set)
-    inv_meta: dict[str, tuple] = {}
-    inv_cancel = {}
-    cust_inv: dict[str, set] = defaultdict(set)
-    prod_desc: dict[str, Counter] = defaultdict(Counter)
-    prod_qty = Counter()
-    prod_rev = Counter()
-    prod_inv: dict[str, set] = defaultdict(set)
-    country_rev = Counter()
-    country_inv: dict[str, set] = defaultdict(set)
-    month_rev = Counter()
-    month_inv: dict[str, set] = defaultdict(set)
-    hour_inv: dict[int, set] = defaultdict(set)
-    wd_inv: dict[int, set] = defaultdict(set)
-    seen_rows = Counter()
-    neg_qty = zero_price = neg_price = cancel_rows = non_product_rows = 0
-    qty_pos, price_pos = [], []
-    dmin = dmax = None
-    clean_rows = 0
-    clean_inv: dict[str, set] = defaultdict(set)
+def main(csv_path: str = DEFAULT_CSV) -> None:
+    if not os.path.exists(csv_path):
+        print(f"Error: {csv_path} not found", file=sys.stderr)
+        sys.exit(1)
 
-    for inv, stock, desc, qty, dt, price, cust, country in iter_rows(path):
-        n += 1
-        for name, v in zip(COLS, (inv, stock, desc, qty, dt, price, cust, country)):
-            if v in (None, ""):
-                miss[name] += 1
-        inv = str(inv); stock = str(stock) if stock is not None else ""
-        qty = int(float(qty)); price = float(price)
-        d = EPOCH + timedelta(days=float(dt))
-        d = d.replace(microsecond=0)
-        dmin = d if dmin is None or d < dmin else dmin
-        dmax = d if dmax is None or d > dmax else dmax
-        cancel = inv.startswith("C")
-        cancel_rows += cancel
-        neg_qty += qty < 0
-        zero_price += price == 0
-        neg_price += price < 0
-        seen_rows[(inv, stock, desc, qty, dt, price, cust)] += 1
-        inv_rows[inv] += 1
-        inv_items[inv].add(stock)
-        cu = None if cust is None else str(int(float(cust)))
-        inv_meta[inv] = (cu, country, d)
-        inv_cancel[inv] = cancel
-        if cu:
-            cust_inv[cu].add(inv)
-        if desc:
-            prod_desc[stock][desc.strip()] += 1
-        is_np = stock in NON_PRODUCT or not re.match(r"^\d{5}", stock)
-        non_product_rows += is_np
-        if not cancel and qty > 0 and price > 0:
-            rev = qty * price
-            qty_pos.append(qty); price_pos.append(price)
-            country_rev[country] += rev
-            country_inv[country].add(inv)
-            mk = d.strftime("%Y-%m")
-            month_rev[mk] += rev
-            month_inv[mk].add(inv)
-            hour_inv[d.hour].add(inv)
-            wd_inv[d.weekday()].add(inv)
-            if not is_np:
-                prod_qty[stock] += qty
-                prod_rev[stock] += rev
-                prod_inv[stock].add(inv)
-                clean_rows += 1
-                clean_inv[inv].add(stock)
+    with open(csv_path, "r", encoding="utf-8") as f:
+        baskets = [
+            sorted({x.strip() for x in line.strip().split(",") if x.strip()})
+            for line in f
+            if line.strip()
+        ]
 
-    dup_rows = sum(c - 1 for c in seen_rows.values() if c > 1)
-    pname = {s: c.most_common(1)[0][0] for s, c in prod_desc.items()}
-    all_products = {s for items in inv_items.values() for s in items}
-    sizes = sorted(len(v) for v in clean_inv.values())
-    n_clean = len(clean_inv)
-    total_rev = sum(month_rev.values())
-    cust_ids = {m[0] for m in inv_meta.values() if m[0]}
+    with open(RULES_FILE, "r", encoding="utf-8") as f:
+        ecom_data = json.load(f)
 
-    top = lambda c, k=15: c.most_common(k)
-    top_by_inv = sorted(prod_inv.items(), key=lambda kv: -len(kv[1]))[:20]
-    pair_counts = Counter()  # top-level support of single items (for Apriori min_sup guidance)
+    catalog = ecom_data.get("catalog", {})
+    frequents = ecom_data.get("frequent_itemsets", {})
+    rules = ecom_data.get("rules", [])
+
+    n_tx = len(baskets)
+    total_item_occurrences = sum(len(b) for b in baskets)
+    item_counts = Counter(item for b in baskets for item in b)
+    sizes = sorted(len(b) for b in baskets)
+    multi_item_baskets = sum(1 for s in sizes if s >= 2)
+    single_item_baskets = sum(1 for s in sizes if s == 1)
+
+    # Support curve across thresholds
+    item_sup_list = sorted(item_counts.values(), reverse=True)
     sup_curve = []
-    item_sup = sorted((len(v) for v in prod_inv.values()), reverse=True)
-    for pct in (0.1, 0.2, 0.5, 1, 2, 3, 5):
-        thr = n_clean * pct / 100
-        sup_curve.append({"min_sup_pct": pct, "min_count": round(thr, 1),
-                          "frequent_items": sum(1 for s in item_sup if s >= thr)})
+    for pct in (0.3, 0.5, 1.0, 2.0, 3.0, 5.0, 10.0):
+        thr = n_tx * pct / 100.0
+        sup_curve.append({
+            "min_sup_pct": pct,
+            "min_count": round(thr, 1),
+            "frequent_items": sum(1 for c in item_sup_list if c >= thr),
+        })
+
+    # Pillar 1: Top Bestsellers (L1)
+    top_bestsellers = []
+    for item, cnt in item_counts.most_common(20):
+        cat_info = catalog.get(item, {})
+        supp_pct = round(100.0 * cnt / n_tx, 2)
+        top_bestsellers.append({
+            "code": item,
+            "name": item,
+            "icon": cat_info.get("icon", "🛒"),
+            "category": cat_info.get("category", "OTHER"),
+            "price": cat_info.get("price", 1.99),
+            "baskets": cnt,
+            "support": round(cnt / n_tx, 4),
+            "support_pct": supp_pct,
+        })
+
+    # Pillar 2: Top Frequent Combos (L2 Pairs & L3 Triplets)
+    top_l2_combos = []
+    for entry in frequents.get("L2", [])[:20]:
+        items = entry["items"]
+        cnt = entry["count"]
+        supp_pct = round(100.0 * cnt / n_tx, 2)
+        c_a = item_counts[items[0]]
+        c_b = item_counts[items[1]]
+        expected_random_cnt = round((c_a * c_b) / n_tx, 1)
+        co_lift = round(cnt / expected_random_cnt, 2) if expected_random_cnt > 0 else 1.0
+        top_l2_combos.append({
+            "items": items,
+            "k": 2,
+            "count": cnt,
+            "support": entry["support"],
+            "support_pct": supp_pct,
+            "item_a_count": c_a,
+            "item_a_support_pct": round(100.0 * c_a / n_tx, 2),
+            "item_b_count": c_b,
+            "item_b_support_pct": round(100.0 * c_b / n_tx, 2),
+            "expected_random_count": expected_random_cnt,
+            "cooccurrence_lift": co_lift,
+        })
+
+    top_l3_combos = []
+    for entry in frequents.get("L3", [])[:15]:
+        items = entry["items"]
+        cnt = entry["count"]
+        supp_pct = round(100.0 * cnt / n_tx, 2)
+        top_l3_combos.append({
+            "items": items,
+            "k": 3,
+            "count": cnt,
+            "support": entry["support"],
+            "support_pct": supp_pct,
+        })
+
+    # Pillar 3: Highlighted Association Rules (A => B) explaining storefront recommendations
+    # Calculate exact antecedent & consequent basket counts for transparent formula proof
+    baskets_sets = [set(b) for b in baskets]
+    sorted_rules = sorted(
+        rules,
+        key=lambda r: (round(r["confidence"] * r["lift"], 4), r["lift"], r["count"]),
+        reverse=True,
+    )
+    top_recommendation_rules = []
+    seen_targets = Counter()
+    for r in sorted_rules:
+        ant = r["antecedent"]
+        con = r["consequent"]
+        target_key = con[0]
+        if seen_targets[target_key] >= 4:
+            continue
+        seen_targets[target_key] += 1
+
+        ant_set = set(ant)
+        con_set = set(con)
+        ant_cnt = sum(1 for b in baskets_sets if ant_set.issubset(b))
+        con_cnt = sum(1 for b in baskets_sets if con_set.issubset(b))
+        both_cnt = r["count"]
+
+        top_recommendation_rules.append({
+            "antecedent": ant,
+            "consequent": con,
+            "count": both_cnt,
+            "support": r["support"],
+            "support_pct": round(r["support"] * 100.0, 2),
+            "antecedent_count": ant_cnt,
+            "antecedent_support_pct": round(100.0 * ant_cnt / n_tx, 2),
+            "consequent_count": con_cnt,
+            "consequent_support_pct": round(100.0 * con_cnt / n_tx, 2),
+            "confidence": r["confidence"],
+            "confidence_pct": round(r["confidence"] * 100.0, 1),
+            "lift": r["lift"],
+            "reason": r.get("reason", ""),
+        })
+        if len(top_recommendation_rules) >= 24:
+            break
 
     out = {
-        "source": "UCI Machine Learning Repository - Online Retail (id 352)",
-        "url": "https://archive.ics.uci.edu/dataset/352/online+retail",
+        "source": "Groceries POS Dataset — Michael Hahsler, Kurt Hornik, Thomas Reutterer (2006), WU Vienna / R arules",
+        "url": "https://cran.r-project.org/web/packages/arules/index.html",
         "overview": {
-            "rows": n, "columns": 8,
-            "invoices": len(inv_items),
-            "customers": len(cust_ids),
-            "products_stockcodes": len(all_products),
-            "countries": len({m[1] for m in inv_meta.values()}),
-            "date_from": dmin.isoformat(sep=" "), "date_to": dmax.isoformat(sep=" "),
-            "days_span": (dmax - dmin).days + 1,
-            "total_revenue_valid_sales": round(total_rev, 2),
-            "avg_order_value": round(total_rev / max(1, len(set().union(*month_inv.values()))), 2),
+            "transactions": n_tx,
+            "multi_item_baskets": multi_item_baskets,
+            "multi_item_baskets_pct": round(100.0 * multi_item_baskets / n_tx, 2),
+            "single_item_baskets": single_item_baskets,
+            "single_item_baskets_pct": round(100.0 * single_item_baskets / n_tx, 2),
+            "total_item_purchases": total_item_occurrences,
+            "distinct_items": len(item_counts),
+            "store_curated_items": len(ecom_data.get("store_skus", [])),
+            "avg_basket_size": round(total_item_occurrences / n_tx, 2),
+            "l1_count": len(frequents.get("L1", [])),
+            "l2_count": len(frequents.get("L2", [])),
+            "l3_count": len(frequents.get("L3", [])),
+            "total_frequent_itemsets": (
+                len(frequents.get("L1", []))
+                + len(frequents.get("L2", []))
+                + len(frequents.get("L3", []))
+            ),
+            "curated_rules_count": len(rules),
+            "min_support_count": 30,
+            "min_support_pct": round(100.0 * 30 / n_tx, 2),
+            "min_confidence_pct": 15.0,
+            "min_lift": 1.15,
+            "max_lift": ecom_data.get("summary", {}).get("max_lift", 4.81),
         },
-        "columns": [
-            {"name": "InvoiceNo", "type": "nominal", "desc": "Mã hóa đơn (6 chữ số). Bắt đầu bằng 'C' = hủy đơn"},
-            {"name": "StockCode", "type": "nominal", "desc": "Mã sản phẩm (5 chữ số)"},
-            {"name": "Description", "type": "text", "desc": "Tên sản phẩm"},
-            {"name": "Quantity", "type": "integer", "desc": "Số lượng mỗi dòng"},
-            {"name": "InvoiceDate", "type": "datetime", "desc": "Thời điểm lập hóa đơn"},
-            {"name": "UnitPrice", "type": "numeric", "desc": "Đơn giá (GBP)"},
-            {"name": "CustomerID", "type": "nominal", "desc": "Mã khách hàng (5 chữ số)"},
-            {"name": "Country", "type": "nominal", "desc": "Quốc gia của khách"},
-        ],
-        "missing": {k: {"count": miss.get(k, 0), "pct": round(100 * miss.get(k, 0) / n, 2)} for k in COLS},
-        "quality": {
-            "cancellation_rows": cancel_rows,
-            "cancellation_invoices": sum(inv_cancel.values()),
-            "negative_quantity_rows": neg_qty,
-            "zero_price_rows": zero_price,
-            "negative_price_rows": neg_price,
-            "duplicate_rows": dup_rows,
-            "non_product_rows": non_product_rows,
-            "non_product_codes": sorted(s for s in all_products if s in NON_PRODUCT or not re.match(r"^\d{5}", s))[:40],
-            "valid_sale_rows": len(qty_pos),
-        },
-        "quantity": quantiles(sorted(qty_pos)),
-        "unit_price": quantiles(sorted(price_pos)),
-        "invoice_lines": {"quantiles": quantiles(sorted(inv_rows.values()))},
         "basket": {
-            "note": "Giỏ hàng sạch cho Apriori: bỏ hóa đơn hủy, qty<=0, giá<=0, mã không phải sản phẩm; mỗi hóa đơn = 1 tập item (không trùng).",
-            "clean_transactions": n_clean,
-            "clean_rows": clean_rows,
-            "distinct_items": len(prod_inv),
+            "clean_transactions": n_tx,
+            "clean_rows": total_item_occurrences,
+            "distinct_items": len(item_counts),
             "size": quantiles([float(x) for x in sizes]),
-            "size_hist": hist(sizes, [1, 2, 3, 4, 5, 6, 8, 11, 16, 21, 31, 51, 101]),
-            "single_item_baskets_pct": round(100 * sum(1 for s in sizes if s == 1) / max(1, n_clean), 2),
-            "multi_item_baskets": sum(1 for s in sizes if s >= 2),
-            "density_pct": round(100 * clean_rows / max(1, n_clean * len(prod_inv)), 4),
+            "size_hist": hist(sizes, [1, 2, 3, 4, 5, 6, 8, 11, 16, 21]),
+            "single_item_baskets_pct": round(100.0 * single_item_baskets / n_tx, 2),
+            "multi_item_baskets": multi_item_baskets,
+            "density_pct": round(100.0 * total_item_occurrences / (n_tx * len(item_counts)), 2),
             "support_curve": sup_curve,
         },
-        "customers": {
-            "orders_per_customer": quantiles(sorted(float(len(v)) for v in cust_inv.values())),
-            "repeat_customers": sum(1 for v in cust_inv.values() if len(v) > 1),
-            "rows_without_customer_pct": round(100 * miss.get("cust", 0) / n, 2),
-        },
-        "top_products_by_baskets": [
-            {"code": s, "name": pname.get(s, ""), "baskets": len(v),
-             "support_pct": round(100 * len(v) / n_clean, 2)} for s, v in top_by_inv],
-        "top_products_by_quantity": [
-            {"code": s, "name": pname.get(s, ""), "qty": q} for s, q in top(prod_qty)],
-        "top_products_by_revenue": [
-            {"code": s, "name": pname.get(s, ""), "revenue": round(r, 2)} for s, r in top(prod_rev)],
-        "countries": [
-            {"country": c, "revenue": round(r, 2), "invoices": len(country_inv[c]),
-             "revenue_pct": round(100 * r / total_rev, 2)} for c, r in top(country_rev, 40)],
-        "monthly": [
-            {"month": m, "revenue": round(month_rev[m], 2), "invoices": len(month_inv[m])}
-            for m in sorted(month_rev)],
-        "hourly_invoices": [{"hour": h, "invoices": len(hour_inv[h])} for h in sorted(hour_inv)],
-        "weekday_invoices": [
-            {"day": ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"][d], "invoices": len(wd_inv[d])}
-            for d in range(7)],
+        "top_products_by_baskets": top_bestsellers,
+        "top_l2_combos": top_l2_combos,
+        "top_l3_combos": top_l3_combos,
+        "top_recommendation_rules": top_recommendation_rules,
     }
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w", encoding="utf-8") as f:
+
+    os.makedirs(os.path.dirname(OUT_FILE), exist_ok=True)
+    with open(OUT_FILE, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
-    print("wrote", OUT, f"({os.path.getsize(OUT)//1024} KB)")
-    print(json.dumps(out["overview"], indent=1))
+
+    print(f"Wrote {OUT_FILE} ({os.path.getsize(OUT_FILE)//1024} KB)")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        sys.exit(__doc__)
-    main(sys.argv[1])
+    csv_arg = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_CSV
+    main(csv_arg)

@@ -5,55 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin — Luật kết hợp &amp; tập phổ biến · BasketIQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/app.css">
 <style>
 :root{--bg:#f8fafc;--surface:#ffffff}
 *{box-sizing:border-box;margin:0;padding:0}
-body{line-height:1.5;min-height:100vh}
+body{line-height:1.5;min-height:100vh;font-size:clamp(15px,.95vw,18px)}
 button,input,select{font:inherit;color:inherit}
-main{max-width:1380px;margin:0 auto;padding:24px 20px 60px}
-.page-head h1{font-size:1.7rem;font-weight:800;letter-spacing:-.03em}
-.page-head p{color:var(--text-muted);font-size:.93rem;margin-top:4px;max-width:80ch}
+main{width:100%;max-width:none;margin:0;padding:2.2vh 2.5vw 6vh}
+.page-head h1{font-size:clamp(1.5rem,1.8vw,2.2rem);font-weight:800;letter-spacing:-.03em}
+.page-head p{color:var(--text-muted);font-size:clamp(.92rem,.96vw,1.12rem);margin-top:.4vh;max-width:95ch}
 
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:20px 0}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow-sm)}
-.kpi .v{font-size:1.65rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.kpi .l{font-size:.78rem;color:var(--text-muted);margin-top:2px;font-weight:600}
-.kpi .i{font-size:1.1rem;margin-bottom:6px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(clamp(180px,13vw,240px),1fr));gap:1.2vw;margin:2vh 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.6vh 1.3vw;box-shadow:var(--shadow-sm)}
+.kpi .v{font-size:clamp(1.45rem,1.65vw,2rem);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:clamp(.8rem,.82vw,.96rem);color:var(--text-muted);margin-top:3px;font-weight:600}
+.kpi .i{font-size:clamp(1.15rem,1.25vw,1.45rem);margin-bottom:6px}
 
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow-sm);padding:18px}
-.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px 24px;align-items:end;margin-bottom:18px}
-.f label{display:flex;justify-content:space-between;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:6px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-sm);padding:2vh 1.6vw}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.6vh 1.8vw;align-items:end;margin-bottom:2vh}
+.f label{display:flex;justify-content:space-between;font-size:clamp(.78rem,.8vw,.94rem);font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:6px}
 .f label output{color:var(--primary-dark);font-family:var(--mono);text-transform:none;letter-spacing:0}
 .f input[type=range]{width:100%;accent-color:var(--primary)}
-.f input[type=search]{width:100%;border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:.9rem;background:var(--surface)}
+.f input[type=search]{width:100%;border:1px solid var(--border);border-radius:10px;padding:.9vh 1vw;font-size:clamp(.9rem,.92vw,1.06rem);background:var(--surface)}
 .f input[type=search]:focus{outline:2px solid var(--primary);outline-offset:1px}
 
-.tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:16px;flex-wrap:wrap}
-.tab{border:none;background:none;padding:10px 16px;font-weight:700;font-size:.92rem;color:var(--text-muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs{display:flex;gap:8px;border-bottom:1px solid var(--border);margin-bottom:1.8vh;flex-wrap:wrap}
+.tab{border:none;background:none;padding:1.1vh 1.2vw;font-weight:700;font-size:clamp(.92rem,.96vw,1.12rem);color:var(--text-muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--primary-dark);border-bottom-color:var(--primary)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:12px}
-.muted{color:var(--text-muted);font-size:.86rem}
-.btn{border:1px solid var(--border);background:var(--surface);border-radius:9px;padding:7px 13px;font-size:.84rem;font-weight:700;cursor:pointer}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:1.4vh}
+.muted{color:var(--text-muted);font-size:clamp(.86rem,.88vw,1.02rem)}
+.btn{border:1px solid var(--border);background:var(--surface);border-radius:9px;padding:.75vh 1vw;font-size:clamp(.84rem,.86vw,1rem);font-weight:700;cursor:pointer;transition:all .15s}
 .btn:hover{border-color:var(--primary);color:var(--primary-dark)}
 .btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
 .seg{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.seg button{border:none;background:var(--surface);padding:7px 14px;font-weight:700;font-size:.84rem;cursor:pointer}
+.seg button{border:none;background:var(--surface);padding:.7vh 1vw;font-weight:700;font-size:clamp(.82rem,.84vw,.98rem);cursor:pointer}
 .seg button.active{background:var(--primary);color:#fff}
 
 .tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px}
-table{width:100%;border-collapse:collapse;font-size:.88rem}
-th{background:var(--surface-sub);text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);padding:10px 12px;white-space:nowrap;user-select:none}
+table{width:100%;border-collapse:collapse;font-size:clamp(.88rem,.9vw,1.05rem)}
+th{background:var(--surface-sub);text-align:left;font-size:clamp(.74rem,.76vw,.88rem);text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);padding:1.1vh 1vw;white-space:nowrap;user-select:none}
 th.sortable{cursor:pointer}
 th.sortable:hover{color:var(--primary-dark)}
-td{padding:9px 12px;border-top:1px solid var(--surface-sub);vertical-align:top}
+td{padding:1vh 1vw;border-top:1px solid var(--surface-sub);vertical-align:middle}
 tr:hover td{background:#fafbff}
-td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:.83rem}
-.sku{display:inline-block;margin:1px 3px 1px 0;background:var(--primary-light);color:var(--primary-dark);border-radius:6px;padding:1px 7px;font-size:.78rem;font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:clamp(.84rem,.86vw,1rem)}
+.sku{display:inline-block;margin:2px 4px 2px 0;background:var(--primary-light);color:var(--primary-dark);border-radius:6px;padding:2px 8px;font-size:clamp(.8rem,.82vw,.96rem);font-weight:600}
 .sku small{font-family:var(--mono);opacity:.7;margin-left:4px;font-weight:400}
 .arrow{color:var(--text-light);font-weight:800}
 .bar{position:relative;background:var(--surface-sub);border-radius:5px;height:8px;min-width:80px}
@@ -61,16 +61,212 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--m
 .lift-hi{color:var(--success-dark);font-weight:700}
 .empty{padding:36px;text-align:center;color:var(--text-muted)}
 
-.net-wrap{position:relative;border:1px solid var(--border);border-radius:12px;background:radial-gradient(circle at 50% 40%,#fff,#f6f7fb);overflow:hidden}
-#netSvg{width:100%;height:620px;display:block}
-.net-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:.78rem;color:var(--text-muted)}
-.net-legend span{display:inline-flex;align-items:center;gap:5px}
-.net-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
-.net-tip{position:absolute;pointer-events:none;background:#111827;color:#fff;font-size:.78rem;padding:8px 11px;border-radius:9px;max-width:280px;display:none;box-shadow:var(--shadow);z-index:3}
-.net-edge{stroke:#a5b4fc;fill:none;transition:opacity .15s}
-.net-node circle{stroke:#fff;stroke-width:2;cursor:pointer}
-.net-node text{font-size:10px;font-weight:700;fill:#374151;pointer-events:none;paint-order:stroke;stroke:#fff;stroke-width:3px}
-.dim{opacity:.1}
+/* ---------- Upgraded Product Network Tab ---------- */
+.net-guide{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.2vw;
+  margin-bottom:1.6vh;
+}
+@media (max-width:960px){.net-guide{grid-template-columns:1fr}}
+.net-guide-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.2vh 1.1vw;
+  font-size:clamp(.84rem,.86vw,1rem);
+  line-height:1.45;
+  color:var(--text-muted);
+}
+.net-guide-card b{
+  display:block;
+  color:var(--text);
+  font-size:clamp(.9rem,.92vw,1.06rem);
+  margin-bottom:3px;
+}
+.net-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 16px;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1.2vh;
+  padding:1vh 1vw;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+.net-hubs{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+  margin-bottom:1.4vh;
+}
+.net-hub-label{
+  font-size:clamp(.78rem,.8vw,.94rem);
+  font-weight:700;
+  color:var(--text-muted);
+  margin-right:4px;
+}
+.hub-pill{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:999px;
+  padding:4px 12px;
+  font-size:clamp(.8rem,.82vw,.95rem);
+  font-weight:600;
+  cursor:pointer;
+  transition:all .15s;
+}
+.hub-pill:hover{border-color:var(--primary);color:var(--primary-dark)}
+.hub-pill.active{background:var(--primary);border-color:var(--primary);color:#fff}
+
+.net-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(340px,27vw,460px);
+  gap:1.4vw;
+  align-items:start;
+}
+@media (max-width:1150px){.net-layout{grid-template-columns:1fr}}
+
+.net-wrap{
+  position:relative;
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  background:radial-gradient(circle at 50% 45%,#ffffff 0%,#f1f5f9 100%);
+  overflow:hidden;
+}
+#netSvg{width:100%;height:clamp(560px,68vh,760px);display:block;cursor:grab;user-select:none}
+#netSvg:active{cursor:grabbing}
+.net-zoom-bar{
+  position:absolute;
+  top:12px;
+  right:12px;
+  display:flex;
+  gap:6px;
+  z-index:4;
+}
+.net-zoom-btn{
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:5px 10px;
+  font-size:clamp(.8rem,.82vw,.95rem);
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(15,23,42,.06);
+}
+.net-zoom-btn:hover{border-color:var(--primary);color:var(--primary-dark)}
+
+.net-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.2vh;font-size:clamp(.8rem,.82vw,.95rem);color:var(--text-muted);align-items:center}
+.net-legend span{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.net-legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+.net-tip{
+  position:absolute;
+  pointer-events:none;
+  background:#0f172a;
+  color:#fff;
+  font-size:clamp(.8rem,.82vw,.95rem);
+  padding:10px 13px;
+  border-radius:10px;
+  max-width:310px;
+  display:none;
+  box-shadow:0 10px 25px rgba(15,23,42,.22);
+  z-index:5;
+  line-height:1.4;
+}
+.net-edge{stroke:#94a3b8;fill:none;transition:opacity .18s,stroke .18s}
+.net-edge.strong{stroke:#6366f1}
+.net-edge.active-edge{stroke:#4f46e5;stroke-opacity:0.95 !important}
+.net-edge-label{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:700;
+  fill:#312e81;
+  paint-order:stroke;
+  stroke:#ffffff;
+  stroke-width:4px;
+  pointer-events:none;
+}
+.net-node{cursor:pointer;transition:opacity .18s}
+.net-node circle{stroke:#fff;stroke-width:2.5;transition:transform .15s,stroke-width .15s}
+.net-node:hover circle,.net-node.pinned circle{stroke:#0f172a;stroke-width:3.5}
+.net-node text{
+  font-size:12.5px;
+  font-weight:700;
+  fill:#0f172a;
+  pointer-events:none;
+  paint-order:stroke;
+  stroke:#ffffff;
+  stroke-width:4px;
+  stroke-linejoin:round;
+}
+.net-node.hub text{font-size:13.5px;font-weight:800}
+.dim{opacity:.12 !important}
+
+/* ---------- Right-Side Network Inspector ---------- */
+.net-side{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:1.5vh 1.2vw;
+  display:flex;
+  flex-direction:column;
+  gap:1.4vh;
+  max-height:clamp(560px,68vh,760px);
+  overflow-y:auto;
+}
+.net-side-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:8px;
+  padding-bottom:1vh;
+  border-bottom:1px solid var(--border);
+}
+.net-side-title{
+  font-size:clamp(.98rem,1vw,1.16rem);
+  font-weight:800;
+  color:var(--text);
+}
+.net-side-sub{
+  font-size:clamp(.8rem,.82vw,.95rem);
+  color:var(--text-muted);
+  margin-top:2px;
+}
+.net-side-list{
+  display:flex;
+  flex-direction:column;
+  gap:.8vh;
+}
+.net-card{
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:.9vh .9vw;
+  cursor:pointer;
+  transition:all .15s;
+}
+.net-card:hover{border-color:var(--primary);background:#f5f3ff}
+.net-card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  font-size:clamp(.88rem,.9vw,1.04rem);
+}
+.net-card-meta{
+  display:flex;
+  justify-content:space-between;
+  font-family:var(--mono);
+  font-size:clamp(.76rem,.78vw,.9rem);
+  color:var(--text-muted);
+  margin-top:4px;
+}
 .err{background:var(--danger-light);color:var(--danger);padding:16px;border-radius:12px}
 </style>
 </head>
@@ -81,7 +277,7 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--m
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
       <a href="/shop"><span aria-hidden="true">🛍️</span>Cửa hàng</a>
       <a href="/"><span aria-hidden="true">🔬</span>Demo thuật toán</a>
-      <a href="/stats"><span aria-hidden="true">📊</span>Thống kê dataset</a>
+      <a href="/stats"><span aria-hidden="true">📊</span>Thống kê Apriori</a>
       <a href="/admin" class="active" aria-current="page"><span aria-hidden="true">🛠️</span>Admin</a>
     </nav>
     <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
@@ -90,22 +286,22 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--m
 
 <main id="root">
   <div class="page-head">
-    <h1>🛠️ Admin — Tập phổ biến &amp; luật kết hợp</h1>
-    <p>Khám phá kết quả khai phá Apriori trên bộ dữ liệu Online Retail: lọc theo support / confidence / lift, tìm theo tên sản phẩm, xem các tập phổ biến L1–L3 và mạng liên kết giữa sản phẩm.</p>
+    <h1>Admin — Tập phổ biến &amp; Luật kết hợp (Groceries POS)</h1>
+    <p>Tra cứu tập phổ biến L<sub>1</sub>, L<sub>2</sub>, L<sub>3</sub>, luật kết hợp A ⇒ B và đồ thị mạng lưới sản phẩm từ 9,835 giao dịch siêu thị (Hahsler et al., 2006).</p>
   </div>
 
   <section class="kpis" id="kpis" aria-label="Chỉ số tổng quan"><div class="muted">Đang tải…</div></section>
 
   <section class="panel">
     <div class="filters" aria-label="Bộ lọc">
-      <div class="f"><label for="fSup">Min support <output id="oSup">0.8%</output></label>
-        <input id="fSup" type="range" min="0.0077" max="0.12" step="0.0005" value="0.0077"></div>
-      <div class="f"><label for="fConf">Min confidence <output id="oConf">20%</output></label>
-        <input id="fConf" type="range" min="0.2" max="1" step="0.01" value="0.2"></div>
+      <div class="f"><label for="fSup">Min support <output id="oSup">0.3%</output></label>
+        <input id="fSup" type="range" min="0.003" max="0.08" step="0.0005" value="0.003"></div>
+      <div class="f"><label for="fConf">Min confidence <output id="oConf">15%</output></label>
+        <input id="fConf" type="range" min="0.15" max="1" step="0.01" value="0.15"></div>
       <div class="f"><label for="fLift">Min lift <output id="oLift">1.0×</output></label>
-        <input id="fLift" type="range" min="1" max="20" step="0.1" value="1"></div>
-      <div class="f"><label for="fSearch">Tìm sản phẩm (tên / SKU)</label>
-        <input id="fSearch" type="search" placeholder="vd: LUNCH BAG, 85123A…"></div>
+        <input id="fLift" type="range" min="1" max="6" step="0.1" value="1"></div>
+      <div class="f"><label for="fSearch">Tìm mặt hàng</label>
+        <input id="fSearch" type="search" placeholder="vd: whole milk, berries, sausage…"></div>
     </div>
 
     <div class="tabs" role="tablist">
@@ -130,9 +326,51 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--m
     </div>
 
     <div class="tab-panel" id="tab-network" role="tabpanel">
-      <div class="toolbar"><span class="muted" id="netInfo"></span><span class="muted">Độ dày cạnh ∝ lift · kích thước nút ∝ số liên kết · rê chuột để xem chi tiết</span></div>
-      <div class="net-wrap"><svg id="netSvg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Đồ thị liên kết sản phẩm"></svg><div class="net-tip" id="netTip"></div></div>
-      <div class="net-legend" id="netLegend"></div>
+      <div class="net-guide">
+        <div class="net-guide-card">
+          <b>🔵 Đỉnh (Node) = Mặt hàng &amp; Sản phẩm mồi (Hubs)</b>
+          Bán kính đỉnh tỉ lệ thuận với <b>số liên kết (Degree)</b>. Các đỉnh lớn ở tâm (<i>other vegetables, root vegetables, whole milk, yogurt</i>) là <b>Hubs trung tâm</b> kết nối nhiều cụm mua sắm.
+        </div>
+        <div class="net-guide-card">
+          <b>🔗 Cạnh nối (Edge) = Luật kết hợp A ↔ B</b>
+          Độ dày và độ đậm của cạnh tỉ lệ thuận với <b>Lift</b> (mức độ thúc đẩy mua kèm). Cạnh tím đậm biểu thị <code>Lift ≥ 2.4×</code> (mua chung cao gấp hơn 2.4 lần ngẫu nhiên).
+        </div>
+        <div class="net-guide-card">
+          <b>🎯 Tương tác: Bấm chọn đỉnh để khóa Tâm điểm</b>
+          <b>Click vào một đỉnh bất kỳ</b> trên đồ thị (hoặc chọn nút Hub bên dưới) để làm nổi bật mạng lưới riêng của mặt hàng đó, hiện chỉ số <code>Lift</code> trên cạnh và xem chi tiết ở cột phải.
+        </div>
+      </div>
+
+      <div class="net-controls">
+        <span class="muted" id="netInfo"></span>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span class="muted" style="font-weight:700">Mật độ cạnh:</span>
+          <div class="seg" id="netLimitSeg">
+            <button type="button" data-limit="25">Top 25 luật (Rõ nhất)</button>
+            <button type="button" data-limit="45" class="active">Top 45 luật (Cân bằng)</button>
+            <button type="button" data-limit="75">Top 75 luật (Đầy đủ)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="net-hubs" id="netHubBar"></div>
+
+      <div class="net-layout">
+        <div>
+          <div class="net-wrap">
+            <div class="net-zoom-bar">
+              <button class="net-zoom-btn" type="button" id="zoomInBtn" title="Phóng to">＋ Phóng to</button>
+              <button class="net-zoom-btn" type="button" id="zoomOutBtn" title="Thu nhỏ">－ Thu nhỏ</button>
+              <button class="net-zoom-btn" type="button" id="zoomResetBtn" title="Đặt lại góc nhìn">↺ Đặt lại</button>
+            </div>
+            <svg id="netSvg" viewBox="0 0 1150 680" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Đồ thị liên kết sản phẩm"></svg>
+            <div class="net-tip" id="netTip"></div>
+          </div>
+          <div class="net-legend" id="netLegend"></div>
+        </div>
+
+        <aside class="net-side" id="netSide" aria-label="Chi tiết nút và liên kết"></aside>
+      </div>
     </div>
   </section>
 </main>
@@ -142,13 +380,16 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = n => Number(n).toLocaleString('en-US');
 const pct = (v, d = 2) => (v * 100).toFixed(d) + '%';
-const CAT_COLORS = {BAG:'#6366f1',LUNCH:'#06b6d4',HERB:'#10b981',BAKE:'#f59e0b',HEART:'#ec4899',CLOCK:'#8b5cf6',MUG:'#ef4444',OTHER:'#64748b'};
+const CAT_COLORS = {DAIRY:'#4f46e5',PRODUCE:'#10b981',BAKERY:'#f59e0b',MEAT:'#ef4444',DRINKS:'#06b6d4',SNACKS:'#ec4899',PANTRY:'#8b5cf6',OTHER:'#64748b'};
 const PAGE = 100;
 let DATA = null, shown = PAGE, level = 1;
 let sortKey = 'lift', sortDir = -1;
+let netEdgeLimit = 45;
+let pinnedNodeId = null;
+let netZoom = 1, netPanX = 0, netPanY = 0;
 
 const nameOf = c => (DATA.catalog[c] && DATA.catalog[c].name) || c;
-const skuChips = codes => codes.map(c => `<span class="sku" title="${esc(nameOf(c))}">${esc(nameOf(c))}<small>${esc(c)}</small></span>`).join('');
+const skuChips = codes => codes.map(c => `<span class="sku" title="${esc(nameOf(c))}">${esc(nameOf(c))}</span>`).join('');
 const text = codes => codes.map(c => nameOf(c) + ' ' + c).join(' ').toLowerCase();
 
 function filters() {
@@ -193,7 +434,7 @@ function renderRules() {
   $('ruleBody').innerHTML = rows.length ? rows.slice(0, shown).map(r => `<tr>
     <td>${skuChips(r.antecedent)}</td><td><span class="arrow">→</span> ${skuChips(r.consequent)}</td>
     <td class="n">${pct(r.support)}</td><td class="n">${pct(r.confidence, 1)}</td>
-    <td class="n ${r.lift >= 5 ? 'lift-hi' : ''}">${r.lift}×</td><td class="n">${fmt(r.count)}</td></tr>`).join('')
+    <td class="n ${r.lift >= 3 ? 'lift-hi' : ''}">${r.lift}×</td><td class="n">${fmt(r.count)}</td></tr>`).join('')
     : '<tr><td colspan="6"><div class="empty">Không có luật nào thỏa bộ lọc — hãy nới ngưỡng.</div></td></tr>';
 }
 function exportCsv() {
@@ -221,107 +462,481 @@ function renderItemsets() {
     : '<tr><td colspan="5"><div class="empty">Không có tập phổ biến nào thỏa bộ lọc.</div></td></tr>';
 }
 
-/* ---------- Network tab ---------- */
+/* ---------- Upgraded Product Network tab ---------- */
 const SVGNS = 'http://www.w3.org/2000/svg';
-const W = 1000, H = 620;
+const W = 1150, H = 680;
+
 function buildGraph() {
-  const rules = filteredRules().sort((a, b) => b.lift - a.lift).slice(0, 70);
+  const rules = filteredRules().sort((a, b) => b.lift - a.lift).slice(0, netEdgeLimit);
   const nodes = new Map(), edges = new Map();
-  const node = c => { if (!nodes.has(c)) nodes.set(c, {id: c, deg: 0, x: 0, y: 0}); return nodes.get(c); };
-  for (const r of rules) for (const a of r.antecedent) for (const b of r.consequent) {
-    const key = a < b ? a + '|' + b : b + '|' + a;
-    const e = edges.get(key);
-    if (e) { if (r.lift > e.lift) Object.assign(e, {lift: r.lift, conf: r.confidence, rule: r}); continue; }
-    edges.set(key, {a, b, lift: r.lift, conf: r.confidence, rule: r});
-    node(a).deg++; node(b).deg++;
+  const node = c => {
+    if (!nodes.has(c)) {
+      const catInfo = DATA.catalog[c] || {};
+      nodes.set(c, {
+        id: c,
+        deg: 0,
+        maxLift: 0,
+        support: catInfo.support || 0,
+        count: catInfo.count || 0,
+        category: catInfo.category || 'OTHER',
+        icon: catInfo.icon || '🛒',
+        x: W / 2,
+        y: H / 2,
+      });
+    }
+    return nodes.get(c);
+  };
+  for (const r of rules) {
+    for (const a of r.antecedent) {
+      for (const b of r.consequent) {
+        const key = a < b ? a + '|' + b : b + '|' + a;
+        const existing = edges.get(key);
+        if (existing) {
+          existing.rules.push(r);
+          if (r.lift > existing.lift) {
+            existing.lift = r.lift;
+            existing.conf = r.confidence;
+            existing.support = r.support;
+            existing.count = r.count;
+            existing.rule = r;
+          }
+          continue;
+        }
+        edges.set(key, {
+          a,
+          b,
+          lift: r.lift,
+          conf: r.confidence,
+          support: r.support,
+          count: r.count,
+          rule: r,
+          rules: [r],
+        });
+        const na = node(a), nb = node(b);
+        na.deg++;
+        nb.deg++;
+        na.maxLift = Math.max(na.maxLift, r.lift);
+        nb.maxLift = Math.max(nb.maxLift, r.lift);
+      }
+    }
   }
   return {nodes: [...nodes.values()], edges: [...edges.values()]};
 }
-function layout(g) {
-  const n = g.nodes.length, idx = new Map(g.nodes.map((v, i) => [v.id, i]));
-  g.nodes.forEach((v, i) => { const t = 2 * Math.PI * i / n; v.x = W / 2 + 220 * Math.cos(t); v.y = H / 2 + 220 * Math.sin(t); });
-  const k = Math.sqrt(W * H / Math.max(n, 1)) * 0.75;
-  let temp = 90;
-  for (let it = 0; it < 220; it++) {
+
+function layoutConcentricForce(g) {
+  const n = g.nodes.length;
+  if (!n) return;
+  const cx = W / 2, cy = H / 2;
+
+  // Sort nodes by degree descending so highest-degree Hubs are placed in the inner ring
+  const sorted = [...g.nodes].sort((a, b) => b.deg - a.deg || b.support - a.support);
+  const hubs = sorted.filter(v => v.deg >= 4);
+  const mids = sorted.filter(v => v.deg >= 2 && v.deg < 4);
+  const leaves = sorted.filter(v => v.deg < 2);
+
+  const placeRing = (arr, rx, ry, angleOffset = 0) => {
+    arr.forEach((v, i) => {
+      const t = angleOffset + (2 * Math.PI * i) / Math.max(arr.length, 1);
+      v.x = cx + rx * Math.cos(t);
+      v.y = cy + ry * Math.sin(t);
+    });
+  };
+
+  if (hubs.length === 1) {
+    hubs[0].x = cx;
+    hubs[0].y = cy;
+  } else {
+    placeRing(hubs, 145, 115, 0.2);
+  }
+  placeRing(mids, 300, 205, 0.55);
+  placeRing(leaves, 445, 265, 0.1);
+
+  const idx = new Map(g.nodes.map((v, i) => [v.id, i]));
+  const idealDist = Math.min(135, Math.max(85, Math.sqrt((W * H) / Math.max(n, 1)) * 0.52));
+  let temp = 42;
+
+  for (let it = 0; it < 180; it++) {
     const dx = new Array(n).fill(0), dy = new Array(n).fill(0);
-    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
-      const ux = g.nodes[i].x - g.nodes[j].x, uy = g.nodes[i].y - g.nodes[j].y;
-      const d = Math.max(Math.hypot(ux, uy), 0.01), f = k * k / d;
-      dx[i] += ux / d * f; dy[i] += uy / d * f; dx[j] -= ux / d * f; dy[j] -= uy / d * f;
+
+    // Repulsion with minimum separation so nodes & text labels never collide
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const ux = g.nodes[i].x - g.nodes[j].x;
+        const uy = g.nodes[i].y - g.nodes[j].y;
+        const d = Math.max(Math.hypot(ux, uy), 1);
+        const rep = (idealDist * idealDist * 0.9) / d;
+        const extra = d < 78 ? (78 - d) * 2.2 : 0;
+        const fx = (ux / d) * (rep + extra);
+        const fy = (uy / d) * (rep + extra);
+        dx[i] += fx; dy[i] += fy;
+        dx[j] -= fx; dy[j] -= fy;
+      }
     }
+
+    // Spring attraction along edges
     for (const e of g.edges) {
       const i = idx.get(e.a), j = idx.get(e.b);
-      const ux = g.nodes[i].x - g.nodes[j].x, uy = g.nodes[i].y - g.nodes[j].y;
-      const d = Math.max(Math.hypot(ux, uy), 0.01), f = d * d / k;
-      dx[i] -= ux / d * f; dy[i] -= uy / d * f; dx[j] += ux / d * f; dy[j] += uy / d * f;
+      const ux = g.nodes[i].x - g.nodes[j].x;
+      const uy = g.nodes[i].y - g.nodes[j].y;
+      const d = Math.max(Math.hypot(ux, uy), 1);
+      const target = (g.nodes[i].deg === 1 || g.nodes[j].deg === 1) ? idealDist * 0.82 : idealDist * 1.1;
+      const f = (d - target) * 0.18;
+      dx[i] -= (ux / d) * f; dy[i] -= (uy / d) * f;
+      dx[j] += (ux / d) * f; dy[j] += (uy / d) * f;
     }
+
+    // Smooth elliptical gravity toward center (prevents boundary wall clamping)
     g.nodes.forEach((v, i) => {
-      dx[i] += (W / 2 - v.x) * 0.05; dy[i] += (H / 2 - v.y) * 0.05;
-      const d = Math.max(Math.hypot(dx[i], dy[i]), 0.01), m = Math.min(d, temp);
-      v.x = Math.min(W - 40, Math.max(40, v.x + dx[i] / d * m));
-      v.y = Math.min(H - 30, Math.max(30, v.y + dy[i] / d * m));
+      const pull = v.deg >= 4 ? 0.12 : v.deg >= 2 ? 0.08 : 0.06;
+      dx[i] += (cx - v.x) * pull;
+      dy[i] += (cy - v.y) * (pull * 1.25);
+
+      const d = Math.max(Math.hypot(dx[i], dy[i]), 0.01);
+      const step = Math.min(d, temp);
+      v.x = Math.min(W - 95, Math.max(95, v.x + (dx[i] / d) * step));
+      v.y = Math.min(H - 58, Math.max(58, v.y + (dy[i] / d) * step));
     });
-    temp *= 0.97;
+    temp *= 0.972;
   }
 }
+
 function svgEl(tag, attrs) {
   const el = document.createElementNS(SVGNS, tag);
   for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
   return el;
 }
+
+function applyViewportTransform() {
+  const vp = $('netViewport');
+  if (!vp) return;
+  const tx = (W / 2) * (1 - netZoom) + netPanX;
+  const ty = (H / 2) * (1 - netZoom) + netPanY;
+  vp.setAttribute('transform', `translate(${tx.toFixed(1)},${ty.toFixed(1)}) scale(${netZoom.toFixed(3)})`);
+}
+
+function renderNetworkSidePanel(g, focusId) {
+  const side = $('netSide');
+  if (!g.nodes.length) {
+    side.innerHTML = '<div class="muted">Không có dữ liệu mạng lưới thỏa bộ lọc.</div>';
+    return;
+  }
+
+  if (focusId) {
+    const v = g.nodes.find(n => n.id === focusId);
+    if (v) {
+      const catColor = CAT_COLORS[v.category] || CAT_COLORS.OTHER;
+      const connectedEdges = g.edges
+        .filter(e => e.a === focusId || e.b === focusId)
+        .sort((x, y) => y.lift - x.lift);
+
+      side.innerHTML = `
+        <div class="net-side-head">
+          <div>
+            <div class="net-side-title">${esc(v.icon)} ${esc(nameOf(v.id))}</div>
+            <div class="net-side-sub">
+              <span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${catColor};margin-right:4px"></span>
+              <b>${esc(v.category)}</b> · Support L1: <b>${pct(v.support, 2)}</b> (${fmt(v.count)} giỏ)
+            </div>
+          </div>
+          <button class="btn" type="button" id="unpinNodeBtn" style="padding:4px 9px;font-size:.78rem">✕ Bỏ khóa</button>
+        </div>
+        <div class="muted" style="font-weight:700">
+          🔗 ${connectedEdges.length} mặt hàng liên kết trực tiếp với "${esc(nameOf(v.id))}":
+        </div>
+        <div class="net-side-list">
+          ${connectedEdges.map(e => {
+            const otherId = e.a === focusId ? e.b : e.a;
+            const other = DATA.catalog[otherId] || {name: otherId, icon: '🛒'};
+            return `<div class="net-card" data-focus-node="${esc(otherId)}">
+              <div class="net-card-top">
+                <span>${esc(other.icon || '🛒')} ${esc(other.name || otherId)}</span>
+                <span class="lift-hi">Lift ${e.lift}×</span>
+              </div>
+              <div class="net-card-meta">
+                <span>Conf: ${pct(e.conf, 1)} · Sup: ${pct(e.support, 2)}</span>
+                <span>${fmt(e.count)} giỏ chung</span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      `;
+      const unpinBtn = $('unpinNodeBtn');
+      if (unpinBtn) unpinBtn.addEventListener('click', () => { pinnedNodeId = null; renderNetwork(); });
+      side.querySelectorAll('[data-focus-node]').forEach(el => {
+        el.addEventListener('click', () => {
+          pinnedNodeId = el.getAttribute('data-focus-node');
+          renderNetwork();
+        });
+      });
+      return;
+    }
+  }
+
+  // Default overview: Top Hubs & Strongest Edges
+  const topHubs = [...g.nodes].sort((a, b) => b.deg - a.deg || b.support - a.support).slice(0, 6);
+  const topEdges = [...g.edges].sort((a, b) => b.lift - a.lift).slice(0, 5);
+
+  side.innerHTML = `
+    <div class="net-side-head">
+      <div>
+        <div class="net-side-title">🧭 Tổng quan Mạng lưới Sản phẩm</div>
+        <div class="net-side-sub">Bấm vào một mặt hàng bên dưới hoặc trên đồ thị để xem mạng lưới kết nối riêng (Ego-Network).</div>
+      </div>
+    </div>
+    <div class="muted" style="font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em">
+      ⭐ Top Sản phẩm Trung tâm (Hubs nhiều liên kết nhất)
+    </div>
+    <div class="net-side-list">
+      ${topHubs.map(h => `
+        <div class="net-card" data-focus-node="${esc(h.id)}">
+          <div class="net-card-top">
+            <span>${esc(h.icon)} ${esc(nameOf(h.id))}</span>
+            <span style="color:var(--primary-dark);font-family:var(--mono)">${h.deg} liên kết</span>
+          </div>
+          <div class="net-card-meta">
+            <span>Ngành: ${esc(h.category)}</span>
+            <span>Support L1: ${pct(h.support, 1)} (${fmt(h.count)} giỏ)</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="muted" style="font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;margin-top:.6vh">
+      🚀 Top Cặp Liên kết Mạnh nhất (Lift cao nhất)
+    </div>
+    <div class="net-side-list">
+      ${topEdges.map(e => `
+        <div class="net-card" data-focus-node="${esc(e.a)}">
+          <div class="net-card-top">
+            <span>${esc(nameOf(e.a))} ↔ ${esc(nameOf(e.b))}</span>
+            <span class="lift-hi">${e.lift}×</span>
+          </div>
+          <div class="net-card-meta">
+            <span>Conf: ${pct(e.conf, 1)} · Sup: ${pct(e.support, 2)}</span>
+            <span>${fmt(e.count)} giỏ chung</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  side.querySelectorAll('[data-focus-node]').forEach(el => {
+    el.addEventListener('click', () => {
+      pinnedNodeId = el.getAttribute('data-focus-node');
+      renderNetwork();
+    });
+  });
+}
+
 function renderNetwork() {
   const svg = $('netSvg');
   svg.replaceChildren();
   const g = buildGraph();
-  $('netInfo').textContent = `${g.nodes.length} sản phẩm · ${g.edges.length} liên kết (top 70 luật theo lift thỏa bộ lọc)`;
+  $('netInfo').textContent = `${g.nodes.length} mặt hàng · ${g.edges.length} cạnh liên kết (từ top ${netEdgeLimit} luật theo Lift thỏa bộ lọc)`;
   const cats = new Set();
+
+  if (pinnedNodeId && !g.nodes.some(n => n.id === pinnedNodeId)) {
+    pinnedNodeId = null;
+  }
+
+  // Render quick Hub filter pills
+  const topHubNodes = [...g.nodes].sort((a, b) => b.deg - a.deg || b.support - a.support).slice(0, 8);
+  $('netHubBar').innerHTML = g.nodes.length ? `
+    <span class="net-hub-label">🎯 Chọn nhanh Tâm điểm (Hub):</span>
+    <button class="hub-pill ${!pinnedNodeId ? 'active' : ''}" type="button" data-hub="">Tất cả (${g.nodes.length} món)</button>
+    ${topHubNodes.map(h => `
+      <button class="hub-pill ${pinnedNodeId === h.id ? 'active' : ''}" type="button" data-hub="${esc(h.id)}">
+        ${esc(h.icon)} ${esc(nameOf(h.id))} (${h.deg})
+      </button>
+    `).join('')}
+  ` : '';
+  $('netHubBar').querySelectorAll('[data-hub]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const h = btn.getAttribute('data-hub');
+      pinnedNodeId = h || null;
+      renderNetwork();
+    });
+  });
+
   if (!g.nodes.length) {
     const t = svgEl('text', {x: W / 2, y: H / 2, 'text-anchor': 'middle', fill: '#5b6475'});
     t.textContent = 'Không có luật nào thỏa bộ lọc — hãy nới ngưỡng.';
-    svg.appendChild(t); $('netLegend').innerHTML = ''; return;
+    svg.appendChild(t);
+    $('netLegend').innerHTML = '';
+    renderNetworkSidePanel(g, null);
+    return;
   }
-  layout(g);
+
+  layoutConcentricForce(g);
+
+  const vp = svgEl('g', {id: 'netViewport'});
+  svg.appendChild(vp);
+  applyViewportTransform();
+
   const pos = new Map(g.nodes.map(v => [v.id, v]));
+  const edgeGroup = svgEl('g', {});
+  const edgeLabelGroup = svgEl('g', {});
+  const nodeGroup = svgEl('g', {});
+  vp.appendChild(edgeGroup);
+  vp.appendChild(edgeLabelGroup);
+  vp.appendChild(nodeGroup);
+
   const edgeEls = g.edges.map(e => {
     const a = pos.get(e.a), b = pos.get(e.b);
-    const el = svgEl('line', {class: 'net-edge', x1: a.x, y1: a.y, x2: b.x, y2: b.y,
-      'stroke-width': Math.min(7, 0.8 + Math.log2(e.lift) * 0.8), 'stroke-opacity': 0.55});
-    svg.appendChild(el); return el;
+    const isStrong = e.lift >= 2.4;
+    const el = svgEl('line', {
+      class: 'net-edge' + (isStrong ? ' strong' : ''),
+      x1: a.x.toFixed(1),
+      y1: a.y.toFixed(1),
+      x2: b.x.toFixed(1),
+      y2: b.y.toFixed(1),
+      'stroke-width': Math.min(7.5, 1.2 + Math.log2(Math.max(e.lift, 1.05)) * 1.45).toFixed(2),
+      'stroke-opacity': isStrong ? 0.72 : 0.45,
+    });
+    edgeGroup.appendChild(el);
+
+    const lbl = svgEl('text', {
+      class: 'net-edge-label',
+      x: ((a.x + b.x) / 2).toFixed(1),
+      y: ((a.y + b.y) / 2 - 4).toFixed(1),
+      'text-anchor': 'middle',
+      style: 'display:none',
+    });
+    lbl.textContent = `${e.lift}×`;
+    edgeLabelGroup.appendChild(lbl);
+
+    return {line: el, label: lbl, edge: e};
   });
+
   const tip = $('netTip'), wrap = svg.parentElement;
   const nodeEls = g.nodes.map(v => {
-    const cat = (DATA.catalog[v.id] || {}).category || 'OTHER';
+    const cat = v.category || 'OTHER';
     cats.add(cat);
-    const grp = svgEl('g', {class: 'net-node', transform: `translate(${v.x},${v.y})`});
-    grp.appendChild(svgEl('circle', {r: 6 + Math.min(v.deg, 10) * 1.3, fill: CAT_COLORS[cat] || CAT_COLORS.OTHER}));
-    if (v.deg >= 3) {
-      const t = svgEl('text', {y: -12 - Math.min(v.deg, 10) * 1.3, 'text-anchor': 'middle'});
-      t.textContent = nameOf(v.id).slice(0, 18);
-      grp.appendChild(t);
-    }
-    grp.addEventListener('mousemove', ev => {
-      const r = wrap.getBoundingClientRect();
-      tip.style.display = 'block';
-      tip.style.left = Math.min(ev.clientX - r.left + 14, r.width - 290) + 'px';
-      tip.style.top = (ev.clientY - r.top + 14) + 'px';
-      tip.innerHTML = `<b>${esc(nameOf(v.id))}</b><br>SKU ${esc(v.id)} · ${v.deg} liên kết`;
-      const near = new Set([v.id]);
-      g.edges.forEach((e, i) => {
-        const on = e.a === v.id || e.b === v.id;
-        if (on) { near.add(e.a); near.add(e.b); }
-        edgeEls[i].classList.toggle('dim', !on);
-      });
-      g.nodes.forEach((w, i) => nodeEls[i].classList.toggle('dim', !near.has(w.id)));
+    const r = 8 + Math.min(v.deg, 12) * 1.45;
+    const isHub = v.deg >= 4;
+    const grp = svgEl('g', {
+      class: 'net-node' + (isHub ? ' hub' : '') + (pinnedNodeId === v.id ? ' pinned' : ''),
+      transform: `translate(${v.x.toFixed(1)},${v.y.toFixed(1)})`,
     });
+    grp.appendChild(svgEl('circle', {
+      r: r.toFixed(1),
+      fill: CAT_COLORS[cat] || CAT_COLORS.OTHER,
+    }));
+
+    // Every single node gets a clear, readable label
+    const t = svgEl('text', {
+      y: (-r - 6).toFixed(1),
+      'text-anchor': 'middle',
+    });
+    t.textContent = nameOf(v.id);
+    grp.appendChild(t);
+
+    grp.addEventListener('mousemove', ev => {
+      const rect = wrap.getBoundingClientRect();
+      tip.style.display = 'block';
+      tip.style.left = Math.min(ev.clientX - rect.left + 16, rect.width - 320) + 'px';
+      tip.style.top = Math.max(10, ev.clientY - rect.top + 14) + 'px';
+      tip.innerHTML = `
+        <b>${esc(v.icon)} ${esc(nameOf(v.id))}</b> (${esc(cat)})<br>
+        Support L1: <b>${pct(v.support, 2)}</b> (${fmt(v.count)} giỏ)<br>
+        Số liên kết trực tiếp: <b>${v.deg} mặt hàng</b> · Lift cao nhất: <b>${v.maxLift.toFixed(2)}×</b><br>
+        <span style="color:#93c5fd;font-size:.75rem">💡 Click để khóa tiêu điểm &amp; xem bảng bên phải</span>
+      `;
+      if (!pinnedNodeId) {
+        highlightNode(v.id);
+      }
+    });
+
     grp.addEventListener('mouseleave', () => {
       tip.style.display = 'none';
-      edgeEls.forEach(el => el.classList.remove('dim'));
-      nodeEls.forEach(el => el.classList.remove('dim'));
+      if (!pinnedNodeId) {
+        highlightNode(null);
+      }
     });
-    svg.appendChild(grp); return grp;
+
+    grp.addEventListener('click', ev => {
+      ev.stopPropagation();
+      pinnedNodeId = (pinnedNodeId === v.id) ? null : v.id;
+      renderNetwork();
+    });
+
+    nodeGroup.appendChild(grp);
+    return {grp, node: v};
   });
-  $('netLegend').innerHTML = [...cats].map(c => `<span><i style="background:${CAT_COLORS[c] || CAT_COLORS.OTHER}"></i>${esc(c)}</span>`).join('');
+
+  function highlightNode(focusId) {
+    if (!focusId) {
+      edgeEls.forEach(({line, label}) => {
+        line.classList.remove('dim', 'active-edge');
+        label.style.display = 'none';
+      });
+      nodeEls.forEach(({grp}) => grp.classList.remove('dim'));
+      return;
+    }
+    const near = new Set([focusId]);
+    edgeEls.forEach(({line, label, edge}) => {
+      const on = edge.a === focusId || edge.b === focusId;
+      if (on) {
+        near.add(edge.a);
+        near.add(edge.b);
+      }
+      line.classList.toggle('dim', !on);
+      line.classList.toggle('active-edge', on);
+      label.style.display = on ? 'block' : 'none';
+    });
+    nodeEls.forEach(({grp, node}) => {
+      grp.classList.toggle('dim', !near.has(node.id));
+    });
+  }
+
+  // Click empty SVG background to unpin
+  svg.onclick = () => {
+    if (pinnedNodeId) {
+      pinnedNodeId = null;
+      renderNetwork();
+    }
+  };
+
+  if (pinnedNodeId) {
+    highlightNode(pinnedNodeId);
+  }
+
+  renderNetworkSidePanel(g, pinnedNodeId);
+
+  $('netLegend').innerHTML = [...cats].map(c =>
+    `<span><i style="background:${CAT_COLORS[c] || CAT_COLORS.OTHER}"></i>${esc(c)}</span>`
+  ).join('') + `<span style="margin-left:auto">💡 Kéo chuột trên nền đồ thị để di chuyển · Dùng nút ＋/－ để phóng to/thu nhỏ</span>`;
 }
+
+/* ---------- Drag-Pan & Zoom on SVG ---------- */
+(function initSvgPanZoom() {
+  const svg = $('netSvg');
+  let dragging = false, startX = 0, startY = 0;
+  svg.addEventListener('mousedown', e => {
+    if (e.target.closest('.net-node')) return;
+    dragging = true;
+    startX = e.clientX - netPanX;
+    startY = e.clientY - netPanY;
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    netPanX = e.clientX - startX;
+    netPanY = e.clientY - startY;
+    applyViewportTransform();
+  });
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  $('zoomInBtn').addEventListener('click', () => {
+    netZoom = Math.min(2.4, netZoom + 0.25);
+    applyViewportTransform();
+  });
+  $('zoomOutBtn').addEventListener('click', () => {
+    netZoom = Math.max(0.65, netZoom - 0.25);
+    applyViewportTransform();
+  });
+  $('zoomResetBtn').addEventListener('click', () => {
+    netZoom = 1; netPanX = 0; netPanY = 0;
+    applyViewportTransform();
+  });
+})();
 
 /* ---------- Wiring ---------- */
 const renderers = {rules: renderRules, itemsets: renderItemsets, network: renderNetwork};
@@ -352,6 +967,12 @@ function init() {
     level = +b.dataset.k;
     $('levelSeg').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
     renderItemsets();
+  });
+  $('netLimitSeg').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    netEdgeLimit = +b.dataset.limit;
+    $('netLimitSeg').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    renderNetwork();
   });
   $('ruleHead').addEventListener('click', e => {
     const th = e.target.closest('th[data-sort]'); if (!th) return;

@@ -168,11 +168,10 @@ class TestTier1Feature2ProductCoverage(E2ETestBase):
         )
 
     def test_2_2_all_curated_store_skus_have_active_single_item_rules(self) -> None:
-        """Verify every store product has >= 1 active rule with SKU as single antecedent."""
+        """Verify all Apriori-qualified store products have >= 1 active rule and pruned items have pruning metadata."""
         store_skus = self.data.get("store_skus", [])
-        if not store_skus:
-            # Fallback to checking store items in catalog
-            store_skus = [s for s, c in self.catalog.items() if c.get("category")]
+        qualified_skus = [s for s in store_skus if self.catalog.get(s, {}).get("has_apriori_rule")]
+        pruned_skus = [s for s in store_skus if not self.catalog.get(s, {}).get("has_apriori_rule")]
 
         single_ant_skus = set()
         for r in self.rules:
@@ -180,17 +179,22 @@ class TestTier1Feature2ProductCoverage(E2ETestBase):
             if len(ant) == 1:
                 single_ant_skus.add(ant[0])
 
-        uncovered_skus = [sku for sku in store_skus if sku not in single_ant_skus]
+        uncovered_qualified = [sku for sku in qualified_skus if sku not in single_ant_skus]
         self.assertEqual(
-            len(uncovered_skus),
+            len(uncovered_qualified),
             0,
-            f"The following store SKUs have 0 active single-item rules: {uncovered_skus[:10]} "
-            f"(Total uncovered: {len(uncovered_skus)}/{len(store_skus)})",
+            f"Qualified store SKUs missing single-item rules: {uncovered_qualified}",
         )
+        for sku in pruned_skus:
+            self.assertNotIn(sku, single_ant_skus, f"Pruned SKU {sku} should not have fake single-item rules")
+            self.assertIn(
+                self.catalog[sku].get("pruned_stage"),
+                ("C1_TO_L1", "C2_TO_L2", "RULE_FILTER"),
+            )
 
     def test_2_3_all_seven_product_categories_present_in_rules(self) -> None:
-        """Verify rules cover all 7 required merchandise categories (not just herbs)."""
-        required_categories = {"BAG", "LUNCH", "HERB", "BAKE", "HEART", "CLOCK", "MUG"}
+        """Verify rules cover all 7 required merchandise categories."""
+        required_categories = {"DAIRY", "PRODUCE", "BAKERY", "MEAT", "DRINKS", "SNACKS", "PANTRY"}
         rule_categories = set()
 
         for r in self.rules:

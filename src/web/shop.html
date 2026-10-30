@@ -3,127 +3,632 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cửa hàng — BasketIQ</title>
+<title>Cửa hàng — BasketIQ Fresh Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/app.css">
 <style>
-:root{--bg:#f8fafc;--surface:#ffffff}
+:root{
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --surface-sub:#f1f5f9;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --text-muted:#475569;
+  --primary:#4f46e5;
+  --primary-hover:#4338ca;
+  --primary-light:#eef2ff;
+  --primary-dark:#3730a3;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{line-height:1.5;min-height:100vh}
-body.drawer-open{overflow:hidden}
-button{font:inherit;color:inherit}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;min-height:100vh}
+button,input{font:inherit;color:inherit}
 
-.hero{background:linear-gradient(135deg,#eef2ff 0%,#f5f3ff 55%,#fdf2f8 100%);border-bottom:1px solid var(--border);padding:32px 20px 28px}
-.hero-inner{max-width:1380px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px}
-.hero h1{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
-.hero p{color:var(--text-muted);font-size:.95rem;max-width:720px}
-.mode-toggle{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:4px;display:flex;gap:4px;box-shadow:var(--shadow-sm)}
-.mode-btn{border:none;background:transparent;padding:8px 14px;border-radius:8px;font-size:.84rem;font-weight:600;color:var(--text-muted);cursor:pointer}
-.mode-btn.active{background:var(--primary);color:#fff}
+/* ---------- Full-Viewport 100% Width 2-Column Layout (vh/vw scaled) ---------- */
+.shop-shell{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:2.2vh 2.5vw 5vh;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(440px,31vw,600px);
+  gap:2.2vw;
+  align-items:start;
+}
+@media (max-width:1100px){
+  .shop-shell{grid-template-columns:1fr;padding:16px 16px 80px}
+}
 
-.container{max-width:1380px;margin:0 auto;padding:24px 20px 60px}
-.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
-.search{flex:1 1 260px;max-width:380px;border:1px solid var(--border);background:var(--surface);border-radius:10px;padding:10px 14px;font-size:.92rem;box-shadow:var(--shadow-sm)}
-.search:focus{outline:2px solid var(--primary);outline-offset:1px}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:var(--surface);border:1px solid var(--border);padding:6px 13px;border-radius:999px;font-size:.82rem;font-weight:600;color:var(--text-muted);cursor:pointer;white-space:nowrap}
-.chip:hover{border-color:var(--primary)}
-.chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
-.section-title{font-size:1.2rem;font-weight:800;margin:6px 0 4px}
-.section-sub{color:var(--text-muted);font-size:.88rem;margin-bottom:14px}
+/* ---------- Left Column: Storefront ---------- */
+.store-main{min-width:0;display:flex;flex-direction:column;gap:2vh}
 
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
-.prod-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
-.prod-card:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
-.prod-thumb{height:116px;display:grid;place-items:center;font-size:2.8rem;position:relative;background:linear-gradient(135deg,var(--primary-light),#faf5ff)}
-.prod-code{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:.68rem;background:#fff;color:var(--text-muted);padding:2px 7px;border-radius:6px;border:1px solid var(--border)}
-.prod-body{padding:14px;display:flex;flex-direction:column;gap:10px;flex:1;justify-content:space-between}
-.prod-name{font-size:.88rem;font-weight:600;line-height:1.35;min-height:2.4em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.prod-foot{display:flex;justify-content:space-between;align-items:center}
-.prod-price{font-size:1.1rem;font-weight:800}
-.btn{border:1px solid transparent;border-radius:9px;padding:8px 13px;font-size:.84rem;font-weight:700;cursor:pointer;transition:background .15s}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-hover)}
-.btn-soft{background:var(--primary-light);color:var(--primary-dark)}
-.btn-soft:hover{background:#e0e7ff}
-.btn-ghost{background:var(--surface);border-color:var(--border);color:var(--text)}
-.btn-ghost:hover{border-color:var(--primary)}
-.empty-grid{grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px 0}
+/* Top Search & Demo Scenarios Bar */
+.store-top{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2vh 1.8vw;
+  display:flex;
+  flex-direction:column;
+  gap:1.5vh;
+  box-shadow:var(--shadow-sm);
+}
+.store-top-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:1.2vw;
+}
+.store-title h1{
+  font-size:clamp(1.45rem,1.65vw,2.15rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.store-title p{
+  font-size:clamp(.95rem,.96vw,1.18rem);
+  color:var(--text-muted);
+  margin-top:.3vh;
+}
+.search-wrap{
+  position:relative;
+  flex:1 1 320px;
+  max-width:clamp(340px,26vw,480px);
+}
+.search-wrap input{
+  width:100%;
+  background:var(--bg);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:1.1vh 1.2vw 1.1vh 2.6vw;
+  font-size:clamp(.95rem,.95vw,1.12rem);
+  transition:border-color .15s,background .15s;
+}
+.search-wrap input:focus{background:var(--surface);border-color:var(--primary);outline:none}
+.search-ico{
+  position:absolute;
+  left:.9vw;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:clamp(.95rem,1vw,1.15rem);
+  color:var(--text-muted);
+  pointer-events:none;
+}
 
-.bundle-section{margin-top:40px;border-top:1px solid var(--border);padding-top:24px}
-.bundle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-.bundle-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
-.bundle-head{display:flex;justify-content:space-between;align-items:center;font-size:.76rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.06em}
-.bundle-items{display:flex;align-items:center;gap:8px}
-.bundle-item{flex:1;background:var(--surface-sub);padding:9px 8px;border-radius:9px;font-size:.78rem;font-weight:600;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bundle-note{font-size:.78rem;color:var(--text-muted)}
-.bundle-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--border);padding-top:10px}
-.pill{font-family:var(--mono);font-size:.7rem;padding:2px 7px;border-radius:6px;font-weight:600;display:inline-block}
-.pill-lift{background:var(--success-light);color:var(--success-dark)}
-.pill-conf{background:var(--primary-light);color:var(--primary-dark)}
-.pill-supp{background:var(--surface-sub);color:var(--text-muted)}
-.biz-note{display:none}
-.biz-mode .biz-note{display:inline}
-.biz-mode .tech-note{display:none}
+/* Quick Demo Basket Pills */
+.demo-strip{
+  display:flex;
+  align-items:center;
+  gap:.7vw;
+  flex-wrap:wrap;
+  padding-top:1.4vh;
+  border-top:1px solid var(--surface-sub);
+}
+.demo-label{
+  font-size:clamp(.82rem,.82vw,1rem);
+  font-weight:700;
+  color:var(--text-muted);
+  margin-right:.3vw;
+}
+.demo-pill{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:.75vh 1.1vw;
+  font-size:clamp(.86rem,.86vw,1.05rem);
+  font-weight:600;
+  color:var(--text);
+  cursor:pointer;
+  transition:all .15s;
+}
+.demo-pill:hover{border-color:var(--primary);background:var(--primary-light);color:var(--primary-dark)}
 
-/* ---------- Cart drawer ---------- */
-.drawer-overlay{position:fixed;inset:0;background:rgba(17,24,39,.45);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
-.drawer-overlay.open{opacity:1;pointer-events:auto}
-.cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);background:var(--surface);z-index:70;display:flex;flex-direction:column;
-  box-shadow:var(--shadow-lg);transform:translateX(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);visibility:hidden}
-.cart-drawer.open{transform:none;visibility:visible}
-.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border)}
-.drawer-head h2{font-size:1.1rem;font-weight:800}
-.icon-btn{border:none;background:var(--surface-sub);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1.1rem}
-.icon-btn:hover{background:var(--border)}
-.drawer-body{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:20px}
-.drawer-label{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:8px}
-.link-btn{background:none;border:none;color:var(--danger);font-size:.78rem;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0}
-.cart-empty{text-align:center;padding:22px 12px;color:var(--text-muted);font-size:.88rem;background:var(--surface-sub);border-radius:12px}
-.cart-row{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--surface-sub)}
-.cart-ico{width:40px;height:40px;border-radius:10px;background:var(--primary-light);display:grid;place-items:center;font-size:1.3rem}
-.cart-name{font-size:.84rem;font-weight:600;line-height:1.3}
-.cart-unit{font-size:.74rem;color:var(--text-muted)}
-.cart-right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.cart-line{font-weight:800;font-size:.9rem;font-variant-numeric:tabular-nums}
-.qty{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.qty button{width:28px;height:28px;border:none;background:var(--surface);cursor:pointer;font-weight:800}
-.qty button:hover{background:var(--surface-sub)}
-.qty span{min-width:26px;text-align:center;font-size:.84rem;font-weight:700}
-.remove-btn{border:none;background:none;color:var(--text-light);cursor:pointer;font-size:.74rem;font-weight:600}
-.remove-btn:hover{color:var(--danger)}
+/* Category Aisle Pills */
+.aisle-bar{
+  display:flex;
+  gap:.65vw;
+  flex-wrap:wrap;
+}
+.aisle-chip{
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:1vh 1.25vw;
+  border-radius:12px;
+  font-size:clamp(.9rem,.92vw,1.12rem);
+  font-weight:600;
+  color:var(--text-muted);
+  cursor:pointer;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  gap:.5vw;
+  transition:all .15s;
+}
+.aisle-chip:hover{border-color:#cbd5e1;color:var(--text)}
+.aisle-chip.active{background:var(--text);border-color:var(--text);color:#fff}
 
-.reco-box{background:linear-gradient(180deg,#f5f3ff,#fff);border:1px solid #e3defb;border-radius:14px;padding:14px}
-.reco-title{font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:6px}
-.fired{font-size:.78rem;font-weight:700;color:var(--success-dark);background:var(--success-light);border-radius:8px;padding:6px 10px;margin:8px 0 10px}
-.fired.none{background:var(--warning-light);color:#92400e}
-.reco-list{display:flex;flex-direction:column;gap:10px}
-.reco-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:11px;display:flex;flex-direction:column;gap:6px}
-.reco-top{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}
-.reco-name{font-size:.83rem;font-weight:700;line-height:1.25}
-.reco-price{font-weight:800;font-size:.86rem}
-.reco-why{font-size:.74rem;color:var(--text-muted);line-height:1.4}
-.reco-why code{font-family:var(--mono);font-size:.72rem;background:var(--surface-sub);padding:0 4px;border-radius:4px}
-.reco-act{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.tier-tag{font-size:.68rem;font-weight:700;color:var(--primary-dark);background:var(--primary-light);padding:2px 8px;border-radius:999px}
+/* Product Grid — Proportional E-Commerce Cards */
+.catalog-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+}
+.catalog-header h2{font-size:clamp(1.2rem,1.25vw,1.55rem);font-weight:800}
+.catalog-header span{font-size:clamp(.9rem,.92vw,1.1rem);color:var(--text-muted);font-weight:500}
 
-.drawer-foot{border-top:1px solid var(--border);padding:16px 20px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
-.total-row{display:flex;justify-content:space-between;align-items:baseline}
-.total-row b{font-size:1.35rem;font-weight:800}
-.btn-block{width:100%;padding:12px;font-size:.95rem;border-radius:11px}
-.btn[disabled]{opacity:.5;cursor:not-allowed}
-.drawer-link{text-align:center;font-size:.82rem;font-weight:600;color:var(--primary);text-decoration:none}
-.order-done{text-align:center;padding:24px 8px;display:flex;flex-direction:column;gap:12px;align-items:center}
-.order-done .big{font-size:2.6rem}
-.order-done p{color:var(--text-muted);font-size:.9rem}
-.order-actions{display:flex;flex-direction:column;gap:8px;width:100%}
-.order-actions a{text-decoration:none;text-align:center}
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(clamp(215px,14.5vw,285px),1fr));
+  gap:1.2vw;
+}
+.prod-card{
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:16px;
+  padding:1.6vh 1.2vw;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:1.2vh;
+  transition:border-color .15s,box-shadow .15s,transform .15s;
+  position:relative;
+}
+.prod-card:hover{border-color:#cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.05);transform:translateY(-2px)}
+.prod-card.in-cart{border-color:var(--primary);background:#fcfcff}
+.prod-visual{
+  height:clamp(100px,11.5vh,145px);
+  background:var(--bg);
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:clamp(2.8rem,3.3vw,4rem);
+  position:relative;
+}
+.pop-tag{
+  position:absolute;
+  top:8px;
+  left:8px;
+  font-size:clamp(.72rem,.72vw,.86rem);
+  font-weight:700;
+  color:var(--text-muted);
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:2px 8px;
+  border-radius:7px;
+}
+.pop-tag.top-seller{color:#047857;background:#ecfdf5;border-color:#a7f3d0}
+.pop-tag.pruned-l1{color:#b45309;background:#fffbeb;border-color:#fde68a}
+.pop-tag.pruned-l2{color:#475569;background:#f1f5f9;border-color:#cbd5e1}
+.prod-cat{
+  font-size:clamp(.74rem,.74vw,.88rem);
+  font-weight:700;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  margin-top:1vh;
+}
+.prod-name{
+  font-size:clamp(1.02rem,1.05vw,1.28rem);
+  font-weight:700;
+  color:var(--text);
+  line-height:1.3;
+  margin-top:.3vh;
+}
+.prod-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:1vh;
+  border-top:1px solid var(--surface-sub);
+}
+.prod-price{
+  font-size:clamp(1.08rem,1.12vw,1.35rem);
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+.add-btn{
+  background:var(--primary-light);
+  color:var(--primary-dark);
+  border:none;
+  border-radius:10px;
+  padding:.8vh 1.1vw;
+  font-size:clamp(.88rem,.9vw,1.08rem);
+  font-weight:700;
+  cursor:pointer;
+  transition:all .15s;
+}
+.add-btn:hover{background:var(--primary);color:#fff}
+.card-qty{
+  display:inline-flex;
+  align-items:center;
+  background:var(--primary);
+  color:#fff;
+  border-radius:10px;
+  overflow:hidden;
+}
+.card-qty button{
+  border:none;
+  background:transparent;
+  color:#fff;
+  width:clamp(30px,2vw,38px);
+  height:clamp(32px,3.4vh,40px);
+  cursor:pointer;
+  font-weight:700;
+  font-size:clamp(.95rem,1vw,1.15rem);
+}
+.card-qty button:hover{background:rgba(255,255,255,.15)}
+.card-qty span{
+  min-width:clamp(26px,1.8vw,34px);
+  text-align:center;
+  font-size:clamp(.9rem,.92vw,1.1rem);
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+.empty-grid{grid-column:1/-1;text-align:center;color:var(--text-muted);padding:5vh 0;font-size:1.05rem}
 
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:#111827;color:#fff;padding:11px 18px;border-radius:12px;font-size:.86rem;font-weight:600;
-  opacity:0;pointer-events:none;transition:.25s;z-index:80;box-shadow:var(--shadow-lg);max-width:92vw}
+/* ---------- Right Column: Sticky Cart + Apriori Cross-Sell Panel ---------- */
+.drawer-overlay{display:none}
+.cart-drawer{
+  position:sticky;
+  top:clamp(74px,8vh,92px);
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  height:calc(100vh - clamp(90px,10vh,115px));
+  max-height:calc(100vh - clamp(90px,10vh,115px));
+  overflow:hidden;
+  box-shadow:0 8px 28px rgba(15,23,42,.06);
+}
+@media (max-width:1100px){
+  .drawer-overlay{
+    display:block;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s;
+    z-index:60;
+  }
+  .drawer-overlay.open{opacity:1;pointer-events:auto}
+  .cart-drawer{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    height:100vh;
+    max-height:none;
+    width:min(460px,100vw);
+    border-radius:0;
+    z-index:70;
+    transform:translateX(102%);
+    transition:transform .25s ease;
+  }
+  .cart-drawer.open{transform:none}
+}
+
+.drawer-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.6vh 1.4vw;
+  border-bottom:1px solid var(--border);
+}
+.drawer-head h2{
+  font-size:clamp(1.1rem,1.15vw,1.38rem);
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.count-pill{
+  font-size:clamp(.8rem,.82vw,.96rem);
+  font-weight:700;
+  background:var(--primary-light);
+  color:var(--primary-dark);
+  padding:3px 10px;
+  border-radius:999px;
+}
+.drawer-close-mobile{
+  display:none;
+  border:1px solid var(--border);
+  background:var(--surface);
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  cursor:pointer;
+}
+@media (max-width:1100px){.drawer-close-mobile{display:inline-grid;place-items:center}}
+
+.drawer-body{
+  flex:1;
+  overflow-y:auto;
+  padding:1.6vh 1.4vw;
+  display:flex;
+  flex-direction:column;
+  gap:2vh;
+}
+
+.cart-sec-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:clamp(.8rem,.8vw,.95rem);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--text-muted);
+  margin-bottom:.8vh;
+}
+.clear-link{
+  background:none;
+  border:none;
+  color:var(--text-muted);
+  font-size:clamp(.82rem,.82vw,.96rem);
+  font-weight:600;
+  cursor:pointer;
+}
+.clear-link:hover{color:#dc2626}
+
+.cart-empty{
+  text-align:center;
+  padding:2.5vh 1vw;
+  color:var(--text-muted);
+  font-size:clamp(.9rem,.9vw,1.05rem);
+  background:var(--bg);
+  border-radius:12px;
+  border:1px dashed var(--border);
+}
+.cart-list{display:flex;flex-direction:column}
+.cart-item{
+  display:grid;
+  grid-template-columns:38px 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:.9vh 0;
+  border-bottom:1px solid var(--surface-sub);
+}
+.cart-item:last-child{border-bottom:none}
+.cart-item-ico{font-size:clamp(1.4rem,1.5vw,1.75rem);text-align:center}
+.cart-item-name{font-size:clamp(.94rem,.96vw,1.14rem);font-weight:700;line-height:1.25}
+.cart-item-price{font-size:clamp(.82rem,.82vw,.98rem);color:var(--text-muted);font-variant-numeric:tabular-nums;margin-top:2px}
+.cart-item-ctrl{display:flex;align-items:center;gap:8px}
+.qty-mini{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+}
+.qty-mini button{
+  width:clamp(26px,1.7vw,32px);
+  height:clamp(26px,2.8vh,32px);
+  border:none;
+  background:var(--surface);
+  cursor:pointer;
+  font-weight:700;
+  font-size:clamp(.88rem,.9vw,1.05rem);
+}
+.qty-mini button:hover{background:var(--surface-sub)}
+.qty-mini span{
+  min-width:clamp(24px,1.5vw,30px);
+  text-align:center;
+  font-size:clamp(.85rem,.86vw,1.02rem);
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- Frequently Bought Together (Apriori Recommendations) ---------- */
+.reco-box{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.4vh 1.1vw;
+}
+.reco-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1vh;
+}
+.reco-title{
+  font-size:clamp(.95rem,.98vw,1.15rem);
+  font-weight:800;
+  color:var(--text);
+}
+.reco-status{
+  font-size:clamp(.78rem,.8vw,.94rem);
+  font-weight:700;
+  color:var(--primary-dark);
+  background:var(--primary-light);
+  padding:3px 10px;
+  border-radius:999px;
+}
+.reco-list{
+  display:flex;
+  flex-direction:column;
+  gap:1vh;
+}
+.reco-item{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.1vh 1vw;
+  display:flex;
+  flex-direction:column;
+  gap:.6vh;
+}
+.reco-main{
+  display:grid;
+  grid-template-columns:34px 1fr auto auto;
+  gap:10px;
+  align-items:center;
+}
+.reco-ico{font-size:clamp(1.35rem,1.45vw,1.7rem);text-align:center}
+.reco-info{min-width:0}
+.reco-name{
+  font-size:clamp(.94rem,.96vw,1.14rem);
+  font-weight:700;
+}
+.reco-why{
+  font-size:clamp(.8rem,.82vw,.96rem);
+  color:var(--text-muted);
+  line-height:1.35;
+}
+.reco-price{
+  font-size:clamp(.92rem,.94vw,1.12rem);
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+  color:var(--text);
+}
+.reco-add{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:9px;
+  padding:.7vh .95vw;
+  font-size:clamp(.84rem,.85vw,1rem);
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.reco-add:hover{background:var(--primary-hover)}
+.reco-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:.5vh;
+  border-top:1px dashed var(--surface-sub);
+  font-family:var(--mono);
+  font-size:clamp(.78rem,.8vw,.94rem);
+  color:var(--text-muted);
+}
+.reco-lift{
+  font-weight:700;
+  color:var(--primary-dark);
+}
+.reco-status.pruned{
+  color:#b45309;
+  background:#fffbeb;
+  border:1px solid #fde68a;
+}
+.prune-explain{
+  background:#fffbeb;
+  border:1.5px solid #fde68a;
+  border-radius:12px;
+  padding:1.2vh 1vw;
+  display:flex;
+  flex-direction:column;
+  gap:.8vh;
+  font-size:clamp(.84rem,.86vw,1.02rem);
+  color:#78350f;
+  line-height:1.45;
+}
+.prune-head{
+  font-weight:800;
+  font-size:clamp(.92rem,.94vw,1.1rem);
+  color:#92400e;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.prune-metrics{
+  background:#ffffff;
+  border:1px solid #fde68a;
+  border-radius:9px;
+  padding:.8vh .9vw;
+  font-family:var(--mono);
+  font-size:clamp(.78rem,.8vw,.95rem);
+  color:#0f172a;
+  display:flex;
+  flex-direction:column;
+  gap:.35vh;
+}
+.prune-reasons{
+  margin:0;
+  padding-left:1.2rem;
+  display:flex;
+  flex-direction:column;
+  gap:.45vh;
+}
+.prune-reasons li b{color:#92400e}
+
+/* ---------- Cart Footer ---------- */
+.drawer-foot{
+  border-top:1px solid var(--border);
+  padding:1.5vh 1.4vw;
+  background:var(--surface);
+  display:flex;
+  flex-direction:column;
+  gap:1vh;
+}
+.total-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  font-size:clamp(.98rem,1vw,1.18rem);
+}
+.total-row b{
+  font-size:clamp(1.3rem,1.38vw,1.68rem);
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+.checkout-btn{
+  width:100%;
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:11px;
+  padding:1.25vh;
+  font-size:clamp(.96rem,.98vw,1.15rem);
+  font-weight:700;
+  cursor:pointer;
+}
+.checkout-btn:hover{background:var(--primary-hover)}
+.checkout-btn:disabled{opacity:.45;cursor:not-allowed}
+.drawer-link{
+  text-align:center;
+  font-size:clamp(.82rem,.82vw,.96rem);
+  font-weight:600;
+  color:var(--text-muted);
+  text-decoration:none;
+}
+.drawer-link:hover{color:var(--primary)}
+
+.order-done{text-align:center;padding:2.5vh 1vw;display:flex;flex-direction:column;gap:1.2vh;align-items:center}
+.order-done .big{font-size:2.4rem}
+.order-done p{color:var(--text-muted);font-size:clamp(.92rem,.94vw,1.1rem)}
+.order-actions{display:flex;flex-direction:column;gap:1vh;width:100%}
+.order-actions a,.order-actions button{
+  text-decoration:none;
+  text-align:center;
+  padding:1.1vh;
+  border-radius:10px;
+  font-size:clamp(.9rem,.92vw,1.08rem);
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-outline{background:var(--surface);border:1px solid var(--border);color:var(--text)}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:2.5vh;
+  transform:translate(-50%,20px);
+  background:#0f172a;
+  color:#fff;
+  padding:1vh 1.4vw;
+  border-radius:999px;
+  font-size:clamp(.88rem,.9vw,1.05rem);
+  font-weight:600;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:80;
+}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-.load-err{background:var(--danger-light);color:var(--danger);padding:20px;border-radius:12px;text-align:center}
 </style>
 </head>
 <body>
@@ -131,10 +636,10 @@ button{font:inherit;color:inherit}
   <div class="app-header-inner">
     <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
-      <a href="/shop" class="active" aria-current="page"><span aria-hidden="true">🛍️</span>Cửa hàng</a>
-      <a href="/"><span aria-hidden="true">🔬</span>Demo thuật toán</a>
-      <a href="/stats"><span aria-hidden="true">📊</span>Thống kê dataset</a>
-      <a href="/admin"><span aria-hidden="true">🛠️</span>Admin</a>
+      <a href="/shop" class="active" aria-current="page">Cửa hàng</a>
+      <a href="/">Demo thuật toán</a>
+      <a href="/stats">Thống kê Apriori</a>
+      <a href="/admin">Admin</a>
     </nav>
     <div class="app-actions">
       <button class="app-cart-btn" id="openCartBtn" type="button" onclick="openCartDrawer()" aria-label="Mở giỏ hàng">
@@ -147,70 +652,83 @@ button{font:inherit;color:inherit}
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div>
-      <h1>Cửa hàng demo — gợi ý mua kèm bằng luật Apriori</h1>
-      <p>Thêm sản phẩm vào giỏ: ngăn kéo giỏ hàng sẽ mở ra và hiển thị <b>luật kết hợp nào được kích hoạt</b> cùng các sản phẩm “thường được mua cùng”, rút ra từ giao dịch thật của bộ dữ liệu Online Retail.</p>
+<div class="shop-shell" id="mainContainer">
+  <!-- LEFT COLUMN: STOREFRONT -->
+  <main class="store-main">
+    <section class="store-top">
+      <div class="store-top-row">
+        <div class="store-title">
+          <h1>Fresh Grocery Market</h1>
+          <p>Chọn mặt hàng bên trái — gợi ý mua kèm Apriori cập nhật tức thì ở giỏ hàng bên phải.</p>
+        </div>
+        <div class="search-wrap">
+          <span class="search-ico" aria-hidden="true">🔍</span>
+          <input id="searchBox" type="search" placeholder="Tìm mặt hàng (milk, berries, beef…)" aria-label="Tìm sản phẩm">
+        </div>
+      </div>
+      <div class="demo-strip" aria-label="Giỏ hàng mẫu thử nhanh">
+        <span class="demo-label">Thử nhanh:</span>
+        <button class="demo-pill" type="button" data-act="preset" data-items="berries,whole milk">🍓 Combo phổ biến (berries + whole milk)</button>
+        <button class="demo-pill" type="button" data-act="preset" data-items="beef,other vegetables">🥩 Nấu bò hầm (beef + vegetables)</button>
+        <button class="demo-pill" type="button" data-act="preset" data-items="cooking chocolate">🍫 Ít phổ biến · Tỉa ở L1 (cooking chocolate)</button>
+        <button class="demo-pill" type="button" data-act="preset" data-items="instant coffee">☕ Đơn lẻ · Tỉa ở L2 (instant coffee)</button>
+      </div>
+    </section>
+
+    <div class="aisle-bar" id="categoryBar" role="group" aria-label="Quầy hàng"></div>
+
+    <div class="catalog-header">
+      <h2 id="aisleTitle">Tất cả mặt hàng</h2>
+      <span id="productCount">Đang tải…</span>
     </div>
-    <div class="mode-toggle" role="group" aria-label="Chế độ xem">
-      <button class="mode-btn active" id="btnTechMode" type="button" data-mode="tech">👨‍💻 Khoa học</button>
-      <button class="mode-btn" id="btnBizMode" type="button" data-mode="biz">💼 Kinh doanh</button>
+
+    <div class="product-grid" id="productGrid"></div>
+  </main>
+
+  <!-- RIGHT COLUMN: PERSISTENT STICKY CART & APRIORI RECOMMENDATIONS -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Giỏ hàng và gợi ý Apriori">
+    <div class="drawer-head">
+      <h2>🛒 Giỏ hàng của bạn <span class="count-pill" id="cartCount">0 món</span></h2>
+      <button class="drawer-close-mobile" id="drawerClose" type="button" aria-label="Đóng">✕</button>
     </div>
-  </div>
-</section>
 
-<div class="container" id="mainContainer">
-  <div class="toolbar">
-    <input class="search" id="searchBox" type="search" placeholder="🔍 Tìm sản phẩm theo tên hoặc SKU…" aria-label="Tìm sản phẩm">
-    <div class="filter-bar" id="categoryBar" role="group" aria-label="Danh mục"></div>
-  </div>
+    <div class="drawer-body" id="drawerBody">
+      <section>
+        <div class="cart-sec-head">
+          <span>Mặt hàng đã chọn</span>
+          <button class="clear-link" id="clearBtn" type="button">Xóa hết</button>
+        </div>
+        <div class="cart-list" id="cartItemsList"></div>
+      </section>
 
-  <h2 class="section-title">Sản phẩm</h2>
-  <p class="section-sub" id="productCount">Đang tải…</p>
-  <div class="product-grid" id="productGrid"></div>
+      <section class="reco-box" id="recoBox">
+        <div class="reco-header">
+          <span class="reco-title">✨ Thường mua cùng nhau</span>
+          <span class="reco-status" id="firedBadge">Bestsellers</span>
+        </div>
+        <div class="reco-list" id="recomList"></div>
+      </section>
+    </div>
 
-  <section class="bundle-section">
-    <h2 class="section-title">📦 Combo mua cùng nhiều nhất</h2>
-    <p class="section-sub">
-      <span class="tech-note">Các cặp sản phẩm (tập phổ biến L<sub>2</sub>) có support cao nhất.</span>
-      <span class="biz-note">Gợi ý đóng gói combo để tăng giá trị đơn hàng trung bình (AOV).</span>
-    </p>
-    <div class="bundle-grid" id="bundleGrid"></div>
-  </section>
+    <div class="drawer-foot" id="drawerFoot">
+      <div class="total-row">
+        <span>Tổng cộng</span>
+        <b id="cartTotal">£0.00</b>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" type="button">Thanh toán đơn hàng</button>
+      <a class="drawer-link" href="/stats">Xem bảng chứng minh số liệu Support &amp; Lift →</a>
+    </div>
+  </aside>
 </div>
 
-<div class="drawer-overlay" id="drawerOverlay"></div>
-<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Giỏ hàng" aria-hidden="true">
-  <div class="drawer-head">
-    <h2>🛒 Giỏ hàng <span class="pill pill-conf" id="cartCount">0 món</span></h2>
-    <button class="icon-btn" id="drawerClose" type="button" aria-label="Đóng giỏ hàng">✕</button>
-  </div>
-  <div class="drawer-body" id="drawerBody">
-    <section>
-      <div class="drawer-label"><span>Sản phẩm đã chọn</span><button class="link-btn" id="clearBtn" type="button">Xóa tất cả</button></div>
-      <div id="cartItemsList"></div>
-    </section>
-    <section class="reco-box" id="recoBox">
-      <div class="reco-title">✨ Thường được mua cùng</div>
-      <div class="fired" id="firedBadge">…</div>
-      <div class="reco-list" id="recomList"></div>
-    </section>
-  </div>
-  <div class="drawer-foot" id="drawerFoot">
-    <div class="total-row"><span>Tạm tính</span><b id="cartTotal">£0.00</b></div>
-    <button class="btn btn-primary btn-block" id="checkoutBtn" type="button">Thanh toán (demo)</button>
-    <a class="drawer-link" href="/">🔬 Xem thuật toán Apriori hoạt động từng bước →</a>
-  </div>
-</aside>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-const STORAGE_KEY = 'basketiq.cart';
-const MAX_RECS = 8;
+const STORAGE_KEY = 'basketiq.cart.groceries';
+const MAX_RECS = 4;
 let DATA = null;
-let CART = loadCart();          // { sku: qty }
-let MODE = 'tech';
+let CART = loadCart();
 let ACTIVE_CAT = 'ALL';
 let QUERY = '';
 let ORDER_PLACED = false;
@@ -219,6 +737,17 @@ let toastTimer = null;
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const gbp = n => '£' + Number(n).toFixed(2);
+
+const CAT_NAMES = {
+  ALL: 'Tất cả mặt hàng',
+  DAIRY: 'Dairy & Eggs',
+  PRODUCE: 'Fruits & Vegetables',
+  BAKERY: 'Bakery & Bread',
+  MEAT: 'Meat & Deli',
+  DRINKS: 'Beverages',
+  SNACKS: 'Sweets & Snacks',
+  PANTRY: 'Pantry & Essentials',
+};
 
 function loadCart() {
   try {
@@ -229,16 +758,15 @@ function loadCart() {
   } catch (e) { return {}; }
 }
 function saveCart() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(CART)); } catch (e) { /* storage unavailable */ }
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(CART)); } catch (e) {}
 }
 function product(code) {
-  return (DATA && DATA.catalog[code]) || {code, name: code, price: 0, icon: '🎁', category: 'OTHER'};
+  return (DATA && DATA.catalog[code]) || {code, name: code, price: 1.50, icon: '🛒', category: 'OTHER', count: 0, support: 0};
 }
 const cartCodes = () => Object.keys(CART);
 const cartCount = () => Object.values(CART).reduce((a, b) => a + b, 0);
 const cartTotal = () => cartCodes().reduce((s, c) => s + product(c).price * CART[c], 0);
 
-/* ---------- Recommendation cascade: never returns an empty list ---------- */
 function computeRecommendations(cartSet) {
   const recs = [];
   const byCode = new Map();
@@ -251,7 +779,6 @@ function computeRecommendations(cartSet) {
         existing.tier = tier;
         existing.score = score;
         if (extra && extra.rule) existing.rule = extra.rule;
-        if (extra && extra.combo) { existing.combo = extra.combo; existing.via = extra.via; }
       }
       return;
     }
@@ -260,68 +787,91 @@ function computeRecommendations(cartSet) {
     recs.push(item);
   };
   let fired = 0;
-  const tier1Targets = new Set();
   if (cartSet.size) {
-    for (const r of DATA.rules) {                    // Tier 1: whole antecedent in cart
+    // Strictly match genuine Apriori rules where antecedent A is a subset of cart
+    for (const r of DATA.rules) {
       if (r.antecedent.every(c => cartSet.has(c))) {
         const targets = r.consequent.filter(c => !cartSet.has(c));
         if (targets.length) fired++;
-        targets.forEach(t => {
-          tier1Targets.add(t);
-          push(t, 1, r.lift * 10 + r.confidence, {rule: r});
-        });
+        const specificityBonus = r.antecedent.length * 15;
+        targets.forEach(t => push(t, 1, specificityBonus + r.lift * 10 + r.confidence, {rule: r}));
       }
     }
-    if (recs.length < 4) {
-      for (const r of DATA.rules) {                  // Tier 2: part of antecedent in cart
-        if (r.antecedent.some(c => cartSet.has(c))) {
-          r.consequent.forEach(t => push(t, 2, r.lift * 5 + r.confidence, {rule: r}));
-        }
-      }
-    }
-    if (recs.length < 4) {
-      for (const c of DATA.combos) {                 // Tier 3: frequent pairs (L2)
-        const [a, b] = c.items;
-        if (cartSet.has(a)) push(b, 3, c.count, {combo: c, via: a});
-        else if (cartSet.has(b)) push(a, 3, c.count, {combo: c, via: b});
-      }
-    }
-  }
-  if (recs.length < 4) {
+  } else {
+    // Only show store bestsellers when cart is completely empty
     const l1 = (DATA.frequent_itemsets && DATA.frequent_itemsets.L1) || [];
-    for (const e of l1) {                            // Tier 4: bestsellers
-      if (recs.length >= MAX_RECS * 3) break;
-      push(e.items[0], 4, e.support, {support: e.support});
+    for (const e of l1) {
+      if (recs.length >= MAX_RECS) break;
+      push(e.items[0], 4, e.support, {support: e.support, count: e.count});
     }
   }
   recs.sort((a, b) => a.tier - b.tier || b.score - a.score);
-  const limit = Math.max(4, Math.min(MAX_RECS, tier1Targets.size || 4));
-  return {recs: recs.slice(0, limit), fired, uniqueTier1: tier1Targets.size};
+  return {recs: recs.slice(0, MAX_RECS), fired};
 }
 
-function names(codes) { return codes.map(c => esc(product(c).name)).join(' + '); }
+function buildPruneExplanationHtml(prunedCodes) {
+  const minCount = (DATA && DATA.summary && DATA.summary.min_count) || 30;
+  const minSupPct = (((DATA && DATA.summary && DATA.summary.min_support) || 0.0031) * 100).toFixed(2);
+  const minConfPct = (((DATA && DATA.summary && DATA.summary.min_confidence) || 0.15) * 100).toFixed(0);
+  const minLift = (DATA && DATA.summary && DATA.summary.min_lift) || 1.15;
+  const totalBaskets = (DATA && DATA.total_baskets) || 9835;
 
-function explain(rec) {
-  const tech = MODE === 'tech';
-  if (rec.tier <= 2) {
-    const r = rec.rule;
-    const lhs = r.antecedent.join(', '), rhs = r.consequent.join(', ');
-    if (!tech) {
-      return `Khách mua ${names(r.antecedent)} thường mua kèm món này — gấp <b>${r.lift}×</b> mức thông thường.`;
+  return prunedCodes.map(code => {
+    const p = product(code);
+    const stage = p.pruned_stage || (p.count < minCount ? 'C1_TO_L1' : 'C2_TO_L2');
+    const suppPct = ((p.support || 0) * 100).toFixed(2);
+    const maxCoItem = p.max_co_item || 'whole milk';
+    const maxCoCnt = p.max_co_count || 0;
+    const maxCoSupPct = ((p.max_co_support || 0) * 100).toFixed(2);
+    const maxCoConfPct = ((p.max_co_conf || 0) * 100).toFixed(0);
+
+    if (stage === 'C1_TO_L1') {
+      return `<div class="prune-explain">
+        <div class="prune-head">🚫 Không gợi ý mua kèm cho "${esc(p.name)}" (Bị tỉa ở bước C1 → L1)</div>
+        <div class="prune-metrics">
+          <div>• Tần suất mặt hàng: <b>${p.count}/${totalBaskets} giỏ (${suppPct}%) &lt; min_sup ${minSupPct}% (${minCount} giỏ)</b></div>
+          <div>• Cặp đi kèm cao nhất: <b>{${esc(p.name)}, ${esc(maxCoItem)}} = ${maxCoCnt} giỏ (${maxCoSupPct}%)</b></div>
+        </div>
+        <ol class="prune-reasons">
+          <li><b>Vi phạm ngưỡng Support tối thiểu (min_sup):</b> Mặt hàng xuất hiện dưới ${minCount} giỏ hàng nên bị loại ngay khi lọc ứng viên <b>C1 → L1</b> (không phải là <i>Frequent 1-Itemset</i>).</li>
+          <li><b>Nguyên lý Apriori (Downward Closure / Anti-monotone):</b> Nếu tập con {A} không phổ biến (<code>Support(A) &lt; min_sup</code>) thì mọi tập cha {A, B} chứa nó chắc chắn cũng có <code>Support(A ∪ B) ≤ Support(A) &lt; min_sup</code>. Thuật toán cắt tỉa ngay lập tức, không ghép cặp ở bước C2.</li>
+          <li><b>Chống nhiễu thống kê (Tránh Spurious Rules):</b> Với mẫu quá nhỏ (${p.count} giỏ), việc có ${maxCoCnt} khách tình cờ mua cùng <i>${esc(maxCoItem)}</i> đẩy Confidence lên <b>${maxCoConfPct}%</b> chỉ là nhiễu ngẫu nhiên, không đủ độ tin cậy để gợi ý.</li>
+        </ol>
+      </div>`;
     }
-    return `Luật <code>{${esc(lhs)}} → {${esc(rhs)}}</code><br>confidence <b>${(r.confidence * 100).toFixed(1)}%</b> · lift <b>${r.lift}×</b> · support ${(r.support * 100).toFixed(2)}%`
-      + (rec.tier === 2 ? '<br><i>(khớp một phần vế trái)</i>' : '');
-  }
-  if (rec.tier === 3) {
-    const c = rec.combo;
-    return tech ? `Cặp phổ biến L<sub>2</sub> với <b>${esc(product(rec.via).name)}</b>: ${c.count} giỏ hàng (support ${(c.support * 100).toFixed(2)}%).`
-      : `Hai món này hay được khách ghép cặp với nhau.`;
-  }
-  return tech ? `Bán chạy nhất (L<sub>1</sub>, support ${(rec.support * 100).toFixed(1)}%).` : 'Sản phẩm bán chạy của cửa hàng.';
+    if (stage === 'C2_TO_L2') {
+      return `<div class="prune-explain">
+        <div class="prune-head">🚫 Không gợi ý mua kèm cho "${esc(p.name)}" (Bị tỉa ở bước C2 → L2)</div>
+        <div class="prune-metrics">
+          <div>• Tần suất đơn lẻ (Đạt L1): <b>${p.count}/${totalBaskets} giỏ (${suppPct}% ≥ min_sup ${minSupPct}%)</b></div>
+          <div>• Cặp mua chung cao nhất: <b>{${esc(p.name)}, ${esc(maxCoItem)}} = ${maxCoCnt} giỏ (${maxCoSupPct}%) &lt; ${minCount} giỏ</b></div>
+        </div>
+        <ol class="prune-reasons">
+          <li><b>Bị cắt tỉa khi lọc C2 → L2:</b> Dù bản thân <i>${esc(p.name)}</i> đủ phổ biến để vào <b>L1</b> (≥ ${minCount} giỏ), nhưng khi ghép cặp với các mặt hàng khác, không có cặp {A, B} nào đạt đủ ngưỡng <b>${minCount} giỏ mua chung</b> để lọt vào <b>L2</b>.</li>
+          <li><b>Hành vi mua sắm độc lập / phân tán:</b> Khách hàng thường mua mặt hàng này riêng lẻ hoặc mua rải rác với nhiều món ngẫu nhiên khác nhau chứ không tạo thành combo đi kèm cố định.</li>
+        </ol>
+      </div>`;
+    }
+    return `<div class="prune-explain">
+      <div class="prune-head">🚫 Không gợi ý mua kèm cho "${esc(p.name)}" (Bị lọc ở bước kiểm định Confidence / Lift)</div>
+      <div class="prune-metrics">
+        <div>• Tần suất đơn lẻ (L1): <b>${p.count}/${totalBaskets} giỏ (${suppPct}%)</b></div>
+        <div>• Cặp cao nhất (L2): <b>{${esc(p.name)}, ${esc(maxCoItem)}} = ${maxCoCnt} giỏ · Conf ${maxCoConfPct}% · Lift ${p.max_co_lift || 1.0}×</b></div>
+      </div>
+      <ol class="prune-reasons">
+        <li><b>Không đạt ngưỡng luật kết hợp (min_conf = ${minConfPct}%, min_lift = ${minLift}×):</b> Các cặp chứa <i>${esc(p.name)}</i> dù xuất hiện ≥ ${minCount} giỏ nhưng <code>Lift ≈ 1</code> hoặc <code>Confidence &lt; ${minConfPct}%</code>, nghĩa là hai món được mua độc lập ngẫu nhiên chứ không thúc đẩy nhau.</li>
+      </ol>
+    </div>`;
+  }).join('');
 }
-const TIER_LABEL = {1: 'Luật khớp đủ', 2: 'Luật khớp một phần', 3: 'Combo L2', 4: 'Bán chạy'};
 
-/* ---------- Rendering ---------- */
+function renderCategories() {
+  $('categoryBar').innerHTML = DATA.categories.map(c =>
+    `<button class="aisle-chip ${c.id === ACTIVE_CAT ? 'active' : ''}" type="button" data-act="cat" data-cat="${esc(c.id)}"><span>${esc(c.icon)}</span><span>${esc(c.name)}</span></button>`
+  ).join('');
+  $('aisleTitle').textContent = CAT_NAMES[ACTIVE_CAT] || 'Mặt hàng';
+}
+
 function renderProducts() {
   if (!DATA) return;
   const q = QUERY.trim().toLowerCase();
@@ -335,36 +885,39 @@ function renderProducts() {
   $('productGrid').innerHTML = codes.length ? codes.map(code => {
     const p = DATA.catalog[code];
     const qty = CART[code] || 0;
-    return `<article class="prod-card">
-      <div class="prod-thumb"><span class="prod-code">${esc(code)}</span><span aria-hidden="true">${esc(p.icon)}</span></div>
-      <div class="prod-body">
-        <div class="prod-name" title="${esc(p.name)}">${esc(p.name)}</div>
-        <div class="prod-foot">
-          <span class="prod-price">${gbp(p.price)}</span>
-          <button class="btn ${qty ? 'btn-soft' : 'btn-primary'}" type="button" data-act="add" data-code="${esc(code)}">${qty ? `✓ Trong giỏ (${qty})` : '+ Thêm vào giỏ'}</button>
+    let tagHtml = '';
+    if (p.support >= 0.10) {
+      tagHtml = `<span class="pop-tag top-seller">Bán chạy · ${p.count} giỏ</span>`;
+    } else if (p.has_apriori_rule) {
+      tagHtml = `<span class="pop-tag">${p.count} giỏ · Đạt L2</span>`;
+    } else if (!p.in_l1) {
+      tagHtml = `<span class="pop-tag pruned-l1">Ít phổ biến · ${p.count} giỏ (&lt;30)</span>`;
+    } else {
+      tagHtml = `<span class="pop-tag pruned-l2">${p.count} giỏ · Tỉa ở L2</span>`;
+    }
+    return `<article class="prod-card ${qty ? 'in-cart' : ''}">
+      <div>
+        <div class="prod-visual">
+          ${tagHtml}
+          <span aria-hidden="true">${esc(p.icon)}</span>
         </div>
-      </div></article>`;
-  }).join('') : '<div class="empty-grid">Không tìm thấy sản phẩm phù hợp.</div>';
-}
-
-function renderCategories() {
-  $('categoryBar').innerHTML = DATA.categories.map(c =>
-    `<button class="chip ${c.id === ACTIVE_CAT ? 'active' : ''}" type="button" data-act="cat" data-cat="${esc(c.id)}">${esc(c.icon)} ${esc(c.name)}</button>`).join('');
-}
-
-function renderBundles() {
-  if (!DATA) return;
-  $('bundleGrid').innerHTML = DATA.combos.slice(0, 6).map((c, i) => {
-    const [a, b] = c.items.map(product);
-    const orig = a.price + b.price;
-    return `<div class="bundle-card">
-      <div class="bundle-head"><span>Combo #${i + 1}</span><span class="pill pill-lift">Tiết kiệm 12%</span></div>
-      <div class="bundle-items"><div class="bundle-item" title="${esc(a.name)}">${esc(a.name)}</div><b>+</b><div class="bundle-item" title="${esc(b.name)}">${esc(b.name)}</div></div>
-      <div class="bundle-note"><span class="tech-note">Xuất hiện trong <b>${c.count}</b> giỏ (${(c.support * 100).toFixed(1)}%).</span><span class="biz-note">Cặp được khách ghép nhiều nhất.</span></div>
-      <div class="bundle-foot"><div><s style="color:var(--text-muted);font-size:.8rem">${gbp(orig)}</s> <b style="color:var(--success-dark);font-size:1.05rem">${gbp(orig * 0.88)}</b></div>
-      <button class="btn btn-primary" type="button" data-act="bundle" data-a="${esc(c.items[0])}" data-b="${esc(c.items[1])}">+ Thêm cả combo</button></div>
-    </div>`;
-  }).join('');
+        <div class="prod-cat">${esc(CAT_NAMES[p.category] || p.category)}</div>
+        <div class="prod-name" title="${esc(p.name)}">${esc(p.name)}</div>
+      </div>
+      <div class="prod-bottom">
+        <span class="prod-price">${gbp(p.price)}</span>
+        ${qty ? `
+          <div class="card-qty">
+            <button type="button" data-act="dec" data-code="${esc(code)}" aria-label="Giảm">−</button>
+            <span>${qty}</span>
+            <button type="button" data-act="inc" data-code="${esc(code)}" aria-label="Tăng">+</button>
+          </div>
+        ` : `
+          <button class="add-btn" type="button" data-act="add" data-code="${esc(code)}">+ Thêm</button>
+        `}
+      </div>
+    </article>`;
+  }).join('') : '<div class="empty-grid">Không tìm thấy mặt hàng phù hợp.</div>';
 }
 
 function renderCart() {
@@ -376,64 +929,96 @@ function renderCart() {
   $('clearBtn').style.display = codes.length ? '' : 'none';
   $('cartItemsList').innerHTML = codes.length ? codes.map(code => {
     const p = product(code), qty = CART[code];
-    return `<div class="cart-row">
-      <div class="cart-ico" aria-hidden="true">${esc(p.icon || '🎁')}</div>
-      <div><div class="cart-name">${esc(p.name)}</div><div class="cart-unit">${gbp(p.price)} / sp</div>
-        <div class="qty" style="margin-top:6px"><button type="button" data-act="dec" data-code="${esc(code)}" aria-label="Giảm số lượng">−</button><span>${qty}</span><button type="button" data-act="inc" data-code="${esc(code)}" aria-label="Tăng số lượng">+</button></div></div>
-      <div class="cart-right"><span class="cart-line">${gbp(p.price * qty)}</span><button class="remove-btn" type="button" data-act="remove" data-code="${esc(code)}">Xóa</button></div>
+    return `<div class="cart-item">
+      <span class="cart-item-ico" aria-hidden="true">${esc(p.icon || '🛒')}</span>
+      <div>
+        <div class="cart-item-name">${esc(p.name)}</div>
+        <div class="cart-item-price">${gbp(p.price)} × ${qty} = <b>${gbp(p.price * qty)}</b></div>
+      </div>
+      <div class="cart-item-ctrl">
+        <div class="qty-mini">
+          <button type="button" data-act="dec" data-code="${esc(code)}" aria-label="Giảm">−</button>
+          <span>${qty}</span>
+          <button type="button" data-act="inc" data-code="${esc(code)}" aria-label="Tăng">+</button>
+        </div>
+      </div>
     </div>`;
-  }).join('') : '<div class="cart-empty">Giỏ hàng đang trống.<br>Hãy thêm một sản phẩm — hoặc thử các gợi ý bán chạy bên dưới.</div>';
+  }).join('') : '<div class="cart-empty">Giỏ hàng chưa có món nào.<br>Hãy bấm <b>+ Thêm</b> ở mặt hàng bất kỳ bên trái.</div>';
   renderRecommendations();
   renderProducts();
 }
 
 function renderRecommendations() {
-  const {recs, fired, uniqueTier1} = computeRecommendations(new Set(cartCodes()));
+  const codes = cartCodes();
+  const {recs, fired} = computeRecommendations(new Set(codes));
   const badge = $('firedBadge');
-  if (!cartCodes().length) {
-    badge.className = 'fired none';
-    badge.textContent = 'Chưa có sản phẩm trong giỏ — đang hiển thị món bán chạy nhất.';
+  badge.classList.remove('pruned');
+
+  if (!codes.length) {
+    badge.textContent = 'Top Bestsellers (L1)';
   } else if (fired > 0) {
-    badge.className = 'fired';
-    const extraNote = fired !== recs.length
-      ? ` → gợi ý ${recs.length} sản phẩm độc nhất (các luật trùng vế phải đã được gộp)`
-      : ` → gợi ý ${recs.length} sản phẩm liên quan`;
-    badge.textContent = `⚡ ${fired} luật kết hợp được kích hoạt bởi giỏ hàng của bạn${extraNote}`;
+    badge.textContent = `${fired} luật Apriori khớp`;
   } else {
-    badge.className = 'fired none';
-    badge.textContent = 'Chưa có luật khớp trọn vế trái — dùng luật khớp một phần / combo / bán chạy.';
+    badge.textContent = '0 luật (Bị tỉa bởi Apriori)';
+    badge.classList.add('pruned');
   }
-  $('recomList').innerHTML = recs.map(rec => {
+
+  const prunedInCart = codes.filter(c => !product(c).has_apriori_rule);
+  if (codes.length > 0 && fired === 0) {
+    $('recomList').innerHTML = buildPruneExplanationHtml(prunedInCart.length ? prunedInCart : codes);
+    return;
+  }
+
+  const recsHtml = recs.map(rec => {
     const p = product(rec.code);
-    const multiBadge = rec.ruleCount > 1 ? ` · ${rec.ruleCount} luật củng cố` : '';
-    return `<div class="reco-card">
-      <div class="reco-top"><span aria-hidden="true" style="font-size:1.3rem">${esc(p.icon || '🎁')}</span><span class="reco-name">${esc(p.name)}</span><span class="reco-price">${gbp(p.price)}</span></div>
-      <div class="reco-why">${explain(rec)}</div>
-      <div class="reco-act"><span class="tier-tag">${TIER_LABEL[rec.tier]}${rec.rule ? ` · lift ${rec.rule.lift}×` : ''}${multiBadge}</span>
-        <button class="btn btn-primary" type="button" data-act="add-reco" data-code="${esc(rec.code)}">+ Thêm nhanh</button></div>
+    let whyText = 'Mặt hàng bán chạy tại cửa hàng (L1)';
+    let metaLeft = `Support ${(p.support * 100).toFixed(1)}% (${p.count} giỏ)`;
+    let metaRight = 'L1 Popular';
+
+    if (rec.tier <= 2 && rec.rule) {
+      const r = rec.rule;
+      whyText = `Vì mua: ${r.antecedent.join(' + ')}`;
+      metaLeft = `Conf ${(r.confidence * 100).toFixed(0)}% · Sup ${(r.support * 100).toFixed(2)}%`;
+      metaRight = `Lift ${r.lift}×`;
+    }
+
+    return `<div class="reco-item">
+      <div class="reco-main">
+        <span class="reco-ico" aria-hidden="true">${esc(p.icon || '🛒')}</span>
+        <div class="reco-info">
+          <div class="reco-name">${esc(p.name)}</div>
+          <div class="reco-why">${esc(whyText)}</div>
+        </div>
+        <span class="reco-price">${gbp(p.price)}</span>
+        <button class="reco-add" type="button" data-act="add-reco" data-code="${esc(rec.code)}">+ Thêm</button>
+      </div>
+      <div class="reco-meta">
+        <span>${esc(metaLeft)}</span>
+        <span class="reco-lift">${esc(metaRight)}</span>
+      </div>
     </div>`;
   }).join('');
+
+  const extraPrunedHtml = (codes.length > 0 && prunedInCart.length > 0)
+    ? buildPruneExplanationHtml(prunedInCart)
+    : '';
+  $('recomList').innerHTML = recsHtml + extraPrunedHtml;
 }
 
-/* ---------- Cart actions ---------- */
 function toast(msg) {
   const t = $('toast');
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 function openCartDrawer() {
   $('cartDrawer').classList.add('open');
-  $('cartDrawer').setAttribute('aria-hidden', 'false');
   $('drawerOverlay').classList.add('open');
-  document.body.classList.add('drawer-open');
 }
 function closeCartDrawer() {
   $('cartDrawer').classList.remove('open');
-  $('cartDrawer').setAttribute('aria-hidden', 'true');
   $('drawerOverlay').classList.remove('open');
-  document.body.classList.remove('drawer-open');
 }
 function changeQty(code, delta) {
   const next = (CART[code] || 0) + delta;
@@ -441,33 +1026,40 @@ function changeQty(code, delta) {
   saveCart();
   renderCart();
 }
-function addToCart(code, opts) {
+function addToCart(code) {
   if (!DATA || !DATA.catalog[code]) return;
   restoreCartView();
-  const before = computeRecommendations(new Set(cartCodes())).fired;
   changeQty(code, 1);
-  const badge = $('cartCountBadge');
-  badge.classList.remove('bump'); void badge.offsetWidth; badge.classList.add('bump');
+  const p = product(code);
   const fired = computeRecommendations(new Set(cartCodes())).fired;
-  if (!(opts && opts.keepClosed)) openCartDrawer();
-  toast(`Đã thêm “${product(code).name}” · ${fired} luật kích hoạt` + (fired > before ? ` (+${fired - before})` : ''));
+  if (!p.has_apriori_rule) {
+    toast(`Đã thêm ${p.name} · Bị tỉa bởi Apriori (xem giải thích ở giỏ hàng)`);
+  } else {
+    toast(`Đã thêm ${p.name} · ${fired} luật kích hoạt`);
+  }
 }
-function addBundle(a, b) {
+function applyPreset(itemsCsv) {
   restoreCartView();
-  [a, b].forEach(c => { CART[c] = (CART[c] || 0) + 1; });
-  saveCart(); renderCart(); openCartDrawer();
-  toast('Đã thêm cả combo vào giỏ');
+  CART = {};
+  itemsCsv.split(',').map(s => s.trim()).filter(Boolean).forEach(c => {
+    if (DATA && DATA.catalog[c]) CART[c] = 1;
+  });
+  saveCart();
+  renderCart();
+  openCartDrawer();
+  toast('Đã nạp giỏ hàng mẫu');
 }
 function checkout() {
   if (!cartCodes().length) return;
   const n = cartCodes().length, total = cartTotal();
   CART = {}; saveCart(); ORDER_PLACED = true;
-  $('drawerBody').innerHTML = `<div class="order-done"><div class="big">🎉</div><h3>Đặt hàng thành công!</h3>
-    <p>Giỏ gồm <b>${n}</b> mặt hàng (${gbp(total)}) vừa trở thành một <b>giao dịch</b> — đúng đơn vị dữ liệu mà Apriori khai phá. Khám phá cách thuật toán tìm ra các gợi ý bạn vừa thấy:</p>
-    <div class="order-actions"><a class="btn btn-primary btn-block" href="/">🔬 Xem thuật toán Apriori từng bước</a>
-    <a class="btn btn-ghost btn-block" href="/stats">📊 Thống kê dataset</a>
-    <a class="btn btn-ghost btn-block" href="/admin">🛠️ Admin: luật &amp; tập phổ biến</a>
-    <button class="btn btn-ghost btn-block" type="button" data-act="continue">Tiếp tục mua sắm</button></div></div>`;
+  $('drawerBody').innerHTML = `<div class="order-done"><div class="big">✅</div><h3>Đặt hàng thành công!</h3>
+    <p>Giỏ hàng gồm <b>${n}</b> món (${gbp(total)}) tương ứng với 1 giao dịch trong thuật toán Apriori.</p>
+    <div class="order-actions">
+      <a class="checkout-btn" href="/stats">Xem thống kê Support / Confidence / Lift</a>
+      <a class="btn-outline" href="/">Xem thuật toán Apriori từng bước</a>
+      <button class="btn-outline" type="button" data-act="continue">Tiếp tục mua hàng</button>
+    </div></div>`;
   $('drawerFoot').style.display = 'none';
   $('cartCountBadge').textContent = '0';
   renderProducts();
@@ -475,23 +1067,21 @@ function checkout() {
 function restoreCartView() {
   if (!ORDER_PLACED) return;
   ORDER_PLACED = false;
-  $('drawerBody').innerHTML = `<section><div class="drawer-label"><span>Sản phẩm đã chọn</span><button class="link-btn" id="clearBtn" type="button">Xóa tất cả</button></div><div id="cartItemsList"></div></section>
-    <section class="reco-box" id="recoBox"><div class="reco-title">✨ Thường được mua cùng</div><div class="fired" id="firedBadge">…</div><div class="reco-list" id="recomList"></div></section>`;
+  $('drawerBody').innerHTML = `<section><div class="cart-sec-head"><span>Mặt hàng đã chọn</span><button class="clear-link" id="clearBtn" type="button">Xóa hết</button></div><div class="cart-list" id="cartItemsList"></div></section>
+    <section class="reco-box" id="recoBox"><div class="reco-header"><span class="reco-title">✨ Thường mua cùng nhau</span><span class="reco-status" id="firedBadge">Bestsellers</span></div><div class="reco-list" id="recomList"></div></section>`;
   $('drawerFoot').style.display = '';
 }
 
 document.addEventListener('click', e => {
-  const el = e.target.closest('[data-act],[data-mode]');
+  const el = e.target.closest('[data-act]');
   if (!el) return;
-  if (el.dataset.mode) { setMode(el.dataset.mode); return; }
   const code = el.dataset.code;
   switch (el.dataset.act) {
     case 'add': addToCart(code); break;
-    case 'add-reco': addToCart(code, {keepClosed: true}); break;
+    case 'add-reco': addToCart(code); break;
     case 'inc': changeQty(code, 1); break;
     case 'dec': changeQty(code, -1); break;
-    case 'remove': delete CART[code]; saveCart(); renderCart(); break;
-    case 'bundle': addBundle(el.dataset.a, el.dataset.b); break;
+    case 'preset': applyPreset(el.dataset.items); break;
     case 'cat': ACTIVE_CAT = el.dataset.cat; renderCategories(); renderProducts(); break;
     case 'continue': restoreCartView(); renderCart(); closeCartDrawer(); break;
   }
@@ -504,24 +1094,13 @@ $('drawerOverlay').addEventListener('click', closeCartDrawer);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCartDrawer(); });
 $('searchBox').addEventListener('input', e => { QUERY = e.target.value; renderProducts(); });
 
-function setMode(mode) {
-  MODE = mode;
-  $('btnTechMode').classList.toggle('active', mode === 'tech');
-  $('btnBizMode').classList.toggle('active', mode === 'biz');
-  document.body.classList.toggle('biz-mode', mode === 'biz');
-  if (DATA) renderRecommendations();
-}
-
-/* ---------- Boot ---------- */
 fetch('/api/ecom-rules')
   .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
   .then(data => {
     DATA = data;
     for (const c of Object.keys(CART)) if (!DATA.catalog[c]) delete CART[c];
-    renderCategories(); renderBundles(); renderCart();
-  })
-  .catch(err => {
-    $('mainContainer').innerHTML = `<div class="load-err"><h3>Không thể tải dữ liệu luật: ${esc(err.message)}</h3></div>`;
+    renderCategories();
+    renderCart();
   });
 </script>
 </body>
