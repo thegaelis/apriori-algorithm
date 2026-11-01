@@ -28,7 +28,7 @@ class StorefrontDataTests(unittest.TestCase):
         self.assertEqual(len(self.store["catalog"]), 169)
         self.assertEqual(set(self.store["catalog"]), set(self.rules["catalog"]))
         self.assertIn("whole milk", self.store["catalog"])
-        self.assertEqual(self.store["catalog"]["whole milk"]["display_name"], "Sữa tươi nguyên kem")
+        self.assertEqual(self.store["catalog"]["whole milk"]["display_name"], "whole milk")
         for entry in self.store["catalog"].values():
             self.assertIsInstance(entry["price"], int)
             self.assertGreater(entry["price"], 0)

@@ -25,8 +25,13 @@ window.StoreRecs = (() => {
         if (rule.antecedent.every(code => cartSet.has(code))) {
           const targets = rule.consequent.filter(code => !cartSet.has(code));
           if (targets.length) fired += 1;
-          const specificityBonus = rule.antecedent.length * 15;
-          targets.forEach(code => push(code, 1, specificityBonus + rule.lift * 10 + rule.confidence, { rule }));
+          // Prioritize matching more items in the current cart (antecedent length),
+          // combined with high conditional probability (confidence) and correlation (lift).
+          const antMatchScore = rule.antecedent.length * 50;
+          const confScore = (rule.confidence || 0) * 20;
+          const liftScore = (rule.lift || 1) * 3;
+          const score = antMatchScore + confScore + liftScore;
+          targets.forEach(code => push(code, 1, score, { rule }));
         }
       }
     } else {

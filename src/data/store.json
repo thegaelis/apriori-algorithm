@@ -131,7 +131,7 @@
   ],
   "catalog": {
     "whole milk": {
-      "display_name": "Sữa tươi nguyên kem",
+      "display_name": "whole milk",
       "unit": "Hộp 1 lít",
       "price": 32000,
       "category": "sua-bo-trung",
@@ -149,7 +149,7 @@
       "max_co_lift": 1.51
     },
     "UHT-milk": {
-      "display_name": "Sữa tiệt trùng",
+      "display_name": "UHT-milk",
       "unit": "Hộp 1 lít",
       "price": 34000,
       "category": "sua-bo-trung",
@@ -167,7 +167,7 @@
       "max_co_lift": 1.26
     },
     "butter milk": {
-      "display_name": "Sữa bơ (buttermilk)",
+      "display_name": "butter milk",
       "unit": "Chai 500ml",
       "price": 28000,
       "category": "sua-bo-trung",
@@ -185,7 +185,7 @@
       "max_co_lift": 1.62
     },
     "condensed milk": {
-      "display_name": "Sữa đặc",
+      "display_name": "condensed milk",
       "unit": "Lon 380g",
       "price": 25000,
       "category": "sua-bo-trung",
@@ -203,7 +203,7 @@
       "max_co_lift": 4.26
     },
     "cream": {
-      "display_name": "Kem sữa béo",
+      "display_name": "cream",
       "unit": "Hộp 200ml",
       "price": 45000,
       "category": "sua-bo-trung",
@@ -221,7 +221,7 @@
       "max_co_lift": 5.73
     },
     "yogurt": {
-      "display_name": "Sữa chua",
+      "display_name": "yogurt",
       "unit": "Lốc 4 hộp",
       "price": 28000,
       "category": "sua-bo-trung",
@@ -239,7 +239,7 @@
       "max_co_lift": 1.57
     },
     "curd": {
-      "display_name": "Sữa đông (quark)",
+      "display_name": "curd",
       "unit": "Hộp 250g",
       "price": 22000,
       "category": "sua-bo-trung",
@@ -257,7 +257,7 @@
       "max_co_lift": 1.92
     },
     "whipped/sour cream": {
-      "display_name": "Kem tươi / kem chua",
+      "display_name": "whipped/sour cream",
       "unit": "Hộp 200ml",
       "price": 38000,
       "category": "sua-bo-trung",
@@ -275,7 +275,7 @@
       "max_co_lift": 1.76
     },
     "dessert": {
-      "display_name": "Pudding sữa",
+      "display_name": "dessert",
       "unit": "Lốc 4 hộp",
       "price": 36000,
       "category": "sua-bo-trung",
@@ -293,7 +293,7 @@
       "max_co_lift": 1.45
     },
     "butter": {
-      "display_name": "Bơ lạt",
+      "display_name": "butter",
       "unit": "Hộp 200g",
       "price": 72000,
       "category": "sua-bo-trung",
@@ -311,7 +311,7 @@
       "max_co_lift": 1.95
     },
     "margarine": {
-      "display_name": "Bơ thực vật",
+      "display_name": "margarine",
       "unit": "Hộp 250g",
       "price": 32000,
       "category": "sua-bo-trung",
@@ -329,7 +329,7 @@
       "max_co_lift": 1.62
     },
     "specialty fat": {
-      "display_name": "Mỡ nấu ăn đặc biệt",
+      "display_name": "specialty fat",
       "unit": "Hộp 250g",
       "price": 48000,
       "category": "sua-bo-trung",
@@ -347,7 +347,7 @@
       "max_co_lift": 5.69
     },
     "domestic eggs": {
-      "display_name": "Trứng gà",
+      "display_name": "domestic eggs",
       "unit": "Vỉ 10 quả",
       "price": 35000,
       "category": "sua-bo-trung",
@@ -365,7 +365,7 @@
       "max_co_lift": 1.85
     },
     "cream cheese": {
-      "display_name": "Phô mai kem",
+      "display_name": "cream cheese",
       "unit": "Hộp 150g",
       "price": 55000,
       "category": "pho-mai",
@@ -383,7 +383,7 @@
       "max_co_lift": 1.63
     },
     "curd cheese": {
-      "display_name": "Phô mai tươi",
+      "display_name": "curd cheese",
       "unit": "Hộp 250g",
       "price": 42000,
       "category": "pho-mai",
@@ -401,7 +401,7 @@
       "max_co_lift": 1.8
     },
     "hard cheese": {
-      "display_name": "Phô mai cứng",
+      "display_name": "hard cheese",
       "unit": "Miếng 200g",
       "price": 89000,
       "category": "pho-mai",
@@ -419,7 +419,7 @@
       "max_co_lift": 1.61
     },
     "processed cheese": {
-      "display_name": "Phô mai miếng",
+      "display_name": "processed cheese",
       "unit": "Hộp 8 miếng",
       "price": 39000,
       "category": "pho-mai",
@@ -437,7 +437,7 @@
       "max_co_lift": 1.66
     },
     "sliced cheese": {
-      "display_name": "Phô mai lát",
+      "display_name": "sliced cheese",
       "unit": "Gói 10 lát",
       "price": 52000,
       "category": "pho-mai",
@@ -455,7 +455,7 @@
       "max_co_lift": 1.72
     },
     "soft cheese": {
-      "display_name": "Phô mai mềm",
+      "display_name": "soft cheese",
       "unit": "Hộp 125g",
       "price": 65000,
       "category": "pho-mai",
@@ -473,7 +473,7 @@
       "max_co_lift": 1.72
     },
     "specialty cheese": {
-      "display_name": "Phô mai đặc biệt",
+      "display_name": "specialty cheese",
       "unit": "Miếng 150g",
       "price": 120000,
       "category": "pho-mai",
@@ -491,7 +491,7 @@
       "max_co_lift": 2.58
     },
     "spread cheese": {
-      "display_name": "Phô mai phết",
+      "display_name": "spread cheese",
       "unit": "Hộp 150g",
       "price": 45000,
       "category": "pho-mai",
@@ -509,7 +509,7 @@
       "max_co_lift": 2.03
     },
     "other vegetables": {
-      "display_name": "Rau xanh các loại",
+      "display_name": "other vegetables",
       "unit": "Túi 500g",
       "price": 18000,
       "category": "rau-cu",
@@ -527,7 +527,7 @@
       "max_co_lift": 1.51
     },
     "root vegetables": {
-      "display_name": "Củ quả (cà rốt, củ cải)",
+      "display_name": "root vegetables",
       "unit": "Túi 1kg",
       "price": 22000,
       "category": "rau-cu",
@@ -545,7 +545,7 @@
       "max_co_lift": 1.76
     },
     "onions": {
-      "display_name": "Hành tây",
+      "display_name": "onions",
       "unit": "Túi 1kg",
       "price": 28000,
       "category": "rau-cu",
@@ -563,7 +563,7 @@
       "max_co_lift": 2.37
     },
     "herbs": {
-      "display_name": "Rau thơm",
+      "display_name": "herbs",
       "unit": "Bó 100g",
       "price": 8000,
       "category": "rau-cu",
@@ -581,7 +581,7 @@
       "max_co_lift": 2.45
     },
     "specialty vegetables": {
-      "display_name": "Rau củ đặc sản",
+      "display_name": "specialty vegetables",
       "unit": "Gói 250g",
       "price": 45000,
       "category": "rau-cu",
@@ -599,7 +599,7 @@
       "max_co_lift": 2.13
     },
     "packaged fruit/vegetables": {
-      "display_name": "Rau quả cắt sẵn",
+      "display_name": "packaged fruit/vegetables",
       "unit": "Hộp 300g",
       "price": 35000,
       "category": "rau-cu",
@@ -617,7 +617,7 @@
       "max_co_lift": 1.19
     },
     "tropical fruit": {
-      "display_name": "Trái cây nhiệt đới",
+      "display_name": "tropical fruit",
       "unit": "Túi 1kg",
       "price": 40000,
       "category": "trai-cay",
@@ -635,7 +635,7 @@
       "max_co_lift": 1.58
     },
     "citrus fruit": {
-      "display_name": "Cam, quýt",
+      "display_name": "citrus fruit",
       "unit": "Túi 1kg",
       "price": 45000,
       "category": "trai-cay",
@@ -653,7 +653,7 @@
       "max_co_lift": 1.44
     },
     "pip fruit": {
-      "display_name": "Táo, lê",
+      "display_name": "pip fruit",
       "unit": "Túi 1kg",
       "price": 55000,
       "category": "trai-cay",
@@ -671,7 +671,7 @@
       "max_co_lift": 1.56
     },
     "berries": {
-      "display_name": "Quả mọng",
+      "display_name": "berries",
       "unit": "Hộp 125g",
       "price": 69000,
       "category": "trai-cay",
@@ -689,7 +689,7 @@
       "max_co_lift": 1.39
     },
     "grapes": {
-      "display_name": "Nho",
+      "display_name": "grapes",
       "unit": "Túi 500g",
       "price": 79000,
       "category": "trai-cay",
@@ -707,7 +707,7 @@
       "max_co_lift": 2.09
     },
     "beef": {
-      "display_name": "Thịt bò",
+      "display_name": "beef",
       "unit": "Khay 500g",
       "price": 145000,
       "category": "thit-ca",
@@ -725,7 +725,7 @@
       "max_co_lift": 1.59
     },
     "pork": {
-      "display_name": "Thịt heo",
+      "display_name": "pork",
       "unit": "Khay 500g",
       "price": 75000,
       "category": "thit-ca",
@@ -743,7 +743,7 @@
       "max_co_lift": 1.5
     },
     "chicken": {
-      "display_name": "Thịt gà",
+      "display_name": "chicken",
       "unit": "Khay 1kg",
       "price": 85000,
       "category": "thit-ca",
@@ -761,7 +761,7 @@
       "max_co_lift": 2.16
     },
     "hamburger meat": {
-      "display_name": "Thịt xay",
+      "display_name": "hamburger meat",
       "unit": "Khay 500g",
       "price": 70000,
       "category": "thit-ca",
@@ -779,7 +779,7 @@
       "max_co_lift": 1.74
     },
     "meat": {
-      "display_name": "Thịt tươi các loại",
+      "display_name": "meat",
       "unit": "Khay 500g",
       "price": 90000,
       "category": "thit-ca",
@@ -797,7 +797,7 @@
       "max_co_lift": 1.99
     },
     "turkey": {
-      "display_name": "Thịt gà tây",
+      "display_name": "turkey",
       "unit": "Khay 500g",
       "price": 110000,
       "category": "thit-ca",
@@ -815,7 +815,7 @@
       "max_co_lift": 2.52
     },
     "fish": {
-      "display_name": "Cá tươi",
+      "display_name": "fish",
       "unit": "Khay 500g",
       "price": 95000,
       "category": "thit-ca",
@@ -833,7 +833,7 @@
       "max_co_lift": 1.21
     },
     "sausage": {
-      "display_name": "Xúc xích",
+      "display_name": "sausage",
       "unit": "Gói 500g",
       "price": 62000,
       "category": "thit-nguoi-xuc-xich",
@@ -851,7 +851,7 @@
       "max_co_lift": 1.77
     },
     "frankfurter": {
-      "display_name": "Xúc xích Đức",
+      "display_name": "frankfurter",
       "unit": "Gói 400g",
       "price": 58000,
       "category": "thit-nguoi-xuc-xich",
@@ -869,7 +869,7 @@
       "max_co_lift": 1.36
     },
     "organic sausage": {
-      "display_name": "Xúc xích hữu cơ",
+      "display_name": "organic sausage",
       "unit": "Gói 300g",
       "price": 75000,
       "category": "thit-nguoi-xuc-xich",
@@ -887,7 +887,7 @@
       "max_co_lift": 1.6
     },
     "ham": {
-      "display_name": "Giăm bông",
+      "display_name": "ham",
       "unit": "Gói 200g",
       "price": 49000,
       "category": "thit-nguoi-xuc-xich",
@@ -905,7 +905,7 @@
       "max_co_lift": 1.73
     },
     "liver loaf": {
-      "display_name": "Pa-tê gan",
+      "display_name": "liver loaf",
       "unit": "Hộp 150g",
       "price": 32000,
       "category": "thit-nguoi-xuc-xich",
@@ -923,7 +923,7 @@
       "max_co_lift": 1.64
     },
     "meat spreads": {
-      "display_name": "Pa-tê thịt",
+      "display_name": "meat spreads",
       "unit": "Hộp 125g",
       "price": 28000,
       "category": "thit-nguoi-xuc-xich",
@@ -941,7 +941,7 @@
       "max_co_lift": 3.07
     },
     "rolls/buns": {
-      "display_name": "Bánh mì ổ nhỏ",
+      "display_name": "rolls/buns",
       "unit": "Túi 6 ổ",
       "price": 25000,
       "category": "banh-mi-banh-ngot",
@@ -959,7 +959,7 @@
       "max_co_lift": 1.21
     },
     "white bread": {
-      "display_name": "Bánh mì sandwich trắng",
+      "display_name": "white bread",
       "unit": "Ổ 500g",
       "price": 28000,
       "category": "banh-mi-banh-ngot",
@@ -977,7 +977,7 @@
       "max_co_lift": 1.59
     },
     "brown bread": {
-      "display_name": "Bánh mì nâu",
+      "display_name": "brown bread",
       "unit": "Ổ 500g",
       "price": 35000,
       "category": "banh-mi-banh-ngot",
@@ -995,7 +995,7 @@
       "max_co_lift": 1.52
     },
     "semi-finished bread": {
-      "display_name": "Bánh mì nướng tại nhà",
+      "display_name": "semi-finished bread",
       "unit": "Gói 4 ổ",
       "price": 30000,
       "category": "banh-mi-banh-ngot",
@@ -1013,7 +1013,7 @@
       "max_co_lift": 1.57
     },
     "pastry": {
-      "display_name": "Bánh ngọt",
+      "display_name": "pastry",
       "unit": "Hộp 4 cái",
       "price": 45000,
       "category": "banh-mi-banh-ngot",
@@ -1031,7 +1031,7 @@
       "max_co_lift": 1.46
     },
     "waffles": {
-      "display_name": "Bánh quế",
+      "display_name": "waffles",
       "unit": "Gói 250g",
       "price": 38000,
       "category": "banh-mi-banh-ngot",
@@ -1049,7 +1049,7 @@
       "max_co_lift": 1.29
     },
     "long life bakery product": {
-      "display_name": "Bánh quy, bánh khô",
+      "display_name": "long life bakery product",
       "unit": "Gói 300g",
       "price": 32000,
       "category": "banh-mi-banh-ngot",
@@ -1067,7 +1067,7 @@
       "max_co_lift": 1.41
     },
     "zwieback": {
-      "display_name": "Bánh mì nướng giòn",
+      "display_name": "zwieback",
       "unit": "Gói 225g",
       "price": 30000,
       "category": "banh-mi-banh-ngot",
@@ -1085,7 +1085,7 @@
       "max_co_lift": 1.29
     },
     "soda": {
-      "display_name": "Nước ngọt có ga",
+      "display_name": "soda",
       "unit": "Chai 1.5 lít",
       "price": 22000,
       "category": "do-uong",
@@ -1103,7 +1103,7 @@
       "max_co_lift": 0.9
     },
     "bottled water": {
-      "display_name": "Nước suối",
+      "display_name": "bottled water",
       "unit": "Chai 1.5 lít",
       "price": 10000,
       "category": "do-uong",
@@ -1121,7 +1121,7 @@
       "max_co_lift": 1.22
     },
     "fruit/vegetable juice": {
-      "display_name": "Nước ép trái cây",
+      "display_name": "fruit/vegetable juice",
       "unit": "Hộp 1 lít",
       "price": 35000,
       "category": "do-uong",
@@ -1139,7 +1139,7 @@
       "max_co_lift": 1.44
     },
     "beverages": {
-      "display_name": "Nước giải khát",
+      "display_name": "beverages",
       "unit": "Lốc 6 hộp",
       "price": 42000,
       "category": "do-uong",
@@ -1157,7 +1157,7 @@
       "max_co_lift": 1.02
     },
     "misc. beverages": {
-      "display_name": "Đồ uống các loại",
+      "display_name": "misc. beverages",
       "unit": "Chai 500ml",
       "price": 15000,
       "category": "do-uong",
@@ -1175,7 +1175,7 @@
       "max_co_lift": 1.48
     },
     "coffee": {
-      "display_name": "Cà phê rang xay",
+      "display_name": "coffee",
       "unit": "Gói 500g",
       "price": 120000,
       "category": "do-uong",
@@ -1193,7 +1193,7 @@
       "max_co_lift": 1.26
     },
     "instant coffee": {
-      "display_name": "Cà phê hòa tan",
+      "display_name": "instant coffee",
       "unit": "Hộp 18 gói",
       "price": 65000,
       "category": "do-uong",
@@ -1211,7 +1211,7 @@
       "max_co_lift": 1.89
     },
     "tea": {
-      "display_name": "Trà túi lọc",
+      "display_name": "tea",
       "unit": "Hộp 25 túi",
       "price": 42000,
       "category": "do-uong",
@@ -1229,7 +1229,7 @@
       "max_co_lift": 1.65
     },
     "cocoa drinks": {
-      "display_name": "Bột ca cao",
+      "display_name": "cocoa drinks",
       "unit": "Hộp 250g",
       "price": 65000,
       "category": "do-uong",
@@ -1247,7 +1247,7 @@
       "max_co_lift": 2.31
     },
     "syrup": {
-      "display_name": "Si-rô trái cây",
+      "display_name": "syrup",
       "unit": "Chai 700ml",
       "price": 85000,
       "category": "do-uong",
@@ -1265,7 +1265,7 @@
       "max_co_lift": 1.78
     },
     "bottled beer": {
-      "display_name": "Bia chai",
+      "display_name": "bottled beer",
       "unit": "Lốc 6 chai",
       "price": 120000,
       "category": "do-uong-co-con",
@@ -1283,7 +1283,7 @@
       "max_co_lift": 0.99
     },
     "canned beer": {
-      "display_name": "Bia lon",
+      "display_name": "canned beer",
       "unit": "Lốc 6 lon",
       "price": 105000,
       "category": "do-uong-co-con",
@@ -1301,7 +1301,7 @@
       "max_co_lift": 1.02
     },
     "white wine": {
-      "display_name": "Rượu vang trắng",
+      "display_name": "white wine",
       "unit": "Chai 750ml",
       "price": 290000,
       "category": "do-uong-co-con",
@@ -1319,7 +1319,7 @@
       "max_co_lift": 1.89
     },
     "red/blush wine": {
-      "display_name": "Rượu vang đỏ",
+      "display_name": "red/blush wine",
       "unit": "Chai 750ml",
       "price": 280000,
       "category": "do-uong-co-con",
@@ -1337,7 +1337,7 @@
       "max_co_lift": 1.34
     },
     "sparkling wine": {
-      "display_name": "Rượu vang nổ",
+      "display_name": "sparkling wine",
       "unit": "Chai 750ml",
       "price": 320000,
       "category": "do-uong-co-con",
@@ -1355,7 +1355,7 @@
       "max_co_lift": 1.41
     },
     "prosecco": {
-      "display_name": "Rượu vang Prosecco",
+      "display_name": "prosecco",
       "unit": "Chai 750ml",
       "price": 450000,
       "category": "do-uong-co-con",
@@ -1373,7 +1373,7 @@
       "max_co_lift": 4.97
     },
     "liquor": {
-      "display_name": "Rượu mạnh",
+      "display_name": "liquor",
       "unit": "Chai 700ml",
       "price": 420000,
       "category": "do-uong-co-con",
@@ -1391,7 +1391,7 @@
       "max_co_lift": 5.24
     },
     "liquor (appetizer)": {
-      "display_name": "Rượu khai vị",
+      "display_name": "liquor (appetizer)",
       "unit": "Chai 700ml",
       "price": 380000,
       "category": "do-uong-co-con",
@@ -1409,7 +1409,7 @@
       "max_co_lift": 1.76
     },
     "liqueur": {
-      "display_name": "Rượu mùi",
+      "display_name": "liqueur",
       "unit": "Chai 500ml",
       "price": 350000,
       "category": "do-uong-co-con",
@@ -1427,7 +1427,7 @@
       "max_co_lift": 1.81
     },
     "brandy": {
-      "display_name": "Rượu brandy",
+      "display_name": "brandy",
       "unit": "Chai 700ml",
       "price": 650000,
       "category": "do-uong-co-con",
@@ -1445,7 +1445,7 @@
       "max_co_lift": 3.22
     },
     "rum": {
-      "display_name": "Rượu rum",
+      "display_name": "rum",
       "unit": "Chai 700ml",
       "price": 390000,
       "category": "do-uong-co-con",
@@ -1463,7 +1463,7 @@
       "max_co_lift": 1.51
     },
     "whisky": {
-      "display_name": "Rượu whisky",
+      "display_name": "whisky",
       "unit": "Chai 700ml",
       "price": 750000,
       "category": "do-uong-co-con",
@@ -1481,7 +1481,7 @@
       "max_co_lift": 1.29
     },
     "chocolate": {
-      "display_name": "Sô-cô-la thanh",
+      "display_name": "chocolate",
       "unit": "Thanh 100g",
       "price": 35000,
       "category": "banh-keo-snack",
@@ -1499,7 +1499,7 @@
       "max_co_lift": 1.32
     },
     "specialty chocolate": {
-      "display_name": "Sô-cô-la cao cấp",
+      "display_name": "specialty chocolate",
       "unit": "Hộp 150g",
       "price": 95000,
       "category": "banh-keo-snack",
@@ -1517,7 +1517,7 @@
       "max_co_lift": 1.03
     },
     "chocolate marshmallow": {
-      "display_name": "Kẹo dẻo phủ sô-cô-la",
+      "display_name": "chocolate marshmallow",
       "unit": "Hộp 200g",
       "price": 48000,
       "category": "banh-keo-snack",
@@ -1535,7 +1535,7 @@
       "max_co_lift": 1.36
     },
     "candy": {
-      "display_name": "Kẹo trái cây",
+      "display_name": "candy",
       "unit": "Gói 200g",
       "price": 25000,
       "category": "banh-keo-snack",
@@ -1553,7 +1553,7 @@
       "max_co_lift": 1.66
     },
     "chewing gum": {
-      "display_name": "Kẹo cao su",
+      "display_name": "chewing gum",
       "unit": "Hộp 10 thỏi",
       "price": 20000,
       "category": "banh-keo-snack",
@@ -1571,7 +1571,7 @@
       "max_co_lift": 1.47
     },
     "salty snack": {
-      "display_name": "Snack khoai tây",
+      "display_name": "salty snack",
       "unit": "Gói 150g",
       "price": 22000,
       "category": "banh-keo-snack",
@@ -1589,7 +1589,7 @@
       "max_co_lift": 1.16
     },
     "nut snack": {
-      "display_name": "Đậu phộng rang",
+      "display_name": "nut snack",
       "unit": "Gói 150g",
       "price": 39000,
       "category": "banh-keo-snack",
@@ -1607,7 +1607,7 @@
       "max_co_lift": 1.85
     },
     "nuts/prunes": {
-      "display_name": "Hạt dinh dưỡng, mận khô",
+      "display_name": "nuts/prunes",
       "unit": "Gói 200g",
       "price": 75000,
       "category": "banh-keo-snack",
@@ -1625,7 +1625,7 @@
       "max_co_lift": 1.42
     },
     "popcorn": {
-      "display_name": "Bỏng ngô",
+      "display_name": "popcorn",
       "unit": "Gói 100g",
       "price": 22000,
       "category": "banh-keo-snack",
@@ -1643,7 +1643,7 @@
       "max_co_lift": 1.43
     },
     "snack products": {
-      "display_name": "Bánh snack",
+      "display_name": "snack products",
       "unit": "Gói 120g",
       "price": 25000,
       "category": "banh-keo-snack",
@@ -1661,7 +1661,7 @@
       "max_co_lift": 1.99
     },
     "specialty bar": {
-      "display_name": "Thanh ngũ cốc",
+      "display_name": "specialty bar",
       "unit": "Hộp 6 thanh",
       "price": 55000,
       "category": "banh-keo-snack",
@@ -1679,7 +1679,7 @@
       "max_co_lift": 1.51
     },
     "cake bar": {
-      "display_name": "Bánh bông lan thanh",
+      "display_name": "cake bar",
       "unit": "Hộp 6 thanh",
       "price": 42000,
       "category": "banh-keo-snack",
@@ -1697,7 +1697,7 @@
       "max_co_lift": 1.66
     },
     "tidbits": {
-      "display_name": "Đồ nhắm",
+      "display_name": "tidbits",
       "unit": "Gói 150g",
       "price": 30000,
       "category": "banh-keo-snack",
@@ -1715,7 +1715,7 @@
       "max_co_lift": 2.84
     },
     "frozen vegetables": {
-      "display_name": "Rau củ đông lạnh",
+      "display_name": "frozen vegetables",
       "unit": "Gói 500g",
       "price": 35000,
       "category": "do-dong-lanh",
@@ -1733,7 +1733,7 @@
       "max_co_lift": 1.66
     },
     "frozen meals": {
-      "display_name": "Món ăn đông lạnh",
+      "display_name": "frozen meals",
       "unit": "Hộp 350g",
       "price": 55000,
       "category": "do-dong-lanh",
@@ -1751,7 +1751,7 @@
       "max_co_lift": 1.36
     },
     "frozen potato products": {
-      "display_name": "Khoai tây chiên đông lạnh",
+      "display_name": "frozen potato products",
       "unit": "Gói 1kg",
       "price": 60000,
       "category": "do-dong-lanh",
@@ -1769,7 +1769,7 @@
       "max_co_lift": 1.6
     },
     "frozen fish": {
-      "display_name": "Cá đông lạnh",
+      "display_name": "frozen fish",
       "unit": "Gói 500g",
       "price": 80000,
       "category": "do-dong-lanh",
@@ -1787,7 +1787,7 @@
       "max_co_lift": 1.67
     },
     "frozen chicken": {
-      "display_name": "Gà đông lạnh",
+      "display_name": "frozen chicken",
       "unit": "Gói 1kg",
       "price": 95000,
       "category": "do-dong-lanh",
@@ -1805,7 +1805,7 @@
       "max_co_lift": 1.3
     },
     "frozen fruits": {
-      "display_name": "Trái cây đông lạnh",
+      "display_name": "frozen fruits",
       "unit": "Gói 500g",
       "price": 70000,
       "category": "do-dong-lanh",
@@ -1823,7 +1823,7 @@
       "max_co_lift": 3.45
     },
     "frozen dessert": {
-      "display_name": "Bánh kem đông lạnh",
+      "display_name": "frozen dessert",
       "unit": "Hộp 500g",
       "price": 65000,
       "category": "do-dong-lanh",
@@ -1841,7 +1841,7 @@
       "max_co_lift": 1.44
     },
     "ice cream": {
-      "display_name": "Kem que",
+      "display_name": "ice cream",
       "unit": "Hộp 6 que",
       "price": 85000,
       "category": "do-dong-lanh",
@@ -1859,7 +1859,7 @@
       "max_co_lift": 1.4
     },
     "flour": {
-      "display_name": "Bột mì",
+      "display_name": "flour",
       "unit": "Gói 1kg",
       "price": 25000,
       "category": "do-kho-gia-vi",
@@ -1877,7 +1877,7 @@
       "max_co_lift": 1.9
     },
     "sugar": {
-      "display_name": "Đường",
+      "display_name": "sugar",
       "unit": "Gói 1kg",
       "price": 24000,
       "category": "do-kho-gia-vi",
@@ -1895,7 +1895,7 @@
       "max_co_lift": 1.74
     },
     "artif. sweetener": {
-      "display_name": "Đường ăn kiêng",
+      "display_name": "artif. sweetener",
       "unit": "Hộp 100 viên",
       "price": 65000,
       "category": "do-kho-gia-vi",
@@ -1913,7 +1913,7 @@
       "max_co_lift": 2.46
     },
     "salt": {
-      "display_name": "Muối",
+      "display_name": "salt",
       "unit": "Gói 500g",
       "price": 6000,
       "category": "do-kho-gia-vi",
@@ -1931,7 +1931,7 @@
       "max_co_lift": 1.4
     },
     "baking powder": {
-      "display_name": "Bột nở",
+      "display_name": "baking powder",
       "unit": "Gói 100g",
       "price": 12000,
       "category": "do-kho-gia-vi",
@@ -1949,7 +1949,7 @@
       "max_co_lift": 2.05
     },
     "rice": {
-      "display_name": "Gạo",
+      "display_name": "rice",
       "unit": "Túi 5kg",
       "price": 120000,
       "category": "do-kho-gia-vi",
@@ -1967,7 +1967,7 @@
       "max_co_lift": 2.4
     },
     "pasta": {
-      "display_name": "Mì Ý",
+      "display_name": "pasta",
       "unit": "Gói 500g",
       "price": 28000,
       "category": "do-kho-gia-vi",
@@ -1985,7 +1985,7 @@
       "max_co_lift": 1.59
     },
     "cereals": {
-      "display_name": "Ngũ cốc ăn sáng",
+      "display_name": "cereals",
       "unit": "Hộp 375g",
       "price": 75000,
       "category": "do-kho-gia-vi",
@@ -2003,7 +2003,7 @@
       "max_co_lift": 2.52
     },
     "oil": {
-      "display_name": "Dầu ăn",
+      "display_name": "oil",
       "unit": "Chai 1 lít",
       "price": 55000,
       "category": "do-kho-gia-vi",
@@ -2021,7 +2021,7 @@
       "max_co_lift": 1.57
     },
     "vinegar": {
-      "display_name": "Giấm",
+      "display_name": "vinegar",
       "unit": "Chai 500ml",
       "price": 18000,
       "category": "do-kho-gia-vi",
@@ -2039,7 +2039,7 @@
       "max_co_lift": 1.59
     },
     "spices": {
-      "display_name": "Gia vị tổng hợp",
+      "display_name": "spices",
       "unit": "Hũ 50g",
       "price": 25000,
       "category": "do-kho-gia-vi",
@@ -2057,7 +2057,7 @@
       "max_co_lift": 1.93
     },
     "mustard": {
-      "display_name": "Mù tạt",
+      "display_name": "mustard",
       "unit": "Hũ 200g",
       "price": 32000,
       "category": "do-kho-gia-vi",
@@ -2075,7 +2075,7 @@
       "max_co_lift": 1.69
     },
     "ketchup": {
-      "display_name": "Tương cà",
+      "display_name": "ketchup",
       "unit": "Chai 340g",
       "price": 22000,
       "category": "do-kho-gia-vi",
@@ -2093,7 +2093,7 @@
       "max_co_lift": 1.85
     },
     "mayonnaise": {
-      "display_name": "Sốt mayonnaise",
+      "display_name": "mayonnaise",
       "unit": "Chai 260g",
       "price": 38000,
       "category": "do-kho-gia-vi",
@@ -2111,7 +2111,7 @@
       "max_co_lift": 2.01
     },
     "sauces": {
-      "display_name": "Nước sốt nấu ăn",
+      "display_name": "sauces",
       "unit": "Chai 300ml",
       "price": 35000,
       "category": "do-kho-gia-vi",
@@ -2129,7 +2129,7 @@
       "max_co_lift": 1.52
     },
     "salad dressing": {
-      "display_name": "Sốt trộn salad",
+      "display_name": "salad dressing",
       "unit": "Chai 250ml",
       "price": 45000,
       "category": "do-kho-gia-vi",
@@ -2147,7 +2147,7 @@
       "max_co_lift": 3.23
     },
     "jam": {
-      "display_name": "Mứt trái cây",
+      "display_name": "jam",
       "unit": "Hũ 340g",
       "price": 55000,
       "category": "do-kho-gia-vi",
@@ -2165,7 +2165,7 @@
       "max_co_lift": 2.14
     },
     "honey": {
-      "display_name": "Mật ong",
+      "display_name": "honey",
       "unit": "Chai 500g",
       "price": 120000,
       "category": "do-kho-gia-vi",
@@ -2183,7 +2183,7 @@
       "max_co_lift": 2.87
     },
     "sweet spreads": {
-      "display_name": "Bơ phết sô-cô-la",
+      "display_name": "sweet spreads",
       "unit": "Hũ 350g",
       "price": 89000,
       "category": "do-kho-gia-vi",
@@ -2201,7 +2201,7 @@
       "max_co_lift": 1.54
     },
     "pudding powder": {
-      "display_name": "Bột pudding",
+      "display_name": "pudding powder",
       "unit": "Gói 3 hộp",
       "price": 25000,
       "category": "do-kho-gia-vi",
@@ -2219,7 +2219,7 @@
       "max_co_lift": 2.21
     },
     "cooking chocolate": {
-      "display_name": "Sô-cô-la làm bánh",
+      "display_name": "cooking chocolate",
       "unit": "Thanh 200g",
       "price": 48000,
       "category": "do-kho-gia-vi",
@@ -2237,7 +2237,7 @@
       "max_co_lift": 2.04
     },
     "potato products": {
-      "display_name": "Khoai tây nghiền ăn liền",
+      "display_name": "potato products",
       "unit": "Gói 200g",
       "price": 32000,
       "category": "do-kho-gia-vi",
@@ -2255,7 +2255,7 @@
       "max_co_lift": 1.68
     },
     "organic products": {
-      "display_name": "Thực phẩm hữu cơ",
+      "display_name": "organic products",
       "unit": "Gói 500g",
       "price": 45000,
       "category": "do-kho-gia-vi",
@@ -2273,7 +2273,7 @@
       "max_co_lift": 3.57
     },
     "Instant food products": {
-      "display_name": "Mì, cháo ăn liền",
+      "display_name": "Instant food products",
       "unit": "Lốc 5 gói",
       "price": 30000,
       "category": "do-hop-mon-an-san",
@@ -2291,7 +2291,7 @@
       "max_co_lift": 1.49
     },
     "soups": {
-      "display_name": "Súp đóng hộp",
+      "display_name": "soups",
       "unit": "Hộp 400g",
       "price": 35000,
       "category": "do-hop-mon-an-san",
@@ -2309,7 +2309,7 @@
       "max_co_lift": 2.39
     },
     "ready soups": {
-      "display_name": "Súp ăn liền",
+      "display_name": "ready soups",
       "unit": "Gói 4 phần",
       "price": 25000,
       "category": "do-hop-mon-an-san",
@@ -2327,7 +2327,7 @@
       "max_co_lift": 2.72
     },
     "canned fish": {
-      "display_name": "Cá hộp",
+      "display_name": "canned fish",
       "unit": "Hộp 155g",
       "price": 28000,
       "category": "do-hop-mon-an-san",
@@ -2345,7 +2345,7 @@
       "max_co_lift": 1.75
     },
     "canned vegetables": {
-      "display_name": "Rau củ đóng hộp",
+      "display_name": "canned vegetables",
       "unit": "Hộp 400g",
       "price": 22000,
       "category": "do-hop-mon-an-san",
@@ -2363,7 +2363,7 @@
       "max_co_lift": 2.24
     },
     "canned fruit": {
-      "display_name": "Trái cây đóng hộp",
+      "display_name": "canned fruit",
       "unit": "Hộp 425g",
       "price": 45000,
       "category": "do-hop-mon-an-san",
@@ -2381,7 +2381,7 @@
       "max_co_lift": 1.59
     },
     "pickled vegetables": {
-      "display_name": "Dưa chua",
+      "display_name": "pickled vegetables",
       "unit": "Hũ 500g",
       "price": 32000,
       "category": "do-hop-mon-an-san",
@@ -2399,7 +2399,7 @@
       "max_co_lift": 1.56
     },
     "finished products": {
-      "display_name": "Món ăn chế biến sẵn",
+      "display_name": "finished products",
       "unit": "Hộp 400g",
       "price": 55000,
       "category": "do-hop-mon-an-san",
@@ -2417,7 +2417,7 @@
       "max_co_lift": 1.62
     },
     "roll products": {
-      "display_name": "Thực phẩm cuộn",
+      "display_name": "roll products",
       "unit": "Gói 300g",
       "price": 45000,
       "category": "do-hop-mon-an-san",
@@ -2435,7 +2435,7 @@
       "max_co_lift": 2.4
     },
     "baby food": {
-      "display_name": "Đồ ăn dặm cho bé",
+      "display_name": "baby food",
       "unit": "Hũ 120g",
       "price": 35000,
       "category": "do-hop-mon-an-san",
@@ -2453,7 +2453,7 @@
       "max_co_lift": 5.44
     },
     "napkins": {
-      "display_name": "Khăn giấy",
+      "display_name": "napkins",
       "unit": "Gói 100 tờ",
       "price": 18000,
       "category": "hoa-pham-gia-dung",
@@ -2471,7 +2471,7 @@
       "max_co_lift": 1.47
     },
     "kitchen towels": {
-      "display_name": "Khăn giấy bếp",
+      "display_name": "kitchen towels",
       "unit": "Lốc 2 cuộn",
       "price": 35000,
       "category": "hoa-pham-gia-dung",
@@ -2489,7 +2489,7 @@
       "max_co_lift": 1.79
     },
     "detergent": {
-      "display_name": "Bột giặt",
+      "display_name": "detergent",
       "unit": "Túi 3kg",
       "price": 150000,
       "category": "hoa-pham-gia-dung",
@@ -2507,7 +2507,7 @@
       "max_co_lift": 1.82
     },
     "softener": {
-      "display_name": "Nước xả vải",
+      "display_name": "softener",
       "unit": "Chai 1.8 lít",
       "price": 95000,
       "category": "hoa-pham-gia-dung",
@@ -2525,7 +2525,7 @@
       "max_co_lift": 1.52
     },
     "dish cleaner": {
-      "display_name": "Nước rửa chén",
+      "display_name": "dish cleaner",
       "unit": "Chai 750ml",
       "price": 35000,
       "category": "hoa-pham-gia-dung",
@@ -2543,7 +2543,7 @@
       "max_co_lift": 1.1
     },
     "cleaner": {
-      "display_name": "Nước lau sàn",
+      "display_name": "cleaner",
       "unit": "Chai 1 lít",
       "price": 39000,
       "category": "hoa-pham-gia-dung",
@@ -2561,7 +2561,7 @@
       "max_co_lift": 1.8
     },
     "abrasive cleaner": {
-      "display_name": "Kem tẩy đa năng",
+      "display_name": "abrasive cleaner",
       "unit": "Chai 500ml",
       "price": 32000,
       "category": "hoa-pham-gia-dung",
@@ -2579,7 +2579,7 @@
       "max_co_lift": 1.79
     },
     "bathroom cleaner": {
-      "display_name": "Nước tẩy rửa nhà tắm",
+      "display_name": "bathroom cleaner",
       "unit": "Chai 500ml",
       "price": 45000,
       "category": "hoa-pham-gia-dung",
@@ -2597,7 +2597,7 @@
       "max_co_lift": 1.91
     },
     "toilet cleaner": {
-      "display_name": "Nước tẩy bồn cầu",
+      "display_name": "toilet cleaner",
       "unit": "Chai 900ml",
       "price": 38000,
       "category": "hoa-pham-gia-dung",
@@ -2615,7 +2615,7 @@
       "max_co_lift": 5.37
     },
     "decalcifier": {
-      "display_name": "Chất tẩy cặn",
+      "display_name": "decalcifier",
       "unit": "Chai 500ml",
       "price": 55000,
       "category": "hoa-pham-gia-dung",
@@ -2633,7 +2633,7 @@
       "max_co_lift": 1.83
     },
     "house keeping products": {
-      "display_name": "Dụng cụ dọn nhà",
+      "display_name": "house keeping products",
       "unit": "Bộ",
       "price": 65000,
       "category": "hoa-pham-gia-dung",
@@ -2651,7 +2651,7 @@
       "max_co_lift": 1.81
     },
     "cling film/bags": {
-      "display_name": "Màng bọc thực phẩm",
+      "display_name": "cling film/bags",
       "unit": "Cuộn 30m",
       "price": 35000,
       "category": "hoa-pham-gia-dung",
@@ -2669,7 +2669,7 @@
       "max_co_lift": 1.26
     },
     "preservation products": {
-      "display_name": "Hộp bảo quản thực phẩm",
+      "display_name": "preservation products",
       "unit": "Bộ 3 hộp",
       "price": 89000,
       "category": "hoa-pham-gia-dung",
@@ -2687,7 +2687,7 @@
       "max_co_lift": 12.08
     },
     "dishes": {
-      "display_name": "Chén đĩa",
+      "display_name": "dishes",
       "unit": "Bộ 4 cái",
       "price": 120000,
       "category": "hoa-pham-gia-dung",
@@ -2705,7 +2705,7 @@
       "max_co_lift": 1.76
     },
     "cookware": {
-      "display_name": "Chảo chống dính",
+      "display_name": "cookware",
       "unit": "Cái",
       "price": 250000,
       "category": "hoa-pham-gia-dung",
@@ -2723,7 +2723,7 @@
       "max_co_lift": 3.43
     },
     "kitchen utensil": {
-      "display_name": "Dụng cụ nhà bếp",
+      "display_name": "kitchen utensil",
       "unit": "Bộ",
       "price": 45000,
       "category": "hoa-pham-gia-dung",
@@ -2741,7 +2741,7 @@
       "max_co_lift": 2.94
     },
     "candles": {
-      "display_name": "Nến thơm",
+      "display_name": "candles",
       "unit": "Hộp 4 cây",
       "price": 55000,
       "category": "hoa-pham-gia-dung",
@@ -2759,7 +2759,7 @@
       "max_co_lift": 1.33
     },
     "light bulbs": {
-      "display_name": "Bóng đèn LED",
+      "display_name": "light bulbs",
       "unit": "Hộp 2 bóng",
       "price": 55000,
       "category": "hoa-pham-gia-dung",
@@ -2777,7 +2777,7 @@
       "max_co_lift": 1.64
     },
     "hygiene articles": {
-      "display_name": "Đồ vệ sinh cá nhân",
+      "display_name": "hygiene articles",
       "unit": "Hộp",
       "price": 45000,
       "category": "cham-soc-ca-nhan",
@@ -2795,7 +2795,7 @@
       "max_co_lift": 1.52
     },
     "soap": {
-      "display_name": "Xà phòng",
+      "display_name": "soap",
       "unit": "Bánh 90g",
       "price": 18000,
       "category": "cham-soc-ca-nhan",
@@ -2813,7 +2813,7 @@
       "max_co_lift": 1.66
     },
     "dental care": {
-      "display_name": "Kem đánh răng",
+      "display_name": "dental care",
       "unit": "Tuýp 180g",
       "price": 35000,
       "category": "cham-soc-ca-nhan",
@@ -2831,7 +2831,7 @@
       "max_co_lift": 1.81
     },
     "female sanitary products": {
-      "display_name": "Băng vệ sinh",
+      "display_name": "female sanitary products",
       "unit": "Gói 10 miếng",
       "price": 32000,
       "category": "cham-soc-ca-nhan",
@@ -2849,7 +2849,7 @@
       "max_co_lift": 1.3
     },
     "skin care": {
-      "display_name": "Kem dưỡng da",
+      "display_name": "skin care",
       "unit": "Tuýp 100ml",
       "price": 180000,
       "category": "cham-soc-ca-nhan",
@@ -2867,7 +2867,7 @@
       "max_co_lift": 1.79
     },
     "make up remover": {
-      "display_name": "Nước tẩy trang",
+      "display_name": "make up remover",
       "unit": "Chai 300ml",
       "price": 120000,
       "category": "cham-soc-ca-nhan",
@@ -2885,7 +2885,7 @@
       "max_co_lift": 2.87
     },
     "male cosmetics": {
-      "display_name": "Mỹ phẩm nam",
+      "display_name": "male cosmetics",
       "unit": "Chai 150ml",
       "price": 150000,
       "category": "cham-soc-ca-nhan",
@@ -2903,7 +2903,7 @@
       "max_co_lift": 2.61
     },
     "hair spray": {
-      "display_name": "Keo xịt tóc",
+      "display_name": "hair spray",
       "unit": "Chai 300ml",
       "price": 95000,
       "category": "cham-soc-ca-nhan",
@@ -2921,7 +2921,7 @@
       "max_co_lift": 1.07
     },
     "baby cosmetics": {
-      "display_name": "Mỹ phẩm cho bé",
+      "display_name": "baby cosmetics",
       "unit": "Chai 200ml",
       "price": 85000,
       "category": "cham-soc-ca-nhan",
@@ -2939,7 +2939,7 @@
       "max_co_lift": 1.96
     },
     "rubbing alcohol": {
-      "display_name": "Cồn sát trùng",
+      "display_name": "rubbing alcohol",
       "unit": "Chai 500ml",
       "price": 25000,
       "category": "cham-soc-ca-nhan",
@@ -2957,7 +2957,7 @@
       "max_co_lift": 2.35
     },
     "cat food": {
-      "display_name": "Thức ăn cho mèo",
+      "display_name": "cat food",
       "unit": "Túi 1.2kg",
       "price": 120000,
       "category": "thu-cung",
@@ -2975,7 +2975,7 @@
       "max_co_lift": 1.49
     },
     "dog food": {
-      "display_name": "Thức ăn cho chó",
+      "display_name": "dog food",
       "unit": "Túi 1.5kg",
       "price": 135000,
       "category": "thu-cung",
@@ -2993,7 +2993,7 @@
       "max_co_lift": 1.35
     },
     "pet care": {
-      "display_name": "Đồ chăm sóc thú cưng",
+      "display_name": "pet care",
       "unit": "Cái",
       "price": 65000,
       "category": "thu-cung",
@@ -3011,7 +3011,7 @@
       "max_co_lift": 1.09
     },
     "pot plants": {
-      "display_name": "Cây cảnh để bàn",
+      "display_name": "pot plants",
       "unit": "Chậu",
       "price": 120000,
       "category": "hoa-cay-canh",
@@ -3029,7 +3029,7 @@
       "max_co_lift": 1.57
     },
     "flower (seeds)": {
-      "display_name": "Hạt giống hoa",
+      "display_name": "flower (seeds)",
       "unit": "Gói",
       "price": 15000,
       "category": "hoa-cay-canh",
@@ -3047,7 +3047,7 @@
       "max_co_lift": 1.5
     },
     "flower soil/fertilizer": {
-      "display_name": "Đất trồng & phân bón",
+      "display_name": "flower soil/fertilizer",
       "unit": "Bao 5kg",
       "price": 45000,
       "category": "hoa-cay-canh",
@@ -3065,7 +3065,7 @@
       "max_co_lift": 1.43
     },
     "newspapers": {
-      "display_name": "Báo",
+      "display_name": "newspapers",
       "unit": "Tờ",
       "price": 8000,
       "category": "khac",
@@ -3083,7 +3083,7 @@
       "max_co_lift": 1.34
     },
     "shopping bags": {
-      "display_name": "Túi mua sắm",
+      "display_name": "shopping bags",
       "unit": "Cái",
       "price": 5000,
       "category": "khac",
@@ -3101,7 +3101,7 @@
       "max_co_lift": 1.43
     },
     "bags": {
-      "display_name": "Túi đựng đồ",
+      "display_name": "bags",
       "unit": "Cái",
       "price": 35000,
       "category": "khac",
@@ -3119,7 +3119,7 @@
       "max_co_lift": 1.36
     },
     "photo/film": {
-      "display_name": "Phim chụp ảnh",
+      "display_name": "photo/film",
       "unit": "Cuộn",
       "price": 95000,
       "category": "khac",
@@ -3137,7 +3137,7 @@
       "max_co_lift": 0.99
     },
     "sound storage medium": {
-      "display_name": "Đĩa nhạc",
+      "display_name": "sound storage medium",
       "unit": "Đĩa",
       "price": 150000,
       "category": "khac",
@@ -3155,7 +3155,7 @@
       "max_co_lift": 9.05
     },
     "seasonal products": {
-      "display_name": "Quà tặng theo mùa",
+      "display_name": "seasonal products",
       "unit": "Phần",
       "price": 150000,
       "category": "khac",
@@ -3187,7 +3187,7 @@
   ],
   "combos": [
     {
-      "id": "bot-mi-duong",
+      "id": "flour-sugar",
       "items": [
         "flour",
         "sugar"
@@ -3201,7 +3201,7 @@
       "saving": 5000
     },
     {
-      "id": "pho-mai-mieng-banh-mi-sandwich-trang",
+      "id": "processed-cheese-white-bread",
       "items": [
         "processed cheese",
         "white bread"
@@ -3215,7 +3215,7 @@
       "saving": 7000
     },
     {
-      "id": "bia-chai-ruou-manh",
+      "id": "bottled-beer-liquor",
       "items": [
         "bottled beer",
         "liquor"
@@ -3229,7 +3229,7 @@
       "saving": 54000
     },
     {
-      "id": "qua-mong-kem-tuoi-kem-chua",
+      "id": "berries-whipped-sour-cream",
       "items": [
         "berries",
         "whipped/sour cream"
@@ -3243,7 +3243,7 @@
       "saving": 11000
     },
     {
-      "id": "rau-thom-cu-qua-ca-rot-cu-cai",
+      "id": "herbs-root-vegetables",
       "items": [
         "herbs",
         "root vegetables"
@@ -3257,7 +3257,7 @@
       "saving": 3000
     },
     {
-      "id": "do-ve-sinh-ca-nhan-khan-giay",
+      "id": "hygiene-articles-napkins",
       "items": [
         "hygiene articles",
         "napkins"
@@ -3271,7 +3271,7 @@
       "saving": 6000
     },
     {
-      "id": "tao-le-trai-cay-nhiet-doi",
+      "id": "pip-fruit-tropical-fruit",
       "items": [
         "pip fruit",
         "tropical fruit"
@@ -3285,7 +3285,7 @@
       "saving": 9000
     },
     {
-      "id": "thit-ga-rau-cu-dong-lanh",
+      "id": "chicken-frozen-vegetables",
       "items": [
         "chicken",
         "frozen vegetables"
@@ -3299,7 +3299,7 @@
       "saving": 12000
     },
     {
-      "id": "keo-trai-cay-so-co-la-thanh",
+      "id": "candy-chocolate",
       "items": [
         "candy",
         "chocolate"
@@ -3313,7 +3313,7 @@
       "saving": 6000
     },
     {
-      "id": "xuc-xich-pho-mai-lat",
+      "id": "sausage-sliced-cheese",
       "items": [
         "sausage",
         "sliced cheese"
@@ -3327,7 +3327,7 @@
       "saving": 11000
     },
     {
-      "id": "bo-lat-trung-ga",
+      "id": "butter-domestic-eggs",
       "items": [
         "butter",
         "domestic eggs"
@@ -3341,7 +3341,7 @@
       "saving": 11000
     },
     {
-      "id": "sua-dong-quark-sua-chua",
+      "id": "curd-yogurt",
       "items": [
         "curd",
         "yogurt"

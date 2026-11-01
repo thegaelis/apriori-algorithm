@@ -12,7 +12,7 @@
   "l3_count": 850,
   "total_frequent_itemsets": 2126,
   "total_rules_mined": 2474,
-  "curated_rules_count": 1200,
+  "curated_rules_count": 1580,
   "max_lift": 11.42,
   "min_confidence": 0.15,
   "min_support": 0.0031,
@@ -40809,6 +40809,5326 @@
    "count": 39,
    "reason": "Complementary basket affinity (2.17× lift)",
    "category": "MEAT"
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0034,
+   "confidence": 0.2215,
+   "lift": 4.0,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "butter",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0034,
+   "confidence": 0.7333,
+   "lift": 2.87,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "butter",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0034,
+   "confidence": 0.541,
+   "lift": 3.88,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "butter",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0034,
+   "confidence": 0.3587,
+   "lift": 3.42,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0035,
+   "confidence": 0.5397,
+   "lift": 2.79,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0035,
+   "confidence": 0.4048,
+   "lift": 2.9,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0035,
+   "confidence": 0.2677,
+   "lift": 3.73,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0035,
+   "confidence": 0.34,
+   "lift": 3.12,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0058,
+   "confidence": 0.6333,
+   "lift": 3.27,
+   "count": 57
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0058,
+   "confidence": 0.25,
+   "lift": 3.02,
+   "count": 57
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0058,
+   "confidence": 0.5588,
+   "lift": 2.19,
+   "count": 57
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0058,
+   "confidence": 0.4453,
+   "lift": 4.09,
+   "count": 57
+  },
+  {
+   "antecedent": [
+    "brown bread",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5536,
+   "lift": 2.86,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "brown bread",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.775,
+   "lift": 3.03,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "brown bread",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.337,
+   "lift": 3.09,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "beef",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5,
+   "lift": 2.58,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5882,
+   "lift": 2.3,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3297,
+   "lift": 2.36,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "soda",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3896,
+   "lift": 2.01,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4225,
+   "lift": 1.65,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.219,
+   "lift": 2.09,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.6522,
+   "lift": 2.55,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3333,
+   "lift": 3.18,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4545,
+   "lift": 3.26,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "pastry"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2013,
+   "lift": 2.26,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "frozen vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0039,
+   "confidence": 0.623,
+   "lift": 3.22,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "frozen vegetables"
+   ],
+   "support": 0.0039,
+   "confidence": 0.1667,
+   "lift": 3.47,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "frozen vegetables",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0039,
+   "confidence": 0.6333,
+   "lift": 2.48,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "frozen vegetables",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0039,
+   "confidence": 0.4,
+   "lift": 3.67,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0034,
+   "confidence": 0.1964,
+   "lift": 3.54,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "butter",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.541,
+   "lift": 2.8,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0034,
+   "confidence": 0.6111,
+   "lift": 2.39,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0034,
+   "confidence": 0.292,
+   "lift": 2.78,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0037,
+   "confidence": 0.5806,
+   "lift": 3.0,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0037,
+   "confidence": 0.25,
+   "lift": 3.02,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0037,
+   "confidence": 0.6429,
+   "lift": 2.52,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0037,
+   "confidence": 0.2812,
+   "lift": 3.92,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "butter",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.5909,
+   "lift": 3.05,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.004,
+   "confidence": 0.6842,
+   "lift": 2.68,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.004,
+   "confidence": 0.2708,
+   "lift": 4.89,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.004,
+   "confidence": 0.3451,
+   "lift": 4.81,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.7333,
+   "lift": 3.79,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0034,
+   "confidence": 0.3929,
+   "lift": 3.74,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0034,
+   "confidence": 0.2727,
+   "lift": 3.8,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.4286,
+   "lift": 3.93,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "rolls/buns",
+    "yogurt"
+   ],
+   "consequent": [
+    "soda"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4286,
+   "lift": 2.46,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "soda",
+    "yogurt"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3529,
+   "lift": 3.19,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "soda",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0031,
+   "confidence": 0.411,
+   "lift": 2.23,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "rolls/buns",
+    "soda"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4478,
+   "lift": 3.21,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.005,
+   "confidence": 0.5506,
+   "lift": 2.85,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.005,
+   "confidence": 0.2917,
+   "lift": 3.52,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.005,
+   "confidence": 0.5506,
+   "lift": 2.15,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.005,
+   "confidence": 0.3828,
+   "lift": 3.65,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0037,
+   "confidence": 0.5714,
+   "lift": 2.24,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0037,
+   "confidence": 0.3871,
+   "lift": 2.77,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0037,
+   "confidence": 0.2517,
+   "lift": 3.51,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "whipped/sour cream",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0037,
+   "confidence": 0.3364,
+   "lift": 3.09,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "pork",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.5246,
+   "lift": 2.71,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pork",
+    "rolls/buns"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0033,
+   "confidence": 0.5818,
+   "lift": 2.28,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pork",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0033,
+   "confidence": 0.32,
+   "lift": 1.74,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "pork"
+   ],
+   "support": 0.0033,
+   "confidence": 0.1818,
+   "lift": 3.15,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "rolls/buns",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5263,
+   "lift": 2.06,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3333,
+   "lift": 1.81,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3571,
+   "lift": 2.56,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "pastry"
+   ],
+   "support": 0.0031,
+   "confidence": 0.1961,
+   "lift": 2.2,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "onions",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.6809,
+   "lift": 3.52,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "onions",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0033,
+   "confidence": 0.5714,
+   "lift": 2.24,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "onions",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.4923,
+   "lift": 4.52,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.2168,
+   "lift": 2.62,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.6458,
+   "lift": 2.53,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3444,
+   "lift": 2.47,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3069,
+   "lift": 2.82,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2098,
+   "lift": 3.79,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.7895,
+   "lift": 3.09,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3704,
+   "lift": 2.65,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3261,
+   "lift": 2.99,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.4342,
+   "lift": 2.24,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "domestic eggs"
+   ],
+   "support": 0.0034,
+   "confidence": 0.1507,
+   "lift": 2.37,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0034,
+   "confidence": 0.5789,
+   "lift": 2.27,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0034,
+   "confidence": 0.2727,
+   "lift": 1.96,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.6383,
+   "lift": 2.5,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "whipped/sour cream",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2804,
+   "lift": 1.52,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3896,
+   "lift": 2.79,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0031,
+   "confidence": 0.1961,
+   "lift": 2.74,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "soda",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.3882,
+   "lift": 2.01,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "yogurt"
+   ],
+   "consequent": [
+    "soda"
+   ],
+   "support": 0.0034,
+   "confidence": 0.292,
+   "lift": 1.67,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0034,
+   "confidence": 0.4024,
+   "lift": 2.19,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "soda"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0034,
+   "confidence": 0.3402,
+   "lift": 2.44,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.5424,
+   "lift": 2.8,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0033,
+   "confidence": 0.4923,
+   "lift": 1.93,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "fruit/vegetable juice"
+   ],
+   "support": 0.0033,
+   "confidence": 0.1905,
+   "lift": 2.63,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0033,
+   "confidence": 0.3107,
+   "lift": 2.96,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0052,
+   "confidence": 0.5484,
+   "lift": 2.83,
+   "count": 51
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0052,
+   "confidence": 0.6071,
+   "lift": 2.38,
+   "count": 51
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0052,
+   "confidence": 0.2237,
+   "lift": 3.12,
+   "count": 51
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0052,
+   "confidence": 0.3542,
+   "lift": 3.25,
+   "count": 51
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0037,
+   "confidence": 0.6102,
+   "lift": 3.15,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0037,
+   "confidence": 0.25,
+   "lift": 3.3,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0037,
+   "confidence": 0.6545,
+   "lift": 2.56,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0037,
+   "confidence": 0.2707,
+   "lift": 3.78,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4412,
+   "lift": 2.28,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "domestic eggs"
+   ],
+   "support": 0.0031,
+   "confidence": 0.1786,
+   "lift": 2.81,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.6383,
+   "lift": 2.5,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2479,
+   "lift": 2.36,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "sausage",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0033,
+   "confidence": 0.6275,
+   "lift": 2.46,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0033,
+   "confidence": 0.4211,
+   "lift": 3.02,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "sausage"
+   ],
+   "support": 0.0033,
+   "confidence": 0.2238,
+   "lift": 2.38,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "sausage",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.3721,
+   "lift": 3.41,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2448,
+   "lift": 3.24,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0036,
+   "confidence": 0.6731,
+   "lift": 2.63,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3977,
+   "lift": 2.85,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3723,
+   "lift": 3.42,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0038,
+   "confidence": 0.4302,
+   "lift": 2.22,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0038,
+   "confidence": 0.3274,
+   "lift": 3.12,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0038,
+   "confidence": 0.3058,
+   "lift": 1.66,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0038,
+   "confidence": 0.4805,
+   "lift": 3.44,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0041,
+   "confidence": 0.3704,
+   "lift": 1.91,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0041,
+   "confidence": 0.5195,
+   "lift": 2.03,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0041,
+   "confidence": 0.2381,
+   "lift": 1.29,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0041,
+   "confidence": 0.2273,
+   "lift": 2.17,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0044,
+   "confidence": 0.1963,
+   "lift": 3.54,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "butter",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0044,
+   "confidence": 0.4674,
+   "lift": 2.42,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0044,
+   "confidence": 0.6825,
+   "lift": 2.67,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0044,
+   "confidence": 0.3805,
+   "lift": 2.73,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.5738,
+   "lift": 2.97,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0036,
+   "confidence": 0.4545,
+   "lift": 3.26,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.35,
+   "lift": 3.34,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2893,
+   "lift": 4.04,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.625,
+   "lift": 3.23,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "domestic eggs"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2431,
+   "lift": 3.83,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0036,
+   "confidence": 0.7,
+   "lift": 2.74,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2893,
+   "lift": 4.04,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0048,
+   "confidence": 0.5663,
+   "lift": 2.93,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0048,
+   "confidence": 0.2798,
+   "lift": 3.7,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0048,
+   "confidence": 0.5054,
+   "lift": 1.98,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0048,
+   "confidence": 0.3534,
+   "lift": 3.37,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "soda"
+   ],
+   "support": 0.0032,
+   "confidence": 0.2081,
+   "lift": 1.19,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "soda",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.4769,
+   "lift": 1.87,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "soda",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0032,
+   "confidence": 0.4026,
+   "lift": 2.89,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "soda",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.301,
+   "lift": 2.87,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "frozen vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.5833,
+   "lift": 3.01,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "frozen vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.1598,
+   "lift": 3.32,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "frozen vegetables",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0036,
+   "confidence": 0.6731,
+   "lift": 2.63,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "frozen vegetables",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3684,
+   "lift": 2.64,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0051,
+   "confidence": 0.5376,
+   "lift": 2.78,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0051,
+   "confidence": 0.6173,
+   "lift": 2.42,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "fruit/vegetable juice"
+   ],
+   "support": 0.0051,
+   "confidence": 0.2283,
+   "lift": 3.16,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0051,
+   "confidence": 0.4854,
+   "lift": 3.48,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "curd",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0037,
+   "confidence": 0.3636,
+   "lift": 1.88,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "curd"
+   ],
+   "support": 0.0037,
+   "confidence": 0.1644,
+   "lift": 3.09,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "curd",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0037,
+   "confidence": 0.6,
+   "lift": 2.35,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "curd",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0037,
+   "confidence": 0.3711,
+   "lift": 2.66,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "sausage",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4225,
+   "lift": 2.18,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "sausage",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5085,
+   "lift": 1.99,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3,
+   "lift": 2.86,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "sausage"
+   ],
+   "support": 0.0031,
+   "confidence": 0.1786,
+   "lift": 1.9,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "beef",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.4937,
+   "lift": 2.55,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.004,
+   "confidence": 0.5,
+   "lift": 1.96,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "beef"
+   ],
+   "support": 0.004,
+   "confidence": 0.1711,
+   "lift": 3.26,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.4286,
+   "lift": 3.93,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0035,
+   "confidence": 0.4474,
+   "lift": 2.31,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "sausage"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0035,
+   "confidence": 0.5075,
+   "lift": 1.99,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0035,
+   "confidence": 0.34,
+   "lift": 3.12,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2966,
+   "lift": 3.58,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0036,
+   "confidence": 0.625,
+   "lift": 2.45,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3889,
+   "lift": 3.71,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3933,
+   "lift": 3.61,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.007,
+   "confidence": 0.5847,
+   "lift": 3.02,
+   "count": 69
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.007,
+   "confidence": 0.5702,
+   "lift": 2.23,
+   "count": 69
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.007,
+   "confidence": 0.3026,
+   "lift": 2.88,
+   "count": 69
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.007,
+   "confidence": 0.4107,
+   "lift": 3.77,
+   "count": 69
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0041,
+   "confidence": 0.4444,
+   "lift": 2.3,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pastry",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0041,
+   "confidence": 0.6154,
+   "lift": 2.41,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pastry",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0041,
+   "confidence": 0.3846,
+   "lift": 2.76,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "pastry"
+   ],
+   "support": 0.0041,
+   "confidence": 0.1826,
+   "lift": 2.05,
+   "count": 40
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.5417,
+   "lift": 2.8,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.004,
+   "confidence": 0.5652,
+   "lift": 2.21,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "support": 0.004,
+   "confidence": 0.1711,
+   "lift": 1.55,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.3679,
+   "lift": 3.38,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "soda",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0044,
+   "confidence": 0.4175,
+   "lift": 2.16,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0044,
+   "confidence": 0.5244,
+   "lift": 2.05,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0044,
+   "confidence": 0.3139,
+   "lift": 2.25,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0038,
+   "confidence": 0.2483,
+   "lift": 3.28,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0038,
+   "confidence": 0.5873,
+   "lift": 2.3,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0038,
+   "confidence": 0.4458,
+   "lift": 3.2,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0038,
+   "confidence": 0.3936,
+   "lift": 3.75,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0057,
+   "confidence": 0.7,
+   "lift": 2.74,
+   "count": 56
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0057,
+   "confidence": 0.3916,
+   "lift": 3.73,
+   "count": 56
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0057,
+   "confidence": 0.4746,
+   "lift": 3.4,
+   "count": 56
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0057,
+   "confidence": 0.3758,
+   "lift": 3.45,
+   "count": 56
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0038,
+   "confidence": 0.4805,
+   "lift": 2.48,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0038,
+   "confidence": 0.5606,
+   "lift": 2.19,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0038,
+   "confidence": 0.2569,
+   "lift": 1.4,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0038,
+   "confidence": 0.2102,
+   "lift": 2.93,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0048,
+   "confidence": 0.4653,
+   "lift": 2.4,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0048,
+   "confidence": 0.2146,
+   "lift": 2.59,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0048,
+   "confidence": 0.6267,
+   "lift": 2.45,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0048,
+   "confidence": 0.3672,
+   "lift": 2.63,
+   "count": 47
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.005,
+   "confidence": 0.6125,
+   "lift": 3.17,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.005,
+   "confidence": 0.3858,
+   "lift": 3.68,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.005,
+   "confidence": 0.405,
+   "lift": 2.9,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.005,
+   "confidence": 0.405,
+   "lift": 3.72,
+   "count": 49
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.4493,
+   "lift": 2.32,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5536,
+   "lift": 2.17,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3407,
+   "lift": 2.44,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "sausage",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0038,
+   "confidence": 0.4302,
+   "lift": 2.22,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "sausage",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0038,
+   "confidence": 0.4625,
+   "lift": 1.81,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0038,
+   "confidence": 0.37,
+   "lift": 2.65,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "sausage"
+   ],
+   "support": 0.0038,
+   "confidence": 0.1689,
+   "lift": 1.8,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "newspapers",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5263,
+   "lift": 2.72,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "newspapers",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5085,
+   "lift": 1.99,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "newspapers",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3659,
+   "lift": 3.36,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.6346,
+   "lift": 3.28,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0034,
+   "confidence": 0.2727,
+   "lift": 3.61,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "root vegetables"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0034,
+   "confidence": 0.4125,
+   "lift": 3.93,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.3548,
+   "lift": 3.26,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0045,
+   "confidence": 0.5641,
+   "lift": 2.92,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0045,
+   "confidence": 0.5714,
+   "lift": 2.24,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0045,
+   "confidence": 0.3056,
+   "lift": 2.91,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0045,
+   "confidence": 0.2619,
+   "lift": 3.65,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0047,
+   "confidence": 0.6479,
+   "lift": 2.54,
+   "count": 46
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0047,
+   "confidence": 0.3217,
+   "lift": 1.75,
+   "count": 46
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0047,
+   "confidence": 0.368,
+   "lift": 2.64,
+   "count": 46
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0047,
+   "confidence": 0.3007,
+   "lift": 2.76,
+   "count": 46
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0038,
+   "confidence": 0.6379,
+   "lift": 2.5,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0038,
+   "confidence": 0.3136,
+   "lift": 1.7,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0038,
+   "confidence": 0.296,
+   "lift": 2.82,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0038,
+   "confidence": 0.3426,
+   "lift": 3.14,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "curd"
+   ],
+   "support": 0.004,
+   "confidence": 0.2617,
+   "lift": 4.91,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "curd",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.004,
+   "confidence": 0.75,
+   "lift": 2.94,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "curd",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.004,
+   "confidence": 0.3939,
+   "lift": 3.75,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "curd",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.004,
+   "confidence": 0.6094,
+   "lift": 4.37,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.4105,
+   "lift": 2.12,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.004,
+   "confidence": 0.4875,
+   "lift": 1.91,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "support": 0.004,
+   "confidence": 0.1781,
+   "lift": 1.61,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.004,
+   "confidence": 0.3679,
+   "lift": 2.64,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "pork",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0038,
+   "confidence": 0.5522,
+   "lift": 2.85,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pork",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0038,
+   "confidence": 0.5362,
+   "lift": 2.1,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "pork"
+   ],
+   "support": 0.0038,
+   "confidence": 0.1623,
+   "lift": 2.81,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pork",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0038,
+   "confidence": 0.37,
+   "lift": 3.39,
+   "count": 37
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0055,
+   "confidence": 0.6136,
+   "lift": 3.17,
+   "count": 54
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0055,
+   "confidence": 0.2368,
+   "lift": 3.13,
+   "count": 54
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0055,
+   "confidence": 0.675,
+   "lift": 2.64,
+   "count": 54
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0055,
+   "confidence": 0.406,
+   "lift": 3.72,
+   "count": 54
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.2627,
+   "lift": 3.47,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5962,
+   "lift": 2.33,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3523,
+   "lift": 3.36,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3735,
+   "lift": 3.43,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0062,
+   "confidence": 0.488,
+   "lift": 2.52,
+   "count": 61
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0062,
+   "confidence": 0.5083,
+   "lift": 1.99,
+   "count": 61
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0062,
+   "confidence": 0.2675,
+   "lift": 1.45,
+   "count": 61
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0062,
+   "confidence": 0.3466,
+   "lift": 3.18,
+   "count": 61
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0042,
+   "confidence": 0.5775,
+   "lift": 2.98,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0042,
+   "confidence": 0.3228,
+   "lift": 1.76,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "root vegetables"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0042,
+   "confidence": 0.3417,
+   "lift": 2.45,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0042,
+   "confidence": 0.3628,
+   "lift": 3.33,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0051,
+   "confidence": 0.5319,
+   "lift": 2.75,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0051,
+   "confidence": 0.2283,
+   "lift": 3.02,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0051,
+   "confidence": 0.625,
+   "lift": 2.45,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0051,
+   "confidence": 0.3759,
+   "lift": 2.69,
+   "count": 50
+  },
+  {
+   "antecedent": [
+    "butter",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0042,
+   "confidence": 0.5062,
+   "lift": 2.62,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0042,
+   "confidence": 0.6308,
+   "lift": 2.47,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0042,
+   "confidence": 0.1798,
+   "lift": 3.25,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0042,
+   "confidence": 0.3628,
+   "lift": 3.33,
+   "count": 41
+  },
+  {
+   "antecedent": [
+    "curd",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.4844,
+   "lift": 2.5,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "curd"
+   ],
+   "support": 0.0032,
+   "confidence": 0.1845,
+   "lift": 3.46,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "curd",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5962,
+   "lift": 2.33,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "curd",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3196,
+   "lift": 3.05,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.006,
+   "confidence": 0.3856,
+   "lift": 1.99,
+   "count": 59
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.006,
+   "confidence": 0.5221,
+   "lift": 2.04,
+   "count": 59
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.006,
+   "confidence": 0.2694,
+   "lift": 1.46,
+   "count": 59
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.006,
+   "confidence": 0.3352,
+   "lift": 2.4,
+   "count": 59
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "soda",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0045,
+   "confidence": 0.55,
+   "lift": 2.84,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "soda"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0045,
+   "confidence": 0.5432,
+   "lift": 2.13,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0045,
+   "confidence": 0.3212,
+   "lift": 2.95,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.6094,
+   "lift": 3.15,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.004,
+   "confidence": 0.6,
+   "lift": 2.35,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "fruit/vegetable juice"
+   ],
+   "support": 0.004,
+   "confidence": 0.1711,
+   "lift": 2.37,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.004,
+   "confidence": 0.3786,
+   "lift": 3.47,
+   "count": 39
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0076,
+   "confidence": 0.5034,
+   "lift": 2.6,
+   "count": 75
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0076,
+   "confidence": 0.6198,
+   "lift": 2.43,
+   "count": 75
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0076,
+   "confidence": 0.3425,
+   "lift": 3.26,
+   "count": 75
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0076,
+   "confidence": 0.4464,
+   "lift": 3.2,
+   "count": 75
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4286,
+   "lift": 2.21,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2479,
+   "lift": 2.24,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.375,
+   "lift": 3.57,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4918,
+   "lift": 3.53,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.443,
+   "lift": 2.29,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0036,
+   "confidence": 0.5738,
+   "lift": 2.25,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2083,
+   "lift": 1.88,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3302,
+   "lift": 3.15,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.6034,
+   "lift": 3.12,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2893,
+   "lift": 1.57,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "root vegetables"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2917,
+   "lift": 2.78,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.4545,
+   "lift": 4.17,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4225,
+   "lift": 2.18,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.1705,
+   "lift": 2.06,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "rolls/buns"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5085,
+   "lift": 1.99,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2344,
+   "lift": 1.27,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "pastry",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5357,
+   "lift": 2.77,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pastry",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5172,
+   "lift": 2.02,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pastry",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2885,
+   "lift": 2.65,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2479,
+   "lift": 4.47,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.6667,
+   "lift": 3.45,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5556,
+   "lift": 3.98,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0031,
+   "confidence": 0.4762,
+   "lift": 4.54,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0039,
+   "confidence": 0.255,
+   "lift": 3.08,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0039,
+   "confidence": 0.6129,
+   "lift": 2.4,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0039,
+   "confidence": 0.427,
+   "lift": 3.06,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0039,
+   "confidence": 0.3762,
+   "lift": 3.59,
+   "count": 38
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0044,
+   "confidence": 0.7049,
+   "lift": 2.76,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0044,
+   "confidence": 0.5513,
+   "lift": 3.95,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "whipped/sour cream",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0044,
+   "confidence": 0.4019,
+   "lift": 3.83,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0044,
+   "confidence": 0.2886,
+   "lift": 4.03,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0049,
+   "confidence": 0.5581,
+   "lift": 2.18,
+   "count": 48
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0049,
+   "confidence": 0.3137,
+   "lift": 2.99,
+   "count": 48
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0049,
+   "confidence": 0.3221,
+   "lift": 1.75,
+   "count": 48
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0049,
+   "confidence": 0.4444,
+   "lift": 3.19,
+   "count": 48
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.6531,
+   "lift": 3.38,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0033,
+   "confidence": 0.5517,
+   "lift": 2.16,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0033,
+   "confidence": 0.3516,
+   "lift": 3.23,
+   "count": 32
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2479,
+   "lift": 4.47,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "domestic eggs"
+   ],
+   "support": 0.0031,
+   "confidence": 0.2655,
+   "lift": 4.18,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "domestic eggs",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.5085,
+   "lift": 2.63,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "butter",
+    "domestic eggs",
+    "other vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.6667,
+   "lift": 2.61,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "beef",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0034,
+   "confidence": 0.4925,
+   "lift": 2.55,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables",
+    "rolls/buns"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0034,
+   "confidence": 0.5789,
+   "lift": 2.27,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0034,
+   "confidence": 0.3626,
+   "lift": 1.97,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "beef"
+   ],
+   "support": 0.0034,
+   "confidence": 0.1875,
+   "lift": 3.57,
+   "count": 33
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0037,
+   "confidence": 0.5143,
+   "lift": 2.01,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "bottled water"
+   ],
+   "support": 0.0037,
+   "confidence": 0.2416,
+   "lift": 2.19,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0037,
+   "confidence": 0.3789,
+   "lift": 3.61,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0037,
+   "confidence": 0.4557,
+   "lift": 3.27,
+   "count": 36
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0036,
+   "confidence": 0.5556,
+   "lift": 2.87,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.2893,
+   "lift": 3.82,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0036,
+   "confidence": 0.3763,
+   "lift": 2.7,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0036,
+   "confidence": 0.4375,
+   "lift": 4.17,
+   "count": 35
+  },
+  {
+   "antecedent": [
+    "sausage",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.6739,
+   "lift": 2.64,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "sausage",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0032,
+   "confidence": 0.4366,
+   "lift": 3.13,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "sausage",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3605,
+   "lift": 3.44,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "tropical fruit",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "sausage"
+   ],
+   "support": 0.0032,
+   "confidence": 0.2081,
+   "lift": 2.21,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "cream cheese",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0035,
+   "confidence": 0.5231,
+   "lift": 2.7,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "cream cheese"
+   ],
+   "support": 0.0035,
+   "confidence": 0.1553,
+   "lift": 3.92,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "cream cheese",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0035,
+   "confidence": 0.6538,
+   "lift": 2.56,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "cream cheese",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0035,
+   "confidence": 0.5152,
+   "lift": 3.69,
+   "count": 34
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0046,
+   "confidence": 0.5357,
+   "lift": 2.77,
+   "count": 45
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "domestic eggs"
+   ],
+   "support": 0.0046,
+   "confidence": 0.1974,
+   "lift": 3.11,
+   "count": 45
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0046,
+   "confidence": 0.625,
+   "lift": 2.45,
+   "count": 45
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0046,
+   "confidence": 0.3719,
+   "lift": 3.41,
+   "count": 45
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5,
+   "lift": 2.58,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.2562,
+   "lift": 3.1,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3483,
+   "lift": 2.5,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0032,
+   "confidence": 0.4133,
+   "lift": 3.94,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "curd",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5082,
+   "lift": 2.63,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "curd",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.5741,
+   "lift": 2.25,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "curd",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3196,
+   "lift": 2.93,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3261,
+   "lift": 1.69,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "sausage"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3448,
+   "lift": 1.35,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "sausage",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0031,
+   "confidence": 0.3,
+   "lift": 1.63,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "sausage"
+   ],
+   "support": 0.0031,
+   "confidence": 0.1705,
+   "lift": 1.81,
+   "count": 30
+  },
+  {
+   "antecedent": [
+    "whipped/sour cream",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0056,
+   "confidence": 0.514,
+   "lift": 2.66,
+   "count": 55
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0056,
+   "confidence": 0.55,
+   "lift": 2.15,
+   "count": 55
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0056,
+   "confidence": 0.3819,
+   "lift": 2.74,
+   "count": 55
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "support": 0.0056,
+   "confidence": 0.2511,
+   "lift": 3.5,
+   "count": 55
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3974,
+   "lift": 2.05,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "other vegetables",
+    "rolls/buns"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0032,
+   "confidence": 0.6078,
+   "lift": 2.38,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "margarine",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0032,
+   "confidence": 0.3407,
+   "lift": 1.85,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "margarine"
+   ],
+   "support": 0.0032,
+   "confidence": 0.1761,
+   "lift": 3.01,
+   "count": 31
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0045,
+   "confidence": 0.7857,
+   "lift": 4.06,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "citrus fruit"
+   ],
+   "support": 0.0045,
+   "confidence": 0.3636,
+   "lift": 4.39,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "root vegetables"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "support": 0.0045,
+   "confidence": 0.4314,
+   "lift": 4.11,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0045,
+   "confidence": 0.4944,
+   "lift": 4.54,
+   "count": 44
+  },
+  {
+   "antecedent": [
+    "rolls/buns",
+    "soda",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0044,
+   "confidence": 0.4943,
+   "lift": 2.55,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "whole milk"
+   ],
+   "consequent": [
+    "soda"
+   ],
+   "support": 0.0044,
+   "confidence": 0.2443,
+   "lift": 1.4,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "rolls/buns",
+    "soda"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0044,
+   "confidence": 0.4433,
+   "lift": 1.73,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "soda",
+    "whole milk"
+   ],
+   "consequent": [
+    "rolls/buns"
+   ],
+   "support": 0.0044,
+   "confidence": 0.3139,
+   "lift": 1.71,
+   "count": 43
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "support": 0.0078,
+   "confidence": 0.5385,
+   "lift": 2.78,
+   "count": 77
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "support": 0.0078,
+   "confidence": 0.6063,
+   "lift": 2.37,
+   "count": 77
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "support": 0.0078,
+   "confidence": 0.3377,
+   "lift": 2.42,
+   "count": 77
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "support": 0.0078,
+   "confidence": 0.3516,
+   "lift": 3.23,
+   "count": 77
   }
  ],
  "combos": [

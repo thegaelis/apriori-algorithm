@@ -151,10 +151,10 @@ button,input{font:inherit;color:inherit}
 }
 .bar-row{
   display:grid;
-  grid-template-columns:36px clamp(140px,22vw,220px) 1fr clamp(100px,14vw,140px);
-  gap:14px;
+  grid-template-columns:36px 1fr clamp(140px,22vw,220px) clamp(90px,12vw,130px);
+  gap:16px;
   align-items:center;
-  padding:6px 8px;
+  padding:8px 10px;
   border-radius:8px;
   transition:background .15s;
 }
@@ -174,16 +174,16 @@ button,input{font:inherit;color:inherit}
   font-size:.92rem;
   font-weight:600;
   color:var(--text);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  min-width:0;
+  word-break:break-word;
+  line-height:1.4;
 }
 .bar-label .ico{
   font-size:1.15rem;
   flex-shrink:0;
 }
 .bar-track{
-  height:12px;
+  height:10px;
   background:var(--bar-bg);
   border-radius:999px;
   overflow:hidden;
@@ -217,9 +217,9 @@ button,input{font:inherit;color:inherit}
   gap:12px;
   margin-top:8px;
 }
-@media(max-width:680px){
+@media(max-width:768px){
   .lk-grid{grid-template-columns:repeat(2,1fr)}
-  .bar-row{grid-template-columns:30px 1fr clamp(80px,25vw,110px);gap:8px}
+  .bar-row{grid-template-columns:28px 1fr clamp(75px,20vw,100px);gap:10px}
   .bar-row .bar-track{display:none}
 }
 .lk-box{
@@ -276,7 +276,7 @@ button,input{font:inherit;color:inherit}
 /* Rule pill styling */
 .rule-row{
   display:grid;
-  grid-template-columns:36px minmax(200px,1.6fr) 1fr clamp(110px,16vw,170px);
+  grid-template-columns:36px 1fr clamp(120px,18vw,180px) clamp(110px,14vw,150px);
   gap:14px;
   align-items:center;
   padding:8px;
@@ -479,6 +479,39 @@ button,input{font:inherit;color:inherit}
     </div>
     <div class="bar-list" id="ruleList"></div>
   </section>
+
+  <!-- Raw Transactions Explorer -->
+  <section class="sec-card">
+    <div class="sec-head">
+      <div>
+        <h2>5. Bản ghi Giao dịch (Transaction Records)</h2>
+        <p>Danh sách các hóa đơn giỏ hàng thực tế trong tập dữ liệu POS siêu thị (tổng cộng 9,835 giao dịch).</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <input type="search" id="txSearch" placeholder="Lọc theo món (vd: milk, bread...)" style="border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-size:.85rem;background:var(--surface)">
+      </div>
+    </div>
+    <div id="txInfo" style="font-size:.84rem;color:var(--text-muted);margin-bottom:12px"></div>
+    <div class="tblwrap" style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:.88rem">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);text-align:left;color:var(--text-muted)">
+            <th style="padding:8px 10px;width:70px">Mã TID</th>
+            <th style="padding:8px 10px">Các mặt hàng trong giỏ hàng (Basket Items)</th>
+            <th style="padding:8px 10px;width:80px;text-align:right">Số món</th>
+          </tr>
+        </thead>
+        <tbody id="txBody"></tbody>
+      </table>
+    </div>
+    <div class="more-wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <span id="txPageInfo" style="font-size:.84rem;color:var(--text-muted)"></span>
+      <div style="display:flex;gap:8px">
+        <button class="btn-more" id="txPrevBtn" type="button">← Trang trước</button>
+        <button class="btn-more" id="txNextBtn" type="button">Trang sau →</button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script>
@@ -490,6 +523,9 @@ let DATA = null;
 let l1Expanded = false;
 let curComboLvl = 'L2';
 let curRuleType = 'confidence';
+let txPage = 1;
+const TX_PER_PAGE = 10;
+let txFilter = '';
 
 function renderMetrics() {
   const s = DATA.summary;
@@ -609,12 +645,58 @@ function renderRules() {
   }).join('');
 }
 
+function renderTransactions() {
+  const allTxs = DATA.transactions_sample || [];
+  const q = txFilter.trim().toLowerCase();
+  const filtered = q ? allTxs.filter(t => t.items.some(it => it.toLowerCase().includes(q))) : allTxs;
+  const total = filtered.length;
+  const maxPage = Math.max(1, Math.ceil(total / TX_PER_PAGE));
+  if (txPage > maxPage) txPage = maxPage;
+  if (txPage < 1) txPage = 1;
+
+  const start = (txPage - 1) * TX_PER_PAGE;
+  const pageTxs = filtered.slice(start, start + TX_PER_PAGE);
+
+  $('txInfo').textContent = q
+    ? `Tìm thấy ${fmt(total)} / ${fmt(allTxs.length)} giao dịch mẫu chứa từ khóa "${q}"`
+    : `Hiển thị 200 giao dịch mẫu từ tập dữ liệu thực tế (9,835 giao dịch)`;
+
+  $('txPageInfo').textContent = `Trang ${txPage} / ${maxPage} (${total ? start + 1 : 0}–${Math.min(start + TX_PER_PAGE, total)} trên ${total} giỏ)`;
+
+  $('txBody').innerHTML = pageTxs.length ? pageTxs.map(t => {
+    const chips = t.items.map(it => `<span style="display:inline-block;background:var(--surface-sub);border:1px solid var(--border);border-radius:6px;padding:2px 8px;margin:2px 4px 2px 0;font-size:.82rem;font-weight:600">${it}</span>`).join('');
+    return `
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:10px;font-family:var(--mono);color:var(--text-muted);font-weight:700">#${t.id}</td>
+        <td style="padding:10px">${chips}</td>
+        <td style="padding:10px;text-align:right;font-family:var(--mono);font-weight:700">${t.count}</td>
+      </tr>
+    `;
+  }).join('') : `<tr><td colspan="3" style="padding:20px;text-align:center;color:var(--text-muted)">Không tìm thấy giao dịch phù hợp.</td></tr>`;
+
+  $('txPrevBtn').disabled = (txPage <= 1);
+  $('txNextBtn').disabled = (txPage >= maxPage);
+}
+
 function init() {
   renderMetrics();
   renderLkGrid();
   renderL1();
   renderCombos();
   renderRules();
+  renderTransactions();
+
+  $('txSearch').addEventListener('input', e => {
+    txFilter = e.target.value;
+    txPage = 1;
+    renderTransactions();
+  });
+  $('txPrevBtn').addEventListener('click', () => {
+    if (txPage > 1) { txPage--; renderTransactions(); }
+  });
+  $('txNextBtn').addEventListener('click', () => {
+    txPage++; renderTransactions();
+  });
 
   $('l1MoreBtn').addEventListener('click', () => {
     l1Expanded = !l1Expanded;
