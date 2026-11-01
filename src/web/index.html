@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Apriori Từng Bước — BasketIQ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/app.css?v=20261103">
 <style>
 *{box-sizing:border-box}
 html{font-size:17px;height:100%}
+.app-header{margin-inline:-20px;width:auto}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;padding-inline:20px;padding-block:0;height:100vh;display:flex;flex-direction:column;overflow:hidden}
 @media (max-width:900px){body{height:auto;overflow:auto;padding-bottom:80px}}
 h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
@@ -26,7 +27,7 @@ sub{font-size:.7em;line-height:0}
 .field input[type=number]{width:96px;font-variant-numeric:tabular-nums}
 .field .row{display:flex;gap:6px;align-items:center}
 .field .unit{color:var(--muted);font-size:.9rem;white-space:nowrap}
-.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:6px;padding:9px 16px;font-weight:600;cursor:pointer;min-height:38px}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:9px 18px;font-weight:600;cursor:pointer;min-height:38px}
 .btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line-strong)}
 .btn:disabled{opacity:.45;cursor:default}
 .btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -175,7 +176,7 @@ h3.sec{font-size:1.25rem;margin:22px 0 10px}
 <body>
 <header class="app-header">
   <div class="app-header-inner">
-    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
+    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">G9</span><span>Mart</span></a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
       <a href="/shop">Cửa hàng</a>
       <a href="/" class="active" aria-current="page">Demo thuật toán</a>
