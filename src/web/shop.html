@@ -6,9 +6,9 @@
 <title>Cửa hàng — BasketIQ Fresh Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/app.css?v=20261104">
-<link rel="stylesheet" href="/store.css?v=20261104">
-<link rel="stylesheet" href="/shop.css?v=20261104">
+<link rel="stylesheet" href="/app.css?v=20261111">
+<link rel="stylesheet" href="/store.css?v=20261111">
+<link rel="stylesheet" href="/shop.css?v=20261111">
 </head>
 <body class="storefront" data-page="shop">
 <header class="app-header">
@@ -146,8 +146,8 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="/store-cart.js"></script>
-<script src="/store-recs.js"></script>
+<script src="/store-cart.js?v=20261111"></script>
+<script src="/store-recs.js?v=20261111"></script>
 <script>
 const STORAGE_KEY = 'basketiq.cart.groceries';
 const MAX_RECS = 4;
@@ -561,11 +561,11 @@ function renderRecommendations() {
         <span class="reco-ico" aria-hidden="true">${esc(p.icon || '🛒')}</span>
         <div class="reco-info">
           <div class="reco-name">${esc(p.display_name)}</div>
-          <div class="reco-why">${esc(whyText)}</div>
         </div>
         <span class="reco-price">${vnd(p.price)}</span>
         <button class="reco-add" type="button" data-act="add-reco" data-code="${esc(rec.code)}">+ Thêm</button>
       </div>
+      <div class="reco-why" title="${esc(whyText)}">${esc(whyText)}</div>
       <div class="reco-meta">
         <span>${esc(metaLeft)}</span>
         <span class="reco-lift">${esc(metaRight)}</span>
@@ -704,8 +704,8 @@ document.addEventListener('click', e => {
 });
 
 Promise.all([
-  fetch('/api/store').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
-  fetch('/api/ecom-rules').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  fetch('/api/store', {cache: 'no-store'}).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
+  fetch('/api/ecom-rules', {cache: 'no-store'}).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
 ]).then(([store, data]) => {
   STORE = store;
   DATA = data;

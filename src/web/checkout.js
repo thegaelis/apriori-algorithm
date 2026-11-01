@@ -9,9 +9,9 @@
 
   function renderSummary() {
     const comboLines = summary.applied.map(entry =>
-      `<div class="saving"><dt>${esc(entry.combo.items.map(code => STORE.catalog[code].display_name).join(' + '))} ×${entry.times}</dt><dd>−${vnd(entry.saving)}</dd></div>`
+      `<div class="saving"><dt>${esc(entry.combo.items.map(code => STORE.catalog[code].display_name).join(' + '))} × ${entry.times}</dt><dd>−${vnd(entry.saving)}</dd></div>`
     ).join('');
-    $('orderSummary').innerHTML = `<h3>Đơn hàng của bạn</h3>
+    $('orderSummary').innerHTML = `<h3>Tóm tắt đơn hàng</h3>
       <ul class="mini-lines">
         ${summary.lines.map(line => `<li><span>${esc(line.product.display_name)} × ${line.qty}</span><b>${vnd(line.total)}</b></li>`).join('')}
       </ul>
@@ -21,7 +21,7 @@
         <div><dt>Phí giao hàng</dt><dd>${summary.shipping ? vnd(summary.shipping) : 'Miễn phí'}</dd></div>
         <div class="grand"><dt>Tổng cộng</dt><dd>${vnd(summary.total)}</dd></div>
       </dl>
-      <a class="continue" href="/cart">← Quay lại giỏ hàng</a>`;
+      `;
   }
 
   function setError(field, message) {
@@ -86,7 +86,7 @@
     placeOrder();
   });
 
-  fetch('/api/store')
+  fetch('/api/store', {cache: 'no-store'})
     .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(store => {
       STORE = store;

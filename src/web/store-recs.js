@@ -1,21 +1,38 @@
-/* Shared Apriori recommendation ranking used by the shop and cart pages. */
+/* Shared recommendation ranking: confidence first, then lift/support/count. */
 window.StoreRecs = (() => {
   function compute(cartSet, data, max = 4) {
     const recs = [];
     const byCode = new Map();
-    const push = (code, tier, score, extra) => {
+
+    const push = (code, tier, extra) => {
       if (cartSet.has(code) || !data.catalog[code]) return;
+      const rule = extra.rule || null;
+      const confidence = rule ? rule.confidence : 0;
+      const lift = rule ? rule.lift : 0;
+      const support = rule ? rule.support : (extra.support || 0);
+      const count = rule ? rule.count : (extra.count || 0);
+
       if (byCode.has(code)) {
         const existing = byCode.get(code);
-        existing.ruleCount = (existing.ruleCount || 1) + 1;
-        if (tier < existing.tier || (tier === existing.tier && score > existing.score)) {
+        existing.ruleCount += 1;
+        const better = confidence > existing.confidence
+          || (confidence === existing.confidence && lift > existing.lift)
+          || (confidence === existing.confidence && lift === existing.lift && support > existing.support);
+        if (better) {
           existing.tier = tier;
-          existing.score = score;
-          if (extra && extra.rule) existing.rule = extra.rule;
+          existing.confidence = confidence;
+          existing.lift = lift;
+          existing.support = support;
+          existing.count = count;
+          existing.rule = rule;
         }
         return;
       }
-      byCode.set(code, Object.assign({ code, tier, score, ruleCount: 1 }, extra));
+
+      byCode.set(code, {
+        code, tier, confidence, lift, support, count,
+        rule, ruleCount: 1,
+      });
       recs.push(byCode.get(code));
     };
 
@@ -25,24 +42,24 @@ window.StoreRecs = (() => {
         if (rule.antecedent.every(code => cartSet.has(code))) {
           const targets = rule.consequent.filter(code => !cartSet.has(code));
           if (targets.length) fired += 1;
-          // Prioritize matching more items in the current cart (antecedent length),
-          // combined with high conditional probability (confidence) and correlation (lift).
-          const antMatchScore = rule.antecedent.length * 50;
-          const confScore = (rule.confidence || 0) * 20;
-          const liftScore = (rule.lift || 1) * 3;
-          const score = antMatchScore + confScore + liftScore;
-          targets.forEach(code => push(code, 1, score, { rule }));
+          targets.forEach(code => push(code, 1, { rule }));
         }
       }
     } else {
       const l1 = (data.frequent_itemsets && data.frequent_itemsets.L1) || [];
       for (const entry of l1) {
         if (recs.length >= max) break;
-        push(entry.items[0], 4, entry.support, { support: entry.support, count: entry.count });
+        push(entry.items[0], 4, { support: entry.support, count: entry.count });
       }
     }
 
-    recs.sort((a, b) => a.tier - b.tier || b.score - a.score);
+    recs.sort((a, b) =>
+      a.tier - b.tier
+      || b.confidence - a.confidence
+      || b.lift - a.lift
+      || b.support - a.support
+      || b.count - a.count
+    );
     return { recs: recs.slice(0, max), fired };
   }
 

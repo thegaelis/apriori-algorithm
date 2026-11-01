@@ -6,8 +6,8 @@
 <title>Giỏ hàng — BasketIQ Fresh Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/app.css?v=20261104">
-<link rel="stylesheet" href="/store.css?v=20261104">
+<link rel="stylesheet" href="/app.css?v=20261111">
+<link rel="stylesheet" href="/store.css?v=20261111">
 </head>
 <body class="storefront" data-page="cart">
 <header class="app-header">
@@ -18,16 +18,20 @@
       <a href="/">Demo thuật toán</a>
       <a href="/dataset">Dataset</a>
     </nav>
-    <div class="app-actions">
-      <a class="app-cart-btn" href="/cart" aria-label="Giỏ hàng">
-        <span aria-hidden="true">🛒</span>
-        <span>Giỏ hàng</span>
-        <span class="app-cart-count" id="cartCountBadge">0</span>
-      </a>
-    </div>
     <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
   </div>
 </header>
+
+<div class="page-subheader">
+  <div class="page-subheader-inner">
+    <a class="page-back" href="/shop"><svg class="back-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg><span>Tiếp tục mua sắm</span></a>
+    <a class="page-cart-btn" href="/cart" aria-label="Giỏ hàng">
+      <span aria-hidden="true">🛒</span>
+      <span>Giỏ hàng</span>
+      <span class="app-cart-count" id="cartCountBadge">0</span>
+    </a>
+  </div>
+</div>
 
 <main class="container main">
   <h1 class="page-title">Giỏ hàng <small id="cartCount"></small></h1>
@@ -50,8 +54,8 @@
   </section>
 </main>
 
-<script src="/store-cart.js"></script>
-<script src="/store-recs.js"></script>
-<script src="/cart.js"></script>
+<script src="/store-cart.js?v=20261111"></script>
+<script src="/store-recs.js?v=20261111"></script>
+<script src="/cart.js?v=20261111"></script>
 </body>
 </html>
