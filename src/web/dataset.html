@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dataset — Khai phá Dữ liệu Groceries POS (Apriori)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+<link rel="stylesheet" href="/app.css">
+<style>
+:root{
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --surface-sub:#f1f5f9;
+  --border:#e2e8f0;
+  --text:#0f172a;
+  --text-muted:#64748b;
+  --primary:#4f46e5;
+  --primary-hover:#4338ca;
+  --primary-light:#eef2ff;
+  --bar-fill:#6366f1;
+  --bar-bg:#f1f5f9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;min-height:100vh}
+button,input{font:inherit;color:inherit}
+
+.dataset-wrap{
+  max-width:1160px;
+  margin:0 auto;
+  padding:24px 20px 64px;
+}
+
+/* Page Header */
+.page-header{
+  margin-bottom:24px;
+}
+.page-header h1{
+  font-size:clamp(1.5rem,2.2vw,2.1rem);
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.page-header p{
+  color:var(--text-muted);
+  font-size:clamp(.92rem,1.1vw,1.05rem);
+  margin-top:4px;
+  max-width:85ch;
+}
+
+/* Overview Metric Cards */
+.metrics-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:14px;
+  margin-bottom:28px;
+}
+.metric-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px 18px;
+  box-shadow:0 1px 3px rgba(15,23,42,.04);
+}
+.metric-card .val{
+  font-size:1.65rem;
+  font-weight:800;
+  letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+  color:var(--text);
+}
+.metric-card .lbl{
+  font-size:.85rem;
+  font-weight:600;
+  color:var(--text-muted);
+  margin-top:2px;
+}
+.metric-card .sub{
+  font-size:.76rem;
+  color:var(--primary);
+  font-weight:600;
+  margin-top:4px;
+}
+
+/* Section Container */
+.sec-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px 24px;
+  margin-bottom:24px;
+  box-shadow:0 1px 3px rgba(15,23,42,.04);
+}
+.sec-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.sec-head h2{
+  font-size:1.22rem;
+  font-weight:800;
+  letter-spacing:-.01em;
+}
+.sec-head p{
+  font-size:.86rem;
+  color:var(--text-muted);
+  margin-top:2px;
+}
+
+/* Segment Tabs */
+.seg-tabs{
+  display:inline-flex;
+  background:var(--surface-sub);
+  padding:3px;
+  border-radius:10px;
+  gap:4px;
+}
+.seg-tab{
+  border:none;
+  background:transparent;
+  padding:6px 14px;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--text-muted);
+  border-radius:8px;
+  cursor:pointer;
+  transition:all .15s;
+}
+.seg-tab.active{
+  background:var(--surface);
+  color:var(--primary);
+  box-shadow:0 1px 2px rgba(15,23,42,.08);
+}
+
+/* Horizontal Bar Rows (Lucas style) */
+.bar-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.bar-row{
+  display:grid;
+  grid-template-columns:36px clamp(140px,22vw,220px) 1fr clamp(100px,14vw,140px);
+  gap:14px;
+  align-items:center;
+  padding:6px 8px;
+  border-radius:8px;
+  transition:background .15s;
+}
+.bar-row:hover{
+  background:var(--surface-sub);
+}
+.bar-rank{
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--text-muted);
+  font-family:var(--mono);
+}
+.bar-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--text);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.bar-label .ico{
+  font-size:1.15rem;
+  flex-shrink:0;
+}
+.bar-track{
+  height:12px;
+  background:var(--bar-bg);
+  border-radius:999px;
+  overflow:hidden;
+  position:relative;
+}
+.bar-fill{
+  height:100%;
+  background:var(--bar-fill);
+  border-radius:999px;
+  transition:width .3s ease-out;
+}
+.bar-val{
+  text-align:right;
+  font-size:.86rem;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  font-family:var(--mono);
+  color:var(--text);
+  white-space:nowrap;
+}
+.bar-val small{
+  font-weight:500;
+  color:var(--text-muted);
+  margin-left:4px;
+}
+
+/* Lk Funnel Bar Grid */
+.lk-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:8px;
+}
+@media(max-width:680px){
+  .lk-grid{grid-template-columns:repeat(2,1fr)}
+  .bar-row{grid-template-columns:30px 1fr clamp(80px,25vw,110px);gap:8px}
+  .bar-row .bar-track{display:none}
+}
+.lk-box{
+  background:var(--surface-sub);
+  border-radius:12px;
+  padding:14px 16px;
+  text-align:center;
+  border:1px solid var(--border);
+}
+.lk-box .badge{
+  font-size:.8rem;
+  font-weight:800;
+  background:var(--primary-light);
+  color:var(--primary);
+  padding:3px 10px;
+  border-radius:999px;
+  display:inline-block;
+  margin-bottom:6px;
+}
+.lk-box .count{
+  font-size:1.55rem;
+  font-weight:800;
+  color:var(--text);
+}
+.lk-box .desc{
+  font-size:.78rem;
+  color:var(--text-muted);
+  margin-top:2px;
+}
+
+/* Action view more */
+.more-wrap{
+  text-align:center;
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px dashed var(--border);
+}
+.btn-more{
+  background:var(--surface-sub);
+  border:1px solid var(--border);
+  padding:7px 18px;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--primary);
+  border-radius:999px;
+  cursor:pointer;
+  transition:all .15s;
+}
+.btn-more:hover{
+  background:var(--primary-light);
+  border-color:var(--primary);
+}
+
+/* Rule pill styling */
+.rule-row{
+  display:grid;
+  grid-template-columns:36px minmax(200px,1.6fr) 1fr clamp(110px,16vw,170px);
+  gap:14px;
+  align-items:center;
+  padding:8px;
+  border-radius:8px;
+  transition:background .15s;
+}
+.rule-row:hover{background:var(--surface-sub)}
+@media(max-width:768px){
+  .rule-row{grid-template-columns:30px 1fr auto;gap:8px}
+  .rule-row .bar-track{display:none}
+}
+.rule-eq{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+  font-size:.9rem;
+}
+.rule-part{
+  font-weight:700;
+  color:var(--text);
+  background:var(--surface-sub);
+  padding:2px 8px;
+  border-radius:6px;
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+}
+.rule-arr{
+  color:var(--primary);
+  font-weight:800;
+  font-size:1rem;
+}
+
+/* Preprocessing Flow Styles */
+.prep-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+  margin-top:8px;
+}
+.prep-step{
+  background:var(--surface-sub);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.prep-step-num{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:.8rem;
+  font-weight:800;
+  color:var(--primary);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.prep-step h3{
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.3;
+}
+.prep-step p{
+  font-size:.85rem;
+  color:var(--text-muted);
+  line-height:1.45;
+  margin:0;
+}
+.prep-box{
+  background:#ffffff;
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:8px 10px;
+  font-family:var(--mono);
+  font-size:.8rem;
+  color:var(--text);
+  margin-top:4px;
+  word-break:break-word;
+}
+.prep-box code{
+  color:var(--primary);
+  font-weight:600;
+}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-brand" href="/dataset"><span class="app-logo" aria-hidden="true">📊</span>BasketIQ</a>
+    <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
+      <a href="/shop">Cửa hàng</a>
+      <a href="/">Demo thuật toán</a>
+      <a href="/dataset" class="active" aria-current="page">Dataset</a>
+    </nav>
+    <div class="app-actions">
+      <a href="/shop" class="app-cart-btn" style="text-decoration:none">
+        <span aria-hidden="true">🛒</span>
+        <span>Cửa hàng</span>
+      </a>
+    </div>
+    <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<main class="dataset-wrap">
+  <div class="page-header">
+    <h1>Tập dữ liệu Siêu thị (Groceries POS)</h1>
+    <p>Thống kê 9,835 giao dịch mua hàng thực tế (Hahsler et al., 2006) và các chỉ số đo lường Apriori (Support, Confidence, Lift) nhằm xác định các mặt hàng và tổ hợp sản phẩm phổ biến.</p>
+  </div>
+
+  <!-- Metric Cards -->
+  <section class="metrics-grid" id="metricsGrid" aria-label="Chỉ số tổng quan"></section>
+
+  <!-- Preprocessing Section -->
+  <section class="sec-card">
+    <div class="sec-head">
+      <div>
+        <h2>Tiền xử lý Dữ liệu Giao dịch (Transaction Data Preprocessing)</h2>
+        <p>Quy trình 3 bước chuẩn hóa dữ liệu hóa đơn dạng chuỗi văn bản thô (CSV) thành tập hợp giỏ hàng đầu vào đạt chuẩn cho thuật toán Apriori.</p>
+      </div>
+    </div>
+    <div class="prep-grid">
+      <div class="prep-step">
+        <span class="prep-step-num">Bước 1 · Làm sạch &amp; Tách mục</span>
+        <h3>Tách dòng hóa đơn (Tokenization)</h3>
+        <p>Đọc từng dòng hóa đơn $T_i$, tách các mặt hàng qua dấu phẩy, chuyển về chữ thường và xóa sạch khoảng trắng thừa ở hai đầu.</p>
+        <div class="prep-box"><code>"citrus fruit, margarine" &rarr; ["citrus fruit", "margarine"]</code></div>
+      </div>
+      <div class="prep-step">
+        <span class="prep-step-num">Bước 2 · Khử trùng trong giỏ</span>
+        <h3>Biểu diễn tập hợp nhị phân (0/1)</h3>
+        <p>Khách mua 1 hay 5 hộp sữa thì hóa đơn vẫn là <b>có mua sữa</b>. Chuyển danh sách sang cấu trúc tập hợp (Set) để khử trùng lặp và tính đúng tần suất giao dịch.</p>
+        <div class="prep-box"><code>["milk", "milk", "bread"] &rarr; {"bread", "milk"}</code></div>
+      </div>
+      <div class="prep-step">
+        <span class="prep-step-num">Bước 3 · Đánh chỉ mục giao dịch</span>
+        <h3>Tạo bảng chỉ mục ngược (Inverted Index / Tidset)</h3>
+        <p>Ánh xạ mỗi mặt hàng với tập các mã hóa đơn chứa nó (Tidset). Nhờ đó, việc đếm số giỏ mua chung hai hay nhiều món chỉ cần phép giao tập hợp (Set Intersection) cực nhanh mà không phải quét lại toàn bộ file.</p>
+        <div class="prep-box"><code>Tidset("milk") &cap; Tidset("bread") = danh sách các giỏ mua cả 2 món</code></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- L1..L4 Funnel -->
+  <section class="sec-card">
+    <div class="sec-head">
+      <div>
+        <h2>1. Số lượng Tập phổ biến theo Bậc (L₁ → L₄)</h2>
+        <p>Số lượng tập phổ biến thu được ở mỗi độ dài tập hợp với ngưỡng <b>min_sup = 0.5% (≥ 49 giỏ)</b>.</p>
+      </div>
+    </div>
+    <div class="lk-grid" id="lkGrid"></div>
+  </section>
+
+  <!-- Top L1 Items -->
+  <section class="sec-card">
+    <div class="sec-head">
+      <div>
+        <h2>2. Mặt hàng có Support cao nhất (L₁)</h2>
+        <p>Tỷ lệ giỏ hàng có chứa mặt hàng: <code>Support(A) = Count(A) / 9,835</code>.</p>
+      </div>
+    </div>
+    <div class="bar-list" id="l1List"></div>
+    <div class="more-wrap">
+      <button class="btn-more" id="l1MoreBtn" type="button">Xem thêm Top 30</button>
+    </div>
+  </section>
+
+  <!-- Top L2, L3, L4 Combos -->
+  <section class="sec-card">
+    <div class="sec-head">
+      <div>
+        <h2>3. Tập phổ biến Nhiều mặt hàng (L₂, L₃, L₄)</h2>
+        <p>Các nhóm sản phẩm thường đồng xuất hiện trong cùng một giỏ hàng (tần suất ≥ 49 giỏ).</p>
+      </div>
+      <div class="seg-tabs" role="tablist" id="comboTabs">
+        <button class="seg-tab active" data-lvl="L2" type="button">Tập 2 món (L₂)</button>
+        <button class="seg-tab" data-lvl="L3" type="button">Tập 3 món (L₃)</button>
+        <button class="seg-tab" data-lvl="L4" type="button">Tập 4 món (L₄)</button>
+      </div>
+    </div>
+    <div class="bar-list" id="comboList"></div>
+  </section>
+
+  <!-- Top Association Rules -->
+  <section class="sec-card">
+    <div class="sec-head">
+      <div>
+        <h2>4. Luật kết hợp (A ⇒ B)</h2>
+        <p>Các luật được sinh từ các tập phổ biến, thỏa mãn <code>A ∩ B = ∅</code>, <code>Confidence ≥ 20%</code> và <code>Lift ≥ 1.20×</code>.</p>
+      </div>
+      <div class="seg-tabs" role="tablist" id="ruleTabs">
+        <button class="seg-tab active" data-type="confidence" type="button">Xếp theo Confidence (Độ tin cậy)</button>
+        <button class="seg-tab" data-type="lift" type="button">Xếp theo Lift (Mức độ tương quan)</button>
+      </div>
+    </div>
+    <div class="bar-list" id="ruleList"></div>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const pct = (n, d = 2) => (n * 100).toFixed(d) + '%';
+const fmt = n => Number(n).toLocaleString('en-US');
+
+let DATA = null;
+let l1Expanded = false;
+let curComboLvl = 'L2';
+let curRuleType = 'confidence';
+
+function renderMetrics() {
+  const s = DATA.summary;
+  const p = DATA.params;
+  const cards = [
+    {val: fmt(s.total_baskets), lbl: 'Giao dịch (Baskets)', sub: 'Hóa đơn đã chuẩn hóa'},
+    {val: fmt(s.distinct_items), lbl: 'Mặt hàng phân biệt', sub: 'Tập mục tiêu I trong catalog'},
+    {val: `${s.avg_basket_size} món`, lbl: 'Kích thước giỏ TB', sub: `Tối đa ${s.max_basket_size} món/giỏ`},
+    {val: '0 dòng', lbl: 'Trùng lặp dòng', sub: 'Dữ liệu được làm sạch nhị phân'},
+    {val: fmt(s.total_frequent_itemsets), lbl: 'Tập phổ biến (L₁–L₄)', sub: `min_sup = ${pct(p.min_support, 1)} (≥ ${p.min_count} giỏ)`},
+    {val: fmt(s.total_rules), lbl: 'Luật kết hợp sinh ra', sub: `Conf ≥ ${pct(p.min_confidence, 0)} · Lift ≥ ${p.min_lift}×`},
+  ];
+  $('metricsGrid').innerHTML = cards.map(c => `
+    <div class="metric-card">
+      <div class="val">${c.val}</div>
+      <div class="lbl">${c.lbl}</div>
+      <div class="sub">${c.sub}</div>
+    </div>
+  `).join('');
+}
+
+function renderLkGrid() {
+  const descMap = {
+    L1: 'Tập 1 món phổ biến',
+    L2: 'Tập 2 món đồng xuất hiện',
+    L3: 'Tập 3 món đồng xuất hiện',
+    L4: 'Tập 4 món đồng xuất hiện',
+  };
+  $('lkGrid').innerHTML = Object.entries(DATA.level_counts).map(([lvl, cnt]) => `
+    <div class="lk-box">
+      <span class="badge">${lvl}</span>
+      <div class="count">${fmt(cnt)}</div>
+      <div class="desc">${descMap[lvl] || ''}</div>
+    </div>
+  `).join('');
+}
+
+function renderL1() {
+  const items = l1Expanded ? DATA.top_items : DATA.top_items.slice(0, 15);
+  const maxSupp = DATA.top_items[0].support;
+  $('l1List').innerHTML = items.map((it, idx) => {
+    const widthPct = ((it.support / maxSupp) * 100).toFixed(1);
+    return `
+      <div class="bar-row">
+        <span class="bar-rank">#${idx + 1}</span>
+        <div class="bar-label">
+          <span class="ico">${it.icon}</span>
+          <span>${it.item}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${widthPct}%"></div>
+        </div>
+        <div class="bar-val">${pct(it.support)} <small>(${fmt(it.count)})</small></div>
+      </div>
+    `;
+  }).join('');
+  $('l1MoreBtn').textContent = l1Expanded ? 'Thu gọn (Top 15)' : 'Xem thêm Top 30';
+}
+
+function renderCombos() {
+  const combos = DATA.top_itemsets[curComboLvl] || [];
+  if (!combos.length) {
+    $('comboList').innerHTML = '<div style="padding:16px;color:var(--text-muted)">Không có dữ liệu.</div>';
+    return;
+  }
+  const maxSupp = combos[0].support;
+  $('comboList').innerHTML = combos.map((c, idx) => {
+    const widthPct = ((c.support / maxSupp) * 100).toFixed(1);
+    const labelHtml = c.items.map((it, i) => `${c.icons[i]} <b>${it}</b>`).join(' + ');
+    return `
+      <div class="bar-row">
+        <span class="bar-rank">#${idx + 1}</span>
+        <div class="bar-label" title="${c.items.join(', ')}">
+          <span>${labelHtml}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${widthPct}%;background:#818cf8"></div>
+        </div>
+        <div class="bar-val">${pct(c.support)} <small>(${fmt(c.count)})</small></div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderRules() {
+  const list = curRuleType === 'confidence' ? DATA.top_rules_confidence : DATA.top_rules_lift;
+  if (!list || !list.length) {
+    $('ruleList').innerHTML = '<div style="padding:16px;color:var(--text-muted)">Không có dữ liệu.</div>';
+    return;
+  }
+  const maxVal = curRuleType === 'confidence' ? list[0].confidence : list[0].lift;
+
+  $('ruleList').innerHTML = list.map((r, idx) => {
+    const primaryVal = curRuleType === 'confidence' ? r.confidence : r.lift;
+    const widthPct = ((primaryVal / maxVal) * 100).toFixed(1);
+    const antHtml = r.antecedent.map((it, i) => `<span>${r.icons[i]} ${it}</span>`).join(' + ');
+    const conHtml = r.consequent.map((it, i) => `<span>${r.con_icons[i]} ${it}</span>`).join(' + ');
+
+    const valHtml = curRuleType === 'confidence'
+      ? `${pct(r.confidence, 1)} <small>· Lift ${r.lift}×</small>`
+      : `${r.lift}× <small>· Conf ${pct(r.confidence, 0)}</small>`;
+
+    return `
+      <div class="rule-row">
+        <span class="bar-rank">#${idx + 1}</span>
+        <div class="rule-eq">
+          <span class="rule-part">${antHtml}</span>
+          <span class="rule-arr">⇒</span>
+          <span class="rule-part">${conHtml}</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${widthPct}%;background:${curRuleType === 'confidence' ? '#4f46e5' : '#059669'}"></div>
+        </div>
+        <div class="bar-val">${valHtml}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function init() {
+  renderMetrics();
+  renderLkGrid();
+  renderL1();
+  renderCombos();
+  renderRules();
+
+  $('l1MoreBtn').addEventListener('click', () => {
+    l1Expanded = !l1Expanded;
+    renderL1();
+  });
+
+  $('comboTabs').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-lvl]');
+    if (!btn) return;
+    curComboLvl = btn.dataset.lvl;
+    $('comboTabs').querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+    renderCombos();
+  });
+
+  $('ruleTabs').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-type]');
+    if (!btn) return;
+    curRuleType = btn.dataset.type;
+    $('ruleTabs').querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+    renderRules();
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+      ]
+    });
+  }
+}
+
+fetch('/api/dataset-stats')
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(d => { DATA = d; init(); })
+  .catch(err => {
+    $('metricsGrid').innerHTML = `<div style="grid-column:1/-1;color:#ef4444;font-weight:700">Lỗi khi tải dữ liệu: ${err.message}</div>`;
+  });
+</script>
+</body>
+</html>

@@ -76,13 +76,18 @@ class TestTier3CrossFeatureInteractions(E2ETestBase):
         )
 
     def test_3_3_url_routing_navigation_cycle_across_all_four_views(self) -> None:
-        """Pairwise: Round-trip HTTP navigation across /, /shop, /stats, and /admin."""
-        routes = ["/", "/shop", "/stats", "/admin"]
-        for r in routes:
+        """Pairwise: Round-trip HTTP navigation across /, /shop, and /dataset (with /stats, /admin redirecting)."""
+        active_routes = ["/", "/shop", "/dataset"]
+        for r in active_routes:
             status, headers, text = self.get(r)
             self.assertEqual(status, 200, f"Route {r} returned {status}")
             self.assertIn("text/html", headers.get("content-type", ""))
             self.assertGreater(len(text), 100)
+
+        for legacy in ("/stats", "/admin"):
+            status, headers, _ = self.get(legacy)
+            self.assertEqual(status, 301, f"Legacy route {legacy} should redirect 301")
+            self.assertEqual(headers.get("location"), "/dataset")
 
     def test_3_4_catalog_to_rules_referential_integrity(self) -> None:
         """Pairwise: Every SKU present in rules must be documented in catalog."""

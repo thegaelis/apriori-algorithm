@@ -1,0 +1,2108 @@
+{
+ "dataset": "Groceries POS (Hahsler et al., 2006)",
+ "params": {
+  "min_support": 0.005,
+  "min_count": 50,
+  "min_confidence": 0.2,
+  "min_lift": 1.2
+ },
+ "summary": {
+  "total_baskets": 9835,
+  "distinct_items": 169,
+  "avg_basket_size": 4.41,
+  "max_basket_size": 32,
+  "duplicate_rows": 2824,
+  "total_frequent_itemsets": 1001,
+  "total_rules": 839,
+  "max_k": 4
+ },
+ "level_counts": {
+  "L1": 120,
+  "L2": 605,
+  "L3": 264,
+  "L4": 12
+ },
+ "top_items": [
+  {
+   "item": "whole milk",
+   "icon": "🥛",
+   "count": 2513,
+   "support": 0.25552
+  },
+  {
+   "item": "other vegetables",
+   "icon": "🥬",
+   "count": 1903,
+   "support": 0.19349
+  },
+  {
+   "item": "rolls/buns",
+   "icon": "🥖",
+   "count": 1809,
+   "support": 0.18393
+  },
+  {
+   "item": "soda",
+   "icon": "🥤",
+   "count": 1715,
+   "support": 0.17438
+  },
+  {
+   "item": "yogurt",
+   "icon": "🥣",
+   "count": 1372,
+   "support": 0.1395
+  },
+  {
+   "item": "bottled water",
+   "icon": "💧",
+   "count": 1087,
+   "support": 0.11052
+  },
+  {
+   "item": "root vegetables",
+   "icon": "🥕",
+   "count": 1072,
+   "support": 0.109
+  },
+  {
+   "item": "tropical fruit",
+   "icon": "🥭",
+   "count": 1032,
+   "support": 0.10493
+  },
+  {
+   "item": "shopping bags",
+   "icon": "🛍️",
+   "count": 969,
+   "support": 0.09853
+  },
+  {
+   "item": "sausage",
+   "icon": "🌭",
+   "count": 924,
+   "support": 0.09395
+  },
+  {
+   "item": "pastry",
+   "icon": "🥐",
+   "count": 875,
+   "support": 0.08897
+  },
+  {
+   "item": "citrus fruit",
+   "icon": "🍊",
+   "count": 814,
+   "support": 0.08277
+  },
+  {
+   "item": "bottled beer",
+   "icon": "🍺",
+   "count": 792,
+   "support": 0.08053
+  },
+  {
+   "item": "newspapers",
+   "icon": "📰",
+   "count": 785,
+   "support": 0.07982
+  },
+  {
+   "item": "canned beer",
+   "icon": "🍻",
+   "count": 764,
+   "support": 0.07768
+  },
+  {
+   "item": "pip fruit",
+   "icon": "🍎",
+   "count": 744,
+   "support": 0.07565
+  },
+  {
+   "item": "fruit/vegetable juice",
+   "icon": "🧃",
+   "count": 711,
+   "support": 0.07229
+  },
+  {
+   "item": "whipped/sour cream",
+   "icon": "🍦",
+   "count": 705,
+   "support": 0.07168
+  },
+  {
+   "item": "brown bread",
+   "icon": "🍞",
+   "count": 638,
+   "support": 0.06487
+  },
+  {
+   "item": "domestic eggs",
+   "icon": "🥚",
+   "count": 624,
+   "support": 0.06345
+  },
+  {
+   "item": "frankfurter",
+   "icon": "🌭",
+   "count": 580,
+   "support": 0.05897
+  },
+  {
+   "item": "margarine",
+   "icon": "🧈",
+   "count": 576,
+   "support": 0.05857
+  },
+  {
+   "item": "coffee",
+   "icon": "☕",
+   "count": 571,
+   "support": 0.05806
+  },
+  {
+   "item": "pork",
+   "icon": "🥓",
+   "count": 567,
+   "support": 0.05765
+  },
+  {
+   "item": "butter",
+   "icon": "🧈",
+   "count": 545,
+   "support": 0.05541
+  },
+  {
+   "item": "curd",
+   "icon": "🧀",
+   "count": 524,
+   "support": 0.05328
+  },
+  {
+   "item": "beef",
+   "icon": "🥩",
+   "count": 516,
+   "support": 0.05247
+  },
+  {
+   "item": "napkins",
+   "icon": "🧻",
+   "count": 515,
+   "support": 0.05236
+  },
+  {
+   "item": "chocolate",
+   "icon": "🍫",
+   "count": 488,
+   "support": 0.04962
+  },
+  {
+   "item": "frozen vegetables",
+   "icon": "🥦",
+   "count": 473,
+   "support": 0.04809
+  }
+ ],
+ "all_items_count": 120,
+ "top_itemsets": {
+  "L2": [
+   {
+    "items": [
+     "other vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥛"
+    ],
+    "count": 736,
+    "support": 0.07483
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "whole milk"
+    ],
+    "icons": [
+     "🥖",
+     "🥛"
+    ],
+    "count": 557,
+    "support": 0.05663
+   },
+   {
+    "items": [
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥛",
+     "🥣"
+    ],
+    "count": 551,
+    "support": 0.05602
+   },
+   {
+    "items": [
+     "root vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥕",
+     "🥛"
+    ],
+    "count": 481,
+    "support": 0.04891
+   },
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables"
+    ],
+    "icons": [
+     "🥬",
+     "🥕"
+    ],
+    "count": 466,
+    "support": 0.04738
+   },
+   {
+    "items": [
+     "other vegetables",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥣"
+    ],
+    "count": 427,
+    "support": 0.04342
+   },
+   {
+    "items": [
+     "other vegetables",
+     "rolls/buns"
+    ],
+    "icons": [
+     "🥬",
+     "🥖"
+    ],
+    "count": 419,
+    "support": 0.0426
+   },
+   {
+    "items": [
+     "tropical fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🥭",
+     "🥛"
+    ],
+    "count": 416,
+    "support": 0.0423
+   },
+   {
+    "items": [
+     "soda",
+     "whole milk"
+    ],
+    "icons": [
+     "🥤",
+     "🥛"
+    ],
+    "count": 394,
+    "support": 0.04006
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "soda"
+    ],
+    "icons": [
+     "🥖",
+     "🥤"
+    ],
+    "count": 377,
+    "support": 0.03833
+   },
+   {
+    "items": [
+     "other vegetables",
+     "tropical fruit"
+    ],
+    "icons": [
+     "🥬",
+     "🥭"
+    ],
+    "count": 353,
+    "support": 0.03589
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "yogurt"
+    ],
+    "icons": [
+     "🥖",
+     "🥣"
+    ],
+    "count": 338,
+    "support": 0.03437
+   },
+   {
+    "items": [
+     "bottled water",
+     "whole milk"
+    ],
+    "icons": [
+     "💧",
+     "🥛"
+    ],
+    "count": 338,
+    "support": 0.03437
+   },
+   {
+    "items": [
+     "pastry",
+     "whole milk"
+    ],
+    "icons": [
+     "🥐",
+     "🥛"
+    ],
+    "count": 327,
+    "support": 0.03325
+   },
+   {
+    "items": [
+     "other vegetables",
+     "soda"
+    ],
+    "icons": [
+     "🥬",
+     "🥤"
+    ],
+    "count": 322,
+    "support": 0.03274
+   },
+   {
+    "items": [
+     "whipped/sour cream",
+     "whole milk"
+    ],
+    "icons": [
+     "🍦",
+     "🥛"
+    ],
+    "count": 317,
+    "support": 0.03223
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "sausage"
+    ],
+    "icons": [
+     "🥖",
+     "🌭"
+    ],
+    "count": 301,
+    "support": 0.0306
+   },
+   {
+    "items": [
+     "citrus fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🍊",
+     "🥛"
+    ],
+    "count": 300,
+    "support": 0.0305
+   },
+   {
+    "items": [
+     "pip fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🍎",
+     "🥛"
+    ],
+    "count": 296,
+    "support": 0.0301
+   },
+   {
+    "items": [
+     "domestic eggs",
+     "whole milk"
+    ],
+    "icons": [
+     "🥚",
+     "🥛"
+    ],
+    "count": 295,
+    "support": 0.02999
+   },
+   {
+    "items": [
+     "sausage",
+     "whole milk"
+    ],
+    "icons": [
+     "🌭",
+     "🥛"
+    ],
+    "count": 294,
+    "support": 0.02989
+   },
+   {
+    "items": [
+     "tropical fruit",
+     "yogurt"
+    ],
+    "icons": [
+     "🥭",
+     "🥣"
+    ],
+    "count": 288,
+    "support": 0.02928
+   },
+   {
+    "items": [
+     "bottled water",
+     "soda"
+    ],
+    "icons": [
+     "💧",
+     "🥤"
+    ],
+    "count": 285,
+    "support": 0.02898
+   },
+   {
+    "items": [
+     "citrus fruit",
+     "other vegetables"
+    ],
+    "icons": [
+     "🍊",
+     "🥬"
+    ],
+    "count": 284,
+    "support": 0.02888
+   },
+   {
+    "items": [
+     "other vegetables",
+     "whipped/sour cream"
+    ],
+    "icons": [
+     "🥬",
+     "🍦"
+    ],
+    "count": 284,
+    "support": 0.02888
+   }
+  ],
+  "L3": [
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥕",
+     "🥛"
+    ],
+    "count": 228,
+    "support": 0.02318
+   },
+   {
+    "items": [
+     "other vegetables",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥛",
+     "🥣"
+    ],
+    "count": 219,
+    "support": 0.02227
+   },
+   {
+    "items": [
+     "other vegetables",
+     "rolls/buns",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥖",
+     "🥛"
+    ],
+    "count": 176,
+    "support": 0.0179
+   },
+   {
+    "items": [
+     "other vegetables",
+     "tropical fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥭",
+     "🥛"
+    ],
+    "count": 168,
+    "support": 0.01708
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥖",
+     "🥛",
+     "🥣"
+    ],
+    "count": 153,
+    "support": 0.01556
+   },
+   {
+    "items": [
+     "tropical fruit",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥭",
+     "🥛",
+     "🥣"
+    ],
+    "count": 149,
+    "support": 0.01515
+   },
+   {
+    "items": [
+     "other vegetables",
+     "whipped/sour cream",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🍦",
+     "🥛"
+    ],
+    "count": 144,
+    "support": 0.01464
+   },
+   {
+    "items": [
+     "root vegetables",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥕",
+     "🥛",
+     "🥣"
+    ],
+    "count": 143,
+    "support": 0.01454
+   },
+   {
+    "items": [
+     "other vegetables",
+     "soda",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥤",
+     "🥛"
+    ],
+    "count": 137,
+    "support": 0.01393
+   },
+   {
+    "items": [
+     "other vegetables",
+     "pip fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🍎",
+     "🥛"
+    ],
+    "count": 133,
+    "support": 0.01352
+   },
+   {
+    "items": [
+     "citrus fruit",
+     "other vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🍊",
+     "🥬",
+     "🥛"
+    ],
+    "count": 128,
+    "support": 0.01301
+   },
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥕",
+     "🥣"
+    ],
+    "count": 127,
+    "support": 0.01291
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "root vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥖",
+     "🥕",
+     "🥛"
+    ],
+    "count": 125,
+    "support": 0.01271
+   },
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables",
+     "tropical fruit"
+    ],
+    "icons": [
+     "🥬",
+     "🥕",
+     "🥭"
+    ],
+    "count": 121,
+    "support": 0.0123
+   },
+   {
+    "items": [
+     "domestic eggs",
+     "other vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥚",
+     "🥬",
+     "🥛"
+    ],
+    "count": 121,
+    "support": 0.0123
+   },
+   {
+    "items": [
+     "other vegetables",
+     "tropical fruit",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥭",
+     "🥣"
+    ],
+    "count": 121,
+    "support": 0.0123
+   },
+   {
+    "items": [
+     "other vegetables",
+     "rolls/buns",
+     "root vegetables"
+    ],
+    "icons": [
+     "🥬",
+     "🥖",
+     "🥕"
+    ],
+    "count": 120,
+    "support": 0.0122
+   },
+   {
+    "items": [
+     "root vegetables",
+     "tropical fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🥕",
+     "🥭",
+     "🥛"
+    ],
+    "count": 118,
+    "support": 0.012
+   },
+   {
+    "items": [
+     "other vegetables",
+     "rolls/buns",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥖",
+     "🥣"
+    ],
+    "count": 113,
+    "support": 0.01149
+   },
+   {
+    "items": [
+     "butter",
+     "other vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🧈",
+     "🥬",
+     "🥛"
+    ],
+    "count": 113,
+    "support": 0.01149
+   },
+   {
+    "items": [
+     "rolls/buns",
+     "tropical fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🥖",
+     "🥭",
+     "🥛"
+    ],
+    "count": 108,
+    "support": 0.01098
+   },
+   {
+    "items": [
+     "whipped/sour cream",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🍦",
+     "🥛",
+     "🥣"
+    ],
+    "count": 107,
+    "support": 0.01088
+   },
+   {
+    "items": [
+     "bottled water",
+     "other vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "💧",
+     "🥬",
+     "🥛"
+    ],
+    "count": 106,
+    "support": 0.01078
+   },
+   {
+    "items": [
+     "other vegetables",
+     "pastry",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥐",
+     "🥛"
+    ],
+    "count": 104,
+    "support": 0.01057
+   },
+   {
+    "items": [
+     "fruit/vegetable juice",
+     "other vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🧃",
+     "🥬",
+     "🥛"
+    ],
+    "count": 103,
+    "support": 0.01047
+   }
+  ],
+  "L4": [
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥕",
+     "🥛",
+     "🥣"
+    ],
+    "count": 77,
+    "support": 0.00783
+   },
+   {
+    "items": [
+     "other vegetables",
+     "tropical fruit",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥭",
+     "🥛",
+     "🥣"
+    ],
+    "count": 75,
+    "support": 0.00763
+   },
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables",
+     "tropical fruit",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥕",
+     "🥭",
+     "🥛"
+    ],
+    "count": 69,
+    "support": 0.00702
+   },
+   {
+    "items": [
+     "other vegetables",
+     "rolls/buns",
+     "root vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥖",
+     "🥕",
+     "🥛"
+    ],
+    "count": 61,
+    "support": 0.0062
+   },
+   {
+    "items": [
+     "other vegetables",
+     "rolls/buns",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🥖",
+     "🥛",
+     "🥣"
+    ],
+    "count": 59,
+    "support": 0.006
+   },
+   {
+    "items": [
+     "citrus fruit",
+     "other vegetables",
+     "root vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🍊",
+     "🥬",
+     "🥕",
+     "🥛"
+    ],
+    "count": 57,
+    "support": 0.0058
+   },
+   {
+    "items": [
+     "root vegetables",
+     "tropical fruit",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥕",
+     "🥭",
+     "🥛",
+     "🥣"
+    ],
+    "count": 56,
+    "support": 0.00569
+   },
+   {
+    "items": [
+     "other vegetables",
+     "whipped/sour cream",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🍦",
+     "🥛",
+     "🥣"
+    ],
+    "count": 55,
+    "support": 0.00559
+   },
+   {
+    "items": [
+     "other vegetables",
+     "pip fruit",
+     "root vegetables",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🍎",
+     "🥕",
+     "🥛"
+    ],
+    "count": 54,
+    "support": 0.00549
+   },
+   {
+    "items": [
+     "other vegetables",
+     "root vegetables",
+     "whipped/sour cream",
+     "whole milk"
+    ],
+    "icons": [
+     "🥬",
+     "🥕",
+     "🍦",
+     "🥛"
+    ],
+    "count": 51,
+    "support": 0.00519
+   },
+   {
+    "items": [
+     "fruit/vegetable juice",
+     "other vegetables",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🧃",
+     "🥬",
+     "🥛",
+     "🥣"
+    ],
+    "count": 50,
+    "support": 0.00508
+   },
+   {
+    "items": [
+     "other vegetables",
+     "pip fruit",
+     "whole milk",
+     "yogurt"
+    ],
+    "icons": [
+     "🥬",
+     "🍎",
+     "🥛",
+     "🥣"
+    ],
+    "count": 50,
+    "support": 0.00508
+   }
+  ]
+ },
+ "top_rules_confidence": [
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 56,
+   "support": 0.00569,
+   "confidence": 0.7,
+   "lift": 2.74,
+   "icons": [
+    "🥕",
+    "🥭",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 54,
+   "support": 0.00549,
+   "confidence": 0.675,
+   "lift": 2.642,
+   "icons": [
+    "🥬",
+    "🍎",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "butter",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 66,
+   "support": 0.00671,
+   "confidence": 0.66,
+   "lift": 2.583,
+   "icons": [
+    "🧈",
+    "🍦"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 59,
+   "support": 0.006,
+   "confidence": 0.6484,
+   "lift": 2.537,
+   "icons": [
+    "🍎",
+    "🍦"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "butter",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 92,
+   "support": 0.00935,
+   "confidence": 0.6389,
+   "lift": 2.5,
+   "icons": [
+    "🧈",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "butter",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 81,
+   "support": 0.00824,
+   "confidence": 0.6378,
+   "lift": 2.496,
+   "icons": [
+    "🧈",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "curd",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 64,
+   "support": 0.00651,
+   "confidence": 0.6337,
+   "lift": 2.48,
+   "icons": [
+    "🧀",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 57,
+   "support": 0.0058,
+   "confidence": 0.6333,
+   "lift": 3.273,
+   "icons": [
+    "🍊",
+    "🥕",
+    "🥛"
+   ],
+   "con_icons": [
+    "🥬"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 50,
+   "support": 0.00508,
+   "confidence": 0.625,
+   "lift": 2.446,
+   "icons": [
+    "🥬",
+    "🍎",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "pip fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 53,
+   "support": 0.00539,
+   "confidence": 0.6235,
+   "lift": 2.44,
+   "icons": [
+    "🥚",
+    "🍎"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "butter",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 61,
+   "support": 0.0062,
+   "confidence": 0.6224,
+   "lift": 2.436,
+   "icons": [
+    "🧈",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "margarine"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 51,
+   "support": 0.00519,
+   "confidence": 0.622,
+   "lift": 2.434,
+   "icons": [
+    "🥚",
+    "🧈"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "butter",
+    "domestic eggs"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 59,
+   "support": 0.006,
+   "confidence": 0.6211,
+   "lift": 2.431,
+   "icons": [
+    "🧈",
+    "🥚"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 75,
+   "support": 0.00763,
+   "confidence": 0.6198,
+   "lift": 2.426,
+   "icons": [
+    "🥬",
+    "🥭",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 50,
+   "support": 0.00508,
+   "confidence": 0.6173,
+   "lift": 2.416,
+   "icons": [
+    "🧃",
+    "🥬",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 54,
+   "support": 0.00549,
+   "confidence": 0.6136,
+   "lift": 3.171,
+   "icons": [
+    "🍎",
+    "🥕",
+    "🥛"
+   ],
+   "con_icons": [
+    "🥬"
+   ]
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 68,
+   "support": 0.00691,
+   "confidence": 0.6071,
+   "lift": 2.376,
+   "icons": [
+    "🥚",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 51,
+   "support": 0.00519,
+   "confidence": 0.6071,
+   "lift": 2.376,
+   "icons": [
+    "🥬",
+    "🥕",
+    "🍦"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 77,
+   "support": 0.00783,
+   "confidence": 0.6063,
+   "lift": 2.373,
+   "icons": [
+    "🥬",
+    "🥕",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 55,
+   "support": 0.00559,
+   "confidence": 0.6044,
+   "lift": 3.124,
+   "icons": [
+    "🍎",
+    "🍦"
+   ],
+   "con_icons": [
+    "🥬"
+   ]
+  },
+  {
+   "antecedent": [
+    "bottled water",
+    "butter"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 53,
+   "support": 0.00539,
+   "confidence": 0.6023,
+   "lift": 2.357,
+   "icons": [
+    "💧",
+    "🧈"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "onions",
+    "root vegetables"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 56,
+   "support": 0.00569,
+   "confidence": 0.6022,
+   "lift": 3.112,
+   "icons": [
+    "🧅",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥬"
+   ]
+  },
+  {
+   "antecedent": [
+    "domestic eggs",
+    "root vegetables"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 84,
+   "support": 0.00854,
+   "confidence": 0.5957,
+   "lift": 2.332,
+   "icons": [
+    "🥚",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables"
+   ],
+   "consequent": [
+    "other vegetables"
+   ],
+   "count": 102,
+   "support": 0.01037,
+   "confidence": 0.5862,
+   "lift": 3.03,
+   "icons": [
+    "🍊",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥬"
+   ]
+  },
+  {
+   "antecedent": [
+    "curd",
+    "rolls/buns"
+   ],
+   "consequent": [
+    "whole milk"
+   ],
+   "count": 58,
+   "support": 0.0059,
+   "confidence": 0.5859,
+   "lift": 2.293,
+   "icons": [
+    "🧀",
+    "🥖"
+   ],
+   "con_icons": [
+    "🥛"
+   ]
+  }
+ ],
+ "top_rules_lift": [
+  {
+   "antecedent": [
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit",
+    "whole milk"
+   ],
+   "count": 56,
+   "support": 0.00569,
+   "confidence": 0.2205,
+   "lift": 5.212,
+   "icons": [
+    "🥕",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥭",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk",
+    "yogurt"
+   ],
+   "count": 56,
+   "support": 0.00569,
+   "confidence": 0.2705,
+   "lift": 4.829,
+   "icons": [
+    "🥕",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥛",
+    "🥣"
+   ]
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "root vegetables"
+   ],
+   "consequent": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "count": 54,
+   "support": 0.00549,
+   "confidence": 0.3529,
+   "lift": 4.716,
+   "icons": [
+    "🍎",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥬",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "count": 69,
+   "support": 0.00702,
+   "confidence": 0.3333,
+   "lift": 4.454,
+   "icons": [
+    "🥕",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥬",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "root vegetables"
+   ],
+   "consequent": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "count": 57,
+   "support": 0.0058,
+   "confidence": 0.3276,
+   "lift": 4.377,
+   "icons": [
+    "🍊",
+    "🥕"
+   ],
+   "con_icons": [
+    "🥬",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "fruit/vegetable juice",
+    "other vegetables"
+   ],
+   "consequent": [
+    "whole milk",
+    "yogurt"
+   ],
+   "count": 50,
+   "support": 0.00508,
+   "confidence": 0.2415,
+   "lift": 4.311,
+   "icons": [
+    "🧃",
+    "🥬"
+   ],
+   "con_icons": [
+    "🥛",
+    "🥣"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit"
+   ],
+   "consequent": [
+    "root vegetables",
+    "whole milk"
+   ],
+   "count": 54,
+   "support": 0.00549,
+   "confidence": 0.2101,
+   "lift": 4.296,
+   "icons": [
+    "🥬",
+    "🍎"
+   ],
+   "con_icons": [
+    "🥕",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables"
+   ],
+   "consequent": [
+    "root vegetables",
+    "whole milk"
+   ],
+   "count": 57,
+   "support": 0.0058,
+   "confidence": 0.2007,
+   "lift": 4.104,
+   "icons": [
+    "🍊",
+    "🥬"
+   ],
+   "con_icons": [
+    "🥕",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "other vegetables",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 57,
+   "support": 0.0058,
+   "confidence": 0.4453,
+   "lift": 4.085,
+   "icons": [
+    "🍊",
+    "🥬",
+    "🥛"
+   ],
+   "con_icons": [
+    "🥕"
+   ]
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whipped/sour cream"
+   ],
+   "consequent": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "count": 51,
+   "support": 0.00519,
+   "confidence": 0.3036,
+   "lift": 4.057,
+   "icons": [
+    "🥕",
+    "🍦"
+   ],
+   "con_icons": [
+    "🥬",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "count": 77,
+   "support": 0.00783,
+   "confidence": 0.3031,
+   "lift": 4.051,
+   "icons": [
+    "🥕",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥬",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "butter",
+    "other vegetables"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "count": 57,
+   "support": 0.0058,
+   "confidence": 0.2893,
+   "lift": 4.036,
+   "icons": [
+    "🧈",
+    "🥬"
+   ],
+   "con_icons": [
+    "🍦"
+   ]
+  },
+  {
+   "antecedent": [
+    "herbs"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 69,
+   "support": 0.00702,
+   "confidence": 0.4312,
+   "lift": 3.956,
+   "icons": [
+    "🌿"
+   ],
+   "con_icons": [
+    "🥕"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "pip fruit"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "count": 55,
+   "support": 0.00559,
+   "confidence": 0.4044,
+   "lift": 3.854,
+   "icons": [
+    "🍊",
+    "🍎"
+   ],
+   "con_icons": [
+    "🥭"
+   ]
+  },
+  {
+   "antecedent": [
+    "berries"
+   ],
+   "consequent": [
+    "whipped/sour cream"
+   ],
+   "count": 89,
+   "support": 0.00905,
+   "confidence": 0.2722,
+   "lift": 3.797,
+   "icons": [
+    "🍓"
+   ],
+   "con_icons": [
+    "🍦"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "whole milk",
+    "yogurt"
+   ],
+   "count": 75,
+   "support": 0.00763,
+   "confidence": 0.2125,
+   "lift": 3.792,
+   "icons": [
+    "🥬",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥛",
+    "🥣"
+   ]
+  },
+  {
+   "antecedent": [
+    "pip fruit",
+    "yogurt"
+   ],
+   "consequent": [
+    "other vegetables",
+    "whole milk"
+   ],
+   "count": 50,
+   "support": 0.00508,
+   "confidence": 0.2825,
+   "lift": 3.775,
+   "icons": [
+    "🍎",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥬",
+    "🥛"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "tropical fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 69,
+   "support": 0.00702,
+   "confidence": 0.4107,
+   "lift": 3.768,
+   "icons": [
+    "🥬",
+    "🥭",
+    "🥛"
+   ],
+   "con_icons": [
+    "🥕"
+   ]
+  },
+  {
+   "antecedent": [
+    "whipped/sour cream",
+    "whole milk"
+   ],
+   "consequent": [
+    "butter"
+   ],
+   "count": 66,
+   "support": 0.00671,
+   "confidence": 0.2082,
+   "lift": 3.757,
+   "icons": [
+    "🍦",
+    "🥛"
+   ],
+   "con_icons": [
+    "🧈"
+   ]
+  },
+  {
+   "antecedent": [
+    "root vegetables",
+    "whole milk",
+    "yogurt"
+   ],
+   "consequent": [
+    "tropical fruit"
+   ],
+   "count": 56,
+   "support": 0.00569,
+   "confidence": 0.3916,
+   "lift": 3.732,
+   "icons": [
+    "🥕",
+    "🥛",
+    "🥣"
+   ],
+   "con_icons": [
+    "🥭"
+   ]
+  },
+  {
+   "antecedent": [
+    "other vegetables",
+    "pip fruit",
+    "whole milk"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 54,
+   "support": 0.00549,
+   "confidence": 0.406,
+   "lift": 3.725,
+   "icons": [
+    "🥬",
+    "🍎",
+    "🥛"
+   ],
+   "con_icons": [
+    "🥕"
+   ]
+  },
+  {
+   "antecedent": [
+    "citrus fruit",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "pip fruit"
+   ],
+   "count": 55,
+   "support": 0.00559,
+   "confidence": 0.2806,
+   "lift": 3.709,
+   "icons": [
+    "🍊",
+    "🥭"
+   ],
+   "con_icons": [
+    "🍎"
+   ]
+  },
+  {
+   "antecedent": [
+    "curd",
+    "tropical fruit"
+   ],
+   "consequent": [
+    "yogurt"
+   ],
+   "count": 52,
+   "support": 0.00529,
+   "confidence": 0.5149,
+   "lift": 3.691,
+   "icons": [
+    "🧀",
+    "🥭"
+   ],
+   "con_icons": [
+    "🥣"
+   ]
+  },
+  {
+   "antecedent": [
+    "beef",
+    "other vegetables"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 78,
+   "support": 0.00793,
+   "confidence": 0.4021,
+   "lift": 3.689,
+   "icons": [
+    "🥩",
+    "🥬"
+   ],
+   "con_icons": [
+    "🥕"
+   ]
+  },
+  {
+   "antecedent": [
+    "onions",
+    "other vegetables"
+   ],
+   "consequent": [
+    "root vegetables"
+   ],
+   "count": 56,
+   "support": 0.00569,
+   "confidence": 0.4,
+   "lift": 3.67,
+   "icons": [
+    "🧅",
+    "🥬"
+   ],
+   "con_icons": [
+    "🥕"
+   ]
+  }
+ ]
+}

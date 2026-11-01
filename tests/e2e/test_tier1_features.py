@@ -253,29 +253,27 @@ class TestTier1Feature3HTTPRoutes(E2ETestBase):
             self.assertIn("text/html", headers.get("content-type", ""))
             self.assertIn("<html", text.lower())
 
-    def test_3_3_route_stats_html(self) -> None:
-        """Verify GET /stats and /stats.html return 200 OK with text/html."""
-        for path in ("/stats", "/stats.html"):
+    def test_3_3_route_dataset_html(self) -> None:
+        """Verify GET /dataset and /dataset.html return 200 OK with text/html."""
+        for path in ("/dataset", "/dataset.html"):
             status, headers, text = self.get(path)
             self.assertEqual(status, 200, f"GET {path} failed with status {status}")
             self.assertIn("text/html", headers.get("content-type", ""))
             self.assertIn("<html", text.lower())
 
-    def test_3_4_route_admin_html(self) -> None:
-        """Verify GET /admin and /admin.html return 200 OK with text/html."""
-        for path in ("/admin", "/admin.html"):
+    def test_3_4_legacy_routes_redirect_to_dataset(self) -> None:
+        """Verify legacy /stats and /admin routes redirect 301 to /dataset."""
+        for path in ("/stats", "/stats.html", "/admin", "/admin.html"):
             status, headers, text = self.get(path)
             self.assertEqual(
                 status,
-                200,
-                f"GET {path} failed with status {status}. "
-                f"Admin route must be registered in app.py and serve src/web/admin.html.",
+                301,
+                f"GET {path} should return 301 redirect to /dataset but got {status}",
             )
-            self.assertIn("text/html", headers.get("content-type", ""))
-            self.assertIn("<html", text.lower())
+            self.assertEqual(headers.get("location"), "/dataset")
 
     def test_3_5_api_routes_return_valid_json_with_correct_content_type(self) -> None:
-        """Verify GET /api/ecom-rules and /api/retail-stats return 200 OK application/json."""
+        """Verify GET /api/ecom-rules and /api/dataset-stats (or /api/retail-stats) return 200 OK application/json."""
         # /api/ecom-rules
         status, headers, data = self.get_json("/api/ecom-rules")
         self.assertEqual(status, 200, f"GET /api/ecom-rules failed with status {status}")
@@ -283,11 +281,12 @@ class TestTier1Feature3HTTPRoutes(E2ETestBase):
         self.assertIsInstance(data, dict, "Expected JSON object from /api/ecom-rules")
         self.assertIn("rules", data)
 
-        # /api/retail-stats
-        status, headers, stats = self.get_json("/api/retail-stats")
-        self.assertEqual(status, 200, f"GET /api/retail-stats failed with status {status}")
-        self.assertIn("application/json", headers.get("content-type", ""))
-        self.assertIsInstance(stats, dict, "Expected JSON object from /api/retail-stats")
+        # /api/dataset-stats (and legacy alias /api/retail-stats)
+        for stat_path in ("/api/dataset-stats", "/api/retail-stats"):
+            status, headers, stats = self.get_json(stat_path)
+            self.assertEqual(status, 200, f"GET {stat_path} failed with status {status}")
+            self.assertIn("application/json", headers.get("content-type", ""))
+            self.assertIsInstance(stats, dict, f"Expected JSON object from {stat_path}")
 
     def test_3_6_non_existent_endpoint_returns_404(self) -> None:
         """Verify unknown paths return 404 Not Found."""
@@ -296,89 +295,84 @@ class TestTier1Feature3HTTPRoutes(E2ETestBase):
 
 
 class TestTier1Feature4AdminPortal(E2ETestBase):
-    """Feature 4: Admin Portal Structure & Visualizations (>= 5 tests)."""
+    """Feature 4: Unified Dataset Visualizer Structure (>= 5 tests)."""
 
     def setUp(self) -> None:
-        admin_path = os.path.join(WEB_DIR, "admin.html")
-        self.admin_exists = os.path.exists(admin_path)
-        self.admin_html = self.load_template("admin.html") if self.admin_exists else ""
+        dataset_path = os.path.join(WEB_DIR, "dataset.html")
+        self.dataset_exists = os.path.exists(dataset_path)
+        self.dataset_html = self.load_template("dataset.html") if self.dataset_exists else ""
 
-    def test_4_1_admin_template_file_exists(self) -> None:
-        """Verify src/web/admin.html exists on disk."""
+    def test_4_1_dataset_template_file_exists(self) -> None:
+        """Verify src/web/dataset.html exists on disk."""
         self.assertTrue(
-            self.admin_exists,
-            "src/web/admin.html must exist as the Data Scientist / Admin Portal page",
+            self.dataset_exists,
+            "src/web/dataset.html must exist as the unified Dataset Visualizer page",
         )
 
-    def test_4_2_admin_portal_executive_kpi_summary_cards(self) -> None:
-        """Verify admin.html contains Executive KPI summary cards."""
-        self.assertTrue(self.admin_exists, "admin.html missing")
-        # Check for presence of KPI metric containers or IDs
+    def test_4_2_dataset_executive_kpi_summary_cards(self) -> None:
+        """Verify dataset.html contains Executive KPI summary cards."""
+        self.assertTrue(self.dataset_exists, "dataset.html missing")
         kpi_indicators = [
-            "frequent",
-            "rule",
-            "lift",
-            "confidence",
-            "basket",
+            "giao dịch",
+            "mặt hàng",
+            "tập phổ biến",
+            "luật",
         ]
-        lower_html = self.admin_html.lower()
+        lower_html = self.dataset_html.lower()
         for ind in kpi_indicators:
             self.assertIn(
                 ind,
                 lower_html,
-                f"Admin portal missing Executive KPI indicator for '{ind}'",
+                f"Dataset visualizer missing Executive KPI indicator for '{ind}'",
             )
 
-    def test_4_3_admin_portal_tab1_frequent_itemsets_explorer(self) -> None:
-        """Verify admin.html contains Tab 1 for Frequent Itemsets ($k=1, 2, 3$)."""
-        self.assertTrue(self.admin_exists, "admin.html missing")
-        lower_html = self.admin_html.lower()
+    def test_4_3_dataset_tab1_frequent_itemsets_funnel(self) -> None:
+        """Verify dataset.html contains visual section for Frequent Itemsets (L1 to L4)."""
+        self.assertTrue(self.dataset_exists, "dataset.html missing")
+        lower_html = self.dataset_html.lower()
         self.assertTrue(
-            "itemset" in lower_html or "tập phổ biến" in lower_html,
-            "Admin portal missing Tab 1: Frequent Itemsets Explorer",
+            "tập phổ biến" in lower_html or "itemset" in lower_html,
+            "Dataset visualizer missing Frequent Itemsets section",
         )
-        # Check for min support slider or level filter
         self.assertTrue(
-            'type="range"' in lower_html or "slider" in lower_html,
-            "Admin Tab 1 missing dynamic min support slider",
+            "l1" in lower_html and "l4" in lower_html,
+            "Dataset visualizer missing L1 to L4 level indicators",
         )
 
-    def test_4_4_admin_portal_tab2_association_rules_explorer(self) -> None:
-        """Verify admin.html contains Tab 2 for Association Rules Explorer ($A \to B$)."""
-        self.assertTrue(self.admin_exists, "admin.html missing")
-        lower_html = self.admin_html.lower()
+    def test_4_4_dataset_tab2_association_rules_explorer(self) -> None:
+        """Verify dataset.html contains section for Association Rules ($A \Rightarrow B$)."""
+        self.assertTrue(self.dataset_exists, "dataset.html missing")
+        lower_html = self.dataset_html.lower()
         self.assertTrue(
-            "rule" in lower_html or "luật kết hợp" in lower_html,
-            "Admin portal missing Tab 2: Association Rules Explorer",
+            "luật kết hợp" in lower_html or "rule" in lower_html,
+            "Dataset visualizer missing Association Rules Explorer",
         )
         self.assertTrue(
             "lift" in lower_html and "confidence" in lower_html,
-            "Admin Tab 2 table missing Lift and Confidence columns",
+            "Dataset visualizer missing Lift and Confidence indicators",
         )
 
-    def test_4_5_admin_portal_tab3_network_graph_and_matrix(self) -> None:
-        """Verify admin.html contains Tab 3 with HTML5 Canvas / SVG network graph."""
-        self.assertTrue(self.admin_exists, "admin.html missing")
-        lower_html = self.admin_html.lower()
-        has_canvas_or_svg = "<canvas" in lower_html or "<svg" in lower_html
+    def test_4_5_dataset_visual_bar_charts(self) -> None:
+        """Verify dataset.html contains visual horizontal bar progress charts."""
+        self.assertTrue(self.dataset_exists, "dataset.html missing")
+        lower_html = self.dataset_html.lower()
+        has_bars = "bar-track" in lower_html or "bar-fill" in lower_html or "progress" in lower_html
         self.assertTrue(
-            has_canvas_or_svg,
-            "Admin Tab 3 missing HTML5 <canvas> or <svg> for Association Network Graph / Matrix",
+            has_bars,
+            "Dataset visualizer missing horizontal bar chart containers",
         )
 
-    def test_4_6_admin_portal_clean_light_theme_and_data_fetch(self) -> None:
-        """Verify admin.html adopts Clean Light SaaS design and fetches /api/ecom-rules."""
-        self.assertTrue(self.admin_exists, "admin.html missing")
-        # Check API fetch
+    def test_4_6_dataset_clean_light_theme_and_data_fetch(self) -> None:
+        """Verify dataset.html adopts Clean Light SaaS design and fetches /api/dataset-stats."""
+        self.assertTrue(self.dataset_exists, "dataset.html missing")
         self.assertIn(
-            "/api/ecom-rules",
-            self.admin_html,
-            "admin.html must fetch data from '/api/ecom-rules'",
+            "/api/dataset-stats",
+            self.dataset_html,
+            "dataset.html must fetch data from '/api/dataset-stats'",
         )
-        # Check light theme color palette (#f8fafc or #ffffff)
-        lower_html = self.admin_html.lower()
+        lower_html = self.dataset_html.lower()
         has_light_theme = "#f8fafc" in lower_html or "#ffffff" in lower_html or "var(--bg" in lower_html
-        self.assertTrue(has_light_theme, "admin.html should adopt Clean Light SaaS styling")
+        self.assertTrue(has_light_theme, "dataset.html should adopt Clean Light styling")
 
 
 class TestTier1Feature5GlobalNavbar(E2ETestBase):
@@ -388,15 +382,12 @@ class TestTier1Feature5GlobalNavbar(E2ETestBase):
         self.templates = {
             "index.html": self.load_template("index.html"),
             "shop.html": self.load_template("shop.html"),
-            "stats.html": self.load_template("stats.html"),
+            "dataset.html": self.load_template("dataset.html"),
         }
-        admin_path = os.path.join(WEB_DIR, "admin.html")
-        if os.path.exists(admin_path):
-            self.templates["admin.html"] = self.load_template("admin.html")
 
-    def test_5_1_all_four_html_views_contain_navigation_header(self) -> None:
+    def test_5_1_all_html_views_contain_navigation_header(self) -> None:
         """Verify all HTML views have a header element for global navigation."""
-        required_views = ["index.html", "shop.html", "stats.html", "admin.html"]
+        required_views = ["index.html", "shop.html", "dataset.html"]
         for view in required_views:
             self.assertIn(
                 view,
@@ -425,20 +416,33 @@ class TestTier1Feature5GlobalNavbar(E2ETestBase):
             )
             self.assertTrue(has_root_link, f"{view} missing hyperlink to '/'")
 
-    def test_5_4_all_views_link_to_stats_route(self) -> None:
-        """Verify all templates include a link to Dataset Statistics (/stats)."""
+    def test_5_4_all_views_link_to_dataset_route(self) -> None:
+        """Verify all templates include a link to Dataset Visualizer (/dataset)."""
         for view, content in self.templates.items():
             self.assertTrue(
-                'href="/stats"' in content or "href='/stats'" in content,
-                f"{view} missing hyperlink to '/stats'",
+                'href="/dataset"' in content or "href='/dataset'" in content,
+                f"{view} missing hyperlink to '/dataset'",
             )
 
-    def test_5_5_all_views_link_to_admin_route(self) -> None:
-        """Verify all templates include a link to Admin Portal (/admin)."""
+    def test_5_5_legacy_redirects_for_stats_and_admin(self) -> None:
+        """Verify legacy /stats and /admin URLs redirect to /dataset."""
+        for path in ("/stats", "/admin"):
+            status, headers, _ = self.get(path)
+            self.assertEqual(status, 301, f"{path} should redirect with 301")
+            self.assertEqual(headers.get("location"), "/dataset")
+
+    def test_5_6_mobile_toggle_button_presence_for_responsive_navbar(self) -> None:
+        """Verify templates contain a mobile menu toggle button for responsive viewports."""
         for view, content in self.templates.items():
+            has_toggle = (
+                "mobile" in content.lower()
+                or "toggle" in content.lower()
+                or "hamburger" in content.lower()
+                or "menu" in content.lower()
+            )
             self.assertTrue(
-                'href="/admin"' in content or "href='/admin'" in content,
-                f"{view} missing hyperlink to '/admin' (Global Navbar sync required)",
+                has_toggle,
+                f"{view} missing mobile navigation toggle button",
             )
 
     def test_5_6_mobile_toggle_button_presence_for_responsive_navbar(self) -> None:

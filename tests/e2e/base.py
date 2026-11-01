@@ -23,7 +23,8 @@ from app import AprioriRequestHandler, ThreadedHTTPServer
 WEB_DIR = os.path.join(PROJECT_ROOT, "src", "web")
 DATA_DIR = os.path.join(PROJECT_ROOT, "src", "data")
 ECOM_RULES_PATH = os.path.join(DATA_DIR, "ecom_rules.json")
-RETAIL_STATS_PATH = os.path.join(DATA_DIR, "retail_stats.json")
+DATASET_STATS_PATH = os.path.join(DATA_DIR, "dataset_stats.json")
+RETAIL_STATS_PATH = DATASET_STATS_PATH
 
 
 class E2ETestBase(unittest.TestCase):
@@ -123,12 +124,17 @@ class E2ETestBase(unittest.TestCase):
             return json.load(f)
 
     @staticmethod
-    def load_retail_stats() -> dict[str, Any]:
-        """Read src/data/retail_stats.json."""
-        if not os.path.exists(RETAIL_STATS_PATH):
-            raise FileNotFoundError(f"Data file not found: {RETAIL_STATS_PATH}")
-        with open(RETAIL_STATS_PATH, "r", encoding="utf-8") as f:
+    def load_dataset_stats() -> dict[str, Any]:
+        """Read src/data/dataset_stats.json."""
+        if not os.path.exists(DATASET_STATS_PATH):
+            raise FileNotFoundError(f"Data file not found: {DATASET_STATS_PATH}")
+        with open(DATASET_STATS_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
+
+    @staticmethod
+    def load_retail_stats() -> dict[str, Any]:
+        """Read src/data/retail_stats.json (or dataset_stats.json)."""
+        return E2ETestBase.load_dataset_stats()
 
     @staticmethod
     def simulate_cascade_recommendations(

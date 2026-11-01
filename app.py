@@ -13,7 +13,7 @@ from src.data.sample_baskets import PRESET_BASKETS, DEFAULT_PRESET_NAME, UI_PRES
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEB_DIR = os.path.join(BASE_DIR, "src", "web")
 INDEX_PATH = os.path.join(WEB_DIR, "index.html")
-RETAIL_STATS_PATH = os.path.join(BASE_DIR, "src", "data", "retail_stats.json")
+DATASET_STATS_PATH = os.path.join(BASE_DIR, "src", "data", "dataset_stats.json")
 ECOM_RULES_PATH = os.path.join(BASE_DIR, "src", "data", "ecom_rules.json")
 
 
@@ -64,12 +64,15 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.serve_file(os.path.join(WEB_DIR, "shop.html"), "text/html; charset=utf-8")
         elif self.path == "/api/ecom-rules":
             self.serve_file(ECOM_RULES_PATH, "application/json; charset=utf-8")
-        elif self.path in ("/stats", "/stats.html"):
-            self.serve_file(os.path.join(WEB_DIR, "stats.html"), "text/html; charset=utf-8")
-        elif self.path in ("/admin", "/admin.html"):
-            self.serve_file(os.path.join(WEB_DIR, "admin.html"), "text/html; charset=utf-8")
-        elif self.path == "/api/retail-stats":
-            self.serve_file(RETAIL_STATS_PATH, "application/json; charset=utf-8")
+        elif self.path in ("/dataset", "/dataset.html"):
+            self.serve_file(os.path.join(WEB_DIR, "dataset.html"), "text/html; charset=utf-8")
+        elif self.path in ("/stats", "/stats.html", "/admin", "/admin.html"):
+            self.send_response(301)
+            self.send_header("Location", "/dataset")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+        elif self.path in ("/api/dataset-stats", "/api/retail-stats"):
+            self.serve_file(DATASET_STATS_PATH, "application/json; charset=utf-8")
         elif self.path == "/api/presets":
             self.send_json({
                 "default": DEFAULT_PRESET_NAME,

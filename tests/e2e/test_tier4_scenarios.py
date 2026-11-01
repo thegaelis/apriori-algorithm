@@ -135,8 +135,8 @@ class TestTier4AdminWorkflow(E2ETestBase):
            - Extracts node list from top frequent items.
            - Extracts edge list with source, target, lift, confidence.
         """
-        # Step 1: Access Admin Portal
-        status, headers, text = self.get("/admin")
+        # Step 1: Access Dataset / Analytics Portal
+        status, headers, text = self.get("/dataset")
         self.assertEqual(status, 200)
 
         # Step 2: Retrieve API data
