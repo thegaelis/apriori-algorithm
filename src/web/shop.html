@@ -5,973 +5,502 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cửa hàng — BasketIQ Fresh Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/app.css">
-<style>
-:root{
-  --bg:#f8fafc;
-  --surface:#ffffff;
-  --surface-sub:#f1f5f9;
-  --border:#e2e8f0;
-  --text:#0f172a;
-  --text-muted:#475569;
-  --primary:#4f46e5;
-  --primary-hover:#4338ca;
-  --primary-light:#eef2ff;
-  --primary-dark:#3730a3;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;min-height:100vh}
-button,input{font:inherit;color:inherit}
-
-/* ---------- Full-Viewport 100% Width 2-Column Layout (vh/vw scaled) ---------- */
-.shop-shell{
-  width:100%;
-  max-width:none;
-  margin:0;
-  padding:2.2vh 2.5vw 5vh;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) clamp(440px,31vw,600px);
-  gap:2.2vw;
-  align-items:start;
-}
-@media (max-width:1100px){
-  .shop-shell{grid-template-columns:1fr;padding:16px 16px 80px}
-}
-
-/* ---------- Left Column: Storefront ---------- */
-.store-main{min-width:0;display:flex;flex-direction:column;gap:2vh}
-
-/* Top Search & Demo Scenarios Bar */
-.store-top{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:2vh 1.8vw;
-  display:flex;
-  flex-direction:column;
-  gap:1.5vh;
-  box-shadow:var(--shadow-sm);
-}
-.store-top-row{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:center;
-  gap:1.2vw;
-}
-.store-title h1{
-  font-size:clamp(1.45rem,1.65vw,2.15rem);
-  font-weight:800;
-  letter-spacing:-.02em;
-}
-.store-title p{
-  font-size:clamp(.95rem,.96vw,1.18rem);
-  color:var(--text-muted);
-  margin-top:.3vh;
-}
-.search-wrap{
-  position:relative;
-  flex:1 1 320px;
-  max-width:clamp(340px,26vw,480px);
-}
-.search-wrap input{
-  width:100%;
-  background:var(--bg);
-  border:1.5px solid var(--border);
-  border-radius:12px;
-  padding:1.1vh 1.2vw 1.1vh 2.6vw;
-  font-size:clamp(.95rem,.95vw,1.12rem);
-  transition:border-color .15s,background .15s;
-}
-.search-wrap input:focus{background:var(--surface);border-color:var(--primary);outline:none}
-.search-ico{
-  position:absolute;
-  left:.9vw;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:clamp(.95rem,1vw,1.15rem);
-  color:var(--text-muted);
-  pointer-events:none;
-}
-
-/* Quick Demo Basket Pills */
-.demo-strip{
-  display:flex;
-  align-items:center;
-  gap:.7vw;
-  flex-wrap:wrap;
-  padding-top:1.4vh;
-  border-top:1px solid var(--surface-sub);
-}
-.demo-label{
-  font-size:clamp(.82rem,.82vw,1rem);
-  font-weight:700;
-  color:var(--text-muted);
-  margin-right:.3vw;
-}
-.demo-pill{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:999px;
-  padding:.75vh 1.1vw;
-  font-size:clamp(.86rem,.86vw,1.05rem);
-  font-weight:600;
-  color:var(--text);
-  cursor:pointer;
-  transition:all .15s;
-}
-.demo-pill:hover{border-color:var(--primary);background:var(--primary-light);color:var(--primary-dark)}
-
-/* Category Aisle Pills */
-.aisle-bar{
-  display:flex;
-  gap:.65vw;
-  flex-wrap:wrap;
-}
-.aisle-chip{
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:1vh 1.25vw;
-  border-radius:12px;
-  font-size:clamp(.9rem,.92vw,1.12rem);
-  font-weight:600;
-  color:var(--text-muted);
-  cursor:pointer;
-  white-space:nowrap;
-  display:inline-flex;
-  align-items:center;
-  gap:.5vw;
-  transition:all .15s;
-}
-.aisle-chip:hover{border-color:#cbd5e1;color:var(--text)}
-.aisle-chip.active{background:var(--text);border-color:var(--text);color:#fff}
-
-/* Product Grid — Proportional E-Commerce Cards */
-.catalog-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-}
-.catalog-header h2{font-size:clamp(1.2rem,1.25vw,1.55rem);font-weight:800}
-.catalog-header span{font-size:clamp(.9rem,.92vw,1.1rem);color:var(--text-muted);font-weight:500}
-
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(clamp(215px,14.5vw,285px),1fr));
-  gap:1.2vw;
-}
-.prod-card{
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:16px;
-  padding:1.6vh 1.2vw;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  gap:1.2vh;
-  transition:border-color .15s,box-shadow .15s,transform .15s;
-  position:relative;
-}
-.prod-card:hover{border-color:#cbd5e1;box-shadow:0 6px 18px rgba(15,23,42,.05);transform:translateY(-2px)}
-.prod-card.in-cart{border-color:var(--primary);background:#fcfcff}
-.prod-visual{
-  height:clamp(100px,11.5vh,145px);
-  background:var(--bg);
-  border-radius:12px;
-  display:grid;
-  place-items:center;
-  font-size:clamp(2.8rem,3.3vw,4rem);
-  position:relative;
-}
-.pop-tag{
-  position:absolute;
-  top:8px;
-  left:8px;
-  font-size:clamp(.72rem,.72vw,.86rem);
-  font-weight:700;
-  color:var(--text-muted);
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:2px 8px;
-  border-radius:7px;
-}
-.pop-tag.top-seller{color:#047857;background:#ecfdf5;border-color:#a7f3d0}
-.pop-tag.pruned-l1{color:#b45309;background:#fffbeb;border-color:#fde68a}
-.pop-tag.pruned-l2{color:#475569;background:#f1f5f9;border-color:#cbd5e1}
-.prod-cat{
-  font-size:clamp(.74rem,.74vw,.88rem);
-  font-weight:700;
-  color:var(--text-muted);
-  text-transform:uppercase;
-  letter-spacing:.04em;
-  margin-top:1vh;
-}
-.prod-name{
-  font-size:clamp(1.02rem,1.05vw,1.28rem);
-  font-weight:700;
-  color:var(--text);
-  line-height:1.3;
-  margin-top:.3vh;
-}
-.prod-bottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-top:1vh;
-  border-top:1px solid var(--surface-sub);
-}
-.prod-price{
-  font-size:clamp(1.08rem,1.12vw,1.35rem);
-  font-weight:800;
-  font-variant-numeric:tabular-nums;
-}
-.add-btn{
-  background:var(--primary-light);
-  color:var(--primary-dark);
-  border:none;
-  border-radius:10px;
-  padding:.8vh 1.1vw;
-  font-size:clamp(.88rem,.9vw,1.08rem);
-  font-weight:700;
-  cursor:pointer;
-  transition:all .15s;
-}
-.add-btn:hover{background:var(--primary);color:#fff}
-.card-qty{
-  display:inline-flex;
-  align-items:center;
-  background:var(--primary);
-  color:#fff;
-  border-radius:10px;
-  overflow:hidden;
-}
-.card-qty button{
-  border:none;
-  background:transparent;
-  color:#fff;
-  width:clamp(30px,2vw,38px);
-  height:clamp(32px,3.4vh,40px);
-  cursor:pointer;
-  font-weight:700;
-  font-size:clamp(.95rem,1vw,1.15rem);
-}
-.card-qty button:hover{background:rgba(255,255,255,.15)}
-.card-qty span{
-  min-width:clamp(26px,1.8vw,34px);
-  text-align:center;
-  font-size:clamp(.9rem,.92vw,1.1rem);
-  font-weight:700;
-  font-variant-numeric:tabular-nums;
-}
-.empty-grid{grid-column:1/-1;text-align:center;color:var(--text-muted);padding:5vh 0;font-size:1.05rem}
-
-/* ---------- Right Column: Sticky Cart + Apriori Cross-Sell Panel ---------- */
-.drawer-overlay{display:none}
-.cart-drawer{
-  position:sticky;
-  top:clamp(74px,8vh,92px);
-  background:var(--surface);
-  border:1.5px solid var(--border);
-  border-radius:18px;
-  display:flex;
-  flex-direction:column;
-  height:calc(100vh - clamp(90px,10vh,115px));
-  max-height:calc(100vh - clamp(90px,10vh,115px));
-  overflow:hidden;
-  box-shadow:0 8px 28px rgba(15,23,42,.06);
-}
-@media (max-width:1100px){
-  .drawer-overlay{
-    display:block;
-    position:fixed;
-    inset:0;
-    background:rgba(15,23,42,.4);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .2s;
-    z-index:60;
-  }
-  .drawer-overlay.open{opacity:1;pointer-events:auto}
-  .cart-drawer{
-    position:fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    height:100vh;
-    max-height:none;
-    width:min(460px,100vw);
-    border-radius:0;
-    z-index:70;
-    transform:translateX(102%);
-    transition:transform .25s ease;
-  }
-  .cart-drawer.open{transform:none}
-}
-
-.drawer-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1.6vh 1.4vw;
-  border-bottom:1px solid var(--border);
-}
-.drawer-head h2{
-  font-size:clamp(1.1rem,1.15vw,1.38rem);
-  font-weight:800;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-.count-pill{
-  font-size:clamp(.8rem,.82vw,.96rem);
-  font-weight:700;
-  background:var(--primary-light);
-  color:var(--primary-dark);
-  padding:3px 10px;
-  border-radius:999px;
-}
-.drawer-close-mobile{
-  display:none;
-  border:1px solid var(--border);
-  background:var(--surface);
-  width:34px;
-  height:34px;
-  border-radius:8px;
-  cursor:pointer;
-}
-@media (max-width:1100px){.drawer-close-mobile{display:inline-grid;place-items:center}}
-
-.drawer-body{
-  flex:1;
-  overflow-y:auto;
-  padding:1.6vh 1.4vw;
-  display:flex;
-  flex-direction:column;
-  gap:2vh;
-}
-
-.cart-sec-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:clamp(.8rem,.8vw,.95rem);
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  color:var(--text-muted);
-  margin-bottom:.8vh;
-}
-.clear-link{
-  background:none;
-  border:none;
-  color:var(--text-muted);
-  font-size:clamp(.82rem,.82vw,.96rem);
-  font-weight:600;
-  cursor:pointer;
-}
-.clear-link:hover{color:#dc2626}
-
-.cart-empty{
-  text-align:center;
-  padding:2.5vh 1vw;
-  color:var(--text-muted);
-  font-size:clamp(.9rem,.9vw,1.05rem);
-  background:var(--bg);
-  border-radius:12px;
-  border:1px dashed var(--border);
-}
-.cart-list{display:flex;flex-direction:column}
-.cart-item{
-  display:grid;
-  grid-template-columns:38px 1fr auto;
-  gap:12px;
-  align-items:center;
-  padding:.9vh 0;
-  border-bottom:1px solid var(--surface-sub);
-}
-.cart-item:last-child{border-bottom:none}
-.cart-item-ico{font-size:clamp(1.4rem,1.5vw,1.75rem);text-align:center}
-.cart-item-name{font-size:clamp(.94rem,.96vw,1.14rem);font-weight:700;line-height:1.25}
-.cart-item-price{font-size:clamp(.82rem,.82vw,.98rem);color:var(--text-muted);font-variant-numeric:tabular-nums;margin-top:2px}
-.cart-item-ctrl{display:flex;align-items:center;gap:8px}
-.qty-mini{
-  display:inline-flex;
-  align-items:center;
-  border:1px solid var(--border);
-  border-radius:8px;
-  overflow:hidden;
-}
-.qty-mini button{
-  width:clamp(26px,1.7vw,32px);
-  height:clamp(26px,2.8vh,32px);
-  border:none;
-  background:var(--surface);
-  cursor:pointer;
-  font-weight:700;
-  font-size:clamp(.88rem,.9vw,1.05rem);
-}
-.qty-mini button:hover{background:var(--surface-sub)}
-.qty-mini span{
-  min-width:clamp(24px,1.5vw,30px);
-  text-align:center;
-  font-size:clamp(.85rem,.86vw,1.02rem);
-  font-weight:700;
-  font-variant-numeric:tabular-nums;
-}
-
-/* ---------- Frequently Bought Together (Apriori Recommendations) ---------- */
-.reco-box{
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:1.4vh 1.1vw;
-}
-.reco-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:1vh;
-}
-.reco-title{
-  font-size:clamp(.95rem,.98vw,1.15rem);
-  font-weight:800;
-  color:var(--text);
-}
-.reco-status{
-  font-size:clamp(.78rem,.8vw,.94rem);
-  font-weight:700;
-  color:var(--primary-dark);
-  background:var(--primary-light);
-  padding:3px 10px;
-  border-radius:999px;
-}
-.reco-list{
-  display:flex;
-  flex-direction:column;
-  gap:1vh;
-}
-.reco-item{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:1.1vh 1vw;
-  display:flex;
-  flex-direction:column;
-  gap:.6vh;
-}
-.reco-main{
-  display:grid;
-  grid-template-columns:34px 1fr auto auto;
-  gap:10px;
-  align-items:center;
-}
-.reco-ico{font-size:clamp(1.35rem,1.45vw,1.7rem);text-align:center}
-.reco-info{min-width:0}
-.reco-name{
-  font-size:clamp(.94rem,.96vw,1.14rem);
-  font-weight:700;
-}
-.reco-why{
-  font-size:clamp(.8rem,.82vw,.96rem);
-  color:var(--text-muted);
-  line-height:1.35;
-}
-.reco-price{
-  font-size:clamp(.92rem,.94vw,1.12rem);
-  font-weight:800;
-  font-variant-numeric:tabular-nums;
-  color:var(--text);
-}
-.reco-add{
-  background:var(--primary);
-  color:#fff;
-  border:none;
-  border-radius:9px;
-  padding:.7vh .95vw;
-  font-size:clamp(.84rem,.85vw,1rem);
-  font-weight:700;
-  cursor:pointer;
-  white-space:nowrap;
-}
-.reco-add:hover{background:var(--primary-hover)}
-.reco-meta{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-top:.5vh;
-  border-top:1px dashed var(--surface-sub);
-  font-family:var(--mono);
-  font-size:clamp(.78rem,.8vw,.94rem);
-  color:var(--text-muted);
-}
-.reco-lift{
-  font-weight:700;
-  color:var(--primary-dark);
-}
-.reco-status.pruned{
-  color:#b45309;
-  background:#fffbeb;
-  border:1px solid #fde68a;
-}
-.prune-explain{
-  background:#fffbeb;
-  border:1.5px solid #fde68a;
-  border-radius:12px;
-  padding:1.2vh 1vw;
-  display:flex;
-  flex-direction:column;
-  gap:.8vh;
-  font-size:clamp(.84rem,.86vw,1.02rem);
-  color:#78350f;
-  line-height:1.45;
-}
-.prune-head{
-  font-weight:800;
-  font-size:clamp(.92rem,.94vw,1.1rem);
-  color:#92400e;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.prune-metrics{
-  background:#ffffff;
-  border:1px solid #fde68a;
-  border-radius:9px;
-  padding:.8vh .9vw;
-  font-family:var(--mono);
-  font-size:clamp(.78rem,.8vw,.95rem);
-  color:#0f172a;
-  display:flex;
-  flex-direction:column;
-  gap:.35vh;
-}
-.prune-reasons{
-  margin:0;
-  padding-left:1.2rem;
-  display:flex;
-  flex-direction:column;
-  gap:.45vh;
-}
-.prune-reasons li b{color:#92400e}
-
-/* ---------- Cart Footer ---------- */
-.drawer-foot{
-  border-top:1px solid var(--border);
-  padding:1.5vh 1.4vw;
-  background:var(--surface);
-  display:flex;
-  flex-direction:column;
-  gap:1vh;
-}
-.total-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  font-size:clamp(.98rem,1vw,1.18rem);
-}
-.total-row b{
-  font-size:clamp(1.3rem,1.38vw,1.68rem);
-  font-weight:800;
-  font-variant-numeric:tabular-nums;
-}
-.checkout-btn{
-  width:100%;
-  background:var(--primary);
-  color:#fff;
-  border:none;
-  border-radius:11px;
-  padding:1.25vh;
-  font-size:clamp(.96rem,.98vw,1.15rem);
-  font-weight:700;
-  cursor:pointer;
-}
-.checkout-btn:hover{background:var(--primary-hover)}
-.checkout-btn:disabled{opacity:.45;cursor:not-allowed}
-.drawer-link{
-  text-align:center;
-  font-size:clamp(.82rem,.82vw,.96rem);
-  font-weight:600;
-  color:var(--text-muted);
-  text-decoration:none;
-}
-.drawer-link:hover{color:var(--primary)}
-
-.order-done{text-align:center;padding:2.5vh 1vw;display:flex;flex-direction:column;gap:1.2vh;align-items:center}
-.order-done .big{font-size:2.4rem}
-.order-done p{color:var(--text-muted);font-size:clamp(.92rem,.94vw,1.1rem)}
-.order-actions{display:flex;flex-direction:column;gap:1vh;width:100%}
-.order-actions a,.order-actions button{
-  text-decoration:none;
-  text-align:center;
-  padding:1.1vh;
-  border-radius:10px;
-  font-size:clamp(.9rem,.92vw,1.08rem);
-  font-weight:600;
-  cursor:pointer;
-}
-.btn-outline{background:var(--surface);border:1px solid var(--border);color:var(--text)}
-
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:2.5vh;
-  transform:translate(-50%,20px);
-  background:#0f172a;
-  color:#fff;
-  padding:1vh 1.4vw;
-  border-radius:999px;
-  font-size:clamp(.88rem,.9vw,1.05rem);
-  font-weight:600;
-  opacity:0;
-  pointer-events:none;
-  transition:.2s;
-  z-index:80;
-}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/app.css?v=20261103">
+<link rel="stylesheet" href="/store.css?v=20261103">
+<link rel="stylesheet" href="/shop.css?v=20261103">
 </head>
-<body>
+<body class="storefront" data-page="shop">
 <header class="app-header">
   <div class="app-header-inner">
-    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">🛒</span>BasketIQ</a>
+    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">G9</span><span>Mart</span></a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
       <a href="/shop" class="active" aria-current="page">Cửa hàng</a>
       <a href="/">Demo thuật toán</a>
       <a href="/dataset">Dataset</a>
     </nav>
-    <div class="app-actions">
-      <button class="app-cart-btn" id="openCartBtn" type="button" onclick="openCartDrawer()" aria-label="Mở giỏ hàng">
-        <span aria-hidden="true">🛒</span>
-        <span>Giỏ hàng</span>
-        <span class="app-cart-count" id="cartCountBadge">0</span>
-      </button>
-    </div>
     <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
   </div>
 </header>
 
-<div class="shop-shell" id="mainContainer">
-  <!-- LEFT COLUMN: STOREFRONT -->
-  <main class="store-main">
-    <section class="store-top">
-      <div class="store-top-row">
-        <div class="store-title">
-          <h1>Fresh Grocery Market</h1>
-          <p>Chọn mặt hàng bên trái — gợi ý mua kèm Apriori cập nhật tức thì ở giỏ hàng bên phải.</p>
-        </div>
-        <div class="search-wrap">
-          <span class="search-ico" aria-hidden="true">🔍</span>
-          <input id="searchBox" type="search" placeholder="Tìm mặt hàng (milk, berries, beef…)" aria-label="Tìm sản phẩm">
-        </div>
-      </div>
-      <div class="demo-strip" aria-label="Giỏ hàng mẫu thử nhanh">
-        <span class="demo-label">Thử nhanh:</span>
-        <button class="demo-pill" type="button" data-act="preset" data-items="berries,whole milk">🍓 Combo phổ biến (berries + whole milk)</button>
-        <button class="demo-pill" type="button" data-act="preset" data-items="beef,other vegetables">🥩 Nấu bò hầm (beef + vegetables)</button>
-        <button class="demo-pill" type="button" data-act="preset" data-items="cooking chocolate">🍫 Ít phổ biến · Tỉa ở L1 (cooking chocolate)</button>
-        <button class="demo-pill" type="button" data-act="preset" data-items="instant coffee">☕ Đơn lẻ · Tỉa ở L2 (instant coffee)</button>
-      </div>
-    </section>
+<div class="store-subheader">
+  <div class="store-subheader-inner">
+    <button class="category-menu-btn" id="categoryMenuBtn" type="button" aria-expanded="false" aria-controls="categoryDrawer">
+      <span class="burger-glyph" aria-hidden="true">☰</span>
+      <span class="subheader-label">Danh mục sản phẩm</span>
+    </button>
+    <div class="store-search" id="storeSearch">
+      <span class="search-ico" aria-hidden="true">🔍</span>
+      <input id="searchBox" type="search" placeholder="Tìm mặt hàng (sữa, táo, bánh mì…)" aria-label="Tìm sản phẩm" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="searchSuggestions">
+      <button class="search-clear" id="searchClear" type="button" aria-label="Xóa tìm kiếm" hidden>✕</button>
+      <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Gợi ý sản phẩm" hidden></div>
+    </div>
+    <button class="store-cart-btn" id="openCartBtn" type="button" onclick="openCartDrawer()" aria-label="Mở giỏ hàng">
+      <span aria-hidden="true">🛒</span>
+      <span class="subheader-label">Giỏ hàng</span>
+      <span class="app-cart-count" id="cartCountBadge">0</span>
+    </button>
+  </div>
+</div>
 
-    <div class="aisle-bar" id="categoryBar" role="group" aria-label="Quầy hàng"></div>
+<main class="shop-shell" id="mainContainer">
+  <section class="demo-section" aria-labelledby="demoTitle">
+    <div class="section-head demo-section-head">
+      <div>
+        <h2 id="demoTitle">Thử nhanh</h2>
+        <p>Chọn thử một giỏ hàng mẫu để xem gợi ý mua thêm.</p>
+      </div>
+    </div>
+    <div class="demo-grid">
+      <button class="demo-card" type="button" data-act="preset" data-items="berries,whole milk">
+        <span class="demo-icon" style="--tint:#fdeceb" aria-hidden="true">🍓</span>
+        <span class="demo-copy"><b>Combo phổ biến</b><small>berries + whole milk</small></span>
+      </button>
+      <button class="demo-card" type="button" data-act="preset" data-items="beef,other vegetables">
+        <span class="demo-icon" style="--tint:#fdeaea" aria-hidden="true">🥩</span>
+        <span class="demo-copy"><b>Nấu bò hầm</b><small>beef + other vegetables</small></span>
+      </button>
+      <button class="demo-card" type="button" data-act="preset" data-items="cooking chocolate">
+        <span class="demo-icon" style="--tint:#f3e8dc" aria-hidden="true">🍫</span>
+        <span class="demo-copy"><b>Ít phổ biến</b><small>cooking chocolate · tỉa ở L1</small></span>
+      </button>
+      <button class="demo-card" type="button" data-act="preset" data-items="instant coffee">
+        <span class="demo-icon" style="--tint:#efe7dd" aria-hidden="true">☕</span>
+        <span class="demo-copy"><b>Đơn lẻ</b><small>instant coffee · tỉa ở L2</small></span>
+      </button>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Combo tiết kiệm</h2>
+        <p>Những món khách hàng thường mua cùng nhau, nay mua chung rẻ hơn</p>
+      </div>
+    </div>
+    <div class="combo-grid" id="comboGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Bán chạy nhất</h2></div>
+    <div class="grid" id="bestSellerGrid"></div>
+  </section>
+
+  <section class="section" id="catalog">
     <div class="catalog-header">
-      <h2 id="aisleTitle">Tất cả mặt hàng</h2>
+      <h2>Danh mục sản phẩm</h2>
       <span id="productCount">Đang tải…</span>
     </div>
-
+    <div class="toolbar">
+      <div class="aisle-bar" id="categoryBar" role="group" aria-label="Quầy hàng"></div>
+    </div>
     <div class="product-grid" id="productGrid"></div>
-  </main>
+  </section>
+</main>
 
-  <!-- RIGHT COLUMN: PERSISTENT STICKY CART & APRIORI RECOMMENDATIONS -->
-  <div class="drawer-overlay" id="drawerOverlay"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Giỏ hàng và gợi ý Apriori">
-    <div class="drawer-head">
-      <h2>🛒 Giỏ hàng của bạn <span class="count-pill" id="cartCount">0 món</span></h2>
-      <button class="drawer-close-mobile" id="drawerClose" type="button" aria-label="Đóng">✕</button>
+<div class="category-overlay" id="categoryOverlay"></div>
+<aside class="category-drawer" id="categoryDrawer" aria-label="Danh mục sản phẩm">
+  <div class="category-drawer-head">
+    <div>
+      <h2>Danh mục sản phẩm</h2>
     </div>
+    <button class="category-close" id="categoryClose" type="button" aria-label="Đóng danh mục">✕</button>
+  </div>
+  <div class="category-list" id="categoryList"></div>
+</aside>
 
-    <div class="drawer-body" id="drawerBody">
-      <section>
-        <div class="cart-sec-head">
-          <span>Mặt hàng đã chọn</span>
-          <button class="clear-link" id="clearBtn" type="button">Xóa hết</button>
-        </div>
-        <div class="cart-list" id="cartItemsList"></div>
-      </section>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Giỏ hàng và gợi ý Apriori">
+  <div class="drawer-head">
+    <h2>🛒 Giỏ hàng của bạn <span class="count-pill" id="cartCount">0 món</span></h2>
+    <button class="drawer-close-mobile" id="drawerClose" type="button" aria-label="Đóng">✕</button>
+  </div>
 
-      <section class="reco-box" id="recoBox">
-        <div class="reco-header">
-          <span class="reco-title">✨ Thường mua cùng nhau</span>
-          <span class="reco-status" id="firedBadge">Bestsellers</span>
-        </div>
-        <div class="reco-list" id="recomList"></div>
-      </section>
-    </div>
-
-    <div class="drawer-foot" id="drawerFoot">
-      <div class="total-row">
-        <span>Tổng cộng</span>
-        <b id="cartTotal">£0.00</b>
+  <div class="drawer-body" id="drawerBody">
+    <section>
+      <div class="cart-sec-head">
+        <span>Mặt hàng đã chọn</span>
+        <button class="clear-link" id="clearBtn" type="button">Xóa hết</button>
       </div>
-      <button class="checkout-btn" id="checkoutBtn" type="button">Thanh toán đơn hàng</button>
-      <a class="drawer-link" href="/stats">Xem bảng chứng minh số liệu Support &amp; Lift →</a>
+      <div class="cart-list" id="cartItemsList"></div>
+    </section>
+
+    <section class="reco-box" id="recoBox">
+      <div class="reco-header">
+        <span class="reco-title" id="recoTitle">Sản phẩm hay được mua cùng</span>
+      </div>
+      <div class="reco-list" id="recomList"></div>
+    </section>
+  </div>
+
+  <div class="drawer-foot" id="drawerFoot">
+    <div class="total-row">
+      <span>Tổng cộng</span>
+      <b id="cartTotal">0đ</b>
     </div>
-  </aside>
-</div>
+    <button class="checkout-btn" id="checkoutBtn" type="button">Đặt hàng</button>
+    <a class="drawer-link" href="/cart">Xem giỏ hàng</a>
+  </div>
+</aside>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="/store-cart.js"></script>
+<script src="/store-recs.js"></script>
 <script>
 const STORAGE_KEY = 'basketiq.cart.groceries';
 const MAX_RECS = 4;
+let STORE = null;
 let DATA = null;
-let CART = loadCart();
+let CART = StoreCart.load();
 let ACTIVE_CAT = 'ALL';
 let QUERY = '';
-let ORDER_PLACED = false;
 let toastTimer = null;
+let SEARCH_INDEX = [];
+let SEARCH_MATCHES = [];
+let SEARCH_ACTIVE = -1;
+let SEARCH_SHOW_ALL = false;
+let searchTimer = null;
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const gbp = n => '£' + Number(n).toFixed(2);
+const vnd = n => StoreCart.vnd(n);
+const CAT_NAMES = { ALL: 'Tất cả mặt hàng' };
 
-const CAT_NAMES = {
-  ALL: 'Tất cả mặt hàng',
-  DAIRY: 'Dairy & Eggs',
-  PRODUCE: 'Fruits & Vegetables',
-  BAKERY: 'Bakery & Bread',
-  MEAT: 'Meat & Deli',
-  DRINKS: 'Beverages',
-  SNACKS: 'Sweets & Snacks',
-  PANTRY: 'Pantry & Essentials',
-};
-
-function loadCart() {
-  try {
-    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    const clean = {};
-    for (const [k, v] of Object.entries(raw)) if (Number.isInteger(v) && v > 0) clean[k] = v;
-    return clean;
-  } catch (e) { return {}; }
-}
-function saveCart() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(CART)); } catch (e) {}
-}
 function product(code) {
-  return (DATA && DATA.catalog[code]) || {code, name: code, price: 1.50, icon: '🛒', category: 'OTHER', count: 0, support: 0};
+  return (STORE && STORE.catalog[code]) || {display_name: code, price: 0, icon: '🛒', category: 'khac', count: 0, support: 0};
+}
+function categoryOf(code) {
+  return (STORE.categories.find(c => c.id === product(code).category)) || STORE.categories[0];
+}
+const normalizeSearch = value => String(value)
+  .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase().replace(/\s+/g, ' ').trim();
+
+function buildSearchIndex() {
+  SEARCH_INDEX = Object.entries(STORE.catalog).map(([code, p]) => {
+    const name = normalizeSearch(p.display_name);
+    return {
+      code,
+      name,
+      unit: normalizeSearch(p.unit),
+      category: normalizeSearch(CAT_NAMES[p.category] || p.category),
+      codeKey: normalizeSearch(code),
+      count: p.count || 0,
+    };
+  });
+}
+
+function rankSearch(query) {
+  const q = normalizeSearch(query);
+  const tokens = q.split(' ').filter(Boolean);
+  if (!tokens.length) return [];
+  const scored = [];
+  for (const item of SEARCH_INDEX) {
+    const haystack = `${item.name} ${item.unit} ${item.category} ${item.codeKey}`;
+    if (!tokens.every(token => haystack.includes(token))) continue;
+    let score = item.name.startsWith(q) ? 120 : item.name.includes(q) ? 70 : 0;
+    const at = item.name.indexOf(tokens[0]);
+    if (at >= 0) score += Math.max(0, 30 - at);
+    score += Math.min(item.count, 2000) / 100;
+    scored.push({...item, score});
+  }
+  return scored.sort((a, b) => b.score - a.score || b.count - a.count || a.name.localeCompare(b.name));
+}
+
+function closeSearchPanel() {
+  const panel = $('searchSuggestions');
+  if (!panel) return;
+  panel.hidden = true;
+  SEARCH_ACTIVE = -1;
+  $('searchBox').setAttribute('aria-expanded', 'false');
+}
+
+function renderSearchSuggestions(resetActive = true) {
+  if (!SEARCH_INDEX.length) return;
+  const query = QUERY.trim();
+  const panel = $('searchSuggestions');
+  if (!query) { closeSearchPanel(); return; }
+
+  if (resetActive) {
+    SEARCH_MATCHES = rankSearch(query);
+    SEARCH_ACTIVE = SEARCH_MATCHES.length ? 0 : -1;
+  }
+
+  const visible = SEARCH_SHOW_ALL ? SEARCH_MATCHES : SEARCH_MATCHES.slice(0, 6);
+  if (!visible.length) {
+    panel.innerHTML = `<div class="search-empty">Không tìm thấy sản phẩm cho “${esc(query)}”</div>`;
+  } else {
+    const head = `<div class="search-panel-head"><span>${SEARCH_MATCHES.length} sản phẩm phù hợp</span></div>`;
+    const rows = visible.map((item, index) => {
+      const p = product(item.code);
+      const category = categoryOf(item.code);
+      const qty = CART[item.code] || 0;
+      const action = qty
+        ? `<div class="card-qty search-qty">
+            <button type="button" data-act="dec" data-code="${esc(item.code)}" aria-label="Giảm">−</button>
+            <span>${qty}</span>
+            <button type="button" data-act="inc" data-code="${esc(item.code)}" aria-label="Tăng">+</button>
+          </div>`
+        : `<button class="search-add" type="button" data-act="search-add" data-code="${esc(item.code)}" aria-label="Thêm ${esc(p.display_name)} vào giỏ">+</button>`;
+      return `<div class="search-result ${index === SEARCH_ACTIVE ? 'active' : ''}" role="option" aria-selected="${index === SEARCH_ACTIVE}">
+        <button class="search-result-main" type="button" data-act="search-pick" data-code="${esc(item.code)}">
+          <span class="search-thumb" style="--tint:${esc(category.color)}" aria-hidden="true">${esc(p.icon)}</span>
+          <span class="search-info"><b>${esc(p.display_name)}</b><small>${esc(p.unit)} · ${esc(category.name)}</small></span>
+        </button>
+        <span class="search-price">${vnd(p.price)}</span>
+        ${action}
+      </div>`;
+    }).join('');
+    const footer = SEARCH_MATCHES.length > 6
+      ? SEARCH_SHOW_ALL
+        ? `<button class="search-viewall" type="button" data-act="search-collapse">Thu gọn danh sách</button>`
+        : `<button class="search-viewall" type="button" data-act="search-all">Xem tất cả ${SEARCH_MATCHES.length} sản phẩm phù hợp</button>`
+      : '';
+    panel.innerHTML = head + rows + footer;
+  }
+  panel.hidden = false;
+  $('searchBox').setAttribute('aria-expanded', 'true');
+}
+
+function moveSearchActive(delta) {
+  if ($('searchSuggestions').hidden) { renderSearchSuggestions(); return; }
+  if (!SEARCH_MATCHES.length) return;
+  const visibleCount = SEARCH_SHOW_ALL ? SEARCH_MATCHES.length : Math.min(SEARCH_MATCHES.length, 6);
+  SEARCH_ACTIVE = (SEARCH_ACTIVE + delta + visibleCount) % visibleCount;
+  renderSearchSuggestions(false);
+}
+
+function scrollToCatalog() {
+  document.getElementById('catalog').scrollIntoView({behavior: 'smooth'});
+}
+
+function selectSearchProduct(code) {
+  const p = product(code);
+  QUERY = p.display_name;
+  $('searchBox').value = QUERY;
+  $('searchClear').hidden = false;
+  ACTIVE_CAT = 'ALL';
+  SEARCH_SHOW_ALL = false;
+  closeSearchPanel();
+  renderCategories();
+  renderCategoryMenu();
+  renderProducts();
+  scrollToCatalog();
+  const card = [...document.querySelectorAll('#productGrid .card')].find(el => el.dataset.code === code);
+  if (card) {
+    card.classList.add('search-hit');
+    setTimeout(() => card.classList.remove('search-hit'), 1600);
+  }
+}
+
+function expandSearchResults() {
+  SEARCH_SHOW_ALL = true;
+  renderSearchSuggestions(false);
+}
+
+function collapseSearchResults() {
+  SEARCH_SHOW_ALL = false;
+  SEARCH_ACTIVE = Math.min(SEARCH_ACTIVE, 5);
+  renderSearchSuggestions(false);
+}
+
+function clearSearch() {
+  QUERY = '';
+  SEARCH_SHOW_ALL = false;
+  $('searchBox').value = '';
+  $('searchClear').hidden = true;
+  closeSearchPanel();
+  renderProducts();
+  $('searchBox').focus();
+}
+
+function handleSearchKey(event) {
+  if (event.key === 'ArrowDown') {
+    event.preventDefault();
+    moveSearchActive(1);
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault();
+    moveSearchActive(-1);
+  } else if (event.key === 'Enter') {
+    if (!$('searchSuggestions').hidden && SEARCH_ACTIVE >= 0 && SEARCH_MATCHES[SEARCH_ACTIVE]) {
+      event.preventDefault();
+      selectSearchProduct(SEARCH_MATCHES[SEARCH_ACTIVE].code);
+    }
+  } else if (event.key === 'Escape') {
+    closeSearchPanel();
+  }
 }
 const cartCodes = () => Object.keys(CART);
 const cartCount = () => Object.values(CART).reduce((a, b) => a + b, 0);
-const cartTotal = () => cartCodes().reduce((s, c) => s + product(c).price * CART[c], 0);
 
-function computeRecommendations(cartSet) {
-  const recs = [];
-  const byCode = new Map();
-  const push = (code, tier, score, extra) => {
-    if (cartSet.has(code) || !DATA.catalog[code]) return;
-    if (byCode.has(code)) {
-      const existing = byCode.get(code);
-      existing.ruleCount = (existing.ruleCount || 1) + 1;
-      if (tier < existing.tier || (tier === existing.tier && score > existing.score)) {
-        existing.tier = tier;
-        existing.score = score;
-        if (extra && extra.rule) existing.rule = extra.rule;
-      }
-      return;
-    }
-    const item = Object.assign({code, tier, score, ruleCount: 1}, extra);
-    byCode.set(code, item);
-    recs.push(item);
-  };
-  let fired = 0;
-  if (cartSet.size) {
-    // Strictly match genuine Apriori rules where antecedent A is a subset of cart
-    for (const r of DATA.rules) {
-      if (r.antecedent.every(c => cartSet.has(c))) {
-        const targets = r.consequent.filter(c => !cartSet.has(c));
-        if (targets.length) fired++;
-        const specificityBonus = r.antecedent.length * 15;
-        targets.forEach(t => push(t, 1, specificityBonus + r.lift * 10 + r.confidence, {rule: r}));
-      }
-    }
-  } else {
-    // Only show store bestsellers when cart is completely empty
-    const l1 = (DATA.frequent_itemsets && DATA.frequent_itemsets.L1) || [];
-    for (const e of l1) {
-      if (recs.length >= MAX_RECS) break;
-      push(e.items[0], 4, e.support, {support: e.support, count: e.count});
-    }
-  }
-  recs.sort((a, b) => a.tier - b.tier || b.score - a.score);
-  return {recs: recs.slice(0, MAX_RECS), fired};
+function renderCategoryMenu() {
+  const counts = {};
+  for (const p of Object.values(STORE.catalog)) counts[p.category] = (counts[p.category] || 0) + 1;
+  const rows = [{
+    id: 'ALL',
+    name: 'Tất cả sản phẩm',
+    icon: '🛒',
+    color: '#e7f5ed',
+    count: Object.keys(STORE.catalog).length,
+  }].concat(STORE.categories.map(c => ({...c, count: counts[c.id] || 0})));
+  $('categoryList').innerHTML = rows.map(c => `
+    <button class="category-item ${c.id === ACTIVE_CAT ? 'active' : ''}" type="button" data-act="cat" data-cat="${esc(c.id)}">
+      <span class="category-icon" style="--tint:${esc(c.color)}" aria-hidden="true">${esc(c.icon)}</span>
+      <span class="category-name">${esc(c.name)}<small>${c.count} sản phẩm</small></span>
+      <span class="category-chevron" aria-hidden="true">›</span>
+    </button>`).join('');
 }
 
-function buildPruneExplanationHtml(prunedCodes) {
-  const minCount = (DATA && DATA.summary && DATA.summary.min_count) || 30;
-  const minSupPct = (((DATA && DATA.summary && DATA.summary.min_support) || 0.0031) * 100).toFixed(2);
-  const minConfPct = (((DATA && DATA.summary && DATA.summary.min_confidence) || 0.15) * 100).toFixed(0);
-  const minLift = (DATA && DATA.summary && DATA.summary.min_lift) || 1.15;
-  const totalBaskets = (DATA && DATA.total_baskets) || 9835;
+function openCategoryDrawer() {
+  closeCartDrawer();
+  $('categoryDrawer').classList.add('open');
+  $('categoryOverlay').classList.add('open');
+  $('categoryMenuBtn').setAttribute('aria-expanded', 'true');
+}
 
-  return prunedCodes.map(code => {
-    const p = product(code);
-    const stage = p.pruned_stage || (p.count < minCount ? 'C1_TO_L1' : 'C2_TO_L2');
-    const suppPct = ((p.support || 0) * 100).toFixed(2);
-    const maxCoItem = p.max_co_item || 'whole milk';
-    const maxCoCnt = p.max_co_count || 0;
-    const maxCoSupPct = ((p.max_co_support || 0) * 100).toFixed(2);
-    const maxCoConfPct = ((p.max_co_conf || 0) * 100).toFixed(0);
+function closeCategoryDrawer() {
+  $('categoryDrawer').classList.remove('open');
+  $('categoryOverlay').classList.remove('open');
+  $('categoryMenuBtn').setAttribute('aria-expanded', 'false');
+}
 
-    if (stage === 'C1_TO_L1') {
-      return `<div class="prune-explain">
-        <div class="prune-head">🚫 Không gợi ý mua kèm cho "${esc(p.name)}" (Bị tỉa ở bước C1 → L1)</div>
-        <div class="prune-metrics">
-          <div>• Tần suất mặt hàng: <b>${p.count}/${totalBaskets} giỏ (${suppPct}%) &lt; min_sup ${minSupPct}% (${minCount} giỏ)</b></div>
-          <div>• Cặp đi kèm cao nhất: <b>{${esc(p.name)}, ${esc(maxCoItem)}} = ${maxCoCnt} giỏ (${maxCoSupPct}%)</b></div>
-        </div>
-        <ol class="prune-reasons">
-          <li><b>Vi phạm ngưỡng Support tối thiểu (min_sup):</b> Mặt hàng xuất hiện dưới ${minCount} giỏ hàng nên bị loại ngay khi lọc ứng viên <b>C1 → L1</b> (không phải là <i>Frequent 1-Itemset</i>).</li>
-          <li><b>Nguyên lý Apriori (Downward Closure / Anti-monotone):</b> Nếu tập con {A} không phổ biến (<code>Support(A) &lt; min_sup</code>) thì mọi tập cha {A, B} chứa nó chắc chắn cũng có <code>Support(A ∪ B) ≤ Support(A) &lt; min_sup</code>. Thuật toán cắt tỉa ngay lập tức, không ghép cặp ở bước C2.</li>
-          <li><b>Chống nhiễu thống kê (Tránh Spurious Rules):</b> Với mẫu quá nhỏ (${p.count} giỏ), việc có ${maxCoCnt} khách tình cờ mua cùng <i>${esc(maxCoItem)}</i> đẩy Confidence lên <b>${maxCoConfPct}%</b> chỉ là nhiễu ngẫu nhiên, không đủ độ tin cậy để gợi ý.</li>
-        </ol>
-      </div>`;
-    }
-    if (stage === 'C2_TO_L2') {
-      return `<div class="prune-explain">
-        <div class="prune-head">🚫 Không gợi ý mua kèm cho "${esc(p.name)}" (Bị tỉa ở bước C2 → L2)</div>
-        <div class="prune-metrics">
-          <div>• Tần suất đơn lẻ (Đạt L1): <b>${p.count}/${totalBaskets} giỏ (${suppPct}% ≥ min_sup ${minSupPct}%)</b></div>
-          <div>• Cặp mua chung cao nhất: <b>{${esc(p.name)}, ${esc(maxCoItem)}} = ${maxCoCnt} giỏ (${maxCoSupPct}%) &lt; ${minCount} giỏ</b></div>
-        </div>
-        <ol class="prune-reasons">
-          <li><b>Bị cắt tỉa khi lọc C2 → L2:</b> Dù bản thân <i>${esc(p.name)}</i> đủ phổ biến để vào <b>L1</b> (≥ ${minCount} giỏ), nhưng khi ghép cặp với các mặt hàng khác, không có cặp {A, B} nào đạt đủ ngưỡng <b>${minCount} giỏ mua chung</b> để lọt vào <b>L2</b>.</li>
-          <li><b>Hành vi mua sắm độc lập / phân tán:</b> Khách hàng thường mua mặt hàng này riêng lẻ hoặc mua rải rác với nhiều món ngẫu nhiên khác nhau chứ không tạo thành combo đi kèm cố định.</li>
-        </ol>
-      </div>`;
-    }
-    return `<div class="prune-explain">
-      <div class="prune-head">🚫 Không gợi ý mua kèm cho "${esc(p.name)}" (Bị lọc ở bước kiểm định Confidence / Lift)</div>
-      <div class="prune-metrics">
-        <div>• Tần suất đơn lẻ (L1): <b>${p.count}/${totalBaskets} giỏ (${suppPct}%)</b></div>
-        <div>• Cặp cao nhất (L2): <b>{${esc(p.name)}, ${esc(maxCoItem)}} = ${maxCoCnt} giỏ · Conf ${maxCoConfPct}% · Lift ${p.max_co_lift || 1.0}×</b></div>
+function comboTitle(combo) {
+  return combo.items.map(code => product(code).display_name).join(' + ');
+}
+
+function renderCombos() {
+  $('comboGrid').innerHTML = STORE.combos.map(combo => {
+    const items = combo.items.map(code => {
+      const p = product(code);
+      const cat = categoryOf(code);
+      return `<span class="combo-thumb" style="--tint:${esc(cat.color)}" title="${esc(p.display_name)}">${esc(p.icon)}</span>`;
+    }).join('<span class="plus">+</span>');
+    const units = combo.items.map(code => product(code).unit).join(' · ');
+    return `<article class="combo">
+      <span class="combo-badge">−${combo.discount}%</span>
+      <div class="combo-items">${items}</div>
+      <h3 class="combo-title">${esc(comboTitle(combo))}</h3>
+      <p class="combo-units">${esc(units)}</p>
+      <div class="combo-foot">
+        <div><span class="price">${vnd(combo.price)}</span><span class="old-price">${vnd(combo.original_price)}</span></div>
+        <button class="btn btn-sm" type="button" data-act="combo" data-combo="${esc(combo.id)}">Thêm combo</button>
       </div>
-      <ol class="prune-reasons">
-        <li><b>Không đạt ngưỡng luật kết hợp (min_conf = ${minConfPct}%, min_lift = ${minLift}×):</b> Các cặp chứa <i>${esc(p.name)}</i> dù xuất hiện ≥ ${minCount} giỏ nhưng <code>Lift ≈ 1</code> hoặc <code>Confidence &lt; ${minConfPct}%</code>, nghĩa là hai món được mua độc lập ngẫu nhiên chứ không thúc đẩy nhau.</li>
-      </ol>
-    </div>`;
+    </article>`;
   }).join('');
 }
 
+function productCardHtml(code, forceTag) {
+  const p = product(code);
+  const cat = categoryOf(code);
+  const qty = CART[code] || 0;
+  let tagHtml = '';
+  if (forceTag) {
+    tagHtml = `<span class="tag">${esc(forceTag)}</span>`;
+  } else if (p.support >= 0.10) {
+    tagHtml = `<span class="tag">Bán chạy</span>`;
+  } else if (p.has_apriori_rule) {
+    tagHtml = `<span class="pop-tag">${p.count} giỏ · Đạt L2</span>`;
+  } else if (!p.in_l1) {
+    tagHtml = `<span class="pop-tag pruned-l1">Ít phổ biến · ${p.count} giỏ</span>`;
+  } else {
+    tagHtml = `<span class="pop-tag pruned-l2">${p.count} giỏ · Tỉa ở L2</span>`;
+  }
+  const control = qty
+    ? `<div class="card-qty">
+        <button type="button" data-act="dec" data-code="${esc(code)}" aria-label="Giảm">−</button>
+        <span>${qty}</span>
+        <button type="button" data-act="inc" data-code="${esc(code)}" aria-label="Tăng">+</button>
+      </div>`
+    : `<button class="btn-add" type="button" data-act="add" data-code="${esc(code)}" aria-label="Thêm ${esc(p.display_name)}">+</button>`;
+  return `<article class="card ${qty ? 'in-cart' : ''}" data-code="${esc(code)}">
+    <div class="card-media" style="--tint:${esc(cat.color)}">
+      <span class="emoji" aria-hidden="true">${esc(p.icon)}</span>
+      ${tagHtml}
+    </div>
+    <div class="card-body">
+      <span class="card-title" title="${esc(code)}">${esc(p.display_name)}</span>
+      <span class="card-unit">${esc(p.unit)}</span>
+      <div class="card-foot"><span class="price">${vnd(p.price)}</span>${control}</div>
+    </div>
+  </article>`;
+}
+
+function renderBestsellers() {
+  $('bestSellerGrid').innerHTML = STORE.bestsellers.map(code => productCardHtml(code, 'Bán chạy')).join('');
+}
+
 function renderCategories() {
-  $('categoryBar').innerHTML = DATA.categories.map(c =>
-    `<button class="aisle-chip ${c.id === ACTIVE_CAT ? 'active' : ''}" type="button" data-act="cat" data-cat="${esc(c.id)}"><span>${esc(c.icon)}</span><span>${esc(c.name)}</span></button>`
+  const all = `<button class="chip ${ACTIVE_CAT === 'ALL' ? 'chip-on' : ''}" type="button" data-act="cat" data-cat="ALL"><span>🛒</span> Tất cả sản phẩm</button>`;
+  $('categoryBar').innerHTML = all + STORE.categories.map(c =>
+    `<button class="chip ${c.id === ACTIVE_CAT ? 'chip-on' : ''}" type="button" data-act="cat" data-cat="${esc(c.id)}"><span>${esc(c.icon)}</span> ${esc(c.name)}</button>`
   ).join('');
-  $('aisleTitle').textContent = CAT_NAMES[ACTIVE_CAT] || 'Mặt hàng';
 }
 
 function renderProducts() {
-  if (!DATA) return;
-  const q = QUERY.trim().toLowerCase();
-  const codes = DATA.store_skus.filter(c => {
-    const p = DATA.catalog[c];
-    if (!p) return false;
+  if (!STORE) return;
+  const tokens = normalizeSearch(QUERY).split(' ').filter(Boolean);
+  const codes = Object.keys(STORE.catalog).filter(code => {
+    const p = STORE.catalog[code];
     if (ACTIVE_CAT !== 'ALL' && p.category !== ACTIVE_CAT) return false;
-    return !q || p.name.toLowerCase().includes(q) || c.toLowerCase().includes(q);
+    if (!tokens.length) return true;
+    const haystack = normalizeSearch(`${p.display_name} ${code} ${categoryOf(code).name}`);
+    return tokens.every(token => haystack.includes(token));
   });
   $('productCount').textContent = `${codes.length} sản phẩm`;
-  $('productGrid').innerHTML = codes.length ? codes.map(code => {
-    const p = DATA.catalog[code];
-    const qty = CART[code] || 0;
-    let tagHtml = '';
-    if (p.support >= 0.10) {
-      tagHtml = `<span class="pop-tag top-seller">Bán chạy · ${p.count} giỏ</span>`;
-    } else if (p.has_apriori_rule) {
-      tagHtml = `<span class="pop-tag">${p.count} giỏ · Đạt L2</span>`;
-    } else if (!p.in_l1) {
-      tagHtml = `<span class="pop-tag pruned-l1">Ít phổ biến · ${p.count} giỏ (&lt;30)</span>`;
-    } else {
-      tagHtml = `<span class="pop-tag pruned-l2">${p.count} giỏ · Tỉa ở L2</span>`;
-    }
-    return `<article class="prod-card ${qty ? 'in-cart' : ''}">
-      <div>
-        <div class="prod-visual">
-          ${tagHtml}
-          <span aria-hidden="true">${esc(p.icon)}</span>
-        </div>
-        <div class="prod-cat">${esc(CAT_NAMES[p.category] || p.category)}</div>
-        <div class="prod-name" title="${esc(p.name)}">${esc(p.name)}</div>
-      </div>
-      <div class="prod-bottom">
-        <span class="prod-price">${gbp(p.price)}</span>
-        ${qty ? `
-          <div class="card-qty">
-            <button type="button" data-act="dec" data-code="${esc(code)}" aria-label="Giảm">−</button>
-            <span>${qty}</span>
-            <button type="button" data-act="inc" data-code="${esc(code)}" aria-label="Tăng">+</button>
-          </div>
-        ` : `
-          <button class="add-btn" type="button" data-act="add" data-code="${esc(code)}">+ Thêm</button>
-        `}
-      </div>
-    </article>`;
-  }).join('') : '<div class="empty-grid">Không tìm thấy mặt hàng phù hợp.</div>';
+  $('productGrid').innerHTML = codes.length
+    ? codes.map(code => productCardHtml(code)).join('')
+    : '<div class="empty-grid">Không tìm thấy mặt hàng phù hợp.</div>';
 }
 
 function renderCart() {
-  const codes = cartCodes();
-  $('cartCountBadge').textContent = cartCount();
-  $('cartCount').textContent = `${cartCount()} món`;
-  $('cartTotal').textContent = gbp(cartTotal());
-  $('checkoutBtn').disabled = codes.length === 0;
-  $('clearBtn').style.display = codes.length ? '' : 'none';
-  $('cartItemsList').innerHTML = codes.length ? codes.map(code => {
-    const p = product(code), qty = CART[code];
+  if (!STORE) return;
+  const summary = StoreCart.price(CART, STORE);
+  $('cartCountBadge').textContent = summary.count;
+  $('cartCount').textContent = `${summary.count} món`;
+  $('cartTotal').textContent = vnd(summary.total);
+  $('checkoutBtn').disabled = summary.count === 0;
+  $('clearBtn').style.display = summary.count ? '' : 'none';
+  $('cartItemsList').innerHTML = summary.lines.length ? summary.lines.map(line => {
+    const p = line.product;
     return `<div class="cart-item">
       <span class="cart-item-ico" aria-hidden="true">${esc(p.icon || '🛒')}</span>
       <div>
-        <div class="cart-item-name">${esc(p.name)}</div>
-        <div class="cart-item-price">${gbp(p.price)} × ${qty} = <b>${gbp(p.price * qty)}</b></div>
+        <div class="cart-item-name">${esc(p.display_name)}</div>
+        <div class="cart-item-price">${vnd(p.price)} × ${line.qty} = <b>${vnd(line.total)}</b></div>
       </div>
       <div class="cart-item-ctrl">
         <div class="qty-mini">
-          <button type="button" data-act="dec" data-code="${esc(code)}" aria-label="Giảm">−</button>
-          <span>${qty}</span>
-          <button type="button" data-act="inc" data-code="${esc(code)}" aria-label="Tăng">+</button>
+          <button type="button" data-act="dec" data-code="${esc(line.code)}" aria-label="Giảm">−</button>
+          <span>${line.qty}</span>
+          <button type="button" data-act="inc" data-code="${esc(line.code)}" aria-label="Tăng">+</button>
         </div>
       </div>
     </div>`;
-  }).join('') : '<div class="cart-empty">Giỏ hàng chưa có món nào.<br>Hãy bấm <b>+ Thêm</b> ở mặt hàng bất kỳ bên trái.</div>';
+  }).join('') : '<div class="cart-empty">Giỏ hàng chưa có món nào.<br>Hãy bấm <b>+</b> ở mặt hàng bất kỳ.</div>';
   renderRecommendations();
   renderProducts();
+  renderBestsellers();
+  if (SEARCH_MATCHES.length && !$('searchSuggestions').hidden) renderSearchSuggestions(false);
 }
 
 function renderRecommendations() {
   const codes = cartCodes();
-  const {recs, fired} = computeRecommendations(new Set(codes));
-  const badge = $('firedBadge');
-  badge.classList.remove('pruned');
-
-  if (!codes.length) {
-    badge.textContent = 'Top Bestsellers (L1)';
-  } else if (fired > 0) {
-    badge.textContent = `${fired} luật Apriori khớp`;
-  } else {
-    badge.textContent = '0 luật (Bị tỉa bởi Apriori)';
-    badge.classList.add('pruned');
-  }
-
-  const prunedInCart = codes.filter(c => !product(c).has_apriori_rule);
-  if (codes.length > 0 && fired === 0) {
-    $('recomList').innerHTML = buildPruneExplanationHtml(prunedInCart.length ? prunedInCart : codes);
+  const { recs } = StoreRecs.compute(new Set(codes), DATA, MAX_RECS);
+  const recoBox = $('recoBox');
+  if (codes.length && !recs.length) {
+    recoBox.style.display = 'none';
+    $('recomList').innerHTML = '';
     return;
   }
+  recoBox.style.display = '';
+  $('recoTitle').textContent = codes.length ? 'Sản phẩm hay được mua cùng' : 'Bán chạy tại cửa hàng';
 
   const recsHtml = recs.map(rec => {
     const p = product(rec.code);
     let whyText = 'Mặt hàng bán chạy tại cửa hàng (L1)';
-    let metaLeft = `Support ${(p.support * 100).toFixed(1)}% (${p.count} giỏ)`;
+    let metaLeft = `Support ${((p.support || 0) * 100).toFixed(1)}% (${p.count || 0} giỏ)`;
     let metaRight = 'L1 Popular';
 
     if (rec.tier <= 2 && rec.rule) {
@@ -985,10 +514,10 @@ function renderRecommendations() {
       <div class="reco-main">
         <span class="reco-ico" aria-hidden="true">${esc(p.icon || '🛒')}</span>
         <div class="reco-info">
-          <div class="reco-name">${esc(p.name)}</div>
+          <div class="reco-name">${esc(p.display_name)}</div>
           <div class="reco-why">${esc(whyText)}</div>
         </div>
-        <span class="reco-price">${gbp(p.price)}</span>
+        <span class="reco-price">${vnd(p.price)}</span>
         <button class="reco-add" type="button" data-act="add-reco" data-code="${esc(rec.code)}">+ Thêm</button>
       </div>
       <div class="reco-meta">
@@ -998,10 +527,7 @@ function renderRecommendations() {
     </div>`;
   }).join('');
 
-  const extraPrunedHtml = (codes.length > 0 && prunedInCart.length > 0)
-    ? buildPruneExplanationHtml(prunedInCart)
-    : '';
-  $('recomList').innerHTML = recsHtml + extraPrunedHtml;
+  $('recomList').innerHTML = recsHtml;
 }
 
 function toast(msg) {
@@ -1012,6 +538,7 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 function openCartDrawer() {
+  closeCategoryDrawer();
   $('cartDrawer').classList.add('open');
   $('drawerOverlay').classList.add('open');
 }
@@ -1022,53 +549,28 @@ function closeCartDrawer() {
 function changeQty(code, delta) {
   const next = (CART[code] || 0) + delta;
   if (next <= 0) delete CART[code]; else CART[code] = next;
-  saveCart();
+  StoreCart.save(CART);
   renderCart();
 }
 function addToCart(code) {
-  if (!DATA || !DATA.catalog[code]) return;
-  restoreCartView();
+  if (!STORE || !STORE.catalog[code]) return;
   changeQty(code, 1);
-  const p = product(code);
-  const fired = computeRecommendations(new Set(cartCodes())).fired;
-  if (!p.has_apriori_rule) {
-    toast(`Đã thêm ${p.name} · Bị tỉa bởi Apriori (xem giải thích ở giỏ hàng)`);
-  } else {
-    toast(`Đã thêm ${p.name} · ${fired} luật kích hoạt`);
-  }
+  toast(`Đã thêm ${product(code).display_name}`);
 }
 function applyPreset(itemsCsv) {
-  restoreCartView();
   CART = {};
   itemsCsv.split(',').map(s => s.trim()).filter(Boolean).forEach(c => {
-    if (DATA && DATA.catalog[c]) CART[c] = 1;
+    if (STORE && STORE.catalog[c]) CART[c] = 1;
   });
-  saveCart();
+  StoreCart.save(CART);
   renderCart();
   openCartDrawer();
   toast('Đã nạp giỏ hàng mẫu');
 }
-function checkout() {
-  if (!cartCodes().length) return;
-  const n = cartCodes().length, total = cartTotal();
-  CART = {}; saveCart(); ORDER_PLACED = true;
-  $('drawerBody').innerHTML = `<div class="order-done"><div class="big">✅</div><h3>Đặt hàng thành công!</h3>
-    <p>Giỏ hàng gồm <b>${n}</b> món (${gbp(total)}) tương ứng với 1 giao dịch trong thuật toán Apriori.</p>
-    <div class="order-actions">
-      <a class="checkout-btn" href="/stats">Xem thống kê Support / Confidence / Lift</a>
-      <a class="btn-outline" href="/">Xem thuật toán Apriori từng bước</a>
-      <button class="btn-outline" type="button" data-act="continue">Tiếp tục mua hàng</button>
-    </div></div>`;
-  $('drawerFoot').style.display = 'none';
-  $('cartCountBadge').textContent = '0';
-  renderProducts();
-}
-function restoreCartView() {
-  if (!ORDER_PLACED) return;
-  ORDER_PLACED = false;
-  $('drawerBody').innerHTML = `<section><div class="cart-sec-head"><span>Mặt hàng đã chọn</span><button class="clear-link" id="clearBtn" type="button">Xóa hết</button></div><div class="cart-list" id="cartItemsList"></div></section>
-    <section class="reco-box" id="recoBox"><div class="reco-header"><span class="reco-title">✨ Thường mua cùng nhau</span><span class="reco-status" id="firedBadge">Bestsellers</span></div><div class="reco-list" id="recomList"></div></section>`;
-  $('drawerFoot').style.display = '';
+function clearCart() {
+  CART = {};
+  StoreCart.save(CART);
+  renderCart();
 }
 
 document.addEventListener('click', e => {
@@ -1078,29 +580,91 @@ document.addEventListener('click', e => {
   switch (el.dataset.act) {
     case 'add': addToCart(code); break;
     case 'add-reco': addToCart(code); break;
+    case 'search-pick': selectSearchProduct(code); break;
+    case 'search-add': addToCart(code); break;
+    case 'search-all': expandSearchResults(); break;
+    case 'search-collapse': collapseSearchResults(); break;
     case 'inc': changeQty(code, 1); break;
     case 'dec': changeQty(code, -1); break;
     case 'preset': applyPreset(el.dataset.items); break;
-    case 'cat': ACTIVE_CAT = el.dataset.cat; renderCategories(); renderProducts(); break;
-    case 'continue': restoreCartView(); renderCart(); closeCartDrawer(); break;
+    case 'cat': {
+      const next = el.dataset.cat;
+      ACTIVE_CAT = next !== 'ALL' && ACTIVE_CAT === next ? 'ALL' : next;
+      QUERY = '';
+      SEARCH_SHOW_ALL = false;
+      $('searchBox').value = '';
+      $('searchClear').hidden = true;
+      closeSearchPanel();
+      renderCategories();
+      renderCategoryMenu();
+      renderProducts();
+      closeCategoryDrawer();
+      document.getElementById('catalog').scrollIntoView({behavior: 'smooth'});
+      break;
+    }
+    case 'combo': {
+      const combo = STORE.combos.find(c => c.id === el.dataset.combo);
+      if (!combo) break;
+      for (const item of combo.items) CART[item] = (CART[item] || 0) + 1;
+      StoreCart.save(CART);
+      renderCart();
+      openCartDrawer();
+      toast('Đã thêm combo tiết kiệm');
+      break;
+    }
   }
 });
-function clearCart() { CART = {}; saveCart(); renderCart(); }
 document.addEventListener('click', e => { if (e.target.id === 'clearBtn') clearCart(); });
-$('checkoutBtn').addEventListener('click', checkout);
+$('checkoutBtn').addEventListener('click', () => { location.href = '/checkout'; });
 $('drawerClose').addEventListener('click', closeCartDrawer);
 $('drawerOverlay').addEventListener('click', closeCartDrawer);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCartDrawer(); });
-$('searchBox').addEventListener('input', e => { QUERY = e.target.value; renderProducts(); });
-
-fetch('/api/ecom-rules')
-  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-  .then(data => {
-    DATA = data;
-    for (const c of Object.keys(CART)) if (!DATA.catalog[c]) delete CART[c];
+$('categoryMenuBtn').addEventListener('click', () => {
+  if ($('categoryDrawer').classList.contains('open')) closeCategoryDrawer(); else openCategoryDrawer();
+});
+$('categoryClose').addEventListener('click', closeCategoryDrawer);
+$('categoryOverlay').addEventListener('click', closeCategoryDrawer);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeCartDrawer(); closeCategoryDrawer(); }
+});
+$('searchBox').addEventListener('input', e => {
+  QUERY = e.target.value;
+  $('searchClear').hidden = !QUERY;
+  if (QUERY.trim() && ACTIVE_CAT !== 'ALL') {
+    ACTIVE_CAT = 'ALL';
     renderCategories();
-    renderCart();
-  });
+    renderCategoryMenu();
+  }
+  SEARCH_SHOW_ALL = false;
+  renderSearchSuggestions();
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(renderProducts, 120);
+});
+$('searchBox').addEventListener('focus', () => { if (QUERY.trim()) renderSearchSuggestions(); });
+$('searchBox').addEventListener('keydown', handleSearchKey);
+$('searchClear').addEventListener('click', clearSearch);
+document.addEventListener('click', e => {
+  const path = e.composedPath ? e.composedPath() : [];
+  if (!path.some(node => node && node.id === 'storeSearch')) closeSearchPanel();
+});
+
+Promise.all([
+  fetch('/api/store').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
+  fetch('/api/ecom-rules').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+]).then(([store, data]) => {
+  STORE = store;
+  DATA = data;
+  STORE.categories.forEach(c => { CAT_NAMES[c.id] = c.name; });
+  buildSearchIndex();
+  for (const c of Object.keys(CART)) if (!STORE.catalog[c]) delete CART[c];
+  StoreCart.save(CART);
+  renderCategoryMenu();
+  renderCombos();
+  renderCategories();
+  renderCart();
+}).catch(error => {
+  $('productCount').textContent = 'Không tải được dữ liệu cửa hàng';
+  $('productGrid').innerHTML = `<div class="empty-grid">Lỗi tải dữ liệu: ${esc(error.message)}</div>`;
+});
 </script>
 </body>
 </html>

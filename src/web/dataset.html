@@ -5,33 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dataset — Khai phá Dữ liệu Groceries POS (Apriori)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
-<link rel="stylesheet" href="/app.css">
+<link rel="stylesheet" href="/app.css?v=20261103">
 <style>
 :root{
-  --bg:#f8fafc;
+  --bg:#f5f7f6;
   --surface:#ffffff;
-  --surface-sub:#f1f5f9;
-  --border:#e2e8f0;
-  --text:#0f172a;
-  --text-muted:#64748b;
-  --primary:#4f46e5;
-  --primary-hover:#4338ca;
-  --primary-light:#eef2ff;
-  --bar-fill:#6366f1;
-  --bar-bg:#f1f5f9;
+  --surface-sub:#eef3f0;
+  --border:#e4e8e6;
+  --text:#1b2420;
+  --text-muted:#48534e;
+  --primary:#0f8a4b;
+  --primary-hover:#0a6a39;
+  --primary-light:#e7f5ed;
+  --bar-fill:#34a56f;
+  --bar-bg:#eef3f0;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.5;min-height:100vh}
 button,input{font:inherit;color:inherit}
 
 .dataset-wrap{
-  max-width:1160px;
-  margin:0 auto;
-  padding:24px 20px 64px;
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:24px var(--page-gutter) 64px;
+}
+@media (max-width:760px){
+  .dataset-wrap{padding:20px 16px 48px}
 }
 
 /* Page Header */
@@ -365,7 +369,7 @@ button,input{font:inherit;color:inherit}
 <body>
 <header class="app-header">
   <div class="app-header-inner">
-    <a class="app-brand" href="/dataset"><span class="app-logo" aria-hidden="true">📊</span>BasketIQ</a>
+    <a class="app-brand" href="/dataset"><span class="app-logo" aria-hidden="true">G9</span><span>Mart</span></a>
     <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
       <a href="/shop">Cửa hàng</a>
       <a href="/">Demo thuật toán</a>
@@ -562,7 +566,7 @@ function renderCombos() {
           <span>${labelHtml}</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width:${widthPct}%;background:#818cf8"></div>
+          <div class="bar-fill" style="width:${widthPct}%;background:#6fcf97"></div>
         </div>
         <div class="bar-val">${pct(c.support)} <small>(${fmt(c.count)})</small></div>
       </div>
@@ -597,7 +601,7 @@ function renderRules() {
           <span class="rule-part">${conHtml}</span>
         </div>
         <div class="bar-track">
-          <div class="bar-fill" style="width:${widthPct}%;background:${curRuleType === 'confidence' ? '#4f46e5' : '#059669'}"></div>
+          <div class="bar-fill" style="width:${widthPct}%;background:${curRuleType === 'confidence' ? '#0f8a4b' : '#059669'}"></div>
         </div>
         <div class="bar-val">${valHtml}</div>
       </div>

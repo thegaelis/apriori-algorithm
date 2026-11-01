@@ -1,0 +1,170 @@
+item,name,category,emoji,unit,price
+whole milk,Sữa tươi nguyên kem,"Sữa, bơ & trứng",🥛,Hộp 1 lít,32000
+UHT-milk,Sữa tiệt trùng,"Sữa, bơ & trứng",🥛,Hộp 1 lít,34000
+butter milk,Sữa bơ (buttermilk),"Sữa, bơ & trứng",🥛,Chai 500ml,28000
+condensed milk,Sữa đặc,"Sữa, bơ & trứng",🥫,Lon 380g,25000
+cream,Kem sữa béo,"Sữa, bơ & trứng",🍶,Hộp 200ml,45000
+yogurt,Sữa chua,"Sữa, bơ & trứng",🥣,Lốc 4 hộp,28000
+curd,Sữa đông (quark),"Sữa, bơ & trứng",🫙,Hộp 250g,22000
+whipped/sour cream,Kem tươi / kem chua,"Sữa, bơ & trứng",🍶,Hộp 200ml,38000
+dessert,Pudding sữa,"Sữa, bơ & trứng",🍮,Lốc 4 hộp,36000
+butter,Bơ lạt,"Sữa, bơ & trứng",🧈,Hộp 200g,72000
+margarine,Bơ thực vật,"Sữa, bơ & trứng",🧈,Hộp 250g,32000
+specialty fat,Mỡ nấu ăn đặc biệt,"Sữa, bơ & trứng",🫙,Hộp 250g,48000
+domestic eggs,Trứng gà,"Sữa, bơ & trứng",🥚,Vỉ 10 quả,35000
+cream cheese,Phô mai kem,Phô mai,🧀,Hộp 150g,55000
+curd cheese,Phô mai tươi,Phô mai,🧀,Hộp 250g,42000
+hard cheese,Phô mai cứng,Phô mai,🧀,Miếng 200g,89000
+processed cheese,Phô mai miếng,Phô mai,🧀,Hộp 8 miếng,39000
+sliced cheese,Phô mai lát,Phô mai,🧀,Gói 10 lát,52000
+soft cheese,Phô mai mềm,Phô mai,🧀,Hộp 125g,65000
+specialty cheese,Phô mai đặc biệt,Phô mai,🧀,Miếng 150g,120000
+spread cheese,Phô mai phết,Phô mai,🧀,Hộp 150g,45000
+other vegetables,Rau xanh các loại,Rau củ,🥬,Túi 500g,18000
+root vegetables,"Củ quả (cà rốt, củ cải)",Rau củ,🥕,Túi 1kg,22000
+onions,Hành tây,Rau củ,🧅,Túi 1kg,28000
+herbs,Rau thơm,Rau củ,🌿,Bó 100g,8000
+specialty vegetables,Rau củ đặc sản,Rau củ,🫑,Gói 250g,45000
+packaged fruit/vegetables,Rau quả cắt sẵn,Rau củ,🥗,Hộp 300g,35000
+tropical fruit,Trái cây nhiệt đới,Trái cây,🍍,Túi 1kg,40000
+citrus fruit,"Cam, quýt",Trái cây,🍊,Túi 1kg,45000
+pip fruit,"Táo, lê",Trái cây,🍎,Túi 1kg,55000
+berries,Quả mọng,Trái cây,🫐,Hộp 125g,69000
+grapes,Nho,Trái cây,🍇,Túi 500g,79000
+beef,Thịt bò,Thịt & cá,🥩,Khay 500g,145000
+pork,Thịt heo,Thịt & cá,🥓,Khay 500g,75000
+chicken,Thịt gà,Thịt & cá,🍗,Khay 1kg,85000
+hamburger meat,Thịt xay,Thịt & cá,🍔,Khay 500g,70000
+meat,Thịt tươi các loại,Thịt & cá,🍖,Khay 500g,90000
+turkey,Thịt gà tây,Thịt & cá,🦃,Khay 500g,110000
+fish,Cá tươi,Thịt & cá,🐟,Khay 500g,95000
+sausage,Xúc xích,Thịt nguội & xúc xích,🌭,Gói 500g,62000
+frankfurter,Xúc xích Đức,Thịt nguội & xúc xích,🌭,Gói 400g,58000
+organic sausage,Xúc xích hữu cơ,Thịt nguội & xúc xích,🌭,Gói 300g,75000
+ham,Giăm bông,Thịt nguội & xúc xích,🥪,Gói 200g,49000
+liver loaf,Pa-tê gan,Thịt nguội & xúc xích,🥫,Hộp 150g,32000
+meat spreads,Pa-tê thịt,Thịt nguội & xúc xích,🥫,Hộp 125g,28000
+rolls/buns,Bánh mì ổ nhỏ,Bánh mì & bánh ngọt,🥖,Túi 6 ổ,25000
+white bread,Bánh mì sandwich trắng,Bánh mì & bánh ngọt,🍞,Ổ 500g,28000
+brown bread,Bánh mì nâu,Bánh mì & bánh ngọt,🍞,Ổ 500g,35000
+semi-finished bread,Bánh mì nướng tại nhà,Bánh mì & bánh ngọt,🥖,Gói 4 ổ,30000
+pastry,Bánh ngọt,Bánh mì & bánh ngọt,🥐,Hộp 4 cái,45000
+waffles,Bánh quế,Bánh mì & bánh ngọt,🧇,Gói 250g,38000
+long life bakery product,"Bánh quy, bánh khô",Bánh mì & bánh ngọt,🍪,Gói 300g,32000
+zwieback,Bánh mì nướng giòn,Bánh mì & bánh ngọt,🥨,Gói 225g,30000
+soda,Nước ngọt có ga,Đồ uống,🥤,Chai 1.5 lít,22000
+bottled water,Nước suối,Đồ uống,💧,Chai 1.5 lít,10000
+fruit/vegetable juice,Nước ép trái cây,Đồ uống,🧃,Hộp 1 lít,35000
+beverages,Nước giải khát,Đồ uống,🧃,Lốc 6 hộp,42000
+misc. beverages,Đồ uống các loại,Đồ uống,🥤,Chai 500ml,15000
+coffee,Cà phê rang xay,Đồ uống,☕,Gói 500g,120000
+instant coffee,Cà phê hòa tan,Đồ uống,☕,Hộp 18 gói,65000
+tea,Trà túi lọc,Đồ uống,🍵,Hộp 25 túi,42000
+cocoa drinks,Bột ca cao,Đồ uống,☕,Hộp 250g,65000
+syrup,Si-rô trái cây,Đồ uống,🍹,Chai 700ml,85000
+bottled beer,Bia chai,Đồ uống có cồn,🍺,Lốc 6 chai,120000
+canned beer,Bia lon,Đồ uống có cồn,🍺,Lốc 6 lon,105000
+white wine,Rượu vang trắng,Đồ uống có cồn,🥂,Chai 750ml,290000
+red/blush wine,Rượu vang đỏ,Đồ uống có cồn,🍷,Chai 750ml,280000
+sparkling wine,Rượu vang nổ,Đồ uống có cồn,🍾,Chai 750ml,320000
+prosecco,Rượu vang Prosecco,Đồ uống có cồn,🍾,Chai 750ml,450000
+liquor,Rượu mạnh,Đồ uống có cồn,🥃,Chai 700ml,420000
+liquor (appetizer),Rượu khai vị,Đồ uống có cồn,🍸,Chai 700ml,380000
+liqueur,Rượu mùi,Đồ uống có cồn,🍸,Chai 500ml,350000
+brandy,Rượu brandy,Đồ uống có cồn,🥃,Chai 700ml,650000
+rum,Rượu rum,Đồ uống có cồn,🥃,Chai 700ml,390000
+whisky,Rượu whisky,Đồ uống có cồn,🥃,Chai 700ml,750000
+chocolate,Sô-cô-la thanh,Bánh kẹo & snack,🍫,Thanh 100g,35000
+specialty chocolate,Sô-cô-la cao cấp,Bánh kẹo & snack,🍫,Hộp 150g,95000
+chocolate marshmallow,Kẹo dẻo phủ sô-cô-la,Bánh kẹo & snack,🍡,Hộp 200g,48000
+candy,Kẹo trái cây,Bánh kẹo & snack,🍭,Gói 200g,25000
+chewing gum,Kẹo cao su,Bánh kẹo & snack,🍬,Hộp 10 thỏi,20000
+salty snack,Snack khoai tây,Bánh kẹo & snack,🍘,Gói 150g,22000
+nut snack,Đậu phộng rang,Bánh kẹo & snack,🥜,Gói 150g,39000
+nuts/prunes,"Hạt dinh dưỡng, mận khô",Bánh kẹo & snack,🌰,Gói 200g,75000
+popcorn,Bỏng ngô,Bánh kẹo & snack,🍿,Gói 100g,22000
+snack products,Bánh snack,Bánh kẹo & snack,🥠,Gói 120g,25000
+specialty bar,Thanh ngũ cốc,Bánh kẹo & snack,🌾,Hộp 6 thanh,55000
+cake bar,Bánh bông lan thanh,Bánh kẹo & snack,🍰,Hộp 6 thanh,42000
+tidbits,Đồ nhắm,Bánh kẹo & snack,🍢,Gói 150g,30000
+frozen vegetables,Rau củ đông lạnh,Đồ đông lạnh,🥦,Gói 500g,35000
+frozen meals,Món ăn đông lạnh,Đồ đông lạnh,🍱,Hộp 350g,55000
+frozen potato products,Khoai tây chiên đông lạnh,Đồ đông lạnh,🍟,Gói 1kg,60000
+frozen fish,Cá đông lạnh,Đồ đông lạnh,🐟,Gói 500g,80000
+frozen chicken,Gà đông lạnh,Đồ đông lạnh,🍗,Gói 1kg,95000
+frozen fruits,Trái cây đông lạnh,Đồ đông lạnh,🍓,Gói 500g,70000
+frozen dessert,Bánh kem đông lạnh,Đồ đông lạnh,🍨,Hộp 500g,65000
+ice cream,Kem que,Đồ đông lạnh,🍦,Hộp 6 que,85000
+flour,Bột mì,Đồ khô & gia vị,🌾,Gói 1kg,25000
+sugar,Đường,Đồ khô & gia vị,🍬,Gói 1kg,24000
+artif. sweetener,Đường ăn kiêng,Đồ khô & gia vị,🍬,Hộp 100 viên,65000
+salt,Muối,Đồ khô & gia vị,🧂,Gói 500g,6000
+baking powder,Bột nở,Đồ khô & gia vị,🧁,Gói 100g,12000
+rice,Gạo,Đồ khô & gia vị,🍚,Túi 5kg,120000
+pasta,Mì Ý,Đồ khô & gia vị,🍝,Gói 500g,28000
+cereals,Ngũ cốc ăn sáng,Đồ khô & gia vị,🥣,Hộp 375g,75000
+oil,Dầu ăn,Đồ khô & gia vị,🫒,Chai 1 lít,55000
+vinegar,Giấm,Đồ khô & gia vị,🍶,Chai 500ml,18000
+spices,Gia vị tổng hợp,Đồ khô & gia vị,🌶️,Hũ 50g,25000
+mustard,Mù tạt,Đồ khô & gia vị,🫙,Hũ 200g,32000
+ketchup,Tương cà,Đồ khô & gia vị,🍅,Chai 340g,22000
+mayonnaise,Sốt mayonnaise,Đồ khô & gia vị,🥚,Chai 260g,38000
+sauces,Nước sốt nấu ăn,Đồ khô & gia vị,🥫,Chai 300ml,35000
+salad dressing,Sốt trộn salad,Đồ khô & gia vị,🫗,Chai 250ml,45000
+jam,Mứt trái cây,Đồ khô & gia vị,🍓,Hũ 340g,55000
+honey,Mật ong,Đồ khô & gia vị,🍯,Chai 500g,120000
+sweet spreads,Bơ phết sô-cô-la,Đồ khô & gia vị,🍫,Hũ 350g,89000
+pudding powder,Bột pudding,Đồ khô & gia vị,🍮,Gói 3 hộp,25000
+cooking chocolate,Sô-cô-la làm bánh,Đồ khô & gia vị,🍫,Thanh 200g,48000
+potato products,Khoai tây nghiền ăn liền,Đồ khô & gia vị,🥔,Gói 200g,32000
+organic products,Thực phẩm hữu cơ,Đồ khô & gia vị,🍃,Gói 500g,45000
+Instant food products,"Mì, cháo ăn liền",Đồ hộp & món ăn sẵn,🍜,Lốc 5 gói,30000
+soups,Súp đóng hộp,Đồ hộp & món ăn sẵn,🍲,Hộp 400g,35000
+ready soups,Súp ăn liền,Đồ hộp & món ăn sẵn,🍲,Gói 4 phần,25000
+canned fish,Cá hộp,Đồ hộp & món ăn sẵn,🥫,Hộp 155g,28000
+canned vegetables,Rau củ đóng hộp,Đồ hộp & món ăn sẵn,🥫,Hộp 400g,22000
+canned fruit,Trái cây đóng hộp,Đồ hộp & món ăn sẵn,🍑,Hộp 425g,45000
+pickled vegetables,Dưa chua,Đồ hộp & món ăn sẵn,🥒,Hũ 500g,32000
+finished products,Món ăn chế biến sẵn,Đồ hộp & món ăn sẵn,🍛,Hộp 400g,55000
+roll products,Thực phẩm cuộn,Đồ hộp & món ăn sẵn,🌯,Gói 300g,45000
+baby food,Đồ ăn dặm cho bé,Đồ hộp & món ăn sẵn,🍼,Hũ 120g,35000
+napkins,Khăn giấy,Hóa phẩm & gia dụng,🧻,Gói 100 tờ,18000
+kitchen towels,Khăn giấy bếp,Hóa phẩm & gia dụng,🧻,Lốc 2 cuộn,35000
+detergent,Bột giặt,Hóa phẩm & gia dụng,🧺,Túi 3kg,150000
+softener,Nước xả vải,Hóa phẩm & gia dụng,🧴,Chai 1.8 lít,95000
+dish cleaner,Nước rửa chén,Hóa phẩm & gia dụng,🫧,Chai 750ml,35000
+cleaner,Nước lau sàn,Hóa phẩm & gia dụng,🧴,Chai 1 lít,39000
+abrasive cleaner,Kem tẩy đa năng,Hóa phẩm & gia dụng,🧽,Chai 500ml,32000
+bathroom cleaner,Nước tẩy rửa nhà tắm,Hóa phẩm & gia dụng,🧴,Chai 500ml,45000
+toilet cleaner,Nước tẩy bồn cầu,Hóa phẩm & gia dụng,🚽,Chai 900ml,38000
+decalcifier,Chất tẩy cặn,Hóa phẩm & gia dụng,🧴,Chai 500ml,55000
+house keeping products,Dụng cụ dọn nhà,Hóa phẩm & gia dụng,🧹,Bộ,65000
+cling film/bags,Màng bọc thực phẩm,Hóa phẩm & gia dụng,🥡,Cuộn 30m,35000
+preservation products,Hộp bảo quản thực phẩm,Hóa phẩm & gia dụng,🫙,Bộ 3 hộp,89000
+dishes,Chén đĩa,Hóa phẩm & gia dụng,🍽️,Bộ 4 cái,120000
+cookware,Chảo chống dính,Hóa phẩm & gia dụng,🍳,Cái,250000
+kitchen utensil,Dụng cụ nhà bếp,Hóa phẩm & gia dụng,🥄,Bộ,45000
+candles,Nến thơm,Hóa phẩm & gia dụng,🕯️,Hộp 4 cây,55000
+light bulbs,Bóng đèn LED,Hóa phẩm & gia dụng,💡,Hộp 2 bóng,55000
+hygiene articles,Đồ vệ sinh cá nhân,Chăm sóc cá nhân,🩹,Hộp,45000
+soap,Xà phòng,Chăm sóc cá nhân,🧼,Bánh 90g,18000
+dental care,Kem đánh răng,Chăm sóc cá nhân,🪥,Tuýp 180g,35000
+female sanitary products,Băng vệ sinh,Chăm sóc cá nhân,🌸,Gói 10 miếng,32000
+skin care,Kem dưỡng da,Chăm sóc cá nhân,🧴,Tuýp 100ml,180000
+make up remover,Nước tẩy trang,Chăm sóc cá nhân,💄,Chai 300ml,120000
+male cosmetics,Mỹ phẩm nam,Chăm sóc cá nhân,🪒,Chai 150ml,150000
+hair spray,Keo xịt tóc,Chăm sóc cá nhân,💇,Chai 300ml,95000
+baby cosmetics,Mỹ phẩm cho bé,Chăm sóc cá nhân,👶,Chai 200ml,85000
+rubbing alcohol,Cồn sát trùng,Chăm sóc cá nhân,🧪,Chai 500ml,25000
+cat food,Thức ăn cho mèo,Thú cưng,🐱,Túi 1.2kg,120000
+dog food,Thức ăn cho chó,Thú cưng,🐶,Túi 1.5kg,135000
+pet care,Đồ chăm sóc thú cưng,Thú cưng,🐾,Cái,65000
+pot plants,Cây cảnh để bàn,Hoa & cây cảnh,🪴,Chậu,120000
+flower (seeds),Hạt giống hoa,Hoa & cây cảnh,🌻,Gói,15000
+flower soil/fertilizer,Đất trồng & phân bón,Hoa & cây cảnh,🌱,Bao 5kg,45000
+newspapers,Báo,Khác,📰,Tờ,8000
+shopping bags,Túi mua sắm,Khác,🛍️,Cái,5000
+bags,Túi đựng đồ,Khác,👜,Cái,35000
+photo/film,Phim chụp ảnh,Khác,📷,Cuộn,95000
+sound storage medium,Đĩa nhạc,Khác,💿,Đĩa,150000
+seasonal products,Quà tặng theo mùa,Khác,🎁,Phần,150000
