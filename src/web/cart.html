@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giỏ hàng — BasketIQ Fresh Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/app.css?v=20261103">
+<link rel="stylesheet" href="/store.css?v=20261103">
+</head>
+<body class="storefront" data-page="cart">
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">G9</span><span>Mart</span></a>
+    <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
+      <a href="/shop">Cửa hàng</a>
+      <a href="/">Demo thuật toán</a>
+      <a href="/dataset">Dataset</a>
+    </nav>
+    <div class="app-actions">
+      <a class="app-cart-btn" href="/cart" aria-label="Giỏ hàng">
+        <span aria-hidden="true">🛒</span>
+        <span>Giỏ hàng</span>
+        <span class="app-cart-count" id="cartCountBadge">0</span>
+      </a>
+    </div>
+    <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<main class="container main">
+  <h1 class="page-title">Giỏ hàng <small id="cartCount"></small></h1>
+  <div class="cart-layout">
+    <div>
+      <div id="nudges"></div>
+      <ul class="cart-lines" id="cartLines"></ul>
+    </div>
+    <aside class="summary" id="cartSummary"></aside>
+  </div>
+
+  <section class="section" id="forgotSection">
+    <div class="section-head">
+      <div>
+        <h2>Có thể bạn quên mua</h2>
+        <p>Khách có giỏ hàng giống bạn thường mua thêm những món này</p>
+      </div>
+    </div>
+    <div class="grid" id="forgotGrid"></div>
+  </section>
+</main>
+
+<script src="/store-cart.js"></script>
+<script src="/store-recs.js"></script>
+<script src="/cart.js"></script>
+</body>
+</html>

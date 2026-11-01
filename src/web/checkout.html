@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đặt hàng — BasketIQ Fresh Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/app.css?v=20261103">
+<link rel="stylesheet" href="/store.css?v=20261103">
+</head>
+<body class="storefront" data-page="checkout">
+<header class="app-header">
+  <div class="app-header-inner">
+    <a class="app-brand" href="/shop"><span class="app-logo" aria-hidden="true">G9</span><span>Mart</span></a>
+    <nav class="app-nav" id="appNav" aria-label="Điều hướng chính">
+      <a href="/shop">Cửa hàng</a>
+      <a href="/">Demo thuật toán</a>
+      <a href="/dataset">Dataset</a>
+    </nav>
+    <div class="app-actions">
+      <a class="app-cart-btn" href="/cart" aria-label="Giỏ hàng">
+        <span aria-hidden="true">🛒</span>
+        <span>Giỏ hàng</span>
+        <span class="app-cart-count" id="cartCountBadge">0</span>
+      </a>
+    </div>
+    <button class="app-menu-toggle" type="button" aria-label="Mở menu" aria-controls="appNav" onclick="document.getElementById('appNav').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<main class="container main" id="checkoutMain">
+  <h1 class="page-title">Thông tin giao hàng</h1>
+  <div class="cart-layout">
+    <form class="checkout-form" id="checkoutForm" novalidate>
+      <label class="field" data-field="name">
+        <span>Họ và tên</span>
+        <input name="name" type="text" autocomplete="name" placeholder="Nguyễn Văn A">
+      </label>
+      <label class="field" data-field="phone">
+        <span>Số điện thoại</span>
+        <input name="phone" type="tel" autocomplete="tel" placeholder="0901234567">
+      </label>
+      <label class="field" data-field="address">
+        <span>Địa chỉ giao hàng</span>
+        <input name="address" type="text" autocomplete="street-address" placeholder="Số nhà, đường, phường, quận, thành phố">
+      </label>
+      <label class="field" data-field="note">
+        <span>Ghi chú (không bắt buộc)</span>
+        <textarea name="note" rows="3" placeholder="Ví dụ: giao ngoài giờ hành chính"></textarea>
+      </label>
+      <div class="pay">
+        <span>Phương thức thanh toán</span>
+        <label class="pay-option"><input type="radio" name="pay" value="cod" checked> Thanh toán khi nhận hàng (COD)</label>
+      </div>
+      <button class="btn btn-lg btn-block" type="submit">Xác nhận đặt hàng</button>
+    </form>
+    <aside class="summary" id="orderSummary"></aside>
+  </div>
+</main>
+
+<script src="/store-cart.js"></script>
+<script src="/checkout.js"></script>
+</body>
+</html>
