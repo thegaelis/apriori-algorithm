@@ -15,6 +15,7 @@ WEB_DIR = os.path.join(BASE_DIR, "src", "web")
 INDEX_PATH = os.path.join(WEB_DIR, "index.html")
 DATASET_STATS_PATH = os.path.join(BASE_DIR, "src", "data", "dataset_stats.json")
 ECOM_RULES_PATH = os.path.join(BASE_DIR, "src", "data", "ecom_rules.json")
+STORE_PATH = os.path.join(BASE_DIR, "src", "data", "store.json")
 
 
 def serialize_analysis_result(analysis: dict[str, Any]) -> dict[str, Any]:
@@ -73,6 +74,12 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
         elif self.path in ("/api/dataset-stats", "/api/retail-stats"):
             self.serve_file(DATASET_STATS_PATH, "application/json; charset=utf-8")
+        elif self.path == "/api/store":
+            self.serve_file(STORE_PATH, "application/json; charset=utf-8")
+        elif self.path == "/cart":
+            self.serve_file(os.path.join(WEB_DIR, "cart.html"), "text/html; charset=utf-8")
+        elif self.path == "/checkout":
+            self.serve_file(os.path.join(WEB_DIR, "checkout.html"), "text/html; charset=utf-8")
         elif self.path == "/api/presets":
             self.send_json({
                 "default": DEFAULT_PRESET_NAME,
