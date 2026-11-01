@@ -6,9 +6,9 @@
 <title>Cửa hàng — BasketIQ Fresh Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/app.css?v=20261103">
-<link rel="stylesheet" href="/store.css?v=20261103">
-<link rel="stylesheet" href="/shop.css?v=20261103">
+<link rel="stylesheet" href="/app.css?v=20261104">
+<link rel="stylesheet" href="/store.css?v=20261104">
+<link rel="stylesheet" href="/shop.css?v=20261104">
 </head>
 <body class="storefront" data-page="shop">
 <header class="app-header">
@@ -95,6 +95,7 @@
       <div class="aisle-bar" id="categoryBar" role="group" aria-label="Quầy hàng"></div>
     </div>
     <div class="product-grid" id="productGrid"></div>
+    <nav class="pagination" id="pagination" aria-label="Phân trang sản phẩm" hidden></nav>
   </section>
 </main>
 
@@ -155,6 +156,8 @@ let DATA = null;
 let CART = StoreCart.load();
 let ACTIVE_CAT = 'ALL';
 let QUERY = '';
+const PAGE_SIZE = 18;
+let PAGE = 1;
 let toastTimer = null;
 let SEARCH_INDEX = [];
 let SEARCH_MATCHES = [];
@@ -282,6 +285,7 @@ function selectSearchProduct(code) {
   $('searchBox').value = QUERY;
   $('searchClear').hidden = false;
   ACTIVE_CAT = 'ALL';
+  PAGE = 1;
   SEARCH_SHOW_ALL = false;
   closeSearchPanel();
   renderCategories();
@@ -308,6 +312,7 @@ function collapseSearchResults() {
 
 function clearSearch() {
   QUERY = '';
+  PAGE = 1;
   SEARCH_SHOW_ALL = false;
   $('searchBox').value = '';
   $('searchClear').hidden = true;
@@ -448,10 +453,51 @@ function renderProducts() {
     const haystack = normalizeSearch(`${p.display_name} ${code} ${categoryOf(code).name}`);
     return tokens.every(token => haystack.includes(token));
   });
-  $('productCount').textContent = `${codes.length} sản phẩm`;
-  $('productGrid').innerHTML = codes.length
-    ? codes.map(code => productCardHtml(code)).join('')
+  const total = codes.length;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  PAGE = Math.min(Math.max(PAGE, 1), totalPages);
+  const start = (PAGE - 1) * PAGE_SIZE;
+  const pageCodes = codes.slice(start, start + PAGE_SIZE);
+  $('productCount').textContent = `${total} sản phẩm`;
+  $('productGrid').innerHTML = pageCodes.length
+    ? pageCodes.map(code => productCardHtml(code)).join('')
     : '<div class="empty-grid">Không tìm thấy mặt hàng phù hợp.</div>';
+  renderPagination(total, totalPages, pageCodes.length);
+}
+
+function pageItems(totalPages, current) {
+  if (totalPages <= 7) return Array.from({length: totalPages}, (_, i) => i + 1);
+  const pages = new Set([1, totalPages, current - 1, current, current + 1]);
+  const list = [...pages].filter(page => page >= 1 && page <= totalPages).sort((a, b) => a - b);
+  const items = [];
+  let previous = 0;
+  for (const page of list) {
+    if (page - previous > 1) items.push('…');
+    items.push(page);
+    previous = page;
+  }
+  return items;
+}
+
+function renderPagination(total, totalPages, shown) {
+  const nav = $('pagination');
+  if (total <= PAGE_SIZE) {
+    nav.hidden = true;
+    nav.innerHTML = '';
+    return;
+  }
+  nav.hidden = false;
+  const start = (PAGE - 1) * PAGE_SIZE + 1;
+  const end = start + shown - 1;
+  const buttons = pageItems(totalPages, PAGE).map(page =>
+    page === '…'
+      ? '<span class="page-ellipsis" aria-hidden="true">…</span>'
+      : `<button class="page-btn ${page === PAGE ? 'active' : ''}" type="button" data-act="page" data-page="${page}" ${page === PAGE ? 'aria-current="page"' : ''}>${page}</button>`
+  ).join('');
+  nav.innerHTML = `<button class="page-btn page-nav" type="button" data-act="page" data-page="${PAGE - 1}" ${PAGE === 1 ? 'disabled' : ''} aria-label="Trang trước">‹</button>
+    ${buttons}
+    <button class="page-btn page-nav" type="button" data-act="page" data-page="${PAGE + 1}" ${PAGE === totalPages ? 'disabled' : ''} aria-label="Trang sau">›</button>
+    <span class="page-info">${start}–${end} / ${total}</span>`;
 }
 
 function renderCart() {
@@ -584,6 +630,14 @@ document.addEventListener('click', e => {
     case 'search-add': addToCart(code); break;
     case 'search-all': expandSearchResults(); break;
     case 'search-collapse': collapseSearchResults(); break;
+    case 'page': {
+      const target = Number(el.dataset.page);
+      if (!Number.isFinite(target)) break;
+      PAGE = target;
+      renderProducts();
+      document.getElementById('catalog').scrollIntoView({behavior: 'smooth', block: 'start'});
+      break;
+    }
     case 'inc': changeQty(code, 1); break;
     case 'dec': changeQty(code, -1); break;
     case 'preset': applyPreset(el.dataset.items); break;
@@ -591,6 +645,7 @@ document.addEventListener('click', e => {
       const next = el.dataset.cat;
       ACTIVE_CAT = next !== 'ALL' && ACTIVE_CAT === next ? 'ALL' : next;
       QUERY = '';
+      PAGE = 1;
       SEARCH_SHOW_ALL = false;
       $('searchBox').value = '';
       $('searchClear').hidden = true;
@@ -628,6 +683,7 @@ document.addEventListener('keydown', e => {
 });
 $('searchBox').addEventListener('input', e => {
   QUERY = e.target.value;
+  PAGE = 1;
   $('searchClear').hidden = !QUERY;
   if (QUERY.trim() && ACTIVE_CAT !== 'ALL') {
     ACTIVE_CAT = 'ALL';
