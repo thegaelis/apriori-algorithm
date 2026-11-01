@@ -40,7 +40,7 @@
         </div>`
       : '<div class="ship ship-ok"><p>🎉 Đơn hàng được <b>miễn phí giao hàng</b></p></div>';
     const comboSavings = summary.applied.map(entry =>
-      `<div class="saving"><dt>${esc(titleOf(entry.combo))} ×${entry.times}</dt><dd>−${vnd(entry.saving)}</dd></div>`
+      `<div class="saving"><dt>${esc(titleOf(entry.combo))} × ${entry.times}</dt><dd>−${vnd(entry.saving)}</dd></div>`
     ).join('');
     $('cartSummary').innerHTML = empty
       ? `<h3>Tóm tắt đơn hàng</h3><p class="muted">Giỏ hàng đang trống.</p>`
@@ -53,7 +53,7 @@
            <div class="grand"><dt>Tổng cộng</dt><dd>${vnd(summary.total)}</dd></div>
          </dl>
          <a class="btn btn-block" href="/checkout">Đặt hàng</a>
-         <a class="continue" href="/shop">← Tiếp tục mua sắm</a>`;
+         `;
   }
 
   function renderForgot() {
@@ -124,9 +124,20 @@
     }
   });
 
+  const cartButton = document.querySelector('.page-cart-btn');
+  if (cartButton) {
+    cartButton.addEventListener('click', event => {
+      event.preventDefault();
+      const lines = document.getElementById('cartLines');
+      lines.scrollIntoView({behavior: 'smooth', block: 'center'});
+      lines.classList.add('cart-flash');
+      setTimeout(() => lines.classList.remove('cart-flash'), 700);
+    });
+  }
+
   Promise.all([
-    fetch('/api/store').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
-    fetch('/api/ecom-rules').then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    fetch('/api/store', {cache: 'no-store'}).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
+    fetch('/api/ecom-rules', {cache: 'no-store'}).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
   ]).then(([store, data]) => {
     STORE = store;
     DATA = data;
