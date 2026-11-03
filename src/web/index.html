@@ -39,6 +39,9 @@ sub{font-size:.7em;line-height:0}
 .db h2{font-size:1.2rem}
 .db .iset{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .db .meta{color:var(--muted);font-size:.86rem;margin:4px 0 10px;font-variant-numeric:tabular-nums}
+#dbmeta{display:flex;flex-direction:column;gap:6px;margin:8px 0 14px}
+.meta-row{display:flex;align-items:center;gap:8px;font-size:.86rem;color:var(--muted)}
+.meta-pill{display:inline-block;font-family:var(--mono);font-size:.84rem;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--accent-bg);border:1px solid rgba(15,138,75,.18);color:var(--accent-ink);line-height:1.45;white-space:nowrap}
 .db table{width:100%;border-collapse:collapse;font-size:.95rem}
 .db th{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
 .db td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top;transition:background .15s}
@@ -344,7 +347,12 @@ function renderDB(){
   const R = state.R, N = state.D.length;
   const hl = state.pin || state.hl;
   const hs = hl ? new Set(hl) : null;
-  $('dbmeta').innerHTML = R ? `N = ${N} giao dịch · m = ${R.items.length} item · min_sup = ${pct(R.minSup)} · min_conf = ${pct(R.minConf)}` : `N = ${N}`;
+  $('dbmeta').innerHTML = R ? `
+    <div class="meta-row"><span class="meta-pill">N = ${N}</span> giao dịch</div>
+    <div class="meta-row"><span class="meta-pill">m = ${R.items.length}</span> items</div>
+    <div class="meta-row"><span class="meta-pill">min_sup = ${pct(R.minSup)}</span></div>
+    <div class="meta-row"><span class="meta-pill">min_conf = ${pct(R.minConf)}</span></div>
+  ` : `<div class="meta-row"><span class="meta-pill">N = ${N}</span> giao dịch</div>`;
   $('dbtable').innerHTML = `<table><thead><tr><th>TID</th><th>Items</th></tr></thead><tbody>` + state.D.map(t=>{
     const hit = hs && hl.every(x=>t.items.includes(x));
     return `<tr class="${hit?'hit':''}"><td class="tid">${esc(t.tid)}</td><td><div class="tr-items">${t.items.map(i=>`<span class="it ${hs&&hs.has(i)?'on':''}">${esc(i)}</span>`).join('')}</div></td></tr>`;
