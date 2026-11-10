@@ -5,6 +5,7 @@ import json
 import os
 import socketserver
 import sys
+import urllib.parse
 from typing import Any
 
 from src.core.apriori import analyze_baskets, parse_baskets, build_apriori_trace
@@ -59,28 +60,29 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.do_GET()
 
     def do_GET(self) -> None:
-        if self.path in ("/", "/index.html"):
+        path = urllib.parse.urlparse(self.path).path
+        if path in ("/", "/index.html"):
             self.serve_index()
-        elif self.path in ("/shop", "/shop.html"):
+        elif path in ("/shop", "/shop.html"):
             self.serve_file(os.path.join(WEB_DIR, "shop.html"), "text/html; charset=utf-8")
-        elif self.path == "/api/ecom-rules":
+        elif path == "/api/ecom-rules":
             self.serve_file(ECOM_RULES_PATH, "application/json; charset=utf-8")
-        elif self.path in ("/dataset", "/dataset.html"):
+        elif path in ("/dataset", "/dataset.html"):
             self.serve_file(os.path.join(WEB_DIR, "dataset.html"), "text/html; charset=utf-8")
-        elif self.path in ("/stats", "/stats.html", "/admin", "/admin.html"):
+        elif path in ("/stats", "/stats.html", "/admin", "/admin.html"):
             self.send_response(301)
             self.send_header("Location", "/dataset")
             self.send_header("Content-Length", "0")
             self.end_headers()
-        elif self.path in ("/api/dataset-stats", "/api/retail-stats"):
+        elif path in ("/api/dataset-stats", "/api/retail-stats"):
             self.serve_file(DATASET_STATS_PATH, "application/json; charset=utf-8")
-        elif self.path == "/api/store":
+        elif path == "/api/store":
             self.serve_file(STORE_PATH, "application/json; charset=utf-8")
-        elif self.path == "/cart":
+        elif path == "/cart":
             self.serve_file(os.path.join(WEB_DIR, "cart.html"), "text/html; charset=utf-8")
-        elif self.path == "/checkout":
+        elif path == "/checkout":
             self.serve_file(os.path.join(WEB_DIR, "checkout.html"), "text/html; charset=utf-8")
-        elif self.path == "/api/presets":
+        elif path == "/api/presets":
             self.send_json({
                 "default": DEFAULT_PRESET_NAME,
                 "presets": PRESET_BASKETS,
@@ -90,9 +92,10 @@ class AprioriRequestHandler(http.server.SimpleHTTPRequestHandler):
             super().do_GET()
 
     def do_POST(self) -> None:
-        if self.path == "/api/analyze":
+        path = urllib.parse.urlparse(self.path).path
+        if path == "/api/analyze":
             self.handle_analyze()
-        elif self.path == "/api/apriori":
+        elif path == "/api/apriori":
             self.handle_apriori_trace()
         else:
             self.send_error(404, "Endpoint Not Found")

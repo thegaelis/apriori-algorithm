@@ -6,9 +6,9 @@
 <title>Cửa hàng — BasketIQ Fresh Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/app.css?v=20261111">
-<link rel="stylesheet" href="/store.css?v=20261111">
-<link rel="stylesheet" href="/shop.css?v=20261111">
+<link rel="stylesheet" href="/app.css?v=20261112">
+<link rel="stylesheet" href="/store.css?v=20261112">
+<link rel="stylesheet" href="/shop.css?v=20261112">
 </head>
 <body class="storefront" data-page="shop">
 <header class="app-header">
@@ -146,8 +146,8 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="/store-cart.js?v=20261111"></script>
-<script src="/store-recs.js?v=20261111"></script>
+<script src="/store-cart.js?v=20261112"></script>
+<script src="/store-recs.js?v=20261112"></script>
 <script>
 const STORAGE_KEY = 'basketiq.cart.groceries';
 const MAX_RECS = 4;
@@ -713,12 +713,22 @@ Promise.all([
   DATA = data;
   STORE.categories.forEach(c => { CAT_NAMES[c.id] = c.name; });
   buildSearchIndex();
+  const params = new URLSearchParams(location.search);
+  if (params.has('cart')) {
+    CART = {};
+    params.get('cart').split(',').map(s => s.trim()).filter(Boolean).forEach(c => {
+      if (STORE && STORE.catalog[c]) CART[c] = 1;
+    });
+  }
   for (const c of Object.keys(CART)) if (!STORE.catalog[c]) delete CART[c];
   StoreCart.save(CART);
   renderCategoryMenu();
   renderCombos();
   renderCategories();
   renderCart();
+  if (params.has('cart') || params.get('drawer') === 'open') {
+    openCartDrawer();
+  }
 }).catch(error => {
   $('productCount').textContent = 'Không tải được dữ liệu cửa hàng';
   $('productGrid').innerHTML = `<div class="empty-grid">Lỗi tải dữ liệu: ${esc(error.message)}</div>`;
