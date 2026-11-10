@@ -58,8 +58,10 @@
 
   function renderForgot() {
     const codes = Object.keys(CART);
-    const recs = StoreRecs.compute(new Set(codes), DATA, 6).recs.filter(rec => rec.rule);
-    const picks = recs.length ? recs.map(rec => rec.code) : STORE.bestsellers.slice(0, 6);
+    const { recs } = StoreRecs.compute(new Set(codes), DATA, 6);
+    const picks = recs.length
+      ? recs.map(rec => rec.code)
+      : STORE.bestsellers.filter(c => !(c in CART)).slice(0, 6);
     $('forgotGrid').innerHTML = picks.map(productCard).join('');
   }
 

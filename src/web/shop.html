@@ -533,15 +533,17 @@ function renderCart() {
 
 function renderRecommendations() {
   const codes = cartCodes();
-  const { recs } = StoreRecs.compute(new Set(codes), DATA, MAX_RECS);
+  const { recs, fired } = StoreRecs.compute(new Set(codes), DATA, MAX_RECS);
   const recoBox = $('recoBox');
-  if (codes.length && !recs.length) {
+  if (!recs.length) {
     recoBox.style.display = 'none';
     $('recomList').innerHTML = '';
     return;
   }
   recoBox.style.display = '';
-  $('recoTitle').textContent = codes.length ? 'Sản phẩm hay được mua cùng' : 'Bán chạy tại cửa hàng';
+  $('recoTitle').textContent = (codes.length && fired > 0)
+    ? 'Sản phẩm hay được mua cùng'
+    : 'Bán chạy tại cửa hàng';
 
   const recsHtml = recs.map(rec => {
     const p = product(rec.code);

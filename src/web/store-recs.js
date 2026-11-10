@@ -45,7 +45,9 @@ window.StoreRecs = (() => {
           targets.forEach(code => push(code, 1, { rule }));
         }
       }
-    } else {
+    }
+
+    if (!recs.length) {
       const l1 = (data.frequent_itemsets && data.frequent_itemsets.L1) || [];
       for (const entry of l1) {
         if (recs.length >= max) break;
