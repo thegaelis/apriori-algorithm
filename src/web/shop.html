@@ -505,7 +505,7 @@ function renderCart() {
   const summary = StoreCart.price(CART, STORE);
   $('cartCountBadge').textContent = summary.count;
   $('cartCount').textContent = `${summary.count} món`;
-  $('cartTotal').textContent = vnd(summary.total);
+  $('cartTotal').textContent = vnd(summary.total - summary.shipping);
   $('checkoutBtn').disabled = summary.count === 0;
   $('clearBtn').style.display = summary.count ? '' : 'none';
   $('cartItemsList').innerHTML = summary.lines.length ? summary.lines.map(line => {

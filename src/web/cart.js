@@ -49,8 +49,7 @@
          <dl>
            <div><dt>Tạm tính</dt><dd>${vnd(summary.subtotal)}</dd></div>
            ${comboSavings}
-           <div><dt>Phí giao hàng</dt><dd>${summary.shipping ? vnd(summary.shipping) : 'Miễn phí'}</dd></div>
-           <div class="grand"><dt>Tổng cộng</dt><dd>${vnd(summary.total)}</dd></div>
+           <div class="grand"><dt>Tổng tiền hàng</dt><dd>${vnd(summary.total - summary.shipping)}</dd></div>
          </dl>
          <a class="btn btn-block" href="/checkout">Đặt hàng</a>
          `;
